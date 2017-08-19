@@ -26,19 +26,19 @@ public class PanelHeadhunters extends JPanel {
 		this.setName("Headhunters");
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0,0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{10, 0, 0, 10};
+		gridBagLayout.rowHeights = new int[]{10, 0, 0, 0, 10};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0,0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		//Title panel
 		JPanel panelTitle = new JPanel();
 		GridBagConstraints gbc_panelTitle = new GridBagConstraints();
 		gbc_panelTitle.fill = GridBagConstraints.BOTH;
-		gbc_panelTitle.insets = new Insets(0, 0, 5, 0);
-		gbc_panelTitle.gridx = 0;
-		gbc_panelTitle.gridy = 0;
+		gbc_panelTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_panelTitle.gridx = 1;
+		gbc_panelTitle.gridy = 1;
 		add(panelTitle, gbc_panelTitle);
 		GridBagLayout gbl_panelTitle = new GridBagLayout();
 		gbl_panelTitle.columnWidths = new int[]{0, 0, 0};
@@ -74,9 +74,10 @@ public class PanelHeadhunters extends JPanel {
 		//List - Main panel
 		JPanel panelContent = new JPanel();
 		GridBagConstraints gbc_panelContent = new GridBagConstraints();
+		gbc_panelContent.insets = new Insets(0, 0, 5, 5);
 		gbc_panelContent.fill = GridBagConstraints.BOTH;
-		gbc_panelContent.gridx = 0;
-		gbc_panelContent.gridy = 1;
+		gbc_panelContent.gridx = 1;
+		gbc_panelContent.gridy = 2;
 		add(panelContent, gbc_panelContent);
 		GridBagLayout gbl_panelContent = new GridBagLayout();
 		gbl_panelContent.columnWidths = new int[]{0, 0, 0, 0, 0};
