@@ -2,6 +2,8 @@ package fr.yas.matchup.managers;
 
 import fr.yas.matchup.controllers.BaseController;
 import fr.yas.matchup.utils.views.ViewsUtils;
+import fr.yas.matchup.views.ProfileController;
+
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 public class ViewsManager {
-
+	//Start Singleton Pattern
 	private static ViewsManager instance = null;
 
 	protected ViewsManager() {
@@ -24,6 +26,7 @@ public class ViewsManager {
 		}
 		return instance;
 	}
+	//End Singleton Pattern
 
 	private JFrame frame;
 	private List<BaseController> controllers;
@@ -31,9 +34,12 @@ public class ViewsManager {
 	private BaseController currentController;
 	private Boolean haveBack = false;
 
+	/**
+	 * The call start of the visual application
+	 */
 	public void start() {
 		ViewsUtils.configureFirstJFrame(frame);
-		currentController = new LoginController(frame);
+		currentController = new ProfileController(frame);
 		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,11 +54,21 @@ public class ViewsManager {
 		});
 	}
 
+	/**
+	 * Add a view controller to the pile history of view
+	 * @param controller
+	 * @return
+	 */
 	public ViewsManager add(BaseController controller) {
 		this.controllers.add(controller);
 		return this;
 	}
 
+	/**
+	 * ActionEvent produce need to a new view
+	 * @param controller
+	 * @return
+	 */
 	public ViewsManager next(BaseController controller) {
 		System.out.println("go next to " + controller.getView().getPageName());
 
@@ -75,6 +91,10 @@ public class ViewsManager {
 		return this;
 	}
 
+	/**
+	 * Forward behavior to exisiting view
+	 * @return
+	 */
 	public ViewsManager next() {
 		if (canNext()) {
 			System.out.println("go next to " + controllers.get(currentControllerIndex + 1).getView().getPageName());
@@ -89,6 +109,10 @@ public class ViewsManager {
 		return this;
 	}
 
+	/**
+	 * Backtracking behavior
+	 * @return
+	 */
 	public ViewsManager back() {
 		if (canBack()) {
 			System.out.println("go back to " + controllers.get(currentControllerIndex - 1).getView().getPageName());
@@ -104,6 +128,10 @@ public class ViewsManager {
 		return this;
 	}
 
+	/**
+	 * Test possibility to return to a previous view
+	 * @return
+	 */
 	public Boolean canBack() {
 		if (controllers.size() - 1 >= 0) {
 			return true;
@@ -112,6 +140,10 @@ public class ViewsManager {
 		}
 	}
 
+	/**
+	 * Test possibility to go to a following view
+	 * @return
+	 */
 	public Boolean canNext() {
 		if (controllers.size() > currentControllerIndex + 1) {
 			return true;

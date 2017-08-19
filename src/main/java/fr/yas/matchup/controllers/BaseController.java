@@ -13,6 +13,7 @@ public abstract class BaseController implements IBaseController {
 	protected Map<String,Object> viewDatas = new HashMap<String, Object>();
 
 	/**
+	 * getter
 	 * @return the view
 	 */
 	public BaseView getView() {
@@ -20,6 +21,7 @@ public abstract class BaseController implements IBaseController {
 	}
 
 	/**
+	 * setter
 	 * @param viewDatas the viewDatas to set
 	 */
 	public void setViewDatas(Map<String, Object> viewDatas) {
@@ -27,12 +29,15 @@ public abstract class BaseController implements IBaseController {
 	}
 
 	/**
+	 * getter
 	 * @return the viewDatas
 	 */
 	public Map<String, Object> getViewDatas() {
 		return viewDatas;
 	}
 
+	//Interface functions
+	//*******************
 	@Override
 	public BaseController loadController(JFrame frame) {
 		getView().loadView(frame);
@@ -42,14 +47,23 @@ public abstract class BaseController implements IBaseController {
 		return this;
 	}
 
+	/**
+	 * set the basic information I want to see in my view
+	 */
 	@Override
 	public void initView() {
 	}
 
+	/**
+	 * Add or update transverse objects such as user
+	 */
 	@Override
 	public void setupDatas() {
 	}
 
+	/**
+	 * Set the action done when an event happen
+	 */
 	/* (non-Javadoc)
 	 * @see imiepoecjava2017.controllers.IBaseController#initEvent()
 	 */
@@ -58,7 +72,10 @@ public abstract class BaseController implements IBaseController {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	/**
+	 * Actions at the exit of a view
+	 */
 	/* (non-Javadoc)
 	 * @see imiepoecjava2017.controllers.IBaseController#onExit()
 	 */
@@ -67,6 +84,9 @@ public abstract class BaseController implements IBaseController {
 
 	}
 
+	/**
+	 * Actions at the entry of a view
+	 */
 	/* (non-Javadoc)
 	 * @see imiepoecjava2017.controllers.IBaseController#onEnter()
 	 */

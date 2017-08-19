@@ -26,6 +26,10 @@ public abstract class BaseView implements IBaseView {
 		return contentPane;
 	}
 
+	//Interface override
+	/**
+	 * load a view on a current frame by overriding its contents
+	 */
 	@Override
 	public void loadView(JFrame frame) {
 		frame.setTitle(getPageName());
