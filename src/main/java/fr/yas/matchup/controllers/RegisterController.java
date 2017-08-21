@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.JFrame;
+import javax.swing.JRadioButton;
 
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.views.RegisterView;
@@ -19,13 +20,15 @@ import fr.yas.matchup.views.RegisterView;
  */
 public class RegisterController extends BaseController {
 	private RegisteredUser user;
-	
+
 	public RegisterController(JFrame frame) {
 		super.frame = frame;
 		super.view = new RegisterView(this.frame);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.controllers.BaseController#setViewDatas(java.util.Map)
 	 */
 	@Override
@@ -34,28 +37,28 @@ public class RegisterController extends BaseController {
 		super.setViewDatas(viewDatas);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.controllers.BaseController#initEvent()
 	 */
 	@Override
 	public void initEvent() {
-		// TODO Auto-generated method stub
-
+		
 		RegisterView view = (RegisterView) super.view;
 		view.getBtnValider().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				String pwd = new String(view.getPwdField().getPassword());
+				String pwdVerif = new String(view.getPwdVerifField().getPassword());
+				if(pwd.equals(pwdVerif)) {
+
+				}
 				
 			}
 
-
+		});
 	}
-	
-	
-//	btnValider.addActionListener(new ActionListener() {
-//		public void actionPerformed(ActionEvent e) {
-//		}
-//	});
+
 }
