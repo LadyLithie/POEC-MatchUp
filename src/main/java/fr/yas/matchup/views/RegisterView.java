@@ -17,16 +17,22 @@ import javax.swing.JRadioButton;
 import fr.yas.matchup.views.panels.PanelField;
 
 import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class RegisterView extends BaseView {
-	PanelField login;
-	JPasswordField pwdField;
-	JPasswordField pwdVerifField;
-	PanelField email;
-	JButton btnValider;
-	JButton btnAnnuler;
+	private ButtonGroup typeGroup;
+	private PanelField login;
+	private JPasswordField pwdField;
+	private JPasswordField pwdVerifField;
+	private PanelField email;
+	private JButton btnValider;
+	private JButton btnAnnuler;
+	/**
+	 * @return the typeGroup
+	 */
+	public ButtonGroup getTypeGroup() {
+		return typeGroup;
+	}
 	/**
 	 * @return the login
 	 */
@@ -103,8 +109,9 @@ public class RegisterView extends BaseView {
 		gbc_lblType.gridy = 0;
 		panel_type.add(lblType, gbc_lblType);
 		
-		ButtonGroup typeGroup = new ButtonGroup();
+		typeGroup = new ButtonGroup();
 		JRadioButton rdbtnCandidat = new JRadioButton("Candidat");
+
 		GridBagConstraints gbc_rdbtnCandidat = new GridBagConstraints();
 		gbc_rdbtnCandidat.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnCandidat.insets = new Insets(0, 0, 5, 0);
