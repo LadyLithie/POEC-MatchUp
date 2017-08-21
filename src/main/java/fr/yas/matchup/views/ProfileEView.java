@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import fr.yas.matchup.views.panels.PanelHeadhunters;
+import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelPresentation;
 
 
@@ -19,12 +20,12 @@ import fr.yas.matchup.views.panels.PanelPresentation;
  * @author Audrey
  *
  */
-public class ProfileView extends BaseView {
+public class ProfileEView extends BaseView {
 
 	/**
 	 * Create the frame.
 	 */
-	public ProfileView(JFrame frame) {
+	public ProfileEView(JFrame frame) {
 		super.pageName = "Profile";
 		JPanel panel = new JPanel();
 		super.contentPane = panel;
@@ -38,7 +39,7 @@ public class ProfileView extends BaseView {
 		panel.setLayout(gbl_panel);
 		
 		//Add a big unique panel on the left side
-		JPanel panel_left = new JPanel();
+		JPanel panel_left = new PanelListJobs();
 		GridBagConstraints gbc_panel_left = new GridBagConstraints();
 		gbc_panel_left.gridheight = 3;
 		gbc_panel_left.insets = new Insets(0, 0, 5, 5);

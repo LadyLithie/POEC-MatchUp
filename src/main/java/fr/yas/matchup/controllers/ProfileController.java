@@ -1,12 +1,11 @@
 /**
  * 
  */
-package fr.yas.matchup.views;
+package fr.yas.matchup.controllers;
 
 import javax.swing.JFrame;
 
-import fr.yas.matchup.controllers.BaseController;
-import fr.yas.matchup.views.ProfileView;
+import fr.yas.matchup.views.ProfileEView;
 
 /**
  * @author Audrey
@@ -16,6 +15,6 @@ public class ProfileController extends BaseController {
 	
 	public ProfileController(JFrame frame) {
 		super.frame = frame;
-		super.view = new ProfileView(this.frame);
+		super.view = new ProfileEView(this.frame);
 	}
 }

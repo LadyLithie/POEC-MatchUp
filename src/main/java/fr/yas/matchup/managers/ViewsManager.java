@@ -1,8 +1,8 @@
 package fr.yas.matchup.managers;
 
 import fr.yas.matchup.controllers.BaseController;
+import fr.yas.matchup.controllers.ProfileController;
 import fr.yas.matchup.utils.views.ViewsUtils;
-import fr.yas.matchup.views.ProfileController;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;

@@ -3,7 +3,6 @@
  */
 package fr.yas.matchup.utils.views;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 

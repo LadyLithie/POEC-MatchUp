@@ -34,9 +34,9 @@ public class Panel2FieldButton extends JPanel {
 		if(!label.isEmpty()) {
 			// layout of 1 line with surrounding padding
 			GridBagLayout gridBagLayout = new GridBagLayout();
-			gridBagLayout.columnWidths = new int[] { 10, 0, 2, 0, 0, 2, 0, 10, 0 };
+			gridBagLayout.columnWidths = new int[] { 10, 0, 5, 0, 0, 5, 0, 10, 0 };
 			gridBagLayout.rowHeights = new int[] { 5, 0, 5, 0 };
-			gridBagLayout.columnWeights = new double[] { 5.0, 0.0, 1, 0.0, 0.0, 1, 0.0, 5.0, Double.MIN_VALUE };
+			gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 			gridBagLayout.rowWeights = new double[] { 1, 0.0, 1, Double.MIN_VALUE };
 			setLayout(gridBagLayout);
 
@@ -49,7 +49,8 @@ public class Panel2FieldButton extends JPanel {
 			add(this.label, gbc_label);
 
 			JTextField textField1 = new JTextField();
-			textField1.setColumns(7);
+			textField1.setToolTipText("Pr\u00E9nom");
+			textField1.setColumns(10);
 			GridBagConstraints gbc_textField1 = new GridBagConstraints();
 			gbc_textField1.gridy = 1;
 			gbc_textField1.insets = new Insets(0, 0, 5, 5);
@@ -57,7 +58,8 @@ public class Panel2FieldButton extends JPanel {
 			add(textField1, gbc_textField1);
 
 			JTextField textField2 = new JTextField();
-			textField2.setColumns(7);
+			textField2.setText("Nom");
+			textField2.setColumns(10);
 			GridBagConstraints gbc_textField2 = new GridBagConstraints();
 			gbc_textField2.insets = new Insets(0, 0, 5, 5);
 			gbc_textField2.gridx = 4;
