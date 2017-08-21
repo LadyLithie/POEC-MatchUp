@@ -4,6 +4,7 @@
 package fr.yas.matchup.views.panels;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 import java.awt.GridBagLayout;
@@ -12,7 +13,6 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 
 /**
  * @author Audrey
@@ -64,24 +64,15 @@ public class PanelListJobs extends JPanel {
 		panelTitle.add(btnAdd, gbc_btnAdd);
 		
 		//main part
-		JPanel panelJobs = new JPanel();
+		JPanel panelJobs = new PanelJobs();
 		GridBagConstraints gbc_panelJobs = new GridBagConstraints();
-		gbc_panelJobs.fill = GridBagConstraints.VERTICAL;
-		gbc_panelJobs.anchor = GridBagConstraints.WEST;
 		gbc_panelJobs.gridx = 0;
 		gbc_panelJobs.gridy = 1;
-		add(panelJobs, gbc_panelJobs);
-		panelJobs.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-		
-		//Dynamically added jobs
-		for (int i = 0; i < 3; i++) {
-			PanelResumeJob job = new PanelResumeJob("titre", "Courte présentation", "Ville");
-			GridBagConstraints gbc_job = new GridBagConstraints();
-			gbc_job.anchor = GridBagConstraints.BASELINE_LEADING;
-			panelJobs.add(job, gbc_job);
-		}
-
-
+		gbc_panelJobs.fill = GridBagConstraints.BOTH;
+		gbc_panelJobs.anchor = GridBagConstraints.WEST;
+		JScrollPane scrollJobs = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		add(scrollJobs,gbc_panelJobs);
+		scrollJobs.setViewportView(panelJobs);
 	}
 
 }

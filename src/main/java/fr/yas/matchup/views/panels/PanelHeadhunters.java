@@ -62,7 +62,6 @@ public class PanelHeadhunters extends JPanel {
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
 		gbc_btnEdit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEdit.anchor = GridBagConstraints.EAST;
-		gbc_btnEdit.fill = GridBagConstraints.VERTICAL;
 		gbc_btnEdit.gridx = 4;
 		gbc_btnEdit.gridy = 0;
 		panelTitle.add(btnEdit, gbc_btnEdit);
@@ -77,9 +76,9 @@ public class PanelHeadhunters extends JPanel {
 		add(panelContent, gbc_panelContent);
 		GridBagLayout gbl_panelContent = new GridBagLayout();
 		gbl_panelContent.columnWidths = new int[]{10, 0, 10, 0};
-		gbl_panelContent.rowHeights = new int[]{10, 0, 0, 10, 0};
+		gbl_panelContent.rowHeights = new int[]{10, 0, 0, 0, 0};
 		gbl_panelContent.columnWeights = new double[]{1, 0.0, 1, Double.MIN_VALUE};
-		gbl_panelContent.rowWeights = new double[]{1, 0.0, 1, Double.MIN_VALUE};
+		gbl_panelContent.rowWeights = new double[]{0, 0.0, 0, Double.MIN_VALUE};
 		panelContent.setLayout(gbl_panelContent);
 		//List the present headhunters and offer possibility to delete
 		int posX = 1;
@@ -99,10 +98,12 @@ public class PanelHeadhunters extends JPanel {
 		GridBagConstraints gbc_newHeadHunter = new GridBagConstraints();
 		gbc_newHeadHunter.insets = new Insets(0, 0, 5, 5);
 		gbc_newHeadHunter.fill = GridBagConstraints.HORIZONTAL;
-		gbc_newHeadHunter.anchor = GridBagConstraints.CENTER;
+		gbc_newHeadHunter.anchor = GridBagConstraints.WEST;
 		gbc_newHeadHunter.gridx = 1;
 		gbc_newHeadHunter.gridy = posX;
 		panelContent.add(newHeadHunter, gbc_newHeadHunter);
+		
+
 
 	}
 

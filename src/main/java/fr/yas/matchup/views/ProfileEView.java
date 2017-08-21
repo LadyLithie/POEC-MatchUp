@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.views;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -32,8 +33,8 @@ public class ProfileEView extends BaseView {
 		
 		//Define the general layout for the whole frame
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{10, 0, 10, 0, 10, 0};
-		gbl_panel.rowHeights = new int[]{10, 0, 10, 0, 10, 0};
+		gbl_panel.columnWidths = new int[]{5, 0, 5, 0, 5, 0};
+		gbl_panel.rowHeights = new int[]{5, 0, 5, 0, 5, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
@@ -46,6 +47,7 @@ public class ProfileEView extends BaseView {
 		gbc_panel_left.fill = GridBagConstraints.BOTH;
 		gbc_panel_left.gridx = 1;
 		gbc_panel_left.gridy = 1;
+		panel_left.setMinimumSize(new Dimension(250, 200));
 		panel.add(panel_left, gbc_panel_left);
 		
 		//Add a panel on the top right
@@ -55,6 +57,7 @@ public class ProfileEView extends BaseView {
 		gbc_panel_TopRight.fill = GridBagConstraints.BOTH;
 		gbc_panel_TopRight.gridx = 3;
 		gbc_panel_TopRight.gridy = 1;
+		panel_TopRight.setMinimumSize(new Dimension(300, 100));
 		panel.add(panel_TopRight, gbc_panel_TopRight);
 		
 		//Add a panel on the bottom right
@@ -64,6 +67,7 @@ public class ProfileEView extends BaseView {
 		gbc_panel_bottomRight.fill = GridBagConstraints.BOTH;
 		gbc_panel_bottomRight.gridx = 3;
 		gbc_panel_bottomRight.gridy = 3;
+		panel_bottomRight.setMinimumSize(new Dimension(300, 50));
 		panel.add(panel_bottomRight, gbc_panel_bottomRight);
 
 	}

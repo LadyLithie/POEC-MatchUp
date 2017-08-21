@@ -52,18 +52,17 @@ public class PanelPresentation extends JPanel {
 	public PanelPresentation() {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 10, 0, 0, 10, 10, 0 };
-		gridBagLayout.rowHeights = new int[] { 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0 };
+		gridBagLayout.columnWidths = new int[] { 5, 0, 0, 10, 5, 0 };
+		gridBagLayout.rowHeights = new int[] { 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		// A field Panel with label and its associate textField
 		PanelField namePanel = new PanelField("Nom");
 		GridBagConstraints gbc_namePanel = new GridBagConstraints();
 		gbc_namePanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_namePanel.insets = new Insets(0, 0, 5, 5);
+		gbc_namePanel.insets = new Insets(0, 0, 1, 1);
 		gbc_namePanel.gridx = 1;
 		gbc_namePanel.gridy = 1;
 		add(namePanel, gbc_namePanel);
@@ -73,7 +72,7 @@ public class PanelPresentation extends JPanel {
 		PanelField siretPanel = new PanelField("SIRET");
 		GridBagConstraints gbc_siretPanel = new GridBagConstraints();
 		gbc_siretPanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_siretPanel.insets = new Insets(0, 0, 5, 5);
+		gbc_siretPanel.insets = new Insets(0, 0, 1, 1);
 		gbc_siretPanel.gridx = 1;
 		gbc_siretPanel.gridy = 2;
 		add(siretPanel, gbc_siretPanel);
@@ -82,7 +81,7 @@ public class PanelPresentation extends JPanel {
 		PanelField emailPanel = new PanelField("Email");
 		GridBagConstraints gbc_emailPanel = new GridBagConstraints();
 		gbc_emailPanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_emailPanel.insets = new Insets(0, 0, 5, 5);
+		gbc_emailPanel.insets = new Insets(0, 0, 1, 1);
 		gbc_emailPanel.gridx = 1;
 		gbc_emailPanel.gridy = 3;
 		add(emailPanel, gbc_emailPanel);
@@ -91,7 +90,7 @@ public class PanelPresentation extends JPanel {
 		PanelField websitePanel = new PanelField("Website");
 		GridBagConstraints gbc_websitePanel = new GridBagConstraints();
 		gbc_websitePanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_websitePanel.insets = new Insets(0, 0, 5, 5);
+		gbc_websitePanel.insets = new Insets(0, 0, 1, 1);
 		gbc_websitePanel.gridx = 1;
 		gbc_websitePanel.gridy = 4;
 		add(websitePanel, gbc_websitePanel);
@@ -101,7 +100,7 @@ public class PanelPresentation extends JPanel {
 		GridBagConstraints gbc_panelLogo = new GridBagConstraints();
 		gbc_panelLogo.anchor = GridBagConstraints.EAST;
 		gbc_panelLogo.gridheight = 2;
-		gbc_panelLogo.insets = new Insets(0, 0, 5, 5);
+		gbc_panelLogo.insets = new Insets(0, 0, 1, 1);
 		gbc_panelLogo.gridx = 3;
 		gbc_panelLogo.gridy = 1;
 		add(panelLogo, gbc_panelLogo);
@@ -115,7 +114,7 @@ public class PanelPresentation extends JPanel {
 		lblLogo = new JLabel("Logo");
 		lblLogo.setSize(100, 100);
 		GridBagConstraints gbc_lblLogo = new GridBagConstraints();
-		gbc_lblLogo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLogo.insets = new Insets(0, 0, 1, 1);
 		gbc_lblLogo.gridx = 2;
 		gbc_lblLogo.gridy = 1;
 		panelLogo.add(lblLogo, gbc_lblLogo);
@@ -126,7 +125,7 @@ public class PanelPresentation extends JPanel {
 			}
 		});
 		GridBagConstraints gbc_btnModifier = new GridBagConstraints();
-		gbc_btnModifier.insets = new Insets(0, 0, 5, 5);
+		gbc_btnModifier.insets = new Insets(0, 0, 1, 1);
 		gbc_btnModifier.gridx = 2;
 		gbc_btnModifier.gridy = 2;
 		panelLogo.add(btnModifier, gbc_btnModifier);
@@ -136,14 +135,14 @@ public class PanelPresentation extends JPanel {
 		GridBagConstraints gbc_panelSocialNetwork = new GridBagConstraints();
 		gbc_panelSocialNetwork.anchor = GridBagConstraints.EAST;
 		gbc_panelSocialNetwork.gridheight = 3;
-		gbc_panelSocialNetwork.insets = new Insets(5, 5, 5, 5);
+		gbc_panelSocialNetwork.insets = new Insets(1, 1, 1, 1);
 		gbc_panelSocialNetwork.fill = GridBagConstraints.VERTICAL;
 		gbc_panelSocialNetwork.gridx = 3;
 		gbc_panelSocialNetwork.gridy = 3;
 		add(panelSocialNetwork, gbc_panelSocialNetwork);
 		GridBagLayout gbl_panelSocialNetwork = new GridBagLayout();
-		gbl_panelSocialNetwork.columnWidths = new int[] { 2, 59, 5, 59, 2, 0 };
-		gbl_panelSocialNetwork.rowHeights = new int[] { 2, 35, 1, 35, 2, 0 };
+		gbl_panelSocialNetwork.columnWidths = new int[] { 2, 0, 5, 0, 2, 0 };
+		gbl_panelSocialNetwork.rowHeights = new int[] { 2, 0, 1, 0, 2, 0 };
 		gbl_panelSocialNetwork.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_panelSocialNetwork.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelSocialNetwork.setLayout(gbl_panelSocialNetwork);
@@ -152,39 +151,40 @@ public class PanelPresentation extends JPanel {
 		GridBagConstraints gbc_lblI = new GridBagConstraints();
 		gbc_lblI.anchor = GridBagConstraints.EAST;
 		gbc_lblI.fill = GridBagConstraints.VERTICAL;
-		gbc_lblI.insets = new Insets(0, 0, 5, 5);
+		gbc_lblI.insets = new Insets(0, 0, 1, 1);
 		gbc_lblI.gridx = 1;
 		gbc_lblI.gridy = 1;
 		panelSocialNetwork.add(lblI, gbc_lblI);
 		btnAjout = new JButton("Ajout");
 		GridBagConstraints gbc_btnAjout = new GridBagConstraints();
 		gbc_btnAjout.fill = GridBagConstraints.BOTH;
-		gbc_btnAjout.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAjout.insets = new Insets(0, 0, 1, 1);
 		gbc_btnAjout.gridx = 3;
 		gbc_btnAjout.gridy = 1;
 		panelSocialNetwork.add(btnAjout, gbc_btnAjout);
 		textFieldNetwork = new JTextField();
+		textFieldNetwork.setColumns(10);
 		GridBagConstraints gbc_textFieldNetwork = new GridBagConstraints();
 		gbc_textFieldNetwork.anchor = GridBagConstraints.EAST;
-		gbc_textFieldNetwork.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldNetwork.insets = new Insets(0, 0, 1, 1);
 		gbc_textFieldNetwork.gridwidth = 3;
 		gbc_textFieldNetwork.gridx = 1;
 		gbc_textFieldNetwork.gridy = 3;
 		panelSocialNetwork.add(textFieldNetwork, gbc_textFieldNetwork);
-		textFieldNetwork.setColumns(10);
+
 
 		// Panel for the user presentation
 		lblPrsentation = new JLabel("Pr\u00E9sentation :");
 		GridBagConstraints gbc_lblPrsentation = new GridBagConstraints();
 		gbc_lblPrsentation.anchor = GridBagConstraints.WEST;
-		gbc_lblPrsentation.insets = new Insets(5, 5, 5, 5);
+		gbc_lblPrsentation.insets = new Insets(1, 1, 1, 1);
 		gbc_lblPrsentation.gridx = 1;
 		gbc_lblPrsentation.gridy = 6;
 		add(lblPrsentation, gbc_lblPrsentation);
 		JTextArea textArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridwidth = 3;
-		gbc_textArea.insets = new Insets(5, 5, 5, 5);
+		gbc_textArea.insets = new Insets(1, 1, 1, 1);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 1;
 		gbc_textArea.gridy = 7;
@@ -194,7 +194,7 @@ public class PanelPresentation extends JPanel {
 		panelDecision = new JPanel();
 		GridBagConstraints gbc_panelDecision = new GridBagConstraints();
 		gbc_panelDecision.gridwidth = 3;
-		gbc_panelDecision.insets = new Insets(0, 0, 5, 5);
+		gbc_panelDecision.insets = new Insets(0, 0, 1, 1);
 		gbc_panelDecision.gridx = 1;
 		gbc_panelDecision.gridy = 9;
 		add(panelDecision, gbc_panelDecision);

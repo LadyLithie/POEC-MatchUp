@@ -34,8 +34,8 @@ public class ViewsUtils {
 	 * @param jFrame
 	 */
 	public static void configureFirstJFrame(JFrame jFrame) {
-		int frameWidth = 800;
-		int frameHeight = 600;
+		int frameWidth = 640;
+		int frameHeight = 480;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
 		int screnHeight = (int) screenSize.getHeight();
