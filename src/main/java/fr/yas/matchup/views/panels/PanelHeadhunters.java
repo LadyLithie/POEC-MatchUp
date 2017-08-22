@@ -70,7 +70,7 @@ public class PanelHeadhunters extends JPanel {
 		JPanel panelContent = new JPanel();
 		GridBagConstraints gbc_panelContent = new GridBagConstraints();
 		gbc_panelContent.insets = new Insets(0, 0, 5, 5);
-		gbc_panelContent.fill = GridBagConstraints.BOTH;
+		gbc_panelContent.fill = GridBagConstraints.NORTH;
 		gbc_panelContent.gridx = 1;
 		gbc_panelContent.gridy = 2;
 		add(panelContent, gbc_panelContent);

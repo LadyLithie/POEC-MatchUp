@@ -21,6 +21,9 @@ import java.awt.Insets;
 
 public class RegisterView extends BaseView {
 	private ButtonGroup typeGroup;
+	private JRadioButton rdbtnCandidat;
+	private JRadioButton rdbtnEntreprise;
+	private JRadioButton rdbtnRecruteur;
 	private PanelField login;
 	private JPasswordField pwdField;
 	private JPasswordField pwdVerifField;
@@ -32,6 +35,24 @@ public class RegisterView extends BaseView {
 	 */
 	public ButtonGroup getTypeGroup() {
 		return typeGroup;
+	}
+	/**
+	 * @return the rdbtnCandidat
+	 */
+	public JRadioButton getRdbtnCandidat() {
+		return rdbtnCandidat;
+	}
+	/**
+	 * @return the rdbtnEntreprise
+	 */
+	public JRadioButton getRdbtnEntreprise() {
+		return rdbtnEntreprise;
+	}
+	/**
+	 * @return the rdbtnRecruteur
+	 */
+	public JRadioButton getRdbtnRecruteur() {
+		return rdbtnRecruteur;
 	}
 	/**
 	 * @return the login
@@ -110,7 +131,7 @@ public class RegisterView extends BaseView {
 		panel_type.add(lblType, gbc_lblType);
 		
 		typeGroup = new ButtonGroup();
-		JRadioButton rdbtnCandidat = new JRadioButton("Candidat");
+		rdbtnCandidat = new JRadioButton("Candidat");
 
 		GridBagConstraints gbc_rdbtnCandidat = new GridBagConstraints();
 		gbc_rdbtnCandidat.anchor = GridBagConstraints.WEST;
@@ -119,7 +140,7 @@ public class RegisterView extends BaseView {
 		gbc_rdbtnCandidat.gridy = 1;
 		panel_type.add(rdbtnCandidat, gbc_rdbtnCandidat);
 		typeGroup.add(rdbtnCandidat);
-		JRadioButton rdbtnEntreprise = new JRadioButton("Entreprise");
+		rdbtnEntreprise = new JRadioButton("Entreprise");
 		GridBagConstraints gbc_rdbtnEntreprise = new GridBagConstraints();
 		gbc_rdbtnEntreprise.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnEntreprise.insets = new Insets(0, 0, 5, 0);
@@ -127,7 +148,7 @@ public class RegisterView extends BaseView {
 		gbc_rdbtnEntreprise.gridy = 2;
 		panel_type.add(rdbtnEntreprise, gbc_rdbtnEntreprise);
 		typeGroup.add(rdbtnEntreprise);
-		JRadioButton rdbtnRecruteur = new JRadioButton("Recruteur");
+		rdbtnRecruteur = new JRadioButton("Recruteur");
 		GridBagConstraints gbc_rdbtnRecruteur = new GridBagConstraints();
 		gbc_rdbtnRecruteur.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnRecruteur.gridx = 1;
@@ -136,7 +157,7 @@ public class RegisterView extends BaseView {
 		typeGroup.add(rdbtnRecruteur);
 
 		// Zone Login
-		PanelField login = new PanelField("Login");
+		login = new PanelField("Login");
 		GridBagConstraints gbc_login = new GridBagConstraints();
 		gbc_login.fill = GridBagConstraints.HORIZONTAL;
 		gbc_login.insets = new Insets(0, 0, 5, 5);

@@ -41,6 +41,7 @@ public class ViewsManager {
 	public void start() {
 		ViewsUtils.configureFirstJFrame(frame);
 		currentController = new RegisterController(frame);
+		//currentController = new ProfileController(frame);
 		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -93,7 +94,7 @@ public class ViewsManager {
 	}
 
 	/**
-	 * Forward behavior to exisiting view
+	 * Forward behavior to existing view
 	 * @return
 	 */
 	public ViewsManager next() {
