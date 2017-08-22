@@ -106,7 +106,6 @@ public class RegisterController extends BaseController {
 			}
 			System.out.println(user.toString());
 
-			// if (user != null) {
 			// Login test
 			if (user.getLogin().isEmpty()) {
 				view.getLogin().getInput().setBackground(Color.PINK);
