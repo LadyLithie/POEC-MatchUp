@@ -70,12 +70,24 @@ public class LoginController extends BaseController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("login = "+ view.getTextFieldLogin().equals(user.getLogin()));
-				System.out.println("pwd = "+ user.getPassword().equals(view.getTextFieldPwd()));
-				System.out.println(user.getClass().getName());
-//				if(view.getTextFieldLogin().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd())) {
-//					System.out.println(user.getClass().getName());
-//				}
+//				System.out.println("login = "+ view.getTextFieldLogin().getText().equals(user.getLogin()));
+//				System.out.println("pwd = "+ user.getPassword().equals(view.getTextFieldPwd().getText()));
+				if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
+					System.out.println(user.getClass().getSimpleName());
+					switch (user.getClass().getSimpleName()) {
+					case "Enterprise":
+						ViewsManager.getInstance().next(new ProfileController(frame));
+						break;
+					case "Candidate":
+						
+						break;
+					case "Headhunter":
+						
+						break;						
+					default:
+						break;
+					}
+				}
 				
 			}
 		});

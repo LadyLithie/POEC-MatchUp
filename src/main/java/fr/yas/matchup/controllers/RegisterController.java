@@ -12,11 +12,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 
+import com.sun.java_cup.internal.runtime.virtual_parse_stack;
+
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.managers.ViewsManager;
+import fr.yas.matchup.views.LoginView;
 import fr.yas.matchup.views.RegisterView;
 
 
@@ -72,6 +75,23 @@ public class RegisterController extends BaseController {
 	public void setupDatas() {
 		this.viewDatas.put("newUser", user);
 		}
+	
+	
+
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.controllers.BaseController#initView()
+	 */
+	@Override
+	public void initView() {
+		RegisterView v = ((RegisterView) getView());
+		v.getRdbtnEntreprise().setSelected(true);
+		v.getLogin().getInput().setText("Trololo");
+		v.getPwdField().setText("pwd");
+		v.getPwdVerifField().setText("pwd");
+		v.getEmail().getInput().setText("trololo@lolo.fr");
+		
+		}
+
 
 	/**
 	 * Test that each field 

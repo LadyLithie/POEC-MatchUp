@@ -30,6 +30,7 @@ public class RegisterView extends BaseView {
 	private PanelField email;
 	private JButton btnValider;
 	private JButton btnAnnuler;
+
 	/**
 	 * @return the typeGroup
 	 */
@@ -90,6 +91,7 @@ public class RegisterView extends BaseView {
 	public JButton getBtnAnnuler() {
 		return btnAnnuler;
 	}
+	
 	/**
 	 * Create the frame.
 	 * 
