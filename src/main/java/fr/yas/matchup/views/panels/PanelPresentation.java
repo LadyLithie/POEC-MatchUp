@@ -21,31 +21,122 @@ import java.awt.event.ActionEvent;
 
 public class PanelPresentation extends JPanel {
 
-	private JTextField textFieldName;
-	private JTextField textFieldSIRET;
-	private JTextField textFieldWebSite;
-	private JTextField textFieldEmail;
-	private JTextField textFieldNetwork;
-	GridBagLayout gridBagLayout;
-	JPanel panelField;
-	JLabel lblNom;
-	JPanel panelField_1;
-	JLabel lblSiret;
-	JButton btnModifier;
-	JPanel panelField_2;
-	JLabel lblEmail;
-	JPanel panelSocialNetwork;
-	JLabel lblI;
-	JButton btnAjout;
-	JPanel panelField_3;
-	JLabel lblSiteWeb;
-	JLabel lblPrsentation;
-	private JButton btnAnnuler;
-	private JButton btnValider;
-	private JPanel panelDecision;
-	private JPanel panelLogo;
-	private JLabel lblLogo;
+//	private JTextField textFieldName;
+//	private JTextField textFieldSIRET;
+//	private JTextField textFieldWebSite;
+//	private JTextField textFieldEmail;
 
+	GridBagLayout gridBagLayout;
+	
+	private PanelField namePanel;
+	private PanelField siretPanel;
+	private PanelField emailPanel;
+	private PanelField websitePanel;
+	
+	private JLabel lblLogo;
+	JButton btnModifier;
+	
+	private JLabel lblIcon;
+	JButton btnAjout;
+	private JTextField textFieldNetwork;
+	
+	private JButton btnAnnuler;
+	private JButton btnEditer;
+
+	/**
+	 * @return the btnEditer
+	 */
+	public JButton getBtnEditer() {
+		return btnEditer;
+	}
+
+	private JTextArea textAreaPresentation;
+	
+	/**
+	 * @return the textAreaPresentation
+	 */
+	public JTextArea getTextAreaPresentation() {
+		return textAreaPresentation;
+	}
+
+	/**
+	 * @return the namePanel
+	 */
+	public PanelField getNamePanel() {
+		return namePanel;
+	}
+
+	/**
+	 * @return the siretPanel
+	 */
+	public PanelField getSiretPanel() {
+		return siretPanel;
+	}
+
+	/**
+	 * @return the emailPanel
+	 */
+	public PanelField getEmailPanel() {
+		return emailPanel;
+	}
+
+	/**
+	 * @return the websitePanel
+	 */
+	public PanelField getWebsitePanel() {
+		return websitePanel;
+	}
+
+	/**
+	 * @return the lblLogo
+	 */
+	public JLabel getLblLogo() {
+		return lblLogo;
+	}
+
+	/**
+	 * @return the btnModifier
+	 */
+	public JButton getBtnModifier() {
+		return btnModifier;
+	}
+
+	/**
+	 * @return the lblIcon
+	 */
+	public JLabel getLblIcon() {
+		return lblIcon;
+	}
+
+	/**
+	 * @return the btnAjout
+	 */
+	public JButton getBtnAjout() {
+		return btnAjout;
+	}
+
+	/**
+	 * @return the textFieldNetwork
+	 */
+	public JTextField getTextFieldNetwork() {
+		return textFieldNetwork;
+	}
+
+	/**
+	 * @return the btnAnnuler
+	 */
+	public JButton getBtnAnnuler() {
+		return btnAnnuler;
+	}
+
+	/**
+	 * @return the btnValider
+	 */
+	public JButton getBtnValider() {
+		return btnEditer;
+	}
+
+	
 	/**
 	 * Create the panel.
 	 */
@@ -59,17 +150,18 @@ public class PanelPresentation extends JPanel {
 		setLayout(gridBagLayout);
 
 		// A field Panel with label and its associate textField
-		PanelField namePanel = new PanelField("Nom");
+		namePanel = new PanelField("Nom");
+		namePanel.getInput().setEditable(false);
 		GridBagConstraints gbc_namePanel = new GridBagConstraints();
 		gbc_namePanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_namePanel.insets = new Insets(0, 0, 1, 1);
 		gbc_namePanel.gridx = 1;
 		gbc_namePanel.gridy = 1;
 		add(namePanel, gbc_namePanel);
-		panelField_1 = new JPanel();
 		
 		// A field Panel with label and its associate textField
-		PanelField siretPanel = new PanelField("SIRET");
+		siretPanel = new PanelField("SIRET");
+		siretPanel.getInput().setEditable(false);
 		GridBagConstraints gbc_siretPanel = new GridBagConstraints();
 		gbc_siretPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_siretPanel.insets = new Insets(0, 0, 1, 1);
@@ -78,7 +170,8 @@ public class PanelPresentation extends JPanel {
 		add(siretPanel, gbc_siretPanel);
 
 		// A field Panel with label and its associate textField
-		PanelField emailPanel = new PanelField("Email");
+		emailPanel = new PanelField("Email");
+		emailPanel.getInput().setEditable(false);
 		GridBagConstraints gbc_emailPanel = new GridBagConstraints();
 		gbc_emailPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_emailPanel.insets = new Insets(0, 0, 1, 1);
@@ -87,7 +180,8 @@ public class PanelPresentation extends JPanel {
 		add(emailPanel, gbc_emailPanel);
 
 		// A field Panel with label and its associate textField
-		PanelField websitePanel = new PanelField("Website");
+		websitePanel = new PanelField("Website");
+		websitePanel.getInput().setEditable(false);
 		GridBagConstraints gbc_websitePanel = new GridBagConstraints();
 		gbc_websitePanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_websitePanel.insets = new Insets(0, 0, 1, 1);
@@ -96,7 +190,7 @@ public class PanelPresentation extends JPanel {
 		add(websitePanel, gbc_websitePanel);
 		
 		//Zone logo
-		panelLogo = new JPanel();
+		JPanel panelLogo = new JPanel();
 		GridBagConstraints gbc_panelLogo = new GridBagConstraints();
 		gbc_panelLogo.anchor = GridBagConstraints.EAST;
 		gbc_panelLogo.gridheight = 2;
@@ -120,10 +214,7 @@ public class PanelPresentation extends JPanel {
 		panelLogo.add(lblLogo, gbc_lblLogo);
 
 		btnModifier = new JButton("Modifier");
-		btnModifier.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnModifier.setVisible(false);
 		GridBagConstraints gbc_btnModifier = new GridBagConstraints();
 		gbc_btnModifier.insets = new Insets(0, 0, 1, 1);
 		gbc_btnModifier.gridx = 2;
@@ -131,7 +222,7 @@ public class PanelPresentation extends JPanel {
 		panelLogo.add(btnModifier, gbc_btnModifier);
 
 		// Panel SocialNetwork
-		panelSocialNetwork = new JPanel();
+		JPanel panelSocialNetwork = new JPanel();
 		GridBagConstraints gbc_panelSocialNetwork = new GridBagConstraints();
 		gbc_panelSocialNetwork.anchor = GridBagConstraints.EAST;
 		gbc_panelSocialNetwork.gridheight = 3;
@@ -147,15 +238,16 @@ public class PanelPresentation extends JPanel {
 		gbl_panelSocialNetwork.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		panelSocialNetwork.setLayout(gbl_panelSocialNetwork);
 		// Icone of the network (with link?)
-		lblI = new JLabel("i1");
+		lblIcon = new JLabel("icon1");
 		GridBagConstraints gbc_lblI = new GridBagConstraints();
 		gbc_lblI.anchor = GridBagConstraints.EAST;
 		gbc_lblI.fill = GridBagConstraints.VERTICAL;
 		gbc_lblI.insets = new Insets(0, 0, 1, 1);
 		gbc_lblI.gridx = 1;
 		gbc_lblI.gridy = 1;
-		panelSocialNetwork.add(lblI, gbc_lblI);
+		panelSocialNetwork.add(lblIcon, gbc_lblI);
 		btnAjout = new JButton("Ajout");
+		btnAjout.setVisible(false);
 		GridBagConstraints gbc_btnAjout = new GridBagConstraints();
 		gbc_btnAjout.fill = GridBagConstraints.BOTH;
 		gbc_btnAjout.insets = new Insets(0, 0, 1, 1);
@@ -164,6 +256,7 @@ public class PanelPresentation extends JPanel {
 		panelSocialNetwork.add(btnAjout, gbc_btnAjout);
 		textFieldNetwork = new JTextField();
 		textFieldNetwork.setColumns(10);
+		textFieldNetwork.setEditable(false);
 		GridBagConstraints gbc_textFieldNetwork = new GridBagConstraints();
 		gbc_textFieldNetwork.anchor = GridBagConstraints.EAST;
 		gbc_textFieldNetwork.insets = new Insets(0, 0, 1, 1);
@@ -174,24 +267,25 @@ public class PanelPresentation extends JPanel {
 
 
 		// Panel for the user presentation
-		lblPrsentation = new JLabel("Pr\u00E9sentation :");
+		JLabel lblPrsentation = new JLabel("Pr\u00E9sentation :");
 		GridBagConstraints gbc_lblPrsentation = new GridBagConstraints();
 		gbc_lblPrsentation.anchor = GridBagConstraints.WEST;
 		gbc_lblPrsentation.insets = new Insets(1, 1, 1, 1);
 		gbc_lblPrsentation.gridx = 1;
 		gbc_lblPrsentation.gridy = 6;
 		add(lblPrsentation, gbc_lblPrsentation);
-		JTextArea textArea = new JTextArea();
+		textAreaPresentation = new JTextArea();
+		textAreaPresentation.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridwidth = 3;
 		gbc_textArea.insets = new Insets(1, 1, 1, 1);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 1;
 		gbc_textArea.gridy = 7;
-		add(textArea, gbc_textArea);
+		add(textAreaPresentation, gbc_textArea);
 
 		// Validation or Cancellation sections
-		panelDecision = new JPanel();
+		JPanel panelDecision = new JPanel();
 		GridBagConstraints gbc_panelDecision = new GridBagConstraints();
 		gbc_panelDecision.gridwidth = 3;
 		gbc_panelDecision.insets = new Insets(0, 0, 1, 1);
@@ -200,9 +294,13 @@ public class PanelPresentation extends JPanel {
 		add(panelDecision, gbc_panelDecision);
 		panelDecision.setLayout(new GridLayout(1, 0, 0, 0));
 		btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setVisible(false);
 		panelDecision.add(btnAnnuler);
-		btnValider = new JButton("Valider");
-		panelDecision.add(btnValider);
+		btnEditer = new JButton("Valider");
+		btnEditer.setVisible(false);
+		panelDecision.add(btnEditer);
+		btnEditer = new JButton("Editer");
+		panelDecision.add(btnEditer);
 
 	}
 

@@ -9,6 +9,7 @@ public class Enterprise extends RegisteredUser {
 	private String address;
 	//declare image as int ? chemin du fichier en String
 	private int siretNumber;
+	private String website;
 
 	/**
 	 * @return the address
@@ -35,6 +36,20 @@ public class Enterprise extends RegisteredUser {
 	 */
 	public void setSiretNumber(int siretNumber) {
 		this.siretNumber = siretNumber;
+	}
+
+	/**
+	 * @return the website
+	 */
+	public String getWebsite() {
+		return website;
+	}
+
+	/**
+	 * @param website the website to set
+	 */
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	/**

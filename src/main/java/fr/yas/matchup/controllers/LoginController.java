@@ -66,12 +66,11 @@ public class LoginController extends BaseController {
 	public void initEvent() {
 		LoginView view = (LoginView) super.view;
 		
+		// Connect and go to Profile
 		view.getBtnLogin().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				System.out.println("login = "+ view.getTextFieldLogin().getText().equals(user.getLogin()));
-//				System.out.println("pwd = "+ user.getPassword().equals(view.getTextFieldPwd().getText()));
 				if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
 					System.out.println(user.getClass().getSimpleName());
 					switch (user.getClass().getSimpleName()) {
@@ -92,6 +91,7 @@ public class LoginController extends BaseController {
 			}
 		});
 		
+		// Go to Register
 		view.getBtnRegister().addActionListener(new ActionListener() {
 			
 			@Override

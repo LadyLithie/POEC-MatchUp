@@ -22,6 +22,30 @@ import fr.yas.matchup.views.panels.PanelPresentation;
  *
  */
 public class ProfileEView extends BaseView {
+	private JPanel panel_left;
+	private JPanel panel_TopRight;
+	private JPanel panel_bottomRight;
+
+	/**
+	 * @return the panel_left
+	 */
+	public JPanel getPanel_left() {
+		return panel_left;
+	}
+
+	/**
+	 * @return the panel_TopRight
+	 */
+	public JPanel getPanel_TopRight() {
+		return panel_TopRight;
+	}
+
+	/**
+	 * @return the panel_bottomRight
+	 */
+	public JPanel getPanel_bottomRight() {
+		return panel_bottomRight;
+	}
 
 	/**
 	 * Create the frame.
@@ -40,7 +64,7 @@ public class ProfileEView extends BaseView {
 		panel.setLayout(gbl_panel);
 		
 		//Add a big unique panel on the left side
-		JPanel panel_left = new PanelListJobs();
+		panel_left = new PanelListJobs();
 		GridBagConstraints gbc_panel_left = new GridBagConstraints();
 		gbc_panel_left.gridheight = 3;
 		gbc_panel_left.insets = new Insets(0, 0, 5, 5);
@@ -51,7 +75,7 @@ public class ProfileEView extends BaseView {
 		panel.add(panel_left, gbc_panel_left);
 		
 		//Add a panel on the top right
-		JPanel panel_TopRight = new PanelPresentation();
+		panel_TopRight = new PanelPresentation();
 		GridBagConstraints gbc_panel_TopRight = new GridBagConstraints();
 		gbc_panel_TopRight.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_TopRight.fill = GridBagConstraints.BOTH;
@@ -61,7 +85,7 @@ public class ProfileEView extends BaseView {
 		panel.add(panel_TopRight, gbc_panel_TopRight);
 		
 		//Add a panel on the bottom right
-		JPanel panel_bottomRight = new PanelHeadhunters();
+		panel_bottomRight = new PanelHeadhunters();
 		GridBagConstraints gbc_panel_bottomRight = new GridBagConstraints();
 		gbc_panel_bottomRight.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_bottomRight.fill = GridBagConstraints.BOTH;
