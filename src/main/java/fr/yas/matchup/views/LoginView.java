@@ -13,6 +13,22 @@ import javax.swing.JTextField;
 public class LoginView extends BaseView {
 	private JTextField textFieldPwd;
 	private JTextField textFieldLogin;
+	private JButton btnRegister;
+	private JButton btnLogin;
+
+	/**
+	 * @return the btnRegister
+	 */
+	public JButton getBtnRegister() {
+		return btnRegister;
+	}
+
+	/**
+	 * @return the btnLogin
+	 */
+	public JButton getBtnLogin() {
+		return btnLogin;
+	}
 
 	/**
 	 * @return the textFieldPwd
@@ -115,14 +131,14 @@ public class LoginView extends BaseView {
 		gbc_btnForgottenPassword.gridy = 3;
 		panel_1.add(btnForgottenPassword, gbc_btnForgottenPassword);
 		
-		JButton btnLogin = new JButton("Login");
+		btnLogin = new JButton("Login");
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLogin.gridx = 1;
 		gbc_btnLogin.gridy = 5;
 		panel_1.add(btnLogin, gbc_btnLogin);
 		
-		JButton btnRegister = new JButton("Register");
+		btnRegister = new JButton("Register");
 		GridBagConstraints gbc_btnRegister = new GridBagConstraints();
 		gbc_btnRegister.insets = new Insets(0, 0, 5, 5);
 		gbc_btnRegister.gridx = 2;

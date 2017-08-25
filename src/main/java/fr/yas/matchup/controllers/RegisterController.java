@@ -27,10 +27,12 @@ import fr.yas.matchup.views.RegisterView;
  */
 public class RegisterController extends BaseController {
 	private RegisteredUser user;
+	
 
 	public RegisterController(JFrame frame) {
 		super.frame = frame;
 		super.view = new RegisterView(this.frame);
+
 	}
 
 
@@ -51,7 +53,7 @@ public class RegisterController extends BaseController {
 					user = null;
 				}else {
 					System.out.println("Utilisateur enregistré");
-					ViewsManager.getInstance().next(new LoginController(frame));
+					ViewsManager.getInstance().next(new LoginController(frame,user));
 				}
 			}
 		});
