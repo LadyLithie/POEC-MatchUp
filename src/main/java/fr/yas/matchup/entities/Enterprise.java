@@ -8,7 +8,7 @@ package fr.yas.matchup.entities;
 public class Enterprise extends RegisteredUser {
 	private String address;
 	//declare image as int ? chemin du fichier en String
-	private int siretNumber;
+	private String siretNumber;
 	private String website;
 
 	/**
@@ -28,14 +28,20 @@ public class Enterprise extends RegisteredUser {
 	/**
 	 * @return the siretNumber
 	 */
-	public int getSiretNumber() {
+	public String getSiretNumber() {
 		return siretNumber;
 	}
 	/**
 	 * @param siretNumber the siretNumber to set
+	 * @return 
 	 */
-	public void setSiretNumber(int siretNumber) {
-		this.siretNumber = siretNumber;
+	public boolean setSiretNumber(String siretNumber) {
+		if(siretNumber.length() == 14) {
+			this.siretNumber = siretNumber;
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	/**
@@ -75,7 +81,7 @@ public class Enterprise extends RegisteredUser {
 	 * @param siretNumber
 	 */
 	public Enterprise(String login, boolean isConnected, String name, String phone, String email, String presentation,
-			String avatar, String created_at, String updated_at, String address, int siretNumber) {
+			String avatar, String created_at, String updated_at, String address, String siretNumber) {
 		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.address = address;
 		this.siretNumber = siretNumber;

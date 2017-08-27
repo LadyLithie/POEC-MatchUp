@@ -127,7 +127,6 @@ public class PanelPresentation extends JPanel {
 	public JButton getBtnValider() {
 		return btnValider;
 	}
-
 	
 	/**
 	 * Create the panel.
@@ -156,6 +155,7 @@ public class PanelPresentation extends JPanel {
 		
 		// A field Panel with label and its associate textField
 		siretPanel = new PanelField("SIRET");
+		siretPanel.getInput().setToolTipText("Chiffres uniquement");
 		siretPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
 		GridBagLayout gridBagLayout_2 = (GridBagLayout) siretPanel.getLayout();
 		gridBagLayout_2.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
@@ -280,6 +280,8 @@ public class PanelPresentation extends JPanel {
 		gbc_lblPrsentation.gridy = 6;
 		add(lblPrsentation, gbc_lblPrsentation);
 		textAreaPresentation = new JTextArea();
+		textAreaPresentation.setWrapStyleWord(true);
+		textAreaPresentation.setLineWrap(true);
 		textAreaPresentation.setBackground(UIManager.getColor("Panel.background"));
 		textAreaPresentation.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
