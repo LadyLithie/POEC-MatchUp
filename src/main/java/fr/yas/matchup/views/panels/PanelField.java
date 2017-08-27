@@ -26,9 +26,9 @@ public class PanelField extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelField(String label) {
-		if (!label.isEmpty()) {
+	//	if (!label.isEmpty()) {
 			GridBagLayout gridBagLayout = new GridBagLayout();
-			gridBagLayout.columnWidths = new int[] { 1, 0, 1, 0, 1, 0 };
+			gridBagLayout.columnWidths = new int[] { 1, 0, 5, 0, 1, 0 };
 			gridBagLayout.rowHeights = new int[] { 1, 0, 1, 0 };
 			gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 			gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -51,7 +51,7 @@ public class PanelField extends JPanel {
 			gbc_textField.gridy = 1;
 			add(input, gbc_textField);
 			input.setColumns(10);
-		}
+	//	}
 	}
 
 	/**

@@ -61,6 +61,7 @@ public class Enterprise extends RegisteredUser {
 	}
 
 	/**
+	 * Full constructor
 	 * @param login
 	 * @param isConnected
 	 * @param name
@@ -78,6 +79,14 @@ public class Enterprise extends RegisteredUser {
 		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.address = address;
 		this.siretNumber = siretNumber;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Enterprise [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
 	}	
-	
+
 }

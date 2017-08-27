@@ -22,7 +22,7 @@ public class LoginController extends BaseController {
 	private RegisteredUser user;
 
 	/**
-	 * 
+	 * Basic constructor
 	 * @param frame
 	 */
 	public LoginController(JFrame frame) {
@@ -31,7 +31,7 @@ public class LoginController extends BaseController {
 	}
 
 	/**
-	 * 
+	 * Constructor with data transfer
 	 * @param frame
 	 * @param newUser
 	 */
@@ -72,7 +72,6 @@ public class LoginController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
-					System.out.println(user.getClass().getSimpleName());
 					switch (user.getClass().getSimpleName()) {
 					case "Enterprise":
 						ViewsManager.getInstance().next(new ProfileController(frame));

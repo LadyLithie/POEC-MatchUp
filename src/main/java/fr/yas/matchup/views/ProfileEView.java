@@ -27,6 +27,7 @@ public class ProfileEView extends BaseView {
 	private JPanel panel_bottomRight;
 
 	/**
+	 * Panel listing all the jobs proposed by the Enterprise
 	 * @return the panel_left
 	 */
 	public JPanel getPanel_left() {
@@ -34,6 +35,7 @@ public class ProfileEView extends BaseView {
 	}
 
 	/**
+	 * Panel regrouping the Enterprise informations
 	 * @return the panel_TopRight
 	 */
 	public JPanel getPanel_TopRight() {
@@ -41,6 +43,7 @@ public class ProfileEView extends BaseView {
 	}
 
 	/**
+	 * Panel listing all collaborating head-hunters
 	 * @return the panel_bottomRight
 	 */
 	public JPanel getPanel_bottomRight() {
@@ -63,7 +66,7 @@ public class ProfileEView extends BaseView {
 		gbl_panel.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		//Add a big unique panel on the left side
+		//Add a big unique panel on the left side 
 		panel_left = new PanelListJobs();
 		GridBagConstraints gbc_panel_left = new GridBagConstraints();
 		gbc_panel_left.gridheight = 3;

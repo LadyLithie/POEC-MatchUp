@@ -8,10 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginView extends BaseView {
-	private JTextField textFieldPwd;
+	private JPasswordField textFieldPwd;
 	private JTextField textFieldLogin;
 	private JButton btnRegister;
 	private JButton btnLogin;
@@ -40,7 +41,7 @@ public class LoginView extends BaseView {
 	/**
 	 * @param textFieldPwd the textFieldPwd to set
 	 */
-	public void setTextFieldPwd(JTextField textFieldPwd) {
+	public void setTextFieldPwd(JPasswordField textFieldPwd) {
 		this.textFieldPwd = textFieldPwd;
 	}
 
@@ -114,7 +115,7 @@ public class LoginView extends BaseView {
 		gbc_lblPassword.gridy = 3;
 		panel_1.add(lblPassword, gbc_lblPassword);
 		
-		textFieldPwd = new JTextField();
+		textFieldPwd = new JPasswordField();
 		GridBagConstraints gbc_textFieldPwd = new GridBagConstraints();
 		gbc_textFieldPwd.gridwidth = 2;
 		gbc_textFieldPwd.insets = new Insets(0, 0, 5, 5);
@@ -124,7 +125,7 @@ public class LoginView extends BaseView {
 		panel_1.add(textFieldPwd, gbc_textFieldPwd);
 		textFieldPwd.setColumns(10);
 		
-		JButton btnForgottenPassword = new JButton("Forgotten \r\nPassword");
+		JButton btnForgottenPassword = new JButton("Forgotten Password");
 		GridBagConstraints gbc_btnForgottenPassword = new GridBagConstraints();
 		gbc_btnForgottenPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_btnForgottenPassword.gridx = 3;
@@ -134,14 +135,14 @@ public class LoginView extends BaseView {
 		btnLogin = new JButton("Login");
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
-		gbc_btnLogin.gridx = 1;
+		gbc_btnLogin.gridx = 2;
 		gbc_btnLogin.gridy = 5;
 		panel_1.add(btnLogin, gbc_btnLogin);
 		
 		btnRegister = new JButton("Register");
 		GridBagConstraints gbc_btnRegister = new GridBagConstraints();
 		gbc_btnRegister.insets = new Insets(0, 0, 5, 5);
-		gbc_btnRegister.gridx = 2;
+		gbc_btnRegister.gridx = 1;
 		gbc_btnRegister.gridy = 5;
 		panel_1.add(btnRegister, gbc_btnRegister);
 	}

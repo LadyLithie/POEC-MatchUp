@@ -3,7 +3,16 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.Color;
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.views.ProfileEView;
@@ -23,7 +32,7 @@ public class ProfileController extends BaseController {
 	public ProfileController(JFrame frame) {
 		super.frame = frame;
 		super.view = new ProfileEView(this.frame);
-		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		//user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 	}
 
 	/* (non-Javadoc)
@@ -49,9 +58,43 @@ public class ProfileController extends BaseController {
 	 */
 	@Override
 	public void initEvent() {
-		// TODO Auto-generated method stub
-		super.initEvent();
+		ProfileEView v = (ProfileEView) super.view;
+		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
+		
+		vPresentation.getBtnEditer().addActionListener(new EditListener());
 	}
 	
-	
+	/**
+	 * Intern class listening to BtnEditer of the PanelPresentation
+	 * @author Audrey
+	 *
+	 */
+	class EditListener implements ActionListener {
+		ProfileEView v = (ProfileEView) view;
+		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			vPresentation.getBtnEditer().setVisible(false);
+			vPresentation.getBtnAjout().setVisible(true);
+			vPresentation.getBtnAnnuler().setVisible(true);
+			vPresentation.getBtnModifier().setVisible(true);
+			vPresentation.getBtnValider().setVisible(true);
+			
+			vPresentation.getNamePanel().getInput().setEditable(true);
+			vPresentation.getNamePanel().getInput().setBorder(new TextFieldBorder());
+			vPresentation.getSiretPanel().getInput().setEditable(true);
+			vPresentation.getSiretPanel().getInput().setBorder(new TextFieldBorder());
+			vPresentation.getEmailPanel().getInput().setEditable(true);
+			vPresentation.getEmailPanel().getInput().setBorder(new TextFieldBorder());
+			vPresentation.getWebsitePanel().getInput().setEditable(true);
+			vPresentation.getWebsitePanel().getInput().setBorder(new TextFieldBorder());
+
+			vPresentation.getTextAreaPresentation().setEditable(true);
+			vPresentation.getTextAreaPresentation().setBackground(UIManager.getColor("TextArea.background"));
+			vPresentation.getTextAreaPresentation().setBorder(new TextFieldBorder());
+		}
+	}
 }

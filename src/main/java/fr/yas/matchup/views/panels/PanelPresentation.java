@@ -5,27 +5,18 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+import javax.swing.UIManager;
 
 public class PanelPresentation extends JPanel {
-
-//	private JTextField textFieldName;
-//	private JTextField textFieldSIRET;
-//	private JTextField textFieldWebSite;
-//	private JTextField textFieldEmail;
-
 	GridBagLayout gridBagLayout;
 	
 	private PanelField namePanel;
@@ -42,6 +33,7 @@ public class PanelPresentation extends JPanel {
 	
 	private JButton btnAnnuler;
 	private JButton btnEditer;
+	private JButton btnValider;
 
 	/**
 	 * @return the btnEditer
@@ -133,7 +125,7 @@ public class PanelPresentation extends JPanel {
 	 * @return the btnValider
 	 */
 	public JButton getBtnValider() {
-		return btnEditer;
+		return btnValider;
 	}
 
 	
@@ -144,13 +136,16 @@ public class PanelPresentation extends JPanel {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 5, 0, 0, 10, 5, 0 };
-		gridBagLayout.rowHeights = new int[] { 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowHeights = new int[] { 5, 0, 0, 0, 0, 0, 2, 0, 2, 0, 5, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		// A field Panel with label and its associate textField
 		namePanel = new PanelField("Nom");
+		namePanel.getInput().setBorder(new LineBorder(null, 0));
+		GridBagLayout gridBagLayout_1 = (GridBagLayout) namePanel.getLayout();
+		gridBagLayout_1.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
 		namePanel.getInput().setEditable(false);
 		GridBagConstraints gbc_namePanel = new GridBagConstraints();
 		gbc_namePanel.fill = GridBagConstraints.HORIZONTAL;
@@ -161,6 +156,9 @@ public class PanelPresentation extends JPanel {
 		
 		// A field Panel with label and its associate textField
 		siretPanel = new PanelField("SIRET");
+		siretPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		GridBagLayout gridBagLayout_2 = (GridBagLayout) siretPanel.getLayout();
+		gridBagLayout_2.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
 		siretPanel.getInput().setEditable(false);
 		GridBagConstraints gbc_siretPanel = new GridBagConstraints();
 		gbc_siretPanel.fill = GridBagConstraints.HORIZONTAL;
@@ -171,6 +169,9 @@ public class PanelPresentation extends JPanel {
 
 		// A field Panel with label and its associate textField
 		emailPanel = new PanelField("Email");
+		emailPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		GridBagLayout gridBagLayout_3 = (GridBagLayout) emailPanel.getLayout();
+		gridBagLayout_3.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
 		emailPanel.getInput().setEditable(false);
 		GridBagConstraints gbc_emailPanel = new GridBagConstraints();
 		gbc_emailPanel.fill = GridBagConstraints.HORIZONTAL;
@@ -181,6 +182,9 @@ public class PanelPresentation extends JPanel {
 
 		// A field Panel with label and its associate textField
 		websitePanel = new PanelField("Website");
+		websitePanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		GridBagLayout gridBagLayout_4 = (GridBagLayout) websitePanel.getLayout();
+		gridBagLayout_4.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
 		websitePanel.getInput().setEditable(false);
 		GridBagConstraints gbc_websitePanel = new GridBagConstraints();
 		gbc_websitePanel.fill = GridBagConstraints.HORIZONTAL;
@@ -255,6 +259,7 @@ public class PanelPresentation extends JPanel {
 		gbc_btnAjout.gridy = 1;
 		panelSocialNetwork.add(btnAjout, gbc_btnAjout);
 		textFieldNetwork = new JTextField();
+		textFieldNetwork.setBorder(null);
 		textFieldNetwork.setColumns(10);
 		textFieldNetwork.setEditable(false);
 		GridBagConstraints gbc_textFieldNetwork = new GridBagConstraints();
@@ -275,6 +280,7 @@ public class PanelPresentation extends JPanel {
 		gbc_lblPrsentation.gridy = 6;
 		add(lblPrsentation, gbc_lblPrsentation);
 		textAreaPresentation = new JTextArea();
+		textAreaPresentation.setBackground(UIManager.getColor("Panel.background"));
 		textAreaPresentation.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridwidth = 3;
@@ -296,11 +302,11 @@ public class PanelPresentation extends JPanel {
 		btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setVisible(false);
 		panelDecision.add(btnAnnuler);
-		btnEditer = new JButton("Valider");
-		btnEditer.setVisible(false);
-		panelDecision.add(btnEditer);
 		btnEditer = new JButton("Editer");
 		panelDecision.add(btnEditer);
+		btnValider = new JButton("Valider");
+		btnValider.setVisible(false);
+		panelDecision.add(btnValider);
 
 	}
 

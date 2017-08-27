@@ -168,6 +168,7 @@ public abstract class RegisteredUser {
 	}
 
 	/**
+	 * Full constructor
 	 * @param login
 	 * @param isConnected
 	 * @param name
@@ -189,6 +190,16 @@ public abstract class RegisteredUser {
 		this.avatar = avatar;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "RegisteredUser [login=" + login + ", name=" + name + ", phone=" + phone + ", email=" + email
+				+ ", presentation=" + presentation + ", avatar=" + avatar + ", created_at=" + created_at
+				+ ", updated_at=" + updated_at + ", password=" + password + "]";
 	}
 
 }
