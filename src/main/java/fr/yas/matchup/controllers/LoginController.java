@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.LoginView;
-import fr.yas.matchup.views.RegisterView;
 import fr.yas.matchup.controllers.ViewsDatasTerms;
 
 /**

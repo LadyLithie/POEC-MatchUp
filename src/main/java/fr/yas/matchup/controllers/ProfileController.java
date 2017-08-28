@@ -13,6 +13,7 @@ import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.views.ProfileEView;
+import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelPresentation;
 
 /**
@@ -59,14 +60,23 @@ public class ProfileController extends BaseController {
 	@Override
 	public void initEvent() {
 		ProfileEView v = (ProfileEView) super.view;
+		
+		/* Panel Presentation
+		 * Define the action on the buttons
+		 */
 		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
-
-		vPresentation.getBtnEditer().addActionListener(new EditListener());
-		vPresentation.getBtnValider().addActionListener(new ActionListener() {
-			
+		//mode view
+		vPresentation.getBtnEditer().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisiblePresentation(false);
+				vPresentation.setMode(true);
+			}
+		});
+		//Mode modification
+		vPresentation.getBtnValider().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				vPresentation.setMode(false);
 				user.setName(vPresentation.getNamePanel().getInput().getText());
 				if(!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText()))
 					vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());;
@@ -75,72 +85,36 @@ public class ProfileController extends BaseController {
 			}
 		});
 		vPresentation.getBtnAnnuler().addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisiblePresentation(false);
+				vPresentation.setMode(false);
 				vPresentation.getNamePanel().getInput().setText(user.getName());
-				vPresentation.getSiretPanel().getInput().setText(String.valueOf(user.getSiretNumber()));
+				vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());
 				vPresentation.getWebsitePanel().getInput().setText(user.getWebsite());
 				vPresentation.getTextAreaPresentation().setText(user.getPresentation());
 			}
 		});
-	}
-
-	/**
-	 * Intern class listening to BtnEditer of the PanelPresentation
-	 * 
-	 * @author Audrey
-	 *
-	 */
-	class EditListener implements ActionListener {
-		ProfileEView v = (ProfileEView) view;
-		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			setVisiblePresentation(true);
-
-		}
-	}
-
-	
-	private void setVisiblePresentation(boolean b) {
-		ProfileEView v = (ProfileEView) view;
-		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
-
-		vPresentation.getBtnEditer().setVisible(!b);
-		vPresentation.getBtnAjout().setVisible(b);
-		vPresentation.getBtnAnnuler().setVisible(b);
-		vPresentation.getBtnModifier().setVisible(b);
-		vPresentation.getBtnValider().setVisible(b);	
-		vPresentation.getNamePanel().getInput().setEditable(b);
-		vPresentation.getSiretPanel().getInput().setEditable(b);
-		vPresentation.getEmailPanel().getInput().setEditable(b);
-		vPresentation.getWebsitePanel().getInput().setEditable(b);
-		vPresentation.getTextAreaPresentation().setEditable(b);
 		
-		if(b) {
-			vPresentation.getNamePanel().getInput().setBorder(new TextFieldBorder());
-			vPresentation.getSiretPanel().getInput().setBorder(new TextFieldBorder());
-			vPresentation.getEmailPanel().getInput().setBorder(new TextFieldBorder());
-			vPresentation.getWebsitePanel().getInput().setBorder(new TextFieldBorder());
-			vPresentation.getTextAreaPresentation().setBackground(UIManager.getColor("TextArea.background"));
-			vPresentation.getTextAreaPresentation().setBorder(new TextFieldBorder());
-		} else {
-			vPresentation.getNamePanel().getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-			vPresentation.getSiretPanel().getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-			vPresentation.getEmailPanel().getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-			vPresentation.getWebsitePanel().getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-			vPresentation.getTextAreaPresentation().setBackground(UIManager.getColor("Panel.background"));
-			vPresentation.getTextAreaPresentation().setBorder(new EmptyBorder(0, 0, 0, 0));
-			
-		}
+		/* Panel Head-hunters
+		 * Define the action on the buttons
+		 */
+		PanelHeadhunters vHeadhunters = (PanelHeadhunters) v.getPanel_bottomRight();
+		vHeadhunters.getBtnEdit().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(vHeadhunters.getBtnEdit().getText() == "Editer") 
+					vHeadhunters.setMode(true);
+				else //missing register change
+					vHeadhunters.setMode(false);
+				
+			}
+		});
+		vHeadhunters.getBtnAnnuler().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				vHeadhunters.setMode(false);
+				//need to add re-initialization of panel
+			}
+		});
 	}
 }

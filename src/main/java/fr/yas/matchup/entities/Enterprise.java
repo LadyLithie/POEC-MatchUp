@@ -5,11 +5,14 @@
  */
 package fr.yas.matchup.entities;
 
+import java.util.ArrayList;
+
 public class Enterprise extends RegisteredUser {
 	private String address;
 	//declare image as int ? chemin du fichier en String
 	private String siretNumber;
 	private String website;
+	private ArrayList<Headhunter> associates;
 
 	/**
 	 * @return the address
@@ -32,7 +35,7 @@ public class Enterprise extends RegisteredUser {
 		return siretNumber;
 	}
 	/**
-	 * @param siretNumber the siretNumber to set
+	 * @param siretNumber the siretNumber to set. 14 numbers must be present to be validate
 	 * @return 
 	 */
 	public boolean setSiretNumber(String siretNumber) {
@@ -56,6 +59,20 @@ public class Enterprise extends RegisteredUser {
 	 */
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+
+	/**
+	 * @return the associates
+	 */
+	public ArrayList<Headhunter> getAssociates() {
+		return associates;
+	}
+
+	/**
+	 * @param associates the associates to set
+	 */
+	public void setAssociates(ArrayList<Headhunter> associates) {
+		this.associates = associates;
 	}
 
 	/**

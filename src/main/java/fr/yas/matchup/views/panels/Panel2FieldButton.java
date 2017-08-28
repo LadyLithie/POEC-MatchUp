@@ -5,10 +5,13 @@ package fr.yas.matchup.views.panels;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+
+import fr.yas.matchup.views.IVisibility;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
@@ -18,11 +21,19 @@ import java.awt.Insets;
  * @author Audrey
  *
  */
-public class Panel2FieldButton extends JPanel {
+public class Panel2FieldButton extends JPanel implements IVisibility {
+
 	private JLabel label;
 	private JButton button;
 	private JTextField textField1;
 	private JTextField textField2;
+
+	/**
+	 * @return the button
+	 */
+	public JButton getButton() {
+		return button;
+	}
 
 	/**
 	 * @return the textField1
@@ -95,6 +106,25 @@ public class Panel2FieldButton extends JPanel {
 			}			
 		}
 
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.views.IVisibility#setMode(boolean)
+	 */
+	@Override
+	public void setMode(boolean b) {
+		this.getTextField2().setEditable(b);
+		this.getTextField1().setEditable(b);
+		if(this.getButton() != null)
+			this.getButton().setVisible(b);
+		
+		if (b) {
+			this.getTextField1().setBorder(new TextFieldBorder());
+			this.getTextField2().setBorder(new TextFieldBorder());
+		} else {
+			this.getTextField1().setBorder(new EmptyBorder(0, 0, 0, 0));
+			this.getTextField2().setBorder(new EmptyBorder(0, 0, 0, 0));
+		}
 	}
 
 }

@@ -11,12 +11,15 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+
+import fr.yas.matchup.views.IVisibility;
 
 import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 
-public class PanelPresentation extends JPanel {
+public class PanelPresentation extends JPanel implements IVisibility{
 	GridBagLayout gridBagLayout;
 	
 	private PanelField namePanel;
@@ -310,6 +313,32 @@ public class PanelPresentation extends JPanel {
 		btnValider.setVisible(false);
 		panelDecision.add(btnValider);
 
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.views.IVisibility#setMode(boolean)
+	 */
+	@Override
+	public void setMode(boolean b) {
+		this.getBtnEditer().setVisible(!b);
+		this.getBtnAjout().setVisible(b);
+		this.getBtnAnnuler().setVisible(b);
+		this.getBtnModifier().setVisible(b);
+		this.getBtnValider().setVisible(b);
+		
+		this.getNamePanel().setMode(b);
+		this.getSiretPanel().setMode(b);
+		this.getEmailPanel().setMode(b);
+		this.getWebsitePanel().setMode(b);
+		this.getTextAreaPresentation().setEditable(b);
+		
+		if(b) {
+			this.getTextAreaPresentation().setBackground(UIManager.getColor("TextArea.background"));
+			this.getTextAreaPresentation().setBorder(new TextFieldBorder());
+		} else {
+			this.getTextAreaPresentation().setBackground(UIManager.getColor("Panel.background"));
+			this.getTextAreaPresentation().setBorder(new EmptyBorder(0, 0, 0, 0));
+		}
 	}
 
 }

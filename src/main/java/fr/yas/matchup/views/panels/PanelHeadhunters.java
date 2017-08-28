@@ -8,11 +8,46 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import java.awt.Insets;
-import java.awt.GridLayout;
-import javax.swing.JTextField;
+import java.util.ArrayList;
+
 import javax.swing.border.LineBorder;
 
-public class PanelHeadhunters extends JPanel {
+import fr.yas.matchup.views.IVisibility;
+
+public class PanelHeadhunters extends JPanel implements IVisibility {
+	private Panel2FieldButton newHeadHunter;
+	private JButton btnEdit;
+	private JButton btnAnnuler;
+	private ArrayList<Panel2FieldButton> associates;
+
+	/**
+	 * @return the newHeadHunter
+	 */
+	public Panel2FieldButton getNewHeadHunter() {
+		return newHeadHunter;
+	}
+
+	/**
+	 * @return the btnEdit
+	 */
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+
+	/**
+	 * @return the btnAnnuler
+	 */
+	public JButton getBtnAnnuler() {
+		return btnAnnuler;
+	}
+
+	/**
+	 * @return the associates
+	 */
+	public ArrayList<Panel2FieldButton> getAssociates() {
+		return associates;
+	}
+
 	/**
 	 * Create the panel.
 	 */
@@ -50,7 +85,8 @@ public class PanelHeadhunters extends JPanel {
 		gbc_lblHeadhunters.gridy = 0;
 		panelTitle.add(lblHeadhunters, gbc_lblHeadhunters);
 		
-		JButton btnAnnuler = new JButton("Annuler");
+		btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setVisible(false);
 		GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
 		gbc_btnAnnuler.anchor = GridBagConstraints.EAST;
 		gbc_btnAnnuler.insets = new Insets(0, 0, 0, 5);
@@ -58,7 +94,7 @@ public class PanelHeadhunters extends JPanel {
 		gbc_btnAnnuler.gridy = 0;
 		panelTitle.add(btnAnnuler, gbc_btnAnnuler);
 		
-		JButton btnEdit = new JButton("Valider");
+		btnEdit = new JButton("Editer");
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
 		gbc_btnEdit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEdit.anchor = GridBagConstraints.EAST;
@@ -82,6 +118,7 @@ public class PanelHeadhunters extends JPanel {
 		panelContent.setLayout(gbl_panelContent);
 		//List the present headhunters and offer possibility to delete
 		int posX = 1;
+		associates = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
 			Panel2FieldButton test = new Panel2FieldButton("Headhunter", "Supprimer");
 			GridBagConstraints gbc_test = new GridBagConstraints();
@@ -91,10 +128,11 @@ public class PanelHeadhunters extends JPanel {
 			gbc_test.gridy = posX;
 			panelContent.add(test, gbc_test);
 			posX = posX + 2;
+			associates.add(test);
 		}
 		
 		//Add new one
-		Panel2FieldButton newHeadHunter = new Panel2FieldButton("Nouveau recruteur", "Ajouter");
+		newHeadHunter = new Panel2FieldButton("Nouveau recruteur", "Ajouter");
 		GridBagConstraints gbc_newHeadHunter = new GridBagConstraints();
 		gbc_newHeadHunter.insets = new Insets(0, 0, 5, 5);
 		gbc_newHeadHunter.fill = GridBagConstraints.HORIZONTAL;
@@ -103,8 +141,27 @@ public class PanelHeadhunters extends JPanel {
 		gbc_newHeadHunter.gridy = posX;
 		panelContent.add(newHeadHunter, gbc_newHeadHunter);
 		
+		this.setMode(false);
 
+	}
 
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.views.IVisibility#setMode(boolean)
+	 */
+	@Override
+	public void setMode(boolean b) {
+		this.getBtnAnnuler().setVisible(b);
+		if (b) {
+			this.getBtnEdit().setText("Valider");
+		} else {
+			this.getBtnEdit().setText("Editer");
+		}
+
+		this.getNewHeadHunter().setMode(b);
+		for (Panel2FieldButton headhunter : associates) {
+			headhunter.setMode(b);
+		}
+		
 	}
 
 }
