@@ -86,7 +86,6 @@ public class Enterprise extends RegisteredUser {
 	/**
 	 * Full constructor
 	 * @param login
-	 * @param isConnected
 	 * @param name
 	 * @param phone
 	 * @param email
@@ -97,9 +96,9 @@ public class Enterprise extends RegisteredUser {
 	 * @param address
 	 * @param siretNumber
 	 */
-	public Enterprise(String login, boolean isConnected, String name, String phone, String email, String presentation,
+	public Enterprise(String login, String name, String phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String address, String siretNumber) {
-		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
+		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.address = address;
 		this.siretNumber = siretNumber;
 	}

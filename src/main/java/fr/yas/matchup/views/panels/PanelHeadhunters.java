@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.border.LineBorder;
 
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.views.IVisibility;
 
 public class PanelHeadhunters extends JPanel implements IVisibility {
@@ -51,7 +52,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	/**
 	 * Create the panel.
 	 */
-	public PanelHeadhunters() {
+	public PanelHeadhunters(ArrayList<Headhunter> associates) {
 		this.setName("Headhunters");
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -118,9 +119,11 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		panelContent.setLayout(gbl_panelContent);
 		//List the present headhunters and offer possibility to delete
 		int posX = 1;
-		associates = new ArrayList<>();
-		for (int i = 0; i < 2; i++) {
+		this.associates = new ArrayList<>();
+		for (Headhunter headhunter : associates) {
 			Panel2FieldButton test = new Panel2FieldButton("Headhunter", "Supprimer");
+			test.getTextField1().setText(headhunter.getFirstname());
+			test.getTextField2().setText(headhunter.getLastname());
 			GridBagConstraints gbc_test = new GridBagConstraints();
 			gbc_test.fill = GridBagConstraints.HORIZONTAL;
 			gbc_test.anchor = GridBagConstraints.CENTER;
@@ -128,7 +131,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 			gbc_test.gridy = posX;
 			panelContent.add(test, gbc_test);
 			posX = posX + 2;
-			associates.add(test);
+			this.associates.add(test);
 		}
 		
 		//Add new one

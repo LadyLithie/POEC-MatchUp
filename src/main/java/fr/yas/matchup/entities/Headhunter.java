@@ -97,10 +97,10 @@ public class Headhunter extends RegisteredUser {
 	 * *********************
 	 * To review the lists
 	 */
-	public Headhunter(String login, boolean isConnected, String name, String phone, String email, String presentation,
+	public Headhunter(String login, String name, String phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String firstname, String lastname,
 			ArrayList<String> phones, ArrayList<String> emails) {
-		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
+		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		
 		this.phones = new ArrayList<String>();
 		// This is optional, depend how we want to treat multiple

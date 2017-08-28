@@ -36,14 +36,14 @@ public class Panel2FieldButton extends JPanel implements IVisibility {
 	}
 
 	/**
-	 * @return the textField1
+	 * @return the textField1 (firstname)
 	 */
 	public JTextField getTextField1() {
 		return textField1;
 	}
 
 	/**
-	 * @return the textField2
+	 * @return the textField2 (lastname)
 	 */
 	public JTextField getTextField2() {
 		return textField2;

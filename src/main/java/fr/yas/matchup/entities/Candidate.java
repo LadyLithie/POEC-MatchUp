@@ -109,10 +109,10 @@ public class Candidate extends RegisteredUser {
 	 * @param qualifications
 	 * @param mobility
 	 */
-	public Candidate(String login, boolean isConnected, String name, String phone, String email, String presentation,
+	public Candidate(String login, String name, String phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String firstname, String lastname, String birstdate,
 			ArrayList<Diploma> qualifications, ArrayList<String> mobility) {
-		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
+		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.birstdate = birstdate;

@@ -9,7 +9,6 @@ package fr.yas.matchup.entities;
  */
 public abstract class RegisteredUser {
 	private String login;
-	private boolean isConnected;
 	private String name;
 	private String phone;
 	private String email;
@@ -46,20 +45,6 @@ public abstract class RegisteredUser {
 	 */
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	/**
-	 * @return the isConnected
-	 */
-	public boolean isConnected() {
-		return isConnected;
-	}
-
-	/**
-	 * @param isConnected the isConnected to set
-	 */
-	public void setConnected(boolean isConnected) {
-		this.isConnected = isConnected;
 	}
 
 	/**
@@ -170,7 +155,6 @@ public abstract class RegisteredUser {
 	/**
 	 * Full constructor
 	 * @param login
-	 * @param isConnected
 	 * @param name
 	 * @param phone
 	 * @param email
@@ -179,10 +163,9 @@ public abstract class RegisteredUser {
 	 * @param created_at
 	 * @param updated_at
 	 */
-	public RegisteredUser(String login, boolean isConnected, String name, String phone, String email,
+	public RegisteredUser(String login, String name, String phone, String email,
 			String presentation, String avatar, String created_at, String updated_at) {
 		this.login = login;
-		this.isConnected = isConnected;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
