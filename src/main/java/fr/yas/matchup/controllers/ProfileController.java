@@ -3,16 +3,25 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
+import com.sun.xml.internal.ws.developer.ValidationErrorHandler;
+
 import fr.yas.matchup.entities.Enterprise;
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.views.ProfileEView;
+import fr.yas.matchup.views.panels.Panel2FieldButton;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelPresentation;
 
@@ -21,7 +30,10 @@ import fr.yas.matchup.views.panels.PanelPresentation;
  *
  */
 public class ProfileController extends BaseController {
-	Enterprise user;
+	private Enterprise user;
+	private ArrayList<Headhunter> headhunters = new ArrayList<>();
+	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
+
 
 	/**
 	 * 
@@ -42,6 +54,7 @@ public class ProfileController extends BaseController {
 	public void initView() {
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		ProfileEView v = (ProfileEView) getView();
+		//Panel presentation
 		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
 
 		vP.getNamePanel().getInput().setText(user.getName());
@@ -49,6 +62,13 @@ public class ProfileController extends BaseController {
 		vP.getWebsitePanel().getInput().setText(user.getWebsite());
 		vP.getSiretPanel().getInput().setText(user.getSiretNumber());
 		vP.getTextAreaPresentation().setText(user.getPresentation());
+		
+		//Panel headhunters
+		PanelHeadhunters vH = (PanelHeadhunters) v.getPanel_bottomRight();
+		ArrayList<Panel2FieldButton> associates = vH.getAssociates();
+		for (int i = 0; i < associates.size(); i++) {
+//			associates[i].get
+		}
 
 	}
 
@@ -99,14 +119,22 @@ public class ProfileController extends BaseController {
 		 * Define the action on the buttons
 		 */
 		PanelHeadhunters vHeadhunters = (PanelHeadhunters) v.getPanel_bottomRight();
+		
 		vHeadhunters.getBtnEdit().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(vHeadhunters.getBtnEdit().getText() == "Editer") 
+				if(vHeadhunters.getBtnEdit().getText() == "Editer") {
 					vHeadhunters.setMode(true);
-				else //missing register change
+				}
+				else {
+					if(user.getAssociates() == null) {
+						user.setAssociates(headhunters);
+					}else {
+						user.getAssociates().addAll(headhunters);
+					}
+					headhunters = new ArrayList<>();
 					vHeadhunters.setMode(false);
-				
+				}
 			}
 		});
 		vHeadhunters.getBtnAnnuler().addActionListener(new ActionListener() {
@@ -116,5 +144,51 @@ public class ProfileController extends BaseController {
 				//need to add re-initialization of panel
 			}
 		});
+		vHeadhunters.getNewHeadHunter().getButton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Headhunter newHH = new Headhunter();
+				boolean valid = true;
+				System.err.println(vHeadhunters.getNewHeadHunter().getTextField1().getText().isEmpty());
+				if (!vHeadhunters.getNewHeadHunter().getTextField1().getText().isEmpty()) {
+					vHeadhunters.getNewHeadHunter().getTextField1().setBackground(Color.WHITE);
+				} else {
+					vHeadhunters.getNewHeadHunter().getTextField1().setBackground(Color.PINK);
+					valid  = false;
+				}
+				//lastname
+				System.err.println(vHeadhunters.getNewHeadHunter().getTextField2().getText().isEmpty());
+				if (!vHeadhunters.getNewHeadHunter().getTextField2().getText().isEmpty()) {
+					vHeadhunters.getNewHeadHunter().getTextField2().setBackground(Color.WHITE);
+				} else {
+					vHeadhunters.getNewHeadHunter().getTextField2().setBackground(Color.PINK);
+					valid = false;
+				}
+				
+				//If valid, we add the headhunter to the view list and reinitialize the new headhunter
+				if(valid) {
+					newHH.setFirstname(vHeadhunters.getNewHeadHunter().getTextField1().getText());
+					newHH.setLastname(vHeadhunters.getNewHeadHunter().getTextField2().getText());
+					headhunters.add(newHH);
+					
+					Panel2FieldButton test = new Panel2FieldButton("Headhunter", "Supprimer");
+					test.getTextField1().setText(newHH.getFirstname());
+					test.getTextField2().setText(newHH.getLastname());
+					GridBagConstraints gbc_test = new GridBagConstraints();
+					gbc_test.fill = GridBagConstraints.HORIZONTAL;
+					gbc_test.anchor = GridBagConstraints.CENTER;
+					gbc_test.gridx = 1;
+					gbc_test.gridy = 2+vHeadhunters.getAssociates().size()*2;
+					System.out.println(vHeadhunters.getComponentCount());
+					vHeadhunters.getPanelContent().add(test, gbc_test);
+					pHeadhunters.add(test);
+					
+					vHeadhunters.getNewHeadHunter().getTextField1().setText("");
+					vHeadhunters.getNewHeadHunter().getTextField2().setText("");
+					vHeadhunters.revalidate();
+				}
+			}
+		});
 	}
+
 }

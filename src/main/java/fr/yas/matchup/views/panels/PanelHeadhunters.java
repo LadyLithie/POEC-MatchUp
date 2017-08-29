@@ -20,6 +20,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	private JButton btnEdit;
 	private JButton btnAnnuler;
 	private ArrayList<Panel2FieldButton> associates;
+	private JPanel panelContent;
 
 	/**
 	 * @return the newHeadHunter
@@ -47,6 +48,13 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	 */
 	public ArrayList<Panel2FieldButton> getAssociates() {
 		return associates;
+	}
+
+	/**
+	 * @return the panelContent
+	 */
+	public JPanel getPanelContent() {
+		return panelContent;
 	}
 
 	/**
@@ -104,7 +112,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		panelTitle.add(btnEdit, gbc_btnEdit);
 		
 		//List - Main panel
-		JPanel panelContent = new JPanel();
+		panelContent = new JPanel();
 		GridBagConstraints gbc_panelContent = new GridBagConstraints();
 		gbc_panelContent.insets = new Insets(0, 0, 5, 5);
 		gbc_panelContent.fill = GridBagConstraints.NORTH;
@@ -119,20 +127,6 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		panelContent.setLayout(gbl_panelContent);
 		//List the present headhunters and offer possibility to delete
 		int posX = 1;
-		this.associates = new ArrayList<>();
-		for (Headhunter headhunter : associates) {
-			Panel2FieldButton test = new Panel2FieldButton("Headhunter", "Supprimer");
-			test.getTextField1().setText(headhunter.getFirstname());
-			test.getTextField2().setText(headhunter.getLastname());
-			GridBagConstraints gbc_test = new GridBagConstraints();
-			gbc_test.fill = GridBagConstraints.HORIZONTAL;
-			gbc_test.anchor = GridBagConstraints.CENTER;
-			gbc_test.gridx = 1;
-			gbc_test.gridy = posX;
-			panelContent.add(test, gbc_test);
-			posX = posX + 2;
-			this.associates.add(test);
-		}
 		
 		//Add new one
 		newHeadHunter = new Panel2FieldButton("Nouveau recruteur", "Ajouter");
@@ -144,6 +138,21 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		gbc_newHeadHunter.gridy = posX;
 		panelContent.add(newHeadHunter, gbc_newHeadHunter);
 		
+		this.associates = new ArrayList<>();
+		for (Headhunter headhunter : associates) {
+			posX = posX + 2;
+			Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
+			test.getTextField1().setText(headhunter.getFirstname());
+			test.getTextField2().setText(headhunter.getLastname());
+			GridBagConstraints gbc_test = new GridBagConstraints();
+			gbc_test.fill = GridBagConstraints.HORIZONTAL;
+			gbc_test.anchor = GridBagConstraints.CENTER;
+			gbc_test.gridx = 1;
+			gbc_test.gridy = posX;
+			panelContent.add(test, gbc_test);
+			this.associates.add(test);
+		}
+
 		this.setMode(false);
 
 	}
@@ -160,7 +169,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 			this.getBtnEdit().setText("Editer");
 		}
 
-		this.getNewHeadHunter().setMode(b);
+		this.getNewHeadHunter().setVisible(b);
 		for (Panel2FieldButton headhunter : associates) {
 			headhunter.setMode(b);
 		}

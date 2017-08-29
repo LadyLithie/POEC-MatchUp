@@ -115,7 +115,7 @@ public class RegisterController extends BaseController {
 				user.setEmail(view.getEmail().getInput().getText());
 				user.setPassword(pwd);
 			} else {
-				System.out.println("choisissez un type d'utilisateur");
+				System.err.println("choisissez un type d'utilisateur");
 			}
 //			System.out.println(user.toString());
 

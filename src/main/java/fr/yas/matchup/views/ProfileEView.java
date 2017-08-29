@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -88,7 +89,7 @@ public class ProfileEView extends BaseView {
 		panel.add(panel_TopRight, gbc_panel_TopRight);
 		
 		//Add a panel on the bottom right
-		panel_bottomRight = new PanelHeadhunters(null);
+		panel_bottomRight = new PanelHeadhunters(new ArrayList<>());
 		GridBagConstraints gbc_panel_bottomRight = new GridBagConstraints();
 		gbc_panel_bottomRight.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_bottomRight.fill = GridBagConstraints.BOTH;
