@@ -9,8 +9,9 @@
  *********/
 package fr.yas.matchup.entities;
 
-public class Proposal {
-	private int id;
+import fr.yas.matchup.entities.base.BaseEntity;
+
+public class Proposal extends BaseEntity {
 	private String name;
 	private String presentation;
 	private String handicap;
@@ -19,19 +20,7 @@ public class Proposal {
 	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
 	private ContractType contractType;
 	// Why not with an Enum? 
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	/**
 	 * @return the name
 	 */
@@ -111,16 +100,16 @@ public class Proposal {
 		this.contractType = contractType;
 		this.createdAt = createdAt;
 	}
-	
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", handicap=" + handicap
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", contractType=" + contractType + "]";
+		return "Proposal [name=" + name + ", presentation=" + presentation + ", handicap=" + handicap + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", contractType=" + contractType + "]";
 	}
+	
+
 	
 	
 	

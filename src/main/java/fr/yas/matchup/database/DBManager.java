@@ -35,23 +35,54 @@ public class DBManager {
 	/**
 	 * Attributes
 	 */
+	private static final String PASSWORD = "password";
+	private static final String LOGIN = "login";
+	private static final String DB_NAME = "dbName";
+	private static final String PORT = "port";
+	private static final String SERVER_ADDRESS = "serverAddress";
+	private static final String DBCONFIG = "dbconfig";
+	private static final String CONFIG = "config";
+	
 	private Connection con;
+	private String DBNAME = "mydb";
 	
-	public void connect() {
-		connect("config", "dbconfig");
+	/**
+	 * @return the con
+	 */
+	public Connection getCon() {
+		return con;
 	}
-	
-	public void connect(String path, String file) {
-		FileManager fileManager = new FileManager(path, file);
-		Map<String, Object> datas = fileManager.extractFromPattern();
-		connect(datas.get("serverAddress").toString(),datas.get("port").toString(),datas.get("dbName").toString(),
-				datas.get("login").toString(),datas.get("password").toString());
+
+	/**
+	 * @return the dBNAME
+	 */
+	public String getDBNAME() {
+		return DBNAME;
 	}
-	
+
 	/**
 	 * Function to connect to a database
 	 */
+	public void connect() {
+		connect(CONFIG, DBCONFIG);
+	}
+	
+	/**
+	 * Function to connect to a database with path.file
+	 */
+	public void connect(String path, String file) {
+		FileManager fileManager = new FileManager(path, file);
+		Map<String, Object> datas = fileManager.extractFromPattern();
+
+		connect(datas.get(SERVER_ADDRESS).toString(),datas.get(PORT).toString(),datas.get(DB_NAME).toString(),
+				datas.get(LOGIN).toString(),datas.get(PASSWORD).toString());
+	}
+	
+	/**
+	 * Function to connect to a database with separate string
+	 */
 	public void connect(String serverAddress, String port, String dbName, String login, String password) {
+	DBNAME = dbName;
 		try {
 			//Charge the class Driver from added libs 
 			Class.forName("com.mysql.jdbc.Driver");
