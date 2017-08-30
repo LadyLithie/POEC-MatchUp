@@ -33,7 +33,7 @@ public class ViewsManager {
 
 	public void start() {
 		ViewsUtils.configureFirstJFrame(frame);
-		currentController = new LoginController(frame);
+//		currentController = new BaseController(frame);
 		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
