@@ -19,7 +19,7 @@ public class SoftwareApplication {
 	 */
 	public static void main(String[] args) {
 		SkillDAO dao = new SkillDAO();
-		ResultSet resultSet = dao.executeRequest("SHOW TABLES");
+		ResultSet resultSet = dao.executeRequest("SHOW TABLES;");
 
 		try {
 			while (resultSet.next()) {
