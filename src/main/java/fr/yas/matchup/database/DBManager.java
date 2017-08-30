@@ -22,6 +22,7 @@ public class DBManager {
 	private static DBManager instance = null;
 	protected DBManager() {
 		// Exists only to defeat instantiation.
+		connect();
 	}
 
 	public static DBManager getInstance() {
@@ -73,9 +74,13 @@ public class DBManager {
 	public void connect(String path, String file) {
 		FileManager fileManager = new FileManager(path, file);
 		Map<String, Object> datas = fileManager.extractFromPattern();
-
+		String password = "";
+		
+		if (datas.containsKey(PASSWORD)) {
+			password = datas.get(PASSWORD).toString();
+		}
 		connect(datas.get(SERVER_ADDRESS).toString(),datas.get(PORT).toString(),datas.get(DB_NAME).toString(),
-				datas.get(LOGIN).toString(),datas.get(PASSWORD).toString());
+				datas.get(LOGIN).toString(),password);
 	}
 	
 	/**
