@@ -115,7 +115,7 @@ public abstract class BaseDAO implements IDAOBase {
 		ResultSet rSet = executeRequest("SELECT * FROM "+ table +"WHERE "+ this.id +" = "+ id);
 		try {
 			rSet.next();
-			entity = parseResultSetToObject(rSet);
+			entity = parseToObject(rSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -136,7 +136,7 @@ public abstract class BaseDAO implements IDAOBase {
 		
 		try {
 			while (rSet.next()) {
-				entities.add(parseResultSetToObject(rSet));
+				entities.add(parseToObject(rSet));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -154,11 +154,13 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public void insert(BaseEntity item) {
-		System.out.println("INSERT INTO "+ table + " VALUES ("+parseObjectToString(item)+")");
-		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES ("+parseObjectToString(item)+")");
+		System.out.println("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
+		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
 		System.out.println(res);
-		if(res > 0)
-		item.setId(res);
+		if(res > 0) {
+			item.setId(res);
+		}
+			
 	}
 
 	/* (non-Javadoc)
@@ -166,11 +168,7 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public void update(BaseEntity item) {
-		List<String> values = new ArrayList<String>();
-		for (String string : parseObjectToString(item).split(",")) {
-			
-		}
-		
+		int res = executeRequestUpdate("UPDATE "+ table + "SET "+parseUpdateToString(item)+" WHERE " + id + " = "+item.getId());
 	}
 
 }

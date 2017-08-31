@@ -30,7 +30,7 @@ public class SkillDAO extends BaseDAO {
 	 * @see fr.yas.matchup.database.IDAOBase#parse(java.sql.ResultSet)
 	 */
 	@Override
-	public BaseEntity parseResultSetToObject(ResultSet resultSet) {
+	public BaseEntity parseToObject(ResultSet resultSet) {
 		Skill skill = new Skill();
 		
 		try {
@@ -45,9 +45,11 @@ public class SkillDAO extends BaseDAO {
 		return skill;
 	}
 
-
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.database.IDAOBase#parseToString(fr.yas.matchup.entities.base.BaseEntity)
+	 */
 	@Override
-	public String parseObjectToString(BaseEntity item) {
+	public String parseToString(BaseEntity item) {
 		String request;
 		
 		Skill skill = ((Skill)item);
@@ -58,5 +60,18 @@ public class SkillDAO extends BaseDAO {
 		return request;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.database.IDAOBase#parseUpdateToString(fr.yas.matchup.entities.base.BaseEntity)
+	 */
+	@Override
+	public String parseUpdateToString(BaseEntity item) {
+		String request;
+		
+		Skill skill = ((Skill)item);
+		request = NAME +" = '"+skill.getName()+"'";
+		request += TYPE +" = '"+skill.getSkillType()+"'";
+		
+		return request;
+	}
 
 }
