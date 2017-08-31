@@ -45,23 +45,6 @@ public class SkillDAO extends BaseDAO {
 		return skill;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#insert(fr.yas.matchup.entities.base.BaseEntity)
-	 */
-	@Override
-	public void insert(BaseEntity item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#update(fr.yas.matchup.entities.base.BaseEntity)
-	 */
-	@Override
-	public void update(BaseEntity item) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public String parseObjectToString(BaseEntity item) {
@@ -69,8 +52,8 @@ public class SkillDAO extends BaseDAO {
 		
 		Skill skill = ((Skill)item);
 		request = String.valueOf(skill.getId());
-		request += ","+skill.getName();
-		request += ","+skill.getSkillType();
+		request += ",'"+skill.getName()+"'";
+		request += ",'"+skill.getSkillType()+"'";
 		
 		return request;
 	}

@@ -14,6 +14,7 @@ import fr.yas.matchup.entities.base.BaseEntity;
  */
 public interface IDAOBase {
 	public ResultSet executeRequest(String request);
+	public int executeRequestUpdate(String request);
 	public BaseEntity parseResultSetToObject(ResultSet resultSet) ;
 	public String parseObjectToString(BaseEntity item);
 	public void insert(BaseEntity item) ;

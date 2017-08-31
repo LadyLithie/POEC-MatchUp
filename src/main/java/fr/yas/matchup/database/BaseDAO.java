@@ -58,6 +58,29 @@ public abstract class BaseDAO implements IDAOBase {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.yas.matchup.database.IDAOBase#executeRequestUpdate(java.lang.String)
+	 */
+	@Override
+	public int executeRequestUpdate(String request) {
+		int result=0;
+		
+		try {
+			Statement stmt = DBManager.getInstance().getCon().createStatement();
+			result = stmt.executeUpdate(request,Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet rSet = stmt.getGeneratedKeys();
+			if(rSet.next()) {
+				result = rSet.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 	/**
 	 * Delete an item from the corresponding table
 	 */
@@ -131,7 +154,11 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public void insert(BaseEntity item) {
-		executeRequest("INSERT INTO "+ table + "VALUES ("+parseObjectToString(item)+")");
+		System.out.println("INSERT INTO "+ table + " VALUES ("+parseObjectToString(item)+")");
+		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES ("+parseObjectToString(item)+")");
+		System.out.println(res);
+		if(res > 0)
+		item.setId(res);
 	}
 
 	/* (non-Javadoc)
@@ -139,7 +166,10 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public void update(BaseEntity item) {
-		// TODO Auto-generated method stub
+		List<String> values = new ArrayList<String>();
+		for (String string : parseObjectToString(item).split(",")) {
+			
+		}
 		
 	}
 

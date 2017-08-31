@@ -54,7 +54,7 @@ public class Skill extends BaseEntity {
 	 */
 	@Override
 	public String toString() {
-		return "Skill [name=" + name + ", skillType=" + skillType + "]";
+		return "Skill [name=" + name + ", skillType=" + skillType + ", getId()=" + getId() + "]";
 	}
-	
+
 }
