@@ -96,7 +96,7 @@ public class DBManager {
 	}
 
 	/**
-	 * 
+	 * Function create a new database with a script SQL
 	 * @param path
 	 * @param file
 	 */
@@ -133,6 +133,26 @@ public class DBManager {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * Allow to delete the database and close all link to the database and serverBase
+	 */
+	public void deleteDB() {
+		Statement stmt;
+		
+		try {
+			stmt = creaCon.createStatement();
+			stmt.execute("DROP DATABASE IF EXISTS "+dbName+";");
+			con.close();
+			con = null;
+			creaCon.close();
+			creaCon = null;
+			instance = null;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	/**

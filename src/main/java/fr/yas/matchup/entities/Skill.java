@@ -45,6 +45,10 @@ public class Skill extends BaseEntity {
 		this.skillType = skillType;
 	}
 
+	public Skill() {
+		// TODO Auto-generated constructor stub
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
