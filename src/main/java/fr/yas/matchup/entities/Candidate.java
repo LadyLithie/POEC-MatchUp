@@ -119,6 +119,5 @@ public class Candidate extends RegisteredUser {
 		this.qualifications = qualifications;
 		this.mobility = mobility;
 	}
-	
-	
+
 }
