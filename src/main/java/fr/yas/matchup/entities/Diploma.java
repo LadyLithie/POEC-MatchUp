@@ -3,11 +3,13 @@
  */
 package fr.yas.matchup.entities;
 
+import fr.yas.matchup.entities.base.BaseEntity;
+
 /**
  * @author Audrey
  *	todo new table
  */
-public class Diploma {
+public class Diploma extends BaseEntity{
 	private String label;
 	private Level level;
 

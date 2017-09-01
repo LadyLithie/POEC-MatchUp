@@ -3,11 +3,13 @@
  */
 package fr.yas.matchup.entities;
 
+import fr.yas.matchup.entities.base.BaseEntity;
+
 /**
  * @author Audrey
  *
  */
-public abstract class RegisteredUser {
+public abstract class RegisteredUser extends BaseEntity {
 	private String login;
 	private String name;
 	private String phone;
