@@ -19,7 +19,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 
-public class PanelDetailedResultFrame extends JPanel {
+public class PanelDetailedResult extends JPanel {
 
 	private JButton btnSeeOldMatch;
 	private JButton btnSeeNewMatch;
@@ -45,7 +45,7 @@ public class PanelDetailedResultFrame extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public PanelDetailedResultFrame() {
+	public PanelDetailedResult() {
 		this.setName("DetailedResultFrame");
 		setBounds(100, 100, 900, 600);
 		
@@ -101,7 +101,7 @@ public class PanelDetailedResultFrame extends JPanel {
 		panel_NewMatch1.setLayout(gbl_panel_NewMatch1);
 		
 		JLabel lblPhotoNewMatch = new JLabel("");
-		lblPhotoNewMatch.setIcon(new ImageIcon(PanelDetailedResultFrame.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		lblPhotoNewMatch.setIcon(new ImageIcon(PanelDetailedResult.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		GridBagConstraints gbc_lblPhotoNewMatch = new GridBagConstraints();
 		gbc_lblPhotoNewMatch.gridheight = 2;
 		gbc_lblPhotoNewMatch.insets = new Insets(0, 0, 5, 5);
@@ -204,7 +204,7 @@ public class PanelDetailedResultFrame extends JPanel {
 		panel_OldMatch1.setLayout(gbl_panel_OldMatch1);
 		
 		JLabel label_PhotoOldMatch = new JLabel("");
-		label_PhotoOldMatch.setIcon(new ImageIcon(PanelDetailedResultFrame.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		label_PhotoOldMatch.setIcon(new ImageIcon(PanelDetailedResult.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		GridBagConstraints gbc_label_PhotoOldMatch = new GridBagConstraints();
 		gbc_label_PhotoOldMatch.gridheight = 2;
 		gbc_label_PhotoOldMatch.insets = new Insets(0, 0, 5, 5);

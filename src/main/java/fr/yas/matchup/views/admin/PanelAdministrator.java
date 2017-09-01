@@ -1,4 +1,4 @@
-package fr.yas.matchup.views.panels.admin;
+package fr.yas.matchup.views.admin;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -120,7 +120,7 @@ public class PanelAdministrator extends JPanel {
 	 */
 	public PanelAdministrator() {
 		this.setName("Administrator");
-		setBounds(100, 100, 900, 480);
+		setBounds(100, 100, 900, 600);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] {600, 295};
 		gbl_contentPane.rowHeights = new int[] {165, 300};
