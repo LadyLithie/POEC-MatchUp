@@ -50,7 +50,6 @@ public class ProfileController extends BaseController {
 	public void initView() {
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		ProfileEView v = (ProfileEView) getView();
-		v.getPanel_left().validate();
 		//Panel presentation
 		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
 
