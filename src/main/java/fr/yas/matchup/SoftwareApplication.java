@@ -16,6 +16,7 @@ public class SoftwareApplication {
 	 */
 	public static void main(String[] args) {
 		ViewsManager.getInstance().start();
+		
 	}
 
 }

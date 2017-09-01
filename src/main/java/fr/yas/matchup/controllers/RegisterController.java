@@ -75,7 +75,7 @@ public class RegisterController extends BaseController {
 	@Override
 	public void initView() {
 		RegisterView v = ((RegisterView) getView());
-		v.getRdbtnEntreprise().setSelected(true);
+		v.getRdbtnCandidat().setSelected(true);
 		v.getLogin().getInput().setText("Trololo");
 		v.getPwdField().setText("pwd");
 		v.getPwdVerifField().setText("pwd");

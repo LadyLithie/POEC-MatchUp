@@ -76,7 +76,7 @@ public class LoginController extends BaseController {
 						ViewsManager.getInstance().next(new ProfileController(frame));
 						break;
 					case "Candidate":
-						
+						ViewsManager.getInstance().next(new CandidateController(frame));
 						break;
 					case "Headhunter":
 						
