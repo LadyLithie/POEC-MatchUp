@@ -25,6 +25,9 @@ public class ViewsUtils {
 		// dimension des bordures
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		jFrame.setContentPane(contentPane);
+		
+		// set minimum size to 640x480 in case of resize
+		jFrame.setMinimumSize(new Dimension(640, 480));
 	}
 	
 	/**

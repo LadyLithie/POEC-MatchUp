@@ -13,12 +13,30 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * @author Audrey
  *
  */
 public class PanelListJobs extends JPanel {
+
+	private PanelJobs panelJobs;
+	private JButton btnAdd;
+
+	/**
+	 * @return the panelJobs
+	 */
+	public PanelJobs getPanelJobs() {
+		return panelJobs;
+	}
+
+	/**
+	 * @return the btnAdd
+	 */
+	public JButton getBtnAdd() {
+		return btnAdd;
+	}
 
 	/**
 	 * Create the panel.
@@ -55,7 +73,7 @@ public class PanelListJobs extends JPanel {
 		gbc_lbllTitle.gridy = 0;
 		panelTitle.add(lbllTitle, gbc_lbllTitle);
 		
-		JButton btnAdd = new JButton("Ajouter");
+		btnAdd = new JButton("Ajouter");
 		btnAdd.setToolTipText("Cr\u00E9er un nouveau poste \u00E0 proposer");
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.anchor = GridBagConstraints.EAST;
@@ -64,13 +82,13 @@ public class PanelListJobs extends JPanel {
 		panelTitle.add(btnAdd, gbc_btnAdd);
 		
 		//main part
-		JPanel panelJobs = new PanelJobs();
+		panelJobs = new PanelJobs();
 		GridBagConstraints gbc_panelJobs = new GridBagConstraints();
 		gbc_panelJobs.gridx = 0;
 		gbc_panelJobs.gridy = 1;
 		gbc_panelJobs.fill = GridBagConstraints.BOTH;
 		gbc_panelJobs.anchor = GridBagConstraints.WEST;
-		JScrollPane scrollJobs = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollJobs = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		add(scrollJobs,gbc_panelJobs);
 		scrollJobs.setViewportView(panelJobs);
 	}

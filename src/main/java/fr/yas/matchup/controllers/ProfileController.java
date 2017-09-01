@@ -4,25 +4,21 @@
 package fr.yas.matchup.controllers;
 
 import java.awt.Color;
-import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
-
-import com.sun.xml.internal.ws.developer.ValidationErrorHandler;
-
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.views.ProfileEView;
 import fr.yas.matchup.views.panels.Panel2FieldButton;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
+import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelPresentation;
 
 /**
@@ -54,6 +50,7 @@ public class ProfileController extends BaseController {
 	public void initView() {
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		ProfileEView v = (ProfileEView) getView();
+		v.getPanel_left().validate();
 		//Panel presentation
 		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
 
@@ -189,6 +186,28 @@ public class ProfileController extends BaseController {
 				}
 			}
 		});
+
+		/* Panel Head-hunters
+		 * Define the action on the buttons
+		 */
+		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
+		vListJobs.addComponentListener(new ComponentAdapter() {
+
+			/* (non-Javadoc)
+			 * @see java.awt.event.ComponentAdapter#componentResized(java.awt.event.ComponentEvent)
+			 */
+			@Override
+			public void componentResized(ComponentEvent e) {
+				int width = vListJobs.getWidth();
+//				System.out.println(vListJobs.getPanelJobs().getSize());
+//				System.out.println("the listJobs width = "+width);
+				vListJobs.getPanelJobs().setPreferredSize(new Dimension(width-5, vListJobs.getPanelJobs().getSize().height));
+				vListJobs.validate();
+				vListJobs.getPanelJobs().validate();
+			}
+
+		});
+
 	}
 
 }
