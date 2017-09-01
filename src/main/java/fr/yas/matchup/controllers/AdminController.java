@@ -44,8 +44,14 @@ public class AdminController extends BaseController {
 	 */
 	@Override
 	public void initView() {
-		// TODO Auto-generated method stub
-		super.initView();
+		PanelAdministrator v = (PanelAdministrator) super.view;
+
+		v.getTextField_AdminEmail().setText(user.getEmail());
+		// v.getTextField_AdminName().setText(user.getName());
+		v.getTextField_adminFirstName().setText(user.getFirstname());
+		v.getTextField_AdminLastName().setText(user.getLastname());
+		v.getTextField_AdminPhone().setText(user.getPhone());
+		v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 	}
 
 	/*
@@ -85,10 +91,10 @@ public class AdminController extends BaseController {
 		/*
 		 * Panel presentation
 		 */
-		v.getBtnEdider().addActionListener(new ActionListener() {
+		v.getBtnEditer().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (v.getBtnEdider().getText() == "Editer") {
+				if (v.getBtnEditer().getText() == "Editer") {
 					setMode(true);
 					v.getLblPhoto().addMouseListener(mouseChangeAvatar);
 				} else {
@@ -115,6 +121,11 @@ public class AdminController extends BaseController {
 				v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 			}
 		});
+
+		/*
+		 * Panel Skills
+		 */
+		
 	}
 
 	private void setMode(boolean b) {
@@ -122,9 +133,9 @@ public class AdminController extends BaseController {
 
 		v.getBtnAnnuler().setVisible(b);
 		if (b) {
-			v.getBtnEdider().setText("Valider");
+			v.getBtnEditer().setText("Valider");
 		} else {
-			v.getBtnEdider().setText("Editer");
+			v.getBtnEditer().setText("Editer");
 		}
 
 		// v.getTextField_AdminName().setEditable(b);
