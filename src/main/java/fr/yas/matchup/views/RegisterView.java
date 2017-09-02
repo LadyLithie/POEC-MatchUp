@@ -100,7 +100,7 @@ public class RegisterView extends BaseView {
 	public RegisterView(JFrame frame) {
 		super.pageName = "Register";
 		JPanel panel = new JPanel();
-		super.contentPane = panel;
+		super.panel = panel;
 
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 5, 0, 5, 0 };

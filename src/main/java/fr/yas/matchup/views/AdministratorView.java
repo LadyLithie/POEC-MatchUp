@@ -130,7 +130,7 @@ public class AdministratorView extends BaseView {
 	public AdministratorView(JFrame frame) {
 		super.pageName = "Administrator";
 		JPanel panel = new JPanel();
-		super.contentPane = panel;
+		super.panel = panel;
 
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };

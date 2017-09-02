@@ -65,7 +65,7 @@ public class LoginView extends BaseView {
 	public LoginView(JFrame frame) {
 		super.pageName = "Login";
 		JPanel panel = new JPanel();
-		super.contentPane = panel;
+		super.panel = panel;
 
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();

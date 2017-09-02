@@ -64,7 +64,7 @@ public class ProfileEView extends BaseView {
 	public ProfileEView(JFrame frame) {
 		super.pageName = "Profile";
 		JPanel panel = new JPanel();
-		super.contentPane = panel;
+		super.panel = panel;
 		
 		//Define the general layout for the whole frame
 		GridBagLayout gbl_panel = new GridBagLayout();
