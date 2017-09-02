@@ -23,9 +23,6 @@ public class SkillDAO extends BaseDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Study the result of the SQL query result of the get(id) from BaseDAO
-	 */
 	/* (non-Javadoc)
 	 * @see fr.yas.matchup.database.IDAOBase#parse(java.sql.ResultSet)
 	 */

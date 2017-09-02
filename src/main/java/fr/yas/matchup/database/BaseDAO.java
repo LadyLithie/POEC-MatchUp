@@ -81,9 +81,7 @@ public abstract class BaseDAO implements IDAOBase {
 		return result;
 	}
 
-	/**
-	 * Delete an item from the corresponding table
-	 */
+
 	/* (non-Javadoc)
 	 * @see fr.yas.matchup.database.IDAOBase#delete(fr.yas.matchup.entities.base.BaseEntity)
 	 */
@@ -92,9 +90,6 @@ public abstract class BaseDAO implements IDAOBase {
 		executeRequest("DELETE FROM "+ table + "WHERE "+id+" = "+item.getId());
 	}
 
-	/**
-	 * Delete all items from the table
-	 */
 	/* (non-Javadoc)
 	 * @see fr.yas.matchup.database.IDAOBase#delete()
 	 */
@@ -103,9 +98,6 @@ public abstract class BaseDAO implements IDAOBase {
 		executeRequest("DELETE FROM "+ table);
 	}
 
-	/**
-	 * @return an entity based on its id
-	 */
 	/* (non-Javadoc)
 	 * @see fr.yas.matchup.database.IDAOBase#get(double)
 	 */
@@ -123,9 +115,6 @@ public abstract class BaseDAO implements IDAOBase {
 		return entity;
 	}
 
-	/**
-	 * @return = all a list of all the entities of a table
-	 */
 	/* (non-Javadoc)
 	 * @see fr.yas.matchup.database.IDAOBase#get()
 	 */
@@ -146,9 +135,6 @@ public abstract class BaseDAO implements IDAOBase {
 		return entities;
 	}
 
-	/**
-	 * Insert an entity in a table
-	 */
 	/* (non-Javadoc)
 	 * @see fr.yas.matchup.database.IDAOBase#insert(fr.yas.matchup.entities.base.BaseEntity)
 	 */
