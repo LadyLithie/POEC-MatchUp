@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.yas.matchup.entities.Administrator;
-import fr.yas.matchup.views.PanelAdministrator;
+import fr.yas.matchup.views.AdministratorView;
+import fr.yas.matchup.views.panels.PanelAdminSkill;
+import fr.yas.matchup.views.panels.PanelAdminUser;
 
 /**
  * @author Audrey
@@ -28,7 +31,7 @@ public class AdminController extends BaseController {
 
 	public AdminController(JFrame frame) {
 		super.frame = frame;
-		super.view = new PanelAdministrator(this.frame);
+		super.view = new AdministratorView(this.frame);
 //		user = (Administrator) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		user = new Administrator();
 		user.setFirstname("Hal");
@@ -44,7 +47,7 @@ public class AdminController extends BaseController {
 	 */
 	@Override
 	public void initView() {
-		PanelAdministrator v = (PanelAdministrator) super.view;
+		AdministratorView v = (AdministratorView) super.view;
 
 		v.getTextField_AdminEmail().setText(user.getEmail());
 		// v.getTextField_AdminName().setText(user.getName());
@@ -61,7 +64,7 @@ public class AdminController extends BaseController {
 	 */
 	@Override
 	public void initEvent() {
-		PanelAdministrator v = (PanelAdministrator) super.view;
+		AdministratorView v = (AdministratorView) super.view;
 		this.mouseChangeAvatar = new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -123,13 +126,72 @@ public class AdminController extends BaseController {
 		});
 
 		/*
-		 * Panel Skills
+		 * Panel Skills manager
 		 */
+		v.getBtnAdd().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
+		for (PanelAdminSkill skillManager : v.getSkills()) {
+			skillManager.getBtnModify().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String name = skillManager.gettF_SkillName().getText();
+					String type = skillManager.gettF_SkillType().getText();
+					if (name.isEmpty() && type.isEmpty()) {
+						System.out.println("Cette compétence devrait être supprimée\n mais cela aura des conséquences sur ceux qui les utilise");
+						
+					}else if (name.isEmpty() || type.isEmpty()) {
+						if (name.isEmpty()) {
+							skillManager.gettF_SkillName().setBackground(Color.PINK);
+							skillManager.gettF_SkillType().setBackground(Color.WHITE);
+						} else {
+							skillManager.gettF_SkillName().setBackground(Color.WHITE);
+							skillManager.gettF_SkillType().setBackground(Color.PINK);
+						}						
+					}else {
+						//use dao to correct in the database
+
+					}
+				}
+			});
+		}
+	
+		/*
+		 * Panel Users manager
+		 */
+	for (PanelAdminUser userManager : v.getUsers()) {
+		userManager.getBtnValidateUser().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Update this user as valid
+			}
+		});
+		userManager.getBtnDeleteUser().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Delecte this user
+				v.getPanelListUsers().remove(userManager);
+				v.getPanelListUsers().validate();
+			}
+		});
+		userManager.getBtnResetPasswordUser().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Popup with random password of 6 character
+				//set this new password for the user
+			}
+		});
+	}
+	
+	
+	
 	}
 
 	private void setMode(boolean b) {
-		PanelAdministrator v = (PanelAdministrator) super.view;
+		AdministratorView v = (AdministratorView) super.view;
 
 		v.getBtnAnnuler().setVisible(b);
 		if (b) {
@@ -138,11 +200,6 @@ public class AdminController extends BaseController {
 			v.getBtnEditer().setText("Editer");
 		}
 
-		// v.getTextField_AdminName().setEditable(b);
-		// if (b)
-		// v.getTextField_AdminName().setBorder(new TextFieldBorder());
-		// else
-		// v.getTextField_AdminName().setBorder(new EmptyBorder(0, 0, 0, 0));
 		v.getTextField_adminFirstName().setEditable(b);
 		if (b)
 			v.getTextField_adminFirstName().setBorder(new TextFieldBorder());

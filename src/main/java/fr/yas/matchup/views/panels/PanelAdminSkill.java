@@ -8,6 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Audrey
+ *
+ */
 public class PanelAdminSkill extends JPanel {
 
 	private JTextField tF_SkillType;

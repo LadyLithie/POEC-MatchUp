@@ -1,21 +1,16 @@
 package fr.yas.matchup.views;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
-import javax.swing.JScrollBar;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 
 import fr.yas.matchup.views.panels.PanelAdminSkill;
@@ -28,11 +23,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-public class PanelAdministrator extends BaseView {
-	private JButton btnValidateUser1;
-	private JButton btnDeleteUser1;
-	private JButton btnResetPasswordUser1;
-	private JButton btnAdd;
+/**
+ * @author Yannick, Audrey
+ *
+ */
+public class AdministratorView extends BaseView {
 	// panel user presentation
 	private JTextField textField_AdminPhone;
 	private JTextField textField_AdminEmail;
@@ -42,9 +37,13 @@ public class PanelAdministrator extends BaseView {
 	private JButton btnEditer;
 	private JTextField textField_adminFirstName;
 	// panel skills
+	private JButton btnAdd;
 	private ArrayList<PanelAdminSkill> skills;
+	// panel users
+	private ArrayList<PanelAdminUser> users;
+	private JPanel panelListUsers;
 
-	// begin getter for panel user presentation
+	// begin getters for panel user presentation
 	/**
 	 * @return the textField_AdminPhone
 	 */
@@ -93,29 +92,16 @@ public class PanelAdministrator extends BaseView {
 	public JButton getBtnAnnuler() {
 		return btnAnnuler;
 	}
-	// end getter for panel user presentation
 
 	/**
-	 * @return the btnValidateUser1
+	 * @return the skills
 	 */
-	public JButton getBtnValidateUser1() {
-		return btnValidateUser1;
+	public ArrayList<PanelAdminSkill> getSkills() {
+		return skills;
 	}
+	// end getters for panel user presentation
 
-	/**
-	 * @return the btnDeleteUser1
-	 */
-	public JButton getBtnDeleteUser1() {
-		return btnDeleteUser1;
-	}
-
-	/**
-	 * @return the btnResetPasswordUser1
-	 */
-	public JButton getBtnResetPasswordUser1() {
-		return btnResetPasswordUser1;
-	}
-
+	// begin getters for Skills manager
 	/**
 	 * @return the btnAdd
 	 */
@@ -124,21 +110,36 @@ public class PanelAdministrator extends BaseView {
 	}
 
 	/**
+	 * @return the users
+	 */
+	public ArrayList<PanelAdminUser> getUsers() {
+		return users;
+	}
+	// End getters for users manager
+
+	/**
+	 * @return the panelListUsers
+	 */
+	public JPanel getPanelListUsers() {
+		return panelListUsers;
+	}
+
+	/**
 	 * Create the panel.
 	 */
-	public PanelAdministrator(JFrame frame) {
+	public AdministratorView(JFrame frame) {
 		super.pageName = "Administrator";
 		JPanel panel = new JPanel();
 		super.contentPane = panel;
 
-		//panel.setBounds(100, 100, 900, 480);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 600, 295 };
-		gbl_contentPane.rowHeights = new int[] { 165, 300 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0 };
 		panel.setLayout(gbl_contentPane);
 
+		/*
+		 * Panel left : Users manager
+		 */
 		JPanel panelUser = new JPanel();
 		panelUser.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelUser = new GridBagConstraints();
@@ -150,71 +151,66 @@ public class PanelAdministrator extends BaseView {
 		gbc_panelUser.gridy = 0;
 		panel.add(panelUser, gbc_panelUser);
 		GridBagLayout gbl_panelUser = new GridBagLayout();
-		gbl_panelUser.columnWidths = new int[] { 40, 40, 40, 40, 25, 25, 25, 10 };
-		gbl_panelUser.rowHeights = new int[] { 0, 30, 30, 30, 30 };
-		gbl_panelUser.columnWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0 };
-		gbl_panelUser.rowWeights = new double[] { 0.0, 0.0, 0.0 };
+		gbl_panelUser.columnWeights = new double[] { 1.0 };
+		gbl_panelUser.rowWeights = new double[] { 0.0, 0.0, 1.0 };
 		panelUser.setLayout(gbl_panelUser);
-
+		// title
 		JLabel lblUser = new JLabel("User");
 		GridBagConstraints gbc_lblUser = new GridBagConstraints();
-		gbc_lblUser.anchor = GridBagConstraints.NORTH;
-		gbc_lblUser.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUser.gridx = 3;
+		gbc_lblUser.insets = new Insets(0, 0, 5, 0);
+		gbc_lblUser.gridx = 0;
 		gbc_lblUser.gridy = 0;
 		panelUser.add(lblUser, gbc_lblUser);
-
-		JLabel lblName = new JLabel("Name");
-		GridBagConstraints gbc_lblName = new GridBagConstraints();
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.gridx = 0;
-		gbc_lblName.gridy = 2;
-		panelUser.add(lblName, gbc_lblName);
-
+		// columns titles
+		JPanel titleListUser = new JPanel();
+		GridBagConstraints gbc_titleListUser = new GridBagConstraints();
+		gbc_titleListUser.insets = new Insets(0, 0, 5, 5);
+		gbc_titleListUser.fill = GridBagConstraints.HORIZONTAL;
+		gbc_titleListUser.gridx = 0;
+//		gbc_titleListUser.gridy = 1;
+//		panelUser.add(titleListUser, gbc_titleListUser);
+		titleListUser.setLayout(new GridLayout(1, 7, 0, 0));
+		JLabel label = new JLabel("Name");
+		titleListUser.add(label);
 		JLabel lblEmail = new JLabel("E-mail");
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 1;
-		gbc_lblEmail.gridy = 2;
-		panelUser.add(lblEmail, gbc_lblEmail);
-
+		titleListUser.add(lblEmail);
 		JLabel lblType = new JLabel("Type");
-		GridBagConstraints gbc_lblType = new GridBagConstraints();
-		gbc_lblType.insets = new Insets(0, 0, 5, 5);
-		gbc_lblType.gridx = 2;
-		gbc_lblType.gridy = 2;
-		panelUser.add(lblType, gbc_lblType);
-
+		titleListUser.add(lblType);
 		JLabel lblCreationDate = new JLabel("Creation Date");
-		GridBagConstraints gbc_lblCreationDate = new GridBagConstraints();
-		gbc_lblCreationDate.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCreationDate.gridx = 3;
-		gbc_lblCreationDate.gridy = 2;
-		panelUser.add(lblCreationDate, gbc_lblCreationDate);
+		titleListUser.add(lblCreationDate);
+		JLabel label_1 = new JLabel("");
+		titleListUser.add(label_1);
+		JLabel label_2 = new JLabel("");
+		titleListUser.add(label_2);
+		JLabel label_3 = new JLabel("");
+		titleListUser.add(label_3);
+		// Scrollpane for the listing
+		JScrollPane scrollPaneUser = new JScrollPane();
+		GridBagConstraints gbc_scrollPaneUser = new GridBagConstraints();
+		gbc_scrollPaneUser.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneUser.gridwidth = GridBagConstraints.REMAINDER;
+		gbc_scrollPaneUser.gridx = 0;
+		gbc_scrollPaneUser.gridy = 2;
+		panelUser.add(scrollPaneUser, gbc_scrollPaneUser);
+		scrollPaneUser.setColumnHeaderView(titleListUser);
 		
-		//Listing all users
-		JPanel panelListUsers = new JPanel();
-		GridBagConstraints gbc_panelListUsers = new GridBagConstraints();
-		gbc_panelListUsers.insets = new Insets(0, 0, 5, 5);
-		gbc_panelListUsers.fill = GridBagConstraints.BOTH;
-		gbc_panelListUsers.gridx = 0;
-		gbc_panelListUsers.gridy = 3;
-		gbc_panelListUsers.gridwidth = GridBagConstraints.RELATIVE;
+			// Listing all users
+		users = new ArrayList<PanelAdminUser>();
+		panelListUsers = new JPanel();
+		scrollPaneUser.setViewportView(panelListUsers);
 		panelListUsers.setLayout(new GridLayout(0, 1));
-		panelUser.add(panelListUsers, gbc_panelListUsers);
-		
-		for (int i = 0; i <10; i++) {
+
+		for (int i = 0; i < 10; i++) {
 			PanelAdminUser user = new PanelAdminUser();
 			GridBagConstraints gbc_user = new GridBagConstraints();
 			gbc_user.fill = GridBagConstraints.HORIZONTAL;
 			gbc_user.anchor = GridBagConstraints.BASELINE_LEADING;
-			gbc_user.gridwidth = 3;
+			// gbc_user.gridwidth = 3;
 			gbc_user.insets = new Insets(0, 0, 0, 5);
 			panelListUsers.add(user, gbc_user);
-
+			users.add(user);
 		}
 
-	
 		/*
 		 * Panel topRight : User presentation
 		 */
@@ -235,7 +231,7 @@ public class PanelAdministrator extends BaseView {
 
 		lblPhoto = new JLabel("");
 		lblPhoto.setIcon(
-				new ImageIcon(PanelAdministrator.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+				new ImageIcon(AdministratorView.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
 		gbc_lblPhoto.gridwidth = 2;
 		gbc_lblPhoto.gridheight = 3;
@@ -331,16 +327,15 @@ public class PanelAdministrator extends BaseView {
 		gbc_panelSkill.gridy = 1;
 		panel.add(panelSkill, gbc_panelSkill);
 		GridBagLayout gbl_panelSkill = new GridBagLayout();
-		gbl_panelSkill.columnWidths = new int[] { 0, 0, 0 };
-		gbl_panelSkill.rowHeights = new int[] { 0, 0, 0, 0 };
-		gbl_panelSkill.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_panelSkill.columnWidths = new int[] { 0 };
+		gbl_panelSkill.rowHeights = new int[] { 0, 1, 0, 0 };
+		gbl_panelSkill.columnWeights = new double[] { 1.0 };
 		gbl_panelSkill.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		panelSkill.setLayout(gbl_panelSkill);
 		// Title
 		JLabel lblSkills = new JLabel("Skills");
 		GridBagConstraints gbc_lblSkills = new GridBagConstraints();
-		gbc_lblSkills.gridwidth = 3;
-		gbc_lblSkills.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSkills.insets = new Insets(0, 0, 5, 0);
 		gbc_lblSkills.gridx = 0;
 		gbc_lblSkills.gridy = 0;
 		panelSkill.add(lblSkills, gbc_lblSkills);
@@ -348,15 +343,17 @@ public class PanelAdministrator extends BaseView {
 		// Scrollpane column header
 		JPanel titleList = new JPanel();
 		titleList.setLayout(new GridLayout(0, 3, 0, 0));
-		JLabel lblSkillName = new JLabel("Name");
+		JLabel lblSkillName = new JLabel("Nom");
+		lblSkillName.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblSkillName = new GridBagConstraints();
 		gbc_lblSkillName.insets = new Insets(0, 0, 5, 5);
 		titleList.add(lblSkillName);
 		JLabel lblSkillType = new JLabel("Type");
+		lblSkillType.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblSkillType = new GridBagConstraints();
 		gbc_lblSkillType.insets = new Insets(0, 0, 5, 0);
 		titleList.add(lblSkillType);
-		btnAdd = new JButton("Add");
+		btnAdd = new JButton("Ajout");
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.insets = new Insets(0, 0, 5, 0);
 		titleList.add(btnAdd);
@@ -368,7 +365,6 @@ public class PanelAdministrator extends BaseView {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridwidth = GridBagConstraints.REMAINDER;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
 		panelSkill.add(scrollPane, gbc_scrollPane);
@@ -381,7 +377,6 @@ public class PanelAdministrator extends BaseView {
 		for (int i = 0; i < 10; i++) {
 			PanelAdminSkill skill = new PanelAdminSkill();
 			GridBagConstraints gbc_skill = new GridBagConstraints();
-			gbc_skill.fill = GridBagConstraints.HORIZONTAL;
 			gbc_skill.anchor = GridBagConstraints.BASELINE_LEADING;
 			gbc_skill.gridwidth = 3;
 			gbc_skill.insets = new Insets(0, 0, 0, 5);
