@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.views.IVisibility;
+import javax.swing.JScrollPane;
 
 public class PanelHeadhunters extends JPanel implements IVisibility {
 	private Panel2FieldButton newHeadHunter;
@@ -21,6 +22,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	private JButton btnAnnuler;
 	private ArrayList<Panel2FieldButton> associates;
 	private JPanel panelContent;
+	private JScrollPane scrollPane;
 
 	/**
 	 * @return the newHeadHunter
@@ -51,6 +53,13 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	}
 
 	/**
+	 * @param associates the associates to set
+	 */
+	public void setAssociates(ArrayList<Panel2FieldButton> associates) {
+		this.associates = associates;
+	}
+
+	/**
 	 * @return the panelContent
 	 */
 	public JPanel getPanelContent() {
@@ -64,19 +73,19 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		this.setName("Headhunters");
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{10, 0, 10, 0};
-		gridBagLayout.rowHeights = new int[]{10, 0, 0, 10, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0,1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0,1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		//Title panel
 		JPanel panelTitle = new JPanel();
 		GridBagConstraints gbc_panelTitle = new GridBagConstraints();
 		gbc_panelTitle.fill = GridBagConstraints.BOTH;
-		gbc_panelTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_panelTitle.gridx = 1;
-		gbc_panelTitle.gridy = 1;
+		gbc_panelTitle.insets = new Insets(0, 0, 5, 0);
+		gbc_panelTitle.gridx = 0;
+		gbc_panelTitle.gridy = 0;
 		add(panelTitle, gbc_panelTitle);
 		GridBagLayout gbl_panelTitle = new GridBagLayout();
 		gbl_panelTitle.columnWidths = new int[]{5, 0, 10, 0, 5, 0};
@@ -111,14 +120,24 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		gbc_btnEdit.gridy = 0;
 		panelTitle.add(btnEdit, gbc_btnEdit);
 		
+		//Add new one
+		newHeadHunter = new Panel2FieldButton("Nouveau recruteur", "Ajouter");
+		GridBagConstraints gbc_newHeadHunter = new GridBagConstraints();
+		gbc_newHeadHunter.insets = new Insets(0, 0, 5, 0);
+		gbc_newHeadHunter.gridx = 0;
+		gbc_newHeadHunter.gridy = 1;
+		add(newHeadHunter, gbc_newHeadHunter);
+		
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 2;
+		add(scrollPane, gbc_scrollPane);
+		
 		//List - Main panel
 		panelContent = new JPanel();
-		GridBagConstraints gbc_panelContent = new GridBagConstraints();
-		gbc_panelContent.insets = new Insets(0, 0, 5, 5);
-		gbc_panelContent.fill = GridBagConstraints.NORTH;
-		gbc_panelContent.gridx = 1;
-		gbc_panelContent.gridy = 2;
-		add(panelContent, gbc_panelContent);
+		scrollPane.setViewportView(panelContent);
 		GridBagLayout gbl_panelContent = new GridBagLayout();
 		gbl_panelContent.columnWidths = new int[]{10, 0, 10, 0};
 		gbl_panelContent.rowHeights = new int[]{10, 0, 0, 0, 0};
@@ -126,29 +145,19 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		gbl_panelContent.rowWeights = new double[]{0, 0.0, 0, Double.MIN_VALUE};
 		panelContent.setLayout(gbl_panelContent);
 		//List the present headhunters and offer possibility to delete
-		int posX = 1;
-		
-		//Add new one
-		newHeadHunter = new Panel2FieldButton("Nouveau recruteur", "Ajouter");
-		GridBagConstraints gbc_newHeadHunter = new GridBagConstraints();
-		gbc_newHeadHunter.insets = new Insets(0, 0, 5, 5);
-		gbc_newHeadHunter.fill = GridBagConstraints.HORIZONTAL;
-		gbc_newHeadHunter.anchor = GridBagConstraints.WEST;
-		gbc_newHeadHunter.gridx = 1;
-		gbc_newHeadHunter.gridy = posX;
-		panelContent.add(newHeadHunter, gbc_newHeadHunter);
-		
-		this.associates = new ArrayList<>();
+		//int posX = 1;
+		if(this.associates == null)
+			this.associates = new ArrayList<Panel2FieldButton>();
 		for (Headhunter headhunter : associates) {
-			posX = posX + 2;
+			//posX = posX + 2;
 			Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
 			test.getTextField1().setText(headhunter.getFirstname());
 			test.getTextField2().setText(headhunter.getLastname());
 			GridBagConstraints gbc_test = new GridBagConstraints();
-			gbc_test.fill = GridBagConstraints.HORIZONTAL;
+			gbc_test.fill = GridBagConstraints.NONE;
 			gbc_test.anchor = GridBagConstraints.CENTER;
 			gbc_test.gridx = 1;
-			gbc_test.gridy = posX;
+			gbc_test.gridy =GridBagConstraints.RELATIVE;
 			panelContent.add(test, gbc_test);
 			this.associates.add(test);
 		}
@@ -168,11 +177,10 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		} else {
 			this.getBtnEdit().setText("Editer");
 		}
-
-		this.getNewHeadHunter().setVisible(b);
 		for (Panel2FieldButton headhunter : associates) {
 			headhunter.setMode(b);
 		}
+		this.getNewHeadHunter().setVisible(b);
 		
 	}
 

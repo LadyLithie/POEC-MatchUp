@@ -41,8 +41,8 @@ public class ViewsManager {
 	 */
 	public void start() {
 		ViewsUtils.configureFirstJFrame(frame);
-		//currentController = new RegisterController(frame);
-		currentController = new AdminController(frame);
+		currentController = new RegisterController(frame);
+		//currentController = new AdminController(frame);
 		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

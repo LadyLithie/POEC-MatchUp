@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -70,21 +71,35 @@ public class LoginController extends BaseController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
-					switch (user.getClass().getSimpleName()) {
-					case "Enterprise":
-						ViewsManager.getInstance().next(new ProfileController(frame));
-						break;
-					case "Candidate":
-						
-						break;
-					case "Headhunter":
-						
-						break;						
-					default:
-						break;
+				if (view.getTextFieldLogin().getText().isEmpty() || view.getTextFieldPwd().getText().isEmpty()) {
+					if (view.getTextFieldPwd().getText().isEmpty()) {
+						view.getTextFieldPwd().setBackground(Color.PINK);
+					}else {
+						view.getTextFieldPwd().setBackground(Color.WHITE);
 					}
-				}
+					if (view.getTextFieldLogin().getText().isEmpty()) {
+						view.getTextFieldLogin().setBackground(Color.PINK);
+					} else {
+						view.getTextFieldLogin().setBackground(Color.WHITE);
+					}
+				}else
+					//version with hard value for user
+					//normal version must consult the database for a user with those datas
+					if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
+						switch (user.getClass().getSimpleName()) {
+						case "Enterprise":
+							ViewsManager.getInstance().next(new ProfileController(frame));
+							break;
+						case "Candidate":
+							
+							break;
+						case "Headhunter":
+							
+							break;						
+						default:
+							break;
+						}
+					}
 				
 			}
 		});

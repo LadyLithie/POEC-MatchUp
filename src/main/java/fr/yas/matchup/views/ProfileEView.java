@@ -52,6 +52,13 @@ public class ProfileEView extends BaseView {
 	}
 
 	/**
+	 * @param panel_bottomRight the panel_bottomRight to set
+	 */
+	public void setPanel_bottomRight(JPanel panel_bottomRight) {
+		this.panel_bottomRight = panel_bottomRight;
+	}
+
+	/**
 	 * Create the frame.
 	 */
 	public ProfileEView(JFrame frame) {
