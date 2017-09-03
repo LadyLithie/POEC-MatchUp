@@ -11,7 +11,10 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private ArrayList<String> phones;
 	private ArrayList<String> emails;
-	
+
+	private ArrayList<Proposal> jobs;
+	private ArrayList<Enterprise> associates;
+
 	/**
 	 * @return the firstname
 	 */
@@ -66,6 +69,34 @@ public class Headhunter extends RegisteredUser {
 	 */
 	public void setEmails(ArrayList<String> emails) {
 		this.emails = emails;
+	}
+
+	/**
+	 * @return the jobs
+	 */
+	public ArrayList<Proposal> getJobs() {
+		return jobs;
+	}
+
+	/**
+	 * @param jobs the jobs to set
+	 */
+	public void setJobs(ArrayList<Proposal> jobs) {
+		this.jobs = jobs;
+	}
+
+	/**
+	 * @return the associates
+	 */
+	public ArrayList<Enterprise> getAssociates() {
+		return associates;
+	}
+
+	/**
+	 * @param associates the associates to set
+	 */
+	public void setAssociates(ArrayList<Enterprise> associates) {
+		this.associates = associates;
 	}
 
 	/**

@@ -13,6 +13,8 @@ public class Enterprise extends RegisteredUser {
 	private String siretNumber;
 	private String website;
 	private ArrayList<Headhunter> associates;
+	
+	private ArrayList<Proposal> jobs;
 
 	/**
 	 * @return the address
@@ -73,6 +75,20 @@ public class Enterprise extends RegisteredUser {
 	 */
 	public void setAssociates(ArrayList<Headhunter> associates) {
 		this.associates = associates;
+	}
+
+	/**
+	 * @return the jobs
+	 */
+	public ArrayList<Proposal> getJobs() {
+		return jobs;
+	}
+
+	/**
+	 * @param jobs the jobs to set
+	 */
+	public void setJobs(ArrayList<Proposal> jobs) {
+		this.jobs = jobs;
 	}
 
 	/**

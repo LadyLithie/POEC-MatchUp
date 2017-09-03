@@ -4,33 +4,49 @@ import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
+import fr.yas.matchup.entities.City;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.RegisteredUser;
+import fr.yas.matchup.entities.Skill;
 
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
-public class ProposalFrame extends BaseView {
+/**
+ * @author Audrey
+ *
+ */
+public class ProposalFrame extends BaseView implements IVisibility {
 	private JButton btnCancel;
 	private JButton btnProposalCreation;
 	//Zone options
 	private JComboBox<RegisteredUser> comboBox_linkedUser;
 	private JComboBox<ContractType> comboBox_contract;
-	private JComboBox<String> comboBox_location;
+	private JComboBox<City> comboBox_location;
 	//Zone skills
 	private JCheckBox checkBox;
 	private JCheckBox checkBox_1;
+	private ArrayList<JCheckBox> listSkills;
 	//Zone description
 	private JTextArea textArea;
 	private JTextField textField_JobTitle;
+	private JPanel panelCheckBox;
+	private JLabel lblLink;
 
 	/**
 	 * @return the btnCancel
@@ -64,7 +80,7 @@ public class ProposalFrame extends BaseView {
 	/**
 	 * @return the comboBox_location
 	 */
-	public JComboBox<String> getComboBox_location() {
+	public JComboBox<City> getComboBox_location() {
 		return comboBox_location;
 	}
 	//Zone options end
@@ -81,6 +97,13 @@ public class ProposalFrame extends BaseView {
 	 */
 	public JCheckBox getCheckBox_1() {
 		return checkBox_1;
+	}
+
+	/**
+	 * @return the listSkills
+	 */
+	public ArrayList<JCheckBox> getListSkills() {
+		return listSkills;
 	}
 
 	//Zone description start
@@ -100,10 +123,25 @@ public class ProposalFrame extends BaseView {
 	//Zone description end
 
 	/**
+	 * @return the panelCheckBox
+	 */
+	public JPanel getPanelCheckBox() {
+		return panelCheckBox;
+	}
+
+	/**
+	 * @return the lblLink
+	 */
+	public JLabel getLblLink() {
+		return lblLink;
+	}
+
+	/**
 	 * Create the frame.
 	 */
-	public ProposalFrame() {
-		super.pageName = "Profile";
+	public ProposalFrame(JFrame frame,List<Skill> ls) {
+		super();
+		super.pageName = "Proposal";
 		JPanel panel = new JPanel();
 		super.panel = panel;
 //		setBounds(100, 100, 750, 450);
@@ -126,7 +164,9 @@ public class ProposalFrame extends BaseView {
 		/*
 		 * Zone skills
 		 */
-		JPanel panelCheckBox = new JPanel();
+		//List<Skill> possessSkills = job.getSkills();
+		
+		panelCheckBox = new JPanel();
 		scrollPane.setViewportView(panelCheckBox);
 		panelCheckBox.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gbl_panelCheckBox = new GridBagLayout();
@@ -135,8 +175,19 @@ public class ProposalFrame extends BaseView {
 		gbl_panelCheckBox.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panelCheckBox.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelCheckBox.setLayout(gbl_panelCheckBox);
-		
-		JLabel lblDevelopementSkills = new JLabel("Competences developpement");
+
+		listSkills = new ArrayList<JCheckBox>();
+		for (Skill skill : ls) {
+			JCheckBox box = new JCheckBox(skill.getName());
+			listSkills.add(box);
+			
+			GridBagConstraints gbc_box = new GridBagConstraints();
+			gbc_box.insets = new Insets(0, 0, 5, 5);
+			panelCheckBox.add(box, gbc_box);
+			
+		}
+
+/*		JLabel lblDevelopementSkills = new JLabel("Competences developpement");
 		GridBagConstraints gbc_lblDevelopementSkills = new GridBagConstraints();
 		gbc_lblDevelopementSkills.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDevelopementSkills.gridx = 0;
@@ -149,71 +200,8 @@ public class ProposalFrame extends BaseView {
 		gbc_lblSocialSkills.gridx = 2;
 		gbc_lblSocialSkills.gridy = 0;
 		panelCheckBox.add(lblSocialSkills, gbc_lblSocialSkills);
-		
-		JCheckBox checkBox_8 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_8 = new GridBagConstraints();
-		gbc_checkBox_8.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_8.insets = new Insets(0, 0, 5, 5);
-		gbc_checkBox_8.gridx = 0;
-		gbc_checkBox_8.gridy = 1;
-		panelCheckBox.add(checkBox_8, gbc_checkBox_8);
-		
-		JCheckBox checkBox_1_1 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_1_1 = new GridBagConstraints();
-		gbc_checkBox_1_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_1_1.insets = new Insets(0, 0, 5, 5);
-		gbc_checkBox_1_1.gridx = 2;
-		gbc_checkBox_1_1.gridy = 1;
-		panelCheckBox.add(checkBox_1_1, gbc_checkBox_1_1);
-		
-		JCheckBox checkBox_2 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_2 = new GridBagConstraints();
-		gbc_checkBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_2.insets = new Insets(0, 0, 5, 5);
-		gbc_checkBox_2.gridx = 0;
-		gbc_checkBox_2.gridy = 2;
-		panelCheckBox.add(checkBox_2, gbc_checkBox_2);
-		
-		JCheckBox checkBox_5 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_5 = new GridBagConstraints();
-		gbc_checkBox_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_5.insets = new Insets(0, 0, 5, 5);
-		gbc_checkBox_5.gridx = 2;
-		gbc_checkBox_5.gridy = 2;
-		panelCheckBox.add(checkBox_5, gbc_checkBox_5);
-		
-		JCheckBox checkBox_3 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_3 = new GridBagConstraints();
-		gbc_checkBox_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_3.insets = new Insets(0, 0, 5, 5);
-		gbc_checkBox_3.gridx = 0;
-		gbc_checkBox_3.gridy = 3;
-		panelCheckBox.add(checkBox_3, gbc_checkBox_3);
-		
-		JCheckBox checkBox_6 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_6 = new GridBagConstraints();
-		gbc_checkBox_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_6.insets = new Insets(0, 0, 5, 5);
-		gbc_checkBox_6.gridx = 2;
-		gbc_checkBox_6.gridy = 3;
-		panelCheckBox.add(checkBox_6, gbc_checkBox_6);
-		
-		JCheckBox checkBox_4 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_4 = new GridBagConstraints();
-		gbc_checkBox_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_4.insets = new Insets(0, 0, 0, 5);
-		gbc_checkBox_4.gridx = 0;
-		gbc_checkBox_4.gridy = 4;
-		panelCheckBox.add(checkBox_4, gbc_checkBox_4);
-		
-		JCheckBox checkBox_7 = new JCheckBox("");
-		GridBagConstraints gbc_checkBox_7 = new GridBagConstraints();
-		gbc_checkBox_7.fill = GridBagConstraints.HORIZONTAL;
-		gbc_checkBox_7.insets = new Insets(0, 0, 0, 5);
-		gbc_checkBox_7.gridx = 2;
-		gbc_checkBox_7.gridy = 4;
-		panelCheckBox.add(checkBox_7, gbc_checkBox_7);
-		
+
+*/		
 		/*
 		 * Zone description
 		 */
@@ -228,9 +216,9 @@ public class ProposalFrame extends BaseView {
 		panel.add(panelText, gbc_panelText);
 		GridBagLayout gbl_panelText = new GridBagLayout();
 		gbl_panelText.columnWidths = new int[]{0, 0};
-		gbl_panelText.rowHeights = new int[] {30, 0, 50, 0, 0, 0};
+		gbl_panelText.rowHeights = new int[] {30, 0, 0, 0, 0};
 		gbl_panelText.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelText.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelText.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelText.setLayout(gbl_panelText);
 		
 		JLabel lblJobTitle = new JLabel("Titre du poste");
@@ -253,17 +241,20 @@ public class ProposalFrame extends BaseView {
 		GridBagConstraints gbc_lblProposalDescription = new GridBagConstraints();
 		gbc_lblProposalDescription.insets = new Insets(0, 0, 5, 0);
 		gbc_lblProposalDescription.gridx = 0;
-		gbc_lblProposalDescription.gridy = 3;
+		gbc_lblProposalDescription.gridy = 2;
 		panelText.add(lblProposalDescription, gbc_lblProposalDescription);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 0;
+		gbc_scrollPane_1.gridy = 3;
+		panelText.add(scrollPane_1, gbc_scrollPane_1);
+		
 		textArea = new JTextArea();
+		scrollPane_1.setViewportView(textArea);
 		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 0;
-		gbc_textArea.gridy = 4;
-		panelText.add(textArea, gbc_textArea);
 		
 		/*
 		 * Zone options
@@ -290,7 +281,7 @@ public class ProposalFrame extends BaseView {
 		gbc_lblGeographicLocation.gridy = 0;
 		panelComboBox.add(lblGeographicLocation, gbc_lblGeographicLocation);
 		
-		comboBox_location = new JComboBox<String>();
+		comboBox_location = new JComboBox<City>();
 		GridBagConstraints gbc_comboBox_location = new GridBagConstraints();
 		gbc_comboBox_location.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_location.fill = GridBagConstraints.HORIZONTAL;
@@ -313,7 +304,7 @@ public class ProposalFrame extends BaseView {
 		gbc_comboBox_contract.gridy = 1;
 		panelComboBox.add(comboBox_contract, gbc_comboBox_contract);
 		
-		JLabel lblLink = new JLabel("Link");
+		lblLink = new JLabel("Contact");
 		GridBagConstraints gbc_lblLink = new GridBagConstraints();
 		gbc_lblLink.insets = new Insets(0, 0, 0, 5);
 		gbc_lblLink.gridx = 0;
@@ -324,9 +315,9 @@ public class ProposalFrame extends BaseView {
 		GridBagConstraints gbc_comboBox_linkedUser = new GridBagConstraints();
 		gbc_comboBox_linkedUser.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_linkedUser.gridx = 2;
-		gbc_comboBox_linkedUser.gridy = 2;
+		gbc_comboBox_linkedUser.gridy = 3;
 		panelComboBox.add(comboBox_linkedUser, gbc_comboBox_linkedUser);
-		
+			
 		/*
 		 * Zone finalization
 		 */
@@ -346,4 +337,38 @@ public class ProposalFrame extends BaseView {
 		panel.add(btnProposalCreation, gbc_btnProposalCreation);
 	}
 
+
+	@Override
+	public void setMode(boolean b) {
+		this.getBtnCancel().setVisible(b);
+		this.btnProposalCreation.setVisible(b);
+		//zone options
+		this.getComboBox_contract().setEnabled(b);
+		this.getComboBox_linkedUser().setEnabled(b);
+		this.comboBox_location.setEnabled(b);
+		//zone presentations
+		this.getTextField_JobTitle().setEditable(b);
+		if(b) {
+			this.getTextField_JobTitle().setBorder(new TextFieldBorder());
+		}
+		else {
+			this.getTextField_JobTitle().setBorder(new EmptyBorder(0, 0, 0, 0));
+		}
+		if(b) {
+			this.getTextArea().setBackground(UIManager.getColor("TextArea.background"));
+			this.getTextArea().setBorder(new TextFieldBorder());
+		} else {
+			this.getTextArea().setBackground(UIManager.getColor("Panel.background"));
+			this.getTextArea().setBorder(new EmptyBorder(0, 0, 0, 0));
+		}
+		//zone skills
+		for (JCheckBox jCheckBox : listSkills) {
+			jCheckBox.setEnabled(b);
+			if(!jCheckBox.isSelected() && !b) {
+				this.panelCheckBox.remove(jCheckBox);
+			}
+		}
+	}
+
+	
 }

@@ -6,6 +6,9 @@
 package fr.yas.matchup.entities;
 
 public class Skill {
+	public static final String SOCIAL = "Savoir-être";
+	public static final String TECHNIQUE = "Savoir-faire";
+	
 	private int id;
 	private String name;
 	private String skillType;
@@ -54,6 +57,9 @@ public class Skill {
 	}
 	
 	
+	public Skill() {
+		// TODO Auto-generated constructor stub
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
