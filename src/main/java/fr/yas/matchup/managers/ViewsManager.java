@@ -1,8 +1,11 @@
 package fr.yas.matchup.managers;
 
+import fr.yas.matchup.controllers.AdminController;
 import fr.yas.matchup.controllers.BaseController;
-//import fr.yas.matchup.controllers.ProfileController;
-//import fr.yas.matchup.controllers.RegisterController;
+
+import fr.yas.matchup.controllers.ProfileEController;
+import fr.yas.matchup.controllers.RegisterController;
+
 import fr.yas.matchup.utils.views.ViewsUtils;
 
 import java.awt.EventQueue;
@@ -40,8 +43,9 @@ public class ViewsManager {
 	 */
 	public void start() {
 		ViewsUtils.configureFirstJFrame(frame);
-		//currentController = new RegisterController(frame);
-		//currentController = new ProfileController(frame);
+		currentController = new RegisterController(frame);
+		//currentController = new AdminController(frame);
+
 		controllers.add(currentController);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

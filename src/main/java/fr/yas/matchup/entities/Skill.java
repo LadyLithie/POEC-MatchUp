@@ -8,6 +8,8 @@ package fr.yas.matchup.entities;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class Skill extends BaseEntity {
+	public static final String SOCIAL = "Savoir-être";
+	public static final String TECHNIQUE = "Savoir-faire";
 	private String name;
 	private String skillType;
 
@@ -40,13 +42,16 @@ public class Skill extends BaseEntity {
 	}
 	
 	
-	public Skill (int id, String name, String skillType) {
+	public Skill (double id, String name, String skillType) {
+		super();
+		super.setId(id);
 		this.name = name;
 		this.skillType = skillType;
 	}
-
+	
+	
 	public Skill() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/* (non-Javadoc)

@@ -11,7 +11,6 @@ import fr.yas.matchup.entities.base.BaseEntity;
  */
 public abstract class RegisteredUser extends BaseEntity {
 	private String login;
-	private boolean isConnected;
 	private String name;
 	private String phone;
 	private String email;
@@ -48,20 +47,6 @@ public abstract class RegisteredUser extends BaseEntity {
 	 */
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	/**
-	 * @return the isConnected
-	 */
-	public boolean isConnected() {
-		return isConnected;
-	}
-
-	/**
-	 * @param isConnected the isConnected to set
-	 */
-	public void setConnected(boolean isConnected) {
-		this.isConnected = isConnected;
 	}
 
 	/**
@@ -166,12 +151,12 @@ public abstract class RegisteredUser extends BaseEntity {
 	 * Void constructor
 	 */
 	public RegisteredUser() {
-		
+		super();
 	}
 
 	/**
+	 * Full constructor
 	 * @param login
-	 * @param isConnected
 	 * @param name
 	 * @param phone
 	 * @param email
@@ -180,10 +165,10 @@ public abstract class RegisteredUser extends BaseEntity {
 	 * @param created_at
 	 * @param updated_at
 	 */
-	public RegisteredUser(String login, boolean isConnected, String name, String phone, String email,
+	public RegisteredUser(String login, String name, String phone, String email,
 			String presentation, String avatar, String created_at, String updated_at) {
+		super();
 		this.login = login;
-		this.isConnected = isConnected;
 		this.name = name;
 		this.phone = phone;
 		this.email = email;
@@ -191,6 +176,16 @@ public abstract class RegisteredUser extends BaseEntity {
 		this.avatar = avatar;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "RegisteredUser [login=" + login + ", name=" + name + ", phone=" + phone + ", email=" + email
+				+ ", presentation=" + presentation + ", avatar=" + avatar + ", created_at=" + created_at
+				+ ", updated_at=" + updated_at + ", password=" + password + "]";
 	}
 
 }

@@ -53,6 +53,7 @@ public class Diploma extends BaseEntity{
 	 * @param level
 	 */
 	public Diploma(String label, Level level) {
+		super();
 		this.label = label;
 		this.level = level;
 	}

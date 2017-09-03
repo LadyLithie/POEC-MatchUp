@@ -26,6 +26,7 @@ public class ContractType extends BaseEntity {
 	
 	
 	public ContractType (String name) {
+		super();
 		this.name = name;
 	}
 
