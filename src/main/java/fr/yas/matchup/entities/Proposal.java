@@ -158,6 +158,10 @@ public class Proposal extends BaseEntity {
 		this.name = name;
 		this.contractType = contractType;
 	}
+	
+	public Proposal() {
+		super();
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

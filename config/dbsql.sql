@@ -29,18 +29,21 @@ CREATE TABLE candidate(
 
 CREATE TABLE enterprise(
 	id_enterprise INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	login VARCHAR(50);
+	password VARCHAR(50);
 	name_enterprise VARCHAR(255),
 	phone_enterprise INT(15),
 	address_enterprise VARCHAR(255),
-	city_enterprise VARCHAR(255),
+	-- city_enterprise VARCHAR(255),
 	website_enterprise VARCHAR(255),
 	mail_enterprise VARCHAR(255),
 	presentation_enterprise TEXT,
 	logo_enterprise BLOB,
-	twitter_enterprise VARCHAR(255),
-	linkedin_enterprise VARCHAR(255),
-	activityfield_enterprise VARCHAR(255),
-	role_enterprise VARCHAR(20)
+	--twitter_enterprise VARCHAR(255),
+	--linkedin_enterprise VARCHAR(255),
+	--activityfield_enterprise VARCHAR(255),
+	--role_enterprise VARCHAR(20),
+	siret VARCHAR(14)
 	)ENGINE=InnoDB;
 
 CREATE TABLE administrator(
@@ -51,24 +54,24 @@ CREATE TABLE administrator(
 	phone_admin INT(15),
 	role_administrator VARCHAR(20)
 	)ENGINE=InnoDB;
-	
+
 CREATE TABLE contract_type(
 	id_contract INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name_contract ENUM ('CDI', 'CDD', 'ALTERNANCE', 'CONTRAT DE PROFESSIONALISATION')
 	)ENGINE=InnoDB;
-	
+
 CREATE TABLE job(
 	id_job INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title_job VARCHAR(255),
 	presentation_job TEXT,
-	contract_id INT NOT NULL,
-	enterprise_id INT NOT NULL,
-	headhunter_id INT NOT NULL,
+	contract_id INT NULL,
+	enterprise_id INT NULL,
+	headhunter_id INT NULL,
 	CONSTRAINT fk_job_contract_type FOREIGN KEY (contract_id) REFERENCES contract_type(id_contract),
 	CONSTRAINT fk_job_enterprise FOREIGN KEY (enterprise_id) REFERENCES enterprise(id_enterprise),
 	CONSTRAINT fk_job_headhunter FOREIGN KEY (headhunter_id) REFERENCES headhunter(id_headhunter)
 	)ENGINE=InnoDB;
-	
+
 CREATE TABLE skill(
 	id_skill INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name_skill VARCHAR(255),
@@ -82,7 +85,7 @@ CREATE TABLE candidate_skill(
 	CONSTRAINT fk_cs_candidate FOREIGN KEY (candidate_id) REFERENCES candidate(id_candidate),
 	CONSTRAINT fk_cs_skill FOREIGN KEY (skill_id) REFERENCES skill(id_skill)
 	)ENGINE=InnoDB;
-	
+
 CREATE TABLE job_skill(
 	job_id INT NOT NULL,
 	skill_id INT NOT NULL,
@@ -90,7 +93,7 @@ CREATE TABLE job_skill(
 	CONSTRAINT fk_js_candidate FOREIGN KEY (job_id) REFERENCES job(id_job),
 	CONSTRAINT fk_js_skill FOREIGN KEY (skill_id) REFERENCES skill(id_skill)
 	)ENGINE=InnoDB;
-	
+
 CREATE TABLE headhunter_enterprise(
 	headhunter_id INT NOT NULL,
 	enterprise_id INT NOT NULL,
