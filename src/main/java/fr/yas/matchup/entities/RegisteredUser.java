@@ -149,7 +149,7 @@ public abstract class RegisteredUser {
 	 * Void constructor
 	 */
 	public RegisteredUser() {
-		
+		super();
 	}
 
 	/**
@@ -165,6 +165,7 @@ public abstract class RegisteredUser {
 	 */
 	public RegisteredUser(String login, String name, String phone, String email,
 			String presentation, String avatar, String created_at, String updated_at) {
+		super();
 		this.login = login;
 		this.name = name;
 		this.phone = phone;

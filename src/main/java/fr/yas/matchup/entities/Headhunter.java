@@ -103,6 +103,7 @@ public class Headhunter extends RegisteredUser {
 	 * Void constructor
 	 */
 	public Headhunter() {
+		super();
 		this.phones = new ArrayList<String>();
 		this.getPhones().add(super.getPhone());
 		

@@ -51,6 +51,7 @@ public class Diploma {
 	 * @param level
 	 */
 	public Diploma(String label, Level level) {
+		super();
 		this.label = label;
 		this.level = level;
 	}

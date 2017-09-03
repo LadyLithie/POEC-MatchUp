@@ -49,9 +49,7 @@ public class RegisterController extends BaseController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!getValidRegister(view)) {
-					user = null;
-				}else {
+				if (getValidRegister(view)) {
 					System.out.println("Utilisateur enregistré");
 					ViewsManager.getInstance().next(new LoginController(frame,user));
 				}

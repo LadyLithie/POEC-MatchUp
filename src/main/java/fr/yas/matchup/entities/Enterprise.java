@@ -41,12 +41,14 @@ public class Enterprise extends RegisteredUser {
 	 * @return 
 	 */
 	public boolean setSiretNumber(String siretNumber) {
+		boolean result;
 		if(siretNumber.length() == 14) {
 			this.siretNumber = siretNumber;
-			return true;
+			result = true;
 		}else {
-			return false;
+			result = false;
 		}
+		return result;
 	}
 
 	/**

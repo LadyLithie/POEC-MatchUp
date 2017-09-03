@@ -2,7 +2,7 @@ package fr.yas.matchup.managers;
 
 import fr.yas.matchup.controllers.AdminController;
 import fr.yas.matchup.controllers.BaseController;
-import fr.yas.matchup.controllers.ProfileController;
+import fr.yas.matchup.controllers.ProfileEController;
 import fr.yas.matchup.controllers.RegisterController;
 import fr.yas.matchup.utils.views.ViewsUtils;
 

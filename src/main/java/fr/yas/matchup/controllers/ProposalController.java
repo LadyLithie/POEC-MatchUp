@@ -24,7 +24,6 @@ import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.utils.views.ComboBoxRenderer;
 import fr.yas.matchup.views.ProposalFrame;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.JOniException;
 
 /**
  * @author Audrey
@@ -44,6 +43,7 @@ public class ProposalController extends BaseController {
 	public ProposalController(JFrame frame) {
 		super();
 		skills = (ArrayList<Skill>) generateSkills();
+		// use viewData in future
 
 		super.frame = frame;
 		super.view = new ProposalFrame(this.frame, skills);
@@ -76,12 +76,12 @@ public class ProposalController extends BaseController {
 	@Override
 	public void initView() {
 		ProposalFrame vFrame = ((ProposalFrame) getView());
-		if (job == null) { //mode creation
+		if (job == null) { // mode creation
 			vFrame.setMode(true);
 			for (ContractType type : generateContracts()) {
 				vFrame.getComboBox_contract().addItem(type);
 			}
-		} else { //Job modification or display
+		} else { // Job modification or display
 			// init view with the job infos
 			vFrame.getComboBox_contract().addItem(job.getContractType());
 			vFrame.getComboBox_contract().setSelectedIndex(0);
@@ -91,14 +91,14 @@ public class ProposalController extends BaseController {
 			vFrame.getTextField_JobTitle().setText(job.getName());
 			ArrayList<JCheckBox> ls = vFrame.getListSkills();
 			for (Skill skill : job.getSkills()) {
-				int i=0;
+				int i = 0;
 				while (ls.get(i).getText() != skill.getName()) {
-					i++;					
+					i++;
 				}
 				ls.get(i).setSelected(true);
 			}
-			
-			//case specific to user 
+
+			// case specific to user
 			if (user instanceof Enterprise) {
 				for (Headhunter hh : ((Enterprise) user).getAssociates()) {
 					vFrame.getComboBox_linkedUser().addItem(hh);
@@ -111,11 +111,10 @@ public class ProposalController extends BaseController {
 				vFrame.getLblLink().setText("Compagny");
 				vFrame.getComboBox_linkedUser().setSelectedItem(job.getCompany());
 
-				
-			}else {//Show both the headhunter and the company
+			} else {// Show both the headhunter and the company
 				vFrame.getComboBox_linkedUser().addItem(job.getHeadhunter());
 				vFrame.getComboBox_linkedUser().setSelectedItem(job.getHeadhunter());
-				
+
 				JLabel lblCompany = new JLabel("Entreprise");
 				GridBagConstraints gbc_lblCompany = new GridBagConstraints();
 				gbc_lblCompany.insets = new Insets(0, 0, 0, 5);
@@ -130,7 +129,7 @@ public class ProposalController extends BaseController {
 				gbc_comboBox_company.gridx = 2;
 				gbc_comboBox_company.gridy = 3;
 				vFrame.getPanelCheckBox().add(comboBox_company, gbc_comboBox_company);
-			
+
 				vFrame.setMode(false);
 			}
 		}
@@ -149,63 +148,59 @@ public class ProposalController extends BaseController {
 	public void initEvent() {
 		ProposalFrame v = (ProposalFrame) super.view;
 		// must test if job and user are linked
-		// if YES then
-		// v.setMode(true);
-		// if NO then
-		// v.setMode(false);
+		if (job.getCompany().equals(user) || job.getHeadhunter().equals(user)) {
+			/*
+			 * Mode Edit
+			 */
+			// Cancel modification/creation
+			v.getBtnCancel().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Go previous page
+					if (user instanceof Enterprise) {
+						ViewsManager.getInstance().next(new ProfileEController(frame));
 
-		/*
-		 * Mode Edit
-		 */
-		// Cancel modification/creation
-		v.getBtnCancel().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Go previous page
-				if (user instanceof Enterprise) {
-					ViewsManager.getInstance().next(new ProfileController(frame));
-				
-				} else {
-					ViewsManager.getInstance().next(new ProfileController(frame));
+					} else {
+						ViewsManager.getInstance().next(new ProfileEController(frame));
 
-				}
-			}
-		});
-		// Register a new job
-		v.getBtnProposalCreation().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (job == null) {
-					job = new Proposal(v.getTextField_JobTitle().getText(),
-							(ContractType) v.getComboBox_contract().getSelectedItem());
-					job.setSkills(new ArrayList<Skill>());
-					for (JCheckBox skill : v.getListSkills()) {
-						if (skill.isSelected()) {
-							int i = 0;
-							while (skills.get(i).getName() != skill.getText()) {
-								i++;
-							}
-							job.getSkills().add(skills.get(i));
-						}
 					}
-					job.setPresentation(v.getTextArea().getText());
-				}else {
-					
 				}
-				System.out.println(job.toString());
-				//DAO Job
-				if (user instanceof Enterprise) {
-					((Enterprise)user).getJobs().add(job);
-					ViewsManager.getInstance().next(new ProfileController(frame));
-				
-				} else {
-					ViewsManager.getInstance().next(new ProfileController(frame));
+			});
+			// Register a new job
+			v.getBtnProposalCreation().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (job == null) {
+						job = new Proposal(v.getTextField_JobTitle().getText(),
+								(ContractType) v.getComboBox_contract().getSelectedItem());
+						job.setSkills(new ArrayList<Skill>());
+						for (JCheckBox skill : v.getListSkills()) {
+							if (skill.isSelected()) {
+								int i = 0;
+								while (skills.get(i).getName() != skill.getText()) {
+									i++;
+								}
+								job.getSkills().add(skills.get(i));
+							}
+						}
+						job.setPresentation(v.getTextArea().getText());
+					} else {
+
+					}
+					System.out.println(job.toString());
+					// DAO Job
+					if (user instanceof Enterprise) {
+						((Enterprise) user).getJobs().add(job);
+						ViewsManager.getInstance().next(new ProfileEController(frame));
+
+					} else {
+//						ViewsManager.getInstance().next(new ProfileHController(frame));
+
+					}
 
 				}
-
-			}
-		});
-
+			});
+		}
 	}
 
 	private List<ContractType> generateContracts() {

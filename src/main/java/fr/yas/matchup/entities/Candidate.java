@@ -90,7 +90,7 @@ public class Candidate extends RegisteredUser {
 	 * 
 	 */
 	public Candidate() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

@@ -51,6 +51,7 @@ public class Skill {
 	
 	
 	public Skill (int id, String name, String skillType) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.skillType = skillType;
@@ -58,7 +59,7 @@ public class Skill {
 	
 	
 	public Skill() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

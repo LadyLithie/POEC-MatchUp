@@ -27,7 +27,7 @@ import fr.yas.matchup.views.panels.PanelPresentation;
  * @author Audrey
  *
  */
-public class ProfileController extends BaseController {
+public class ProfileEController extends BaseController {
 	private Enterprise user;
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
 	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
@@ -59,7 +59,8 @@ public class ProfileController extends BaseController {
 	 * 
 	 * @param frame
 	 */
-	public ProfileController(JFrame frame) {
+	public ProfileEController(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new ProfileEView(this.frame);
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
@@ -118,13 +119,14 @@ public class ProfileController extends BaseController {
 			public void actionPerformed(ActionEvent e) {
 				vPresentation.setMode(false);
 				user.setName(vPresentation.getNamePanel().getInput().getText());
-				if (!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText()))
+				if (!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText())) {
 					vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());
-				;
+				}
 				user.setWebsite(vPresentation.getWebsitePanel().getInput().getText());
 				user.setPresentation(vPresentation.getTextAreaPresentation().getText());
 			}
 		});
+		
 		vPresentation.getBtnAnnuler().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -144,7 +146,7 @@ public class ProfileController extends BaseController {
 		vHeadhunters.getBtnEdit().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (vHeadhunters.getBtnEdit().getText() == "Editer") {
+				if (vHeadhunters.getBtnEdit().getText().equalsIgnoreCase("Editer")) {
 					vHeadhunters.setMode(true);
 				} else {
 					// assign to the entity the new associates

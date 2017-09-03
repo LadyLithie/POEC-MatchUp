@@ -88,7 +88,7 @@ public class LoginController extends BaseController {
 					if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
 						switch (user.getClass().getSimpleName()) {
 						case "Enterprise":
-							ViewsManager.getInstance().next(new ProfileController(frame));
+							ViewsManager.getInstance().next(new ProfileEController(frame));
 							break;
 						case "Candidate":
 							

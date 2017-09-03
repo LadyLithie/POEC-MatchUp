@@ -165,6 +165,7 @@ public class Proposal {
 	 * @param contractType
 	 */
 	public Proposal (String name, ContractType contractType) {
+		super();
 		this.name = name;
 		this.contractType = contractType;
 	}
