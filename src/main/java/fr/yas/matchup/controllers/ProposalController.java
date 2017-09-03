@@ -110,11 +110,12 @@ public class ProposalController extends BaseController {
 				}
 				vFrame.getLblLink().setText("Compagny");
 				vFrame.getComboBox_linkedUser().setSelectedItem(job.getCompany());
+
 				
-			}else {
+			}else {//Show both the headhunter and the company
 				vFrame.getComboBox_linkedUser().addItem(job.getHeadhunter());
 				vFrame.getComboBox_linkedUser().setSelectedItem(job.getHeadhunter());
-				//Show both the headhunter and the company
+				
 				JLabel lblCompany = new JLabel("Entreprise");
 				GridBagConstraints gbc_lblCompany = new GridBagConstraints();
 				gbc_lblCompany.insets = new Insets(0, 0, 0, 5);
@@ -124,11 +125,11 @@ public class ProposalController extends BaseController {
 				JComboBox<RegisteredUser> comboBox_company = new JComboBox<RegisteredUser>();
 				comboBox_company.addItem(job.getCompany());
 				comboBox_company.setSelectedItem(job.getCompany());
-				GridBagConstraints gbc_comboBox_linkedUser = new GridBagConstraints();
-				gbc_comboBox_linkedUser.fill = GridBagConstraints.HORIZONTAL;
-				gbc_comboBox_linkedUser.gridx = 2;
-				gbc_comboBox_linkedUser.gridy = 2;
-				vFrame.getPanelCheckBox().add(comboBox_company, gbc_comboBox_linkedUser);
+				GridBagConstraints gbc_comboBox_company = new GridBagConstraints();
+				gbc_comboBox_company.fill = GridBagConstraints.HORIZONTAL;
+				gbc_comboBox_company.gridx = 2;
+				gbc_comboBox_company.gridy = 3;
+				vFrame.getPanelCheckBox().add(comboBox_company, gbc_comboBox_company);
 			
 				vFrame.setMode(false);
 			}
