@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 
 public class PanelPresentation extends JPanel implements IVisibility{
-	GridBagLayout gridBagLayout;
+	private GridBagLayout gridBagLayout;
 	
 	private PanelField namePanel;
 	private PanelField siretPanel;
@@ -28,15 +28,17 @@ public class PanelPresentation extends JPanel implements IVisibility{
 	private PanelField websitePanel;
 	
 	private JLabel lblLogo;
-	JButton btnModifier;
+	private JButton btnModifier;
 	
 	private JLabel lblIcon;
-	JButton btnAjout;
+	private JButton btnAjout;
 	private JTextField textFieldNetwork;
 	
 	private JButton btnAnnuler;
 	private JButton btnEditer;
 	private JButton btnValider;
+
+	private JTextArea textAreaPresentation;
 
 	/**
 	 * @return the btnEditer
@@ -45,8 +47,6 @@ public class PanelPresentation extends JPanel implements IVisibility{
 		return btnEditer;
 	}
 
-	private JTextArea textAreaPresentation;
-	
 	/**
 	 * @return the textAreaPresentation
 	 */
@@ -135,6 +135,7 @@ public class PanelPresentation extends JPanel implements IVisibility{
 	 * Create the panel.
 	 */
 	public PanelPresentation() {
+		super();
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 5, 0, 0, 10, 5, 0 };

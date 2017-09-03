@@ -62,6 +62,7 @@ public class ProfileEView extends BaseView {
 	 * Create the frame.
 	 */
 	public ProfileEView(JFrame frame) {
+		super();
 		super.pageName = "Profile";
 		JPanel panel = new JPanel();
 		super.panel = panel;

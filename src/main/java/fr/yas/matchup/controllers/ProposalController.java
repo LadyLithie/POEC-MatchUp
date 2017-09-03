@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -61,11 +62,12 @@ public class ProposalController extends BaseController {
 	public ProposalController(JFrame frame, Proposal job) {
 		super();
 		super.frame = frame;
+		skills = (ArrayList<Skill>) generateSkills();
 		super.view = new ProposalFrame(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		// DAO : skills = all registered skills
 		this.job = job;
-		skills = (ArrayList<Skill>) generateSkills();
+
 	}
 
 	/*
@@ -75,11 +77,24 @@ public class ProposalController extends BaseController {
 	 */
 	@Override
 	public void initView() {
+		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		ProposalFrame vFrame = ((ProposalFrame) getView());
 		if (job == null) { // mode creation
 			vFrame.setMode(true);
+			// Contracts
 			for (ContractType type : generateContracts()) {
 				vFrame.getComboBox_contract().addItem(type);
+			}
+			// Link
+			if (user instanceof Enterprise) {
+				for (Headhunter hh : ((Enterprise) user).getAssociates()) {
+					vFrame.getComboBox_linkedUser().addItem(hh);
+				}
+			} else if (user instanceof Headhunter) {
+				for (Enterprise hh : ((Headhunter) user).getAssociates()) {
+					vFrame.getComboBox_linkedUser().addItem(hh);
+				}
+				vFrame.getLblLink().setText("Compagny");
 			}
 		} else { // Job modification or display
 			// init view with the job infos
@@ -148,7 +163,7 @@ public class ProposalController extends BaseController {
 	public void initEvent() {
 		ProposalFrame v = (ProposalFrame) super.view;
 		// must test if job and user are linked
-		if (job.getCompany().equals(user) || job.getHeadhunter().equals(user)) {
+		if (user instanceof Enterprise || user instanceof Headhunter) {
 			/*
 			 * Mode Edit
 			 */
@@ -170,34 +185,50 @@ public class ProposalController extends BaseController {
 			v.getBtnProposalCreation().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (job == null) {
-						job = new Proposal(v.getTextField_JobTitle().getText(),
-								(ContractType) v.getComboBox_contract().getSelectedItem());
-						job.setSkills(new ArrayList<Skill>());
-						for (JCheckBox skill : v.getListSkills()) {
-							if (skill.isSelected()) {
-								int i = 0;
-								while (skills.get(i).getName() != skill.getText()) {
-									i++;
+					if (v.getTextField_JobTitle().getText().isEmpty()) {
+						v.getTextField_JobTitle().setBackground(Color.PINK);
+					}else {
+						if (job == null) {
+							job = new Proposal(v.getTextField_JobTitle().getText(),
+									(ContractType) v.getComboBox_contract().getSelectedItem());
+							job.setSkills(new ArrayList<Skill>());
+							for (JCheckBox skill : v.getListSkills()) {
+								if (skill.isSelected()) {
+									int i = 0;
+									while (skills.get(i).getName() != skill.getText()) {
+										i++;
+									}
+									job.getSkills().add(skills.get(i));
 								}
-								job.getSkills().add(skills.get(i));
+							}
+							job.setPresentation(v.getTextArea().getText());
+						} else {
+							for (JCheckBox skill : v.getListSkills()) {
+								if (skill.isSelected()) {
+									int i = 0;
+									while (skills.get(i).getName() != skill.getText()) {
+										i++;
+									}
+									// if the skill is not yet present in the job's skill list, it's added
+									if (!job.getSkills().contains(skills.get(i))) {
+										job.getSkills().add(skills.get(i));
+									}
+
+								}
 							}
 						}
-						job.setPresentation(v.getTextArea().getText());
-					} else {
+						System.out.println(job.toString());
+						// DAO Job
+						if (user instanceof Enterprise) {
+							((Enterprise) user).getJobs().add(job);
+							ViewsManager.getInstance().next(new ProfileEController(frame));
+
+						} else {
+							// ViewsManager.getInstance().next(new ProfileHController(frame));
+							System.out.println("return profile headhunter");
+						}
 
 					}
-					System.out.println(job.toString());
-					// DAO Job
-					if (user instanceof Enterprise) {
-						((Enterprise) user).getJobs().add(job);
-						ViewsManager.getInstance().next(new ProfileEController(frame));
-
-					} else {
-//						ViewsManager.getInstance().next(new ProfileHController(frame));
-
-					}
-
 				}
 			});
 		}

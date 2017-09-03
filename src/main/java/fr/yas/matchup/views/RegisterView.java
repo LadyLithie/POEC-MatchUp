@@ -98,6 +98,7 @@ public class RegisterView extends BaseView {
 	 * @param frame
 	 */
 	public RegisterView(JFrame frame) {
+		super();
 		super.pageName = "Register";
 		JPanel panel = new JPanel();
 		super.panel = panel;

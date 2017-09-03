@@ -11,8 +11,7 @@ import java.awt.Insets;
 import javax.swing.JTextPane;
 import javax.swing.border.LineBorder;
 
-import javafx.scene.layout.Border;
-
+import fr.yas.matchup.entities.Proposal;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Color;
@@ -23,20 +22,47 @@ import java.awt.Color;
  */
 public class PanelResumeJob extends JPanel {
 	private JTextField textField;
+	private JLabel lblLink;
+	private Proposal job;
+	private JButton btnEditer;
+
+	/**
+	 * @return the lblLink
+	 */
+	public JLabel getLblLink() {
+		return lblLink;
+	}
+
+	/**
+	 * @return the job
+	 */
+	public Proposal getJob() {
+		return job;
+	}
+
+	/**
+	 * @return the btnEditer
+	 */
+	public JButton getBtnEditer() {
+		return btnEditer;
+	}
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelResumeJob(String title, String shortResume, String location) {
+	public PanelResumeJob(Proposal job) {
+		super();
+		this.job = job;
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{10, 50, 10, 0};
-		gridBagLayout.rowHeights = new int[]{0, 10, 50, 10, 0, 0, 10, 0, 0};
+		gridBagLayout.columnWidths = new int[]{2, 50, 2, 0};
+		gridBagLayout.rowHeights = new int[]{0, 2, 40, 2, 0, 0, 2, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		
-		JLabel lblTitreDuPoste = new JLabel(title);
+		JLabel lblTitreDuPoste = new JLabel(job.getName());
 		GridBagConstraints gbc_lblTitreDuPoste = new GridBagConstraints();
 		gbc_lblTitreDuPoste.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTitreDuPoste.gridx = 1;
@@ -44,6 +70,12 @@ public class PanelResumeJob extends JPanel {
 		add(lblTitreDuPoste, gbc_lblTitreDuPoste);
 		
 		JTextPane txtpnPresentation = new JTextPane();
+		String shortResume;
+		if (job.getPresentation().length() < 50) {
+			shortResume = job.getPresentation();
+		} else {
+			shortResume = job.getPresentation().substring(0,50) + " ...";
+		}
 		txtpnPresentation.setText(shortResume);
 		txtpnPresentation.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_txtpnPresentation = new GridBagConstraints();
@@ -53,17 +85,16 @@ public class PanelResumeJob extends JPanel {
 		gbc_txtpnPresentation.gridy = 2;
 		add(txtpnPresentation, gbc_txtpnPresentation);
 		
-		JLabel lblLocalisation = new JLabel("Localisation");
-		GridBagConstraints gbc_lblLocalisation = new GridBagConstraints();
-		gbc_lblLocalisation.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLocalisation.gridx = 1;
-		gbc_lblLocalisation.gridy = 4;
-		add(lblLocalisation, gbc_lblLocalisation);
+		lblLink = new JLabel("");
+		GridBagConstraints gbc_lblLink = new GridBagConstraints();
+		gbc_lblLink.insets = new Insets(0, 0, 5, 5);
+		gbc_lblLink.gridx = 1;
+		gbc_lblLink.gridy = 4;
+		add(lblLink, gbc_lblLink);
 		
 		textField = new JTextField();
-		textField.setBackground(Color.WHITE);
 		textField.setEditable(false);
-		textField.setText(location);
+		textField.setBackground(Color.WHITE);
 		textField.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
@@ -73,7 +104,7 @@ public class PanelResumeJob extends JPanel {
 		add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JButton btnEditer = new JButton("Editer");
+		btnEditer = new JButton("Editer");
 		GridBagConstraints gbc_btnEditer = new GridBagConstraints();
 		gbc_btnEditer.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEditer.gridx = 1;

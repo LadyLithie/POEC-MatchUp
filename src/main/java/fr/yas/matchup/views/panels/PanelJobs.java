@@ -25,24 +25,15 @@ public class PanelJobs extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelJobs() {
+		super();
 		setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-		GridBagConstraints gbc_panelJobs = new GridBagConstraints();
-		gbc_panelJobs.fill = GridBagConstraints.ABOVE_BASELINE_LEADING;
+//		GridBagConstraints gbc_panelJobs = new GridBagConstraints();
+//		gbc_panelJobs.fill = GridBagConstraints.ABOVE_BASELINE_LEADING;
 //		gbc_panelJobs.anchor = GridBagConstraints.WEST;
 //		setLayout(new FlowLayout(FlowLayout., 2, 2));
 		
 		//Dynamically added jobs
 		resumeJobs = new ArrayList<PanelResumeJob>();
-		for (int i = 0; i < 3; i++) {
-			PanelResumeJob job = new PanelResumeJob("titre", "Courte présentation\n"
-					+ "blablablzablg"
-					+ "fgtrtreh", "Ville");
-			job.setPreferredSize(new Dimension(150, 200));
-			GridBagConstraints gbc_job = new GridBagConstraints();
-			gbc_job.anchor = GridBagConstraints.NORTHEAST;
-			add(job, gbc_job);
-//			add(job);
-			this.getResumeJobs().add(job);
-		}
+
 	}
 }

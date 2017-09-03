@@ -153,6 +153,7 @@ public class AdminController extends BaseController {
 						}						
 					}else {
 						//use dao to correct in the database
+						System.out.println("use dao to correct in the database");
 
 					}
 				}

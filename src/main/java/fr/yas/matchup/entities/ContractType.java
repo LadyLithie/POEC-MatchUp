@@ -37,6 +37,7 @@ public class ContractType {
 	
 	
 	public ContractType (String name) {
+		super();
 		this.name = name;
 	}
 	

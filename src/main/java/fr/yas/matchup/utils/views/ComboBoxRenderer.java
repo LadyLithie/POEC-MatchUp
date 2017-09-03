@@ -7,6 +7,7 @@ import javax.swing.JList;
 
 import fr.yas.matchup.entities.City;
 import fr.yas.matchup.entities.ContractType;
+import fr.yas.matchup.entities.RegisteredUser;
 
 /**
  * @author Audrey
@@ -23,6 +24,9 @@ public class ComboBoxRenderer extends DefaultListCellRenderer {
 		}else if (value instanceof City) {
 			City item = (City) value;
 			setText(item.getPays() + ":" + item.getDepartement() + " " + item.getName());
+		}else if (value instanceof RegisteredUser) {
+			RegisteredUser item = (RegisteredUser) value;
+			setText(item.getName());
 		}
 		return this;
 	}

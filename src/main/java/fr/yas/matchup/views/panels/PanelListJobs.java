@@ -42,6 +42,7 @@ public class PanelListJobs extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelListJobs() {
+		super();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{43, 0, 0};

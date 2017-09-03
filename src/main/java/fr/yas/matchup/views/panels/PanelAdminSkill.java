@@ -43,6 +43,7 @@ public class PanelAdminSkill extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelAdminSkill() {
+		super();
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		tF_SkillName = new JTextField();

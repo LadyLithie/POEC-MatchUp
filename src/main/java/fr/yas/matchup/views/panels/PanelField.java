@@ -44,6 +44,7 @@ public class PanelField extends JPanel implements IVisibility {
 	 * Create the panel.
 	 */
 	public PanelField(String label) {
+		super();
 		if (!label.isEmpty()) {
 			GridBagLayout gridBagLayout = new GridBagLayout();
 			gridBagLayout.columnWidths = new int[] { 1, 0, 5, 0, 1, 0 };

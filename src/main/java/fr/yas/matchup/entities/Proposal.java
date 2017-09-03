@@ -175,7 +175,7 @@ public class Proposal {
 	@Override
 	public String toString() {
 		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", contractType=" + contractType + ", skills=" + skills + "]";
+				+ ", updatedAt=" + updatedAt + ", contractType=" + contractType + ", localization=" + localization
+				+ ", company=" + company + ", headhunter=" + headhunter + ", skills=" + skills + "]";
 	}
-	
 }

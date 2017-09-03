@@ -58,6 +58,7 @@ public class Panel2FieldButton extends JPanel implements IVisibility {
 	 *            with its label. Can be an empty string if we don't want one
 	 */
 	public Panel2FieldButton(String label, String button) {
+		super();
 		if(!label.isEmpty()) {
 			// layout of 1 line with surrounding padding
 			GridBagLayout gridBagLayout = new GridBagLayout();
@@ -115,8 +116,9 @@ public class Panel2FieldButton extends JPanel implements IVisibility {
 	public void setMode(boolean b) {
 		this.getTextField2().setEditable(b);
 		this.getTextField1().setEditable(b);
-		if(this.getButton() != null)
+		if(this.getButton() != null) {
 			this.getButton().setVisible(b);
+		}
 		
 		if (b) {
 			this.getTextField1().setBorder(new TextFieldBorder());

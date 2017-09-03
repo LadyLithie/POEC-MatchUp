@@ -63,6 +63,7 @@ public class LoginView extends BaseView {
 	 * Create the frame.
 	 */
 	public LoginView(JFrame frame) {
+		super();
 		super.pageName = "Login";
 		JPanel panel = new JPanel();
 		super.panel = panel;

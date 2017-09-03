@@ -80,6 +80,7 @@ public class PanelAdminUser extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelAdminUser() {
+		super();
 		setLayout(new GridLayout(1, 0, 0, 0));
 //		textFieldNameUser = new JTextField();
 //		textFieldNameUser.setEditable(false);
@@ -129,17 +130,17 @@ public class PanelAdminUser extends JPanel {
 		btnValidateUser = new JButton("Validate");
 		GridBagConstraints gbc_btnValidateUser = new GridBagConstraints();
 		gbc_btnValidateUser.insets = new Insets(0, 0, 5, 5);
-		add(btnValidateUser);
+		add(btnValidateUser,gbc_btnValidateUser);
 		
 		btnDeleteUser = new JButton("Delete");
 		GridBagConstraints gbc_btnDeleteUser = new GridBagConstraints();
 		gbc_btnDeleteUser.insets = new Insets(0, 0, 5, 5);
-		add(btnDeleteUser);
+		add(btnDeleteUser,gbc_btnDeleteUser);
 		
 		btnResetPasswordUser = new JButton("Reset password");
 		GridBagConstraints gbc_btnResetPasswordUser = new GridBagConstraints();
 		gbc_btnResetPasswordUser.insets = new Insets(0, 0, 5, 5);
-		add(btnResetPasswordUser);
+		add(btnResetPasswordUser,gbc_btnResetPasswordUser);
 	}
 
 }

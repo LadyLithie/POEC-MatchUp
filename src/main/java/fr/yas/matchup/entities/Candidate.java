@@ -118,6 +118,7 @@ public class Candidate extends RegisteredUser {
 		this.birstdate = birstdate;
 		this.qualifications = qualifications;
 		this.mobility = mobility;
+		super.setName(firstname + " " + lastname);
 	}
 	
 	

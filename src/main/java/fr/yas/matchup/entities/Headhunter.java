@@ -109,7 +109,9 @@ public class Headhunter extends RegisteredUser {
 		
 		this.emails = new ArrayList<String>();
 		this.getEmails().add(super.getEmail());
-	}
+		
+		associates = new ArrayList<>();
+		jobs = new ArrayList<>();	}
 
 	/**
 	 * Full constructor
@@ -146,7 +148,10 @@ public class Headhunter extends RegisteredUser {
 		
 		this.firstname = firstname;
 		this.lastname = lastname;
+		super.setName(firstname + " " + lastname);
 
+		associates = new ArrayList<>();
+		jobs = new ArrayList<>();
 	}
 	
 }

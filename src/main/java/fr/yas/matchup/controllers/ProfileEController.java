@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.ProfileEView;
 import fr.yas.matchup.views.panels.Panel2FieldButton;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelPresentation;
+import fr.yas.matchup.views.panels.PanelResumeJob;
 
 /**
  * @author Audrey
@@ -31,6 +33,7 @@ public class ProfileEController extends BaseController {
 	private Enterprise user;
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
 	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
+	private ArrayList<PanelResumeJob> pJobs = new ArrayList<>();
 
 	/**
 	 * Nested class for shared ActionListener
@@ -86,9 +89,46 @@ public class ProfileEController extends BaseController {
 
 		// Panel headhunters
 		PanelHeadhunters vH = (PanelHeadhunters) v.getPanel_bottomRight();
-		ArrayList<Panel2FieldButton> associates = vH.getAssociates();
-		for (int i = 0; i < associates.size(); i++) {
-			// associates[i].get
+		ArrayList<Panel2FieldButton> associates;
+		if (vH.getAssociates() != null) {
+			associates = vH.getAssociates();	
+		} else {
+			associates = new ArrayList<>();
+		}
+		if (user.getAssociates() != null) {
+			for (Headhunter headhunter : user.getAssociates()) {
+				//posX = posX + 2;
+				Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
+				test.getTextField1().setText(headhunter.getFirstname());
+				test.getTextField2().setText(headhunter.getLastname());
+				GridBagConstraints gbc_test = new GridBagConstraints();
+				gbc_test.fill = GridBagConstraints.NONE;
+				gbc_test.anchor = GridBagConstraints.CENTER;
+				gbc_test.gridx = 1;
+				gbc_test.gridy =GridBagConstraints.RELATIVE;
+				vH.getPanelContent().add(test, gbc_test);
+				vH.getAssociates().add(test);
+				associates.add(test);
+			}			
+		}
+		vH.setMode(false);
+
+		
+		// Panel jobs
+		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
+		if (user.getJobs() != null) {
+			pJobs = new ArrayList<>();
+			for (Proposal Ujob : user.getJobs()) {
+				PanelResumeJob job = new PanelResumeJob(Ujob);
+				job.setPreferredSize(new Dimension(130, 170));
+				job.getLblLink().setText("Contact");
+				GridBagConstraints gbc_job = new GridBagConstraints();
+				gbc_job.anchor = GridBagConstraints.NORTHEAST;
+				vListJobs.getPanelJobs().add(job, gbc_job);
+				vListJobs.getPanelJobs().getResumeJobs().add(job);
+				pJobs.add(job);
+			}
+			
 		}
 
 	}
@@ -245,7 +285,7 @@ public class ProfileEController extends BaseController {
 		}
 		
 		/*
-		 * Panel Head-hunters Define the action on the buttons
+		 * Panel Jobs Define the action on the buttons
 		 */
 		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
 		vListJobs.addComponentListener(new ComponentAdapter() {
@@ -272,9 +312,18 @@ public class ProfileEController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ViewsManager.getInstance().next(new ProposalController(frame));
-				
 			}
 		});
+		for (PanelResumeJob resumeJob : vListJobs.getPanelJobs().getResumeJobs()) {
+			resumeJob.getBtnEditer().addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ViewsManager.getInstance().next(new ProposalController(frame, resumeJob.getJob()));
+					
+				}
+			});
+		}
 	}
 
 }

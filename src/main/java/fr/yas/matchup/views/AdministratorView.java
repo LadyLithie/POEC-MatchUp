@@ -128,6 +128,7 @@ public class AdministratorView extends BaseView {
 	 * Create the panel.
 	 */
 	public AdministratorView(JFrame frame) {
+		super();
 		super.pageName = "Administrator";
 		JPanel panel = new JPanel();
 		super.panel = panel;
@@ -163,10 +164,10 @@ public class AdministratorView extends BaseView {
 		panelUser.add(lblUser, gbc_lblUser);
 		// columns titles
 		JPanel titleListUser = new JPanel();
-		GridBagConstraints gbc_titleListUser = new GridBagConstraints();
-		gbc_titleListUser.insets = new Insets(0, 0, 5, 5);
-		gbc_titleListUser.fill = GridBagConstraints.HORIZONTAL;
-		gbc_titleListUser.gridx = 0;
+//		GridBagConstraints gbc_titleListUser = new GridBagConstraints();
+//		gbc_titleListUser.insets = new Insets(0, 0, 5, 5);
+//		gbc_titleListUser.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_titleListUser.gridx = 0;
 //		gbc_titleListUser.gridy = 1;
 //		panelUser.add(titleListUser, gbc_titleListUser);
 		titleListUser.setLayout(new GridLayout(1, 7, 0, 0));
@@ -347,16 +348,16 @@ public class AdministratorView extends BaseView {
 		lblSkillName.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblSkillName = new GridBagConstraints();
 		gbc_lblSkillName.insets = new Insets(0, 0, 5, 5);
-		titleList.add(lblSkillName);
+		titleList.add(lblSkillName,gbc_lblSkillName);
 		JLabel lblSkillType = new JLabel("Type");
 		lblSkillType.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblSkillType = new GridBagConstraints();
 		gbc_lblSkillType.insets = new Insets(0, 0, 5, 0);
-		titleList.add(lblSkillType);
+		titleList.add(lblSkillType,gbc_lblSkillType);
 		btnAdd = new JButton("Ajout");
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.insets = new Insets(0, 0, 5, 0);
-		titleList.add(btnAdd);
+		titleList.add(btnAdd,gbc_btnAdd);
 
 		// Listing of available skills
 		skills = new ArrayList<PanelAdminSkill>();

@@ -39,8 +39,6 @@ public class ProposalFrame extends BaseView implements IVisibility {
 	private JComboBox<ContractType> comboBox_contract;
 	private JComboBox<City> comboBox_location;
 	//Zone skills
-	private JCheckBox checkBox;
-	private JCheckBox checkBox_1;
 	private ArrayList<JCheckBox> listSkills;
 	//Zone description
 	private JTextArea textArea;
@@ -84,20 +82,6 @@ public class ProposalFrame extends BaseView implements IVisibility {
 		return comboBox_location;
 	}
 	//Zone options end
-
-	/**
-	 * @return the checkBox
-	 */
-	public JCheckBox getCheckBox() {
-		return checkBox;
-	}
-
-	/**
-	 * @return the checkBox_1
-	 */
-	public JCheckBox getCheckBox_1() {
-		return checkBox_1;
-	}
 
 	/**
 	 * @return the listSkills
@@ -315,7 +299,7 @@ public class ProposalFrame extends BaseView implements IVisibility {
 		GridBagConstraints gbc_comboBox_linkedUser = new GridBagConstraints();
 		gbc_comboBox_linkedUser.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_linkedUser.gridx = 2;
-		gbc_comboBox_linkedUser.gridy = 3;
+		gbc_comboBox_linkedUser.gridy = 2;
 		panelComboBox.add(comboBox_linkedUser, gbc_comboBox_linkedUser);
 			
 		/*

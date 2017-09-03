@@ -30,6 +30,7 @@ public class RegisterController extends BaseController {
 	
 
 	public RegisterController(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new RegisterView(this.frame);
 
