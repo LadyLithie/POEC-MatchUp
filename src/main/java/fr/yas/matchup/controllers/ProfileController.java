@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.ProfileEView;
 import fr.yas.matchup.views.panels.Panel2FieldButton;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
@@ -31,6 +32,11 @@ public class ProfileController extends BaseController {
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
 	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
 
+	/**
+	 * Nested class for shared ActionListener
+	 * @author Audrey
+	 *
+	 */
 	class deleteHHListener implements ActionListener {
 		private PanelHeadhunters view;
 		private Component headhunter;
@@ -235,6 +241,7 @@ public class ProfileController extends BaseController {
 		for (Panel2FieldButton headhunter : pHeadhunters) {
 			headhunter.getButton().addActionListener(new deleteHHListener(vHeadhunters, headhunter));
 		}
+		
 		/*
 		 * Panel Head-hunters Define the action on the buttons
 		 */
@@ -262,7 +269,7 @@ public class ProfileController extends BaseController {
 		vListJobs.getBtnAdd().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO link to new job view for creation
+				ViewsManager.getInstance().next(new ProposalController(frame));
 				
 			}
 		});

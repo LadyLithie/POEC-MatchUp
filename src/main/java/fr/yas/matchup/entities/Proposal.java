@@ -9,27 +9,32 @@
  *********/
 package fr.yas.matchup.entities;
 
+import java.util.List;
+
 public class Proposal {
-	private int id;
+	private double id;
 	private String name;
 	private String presentation;
-	private String handicap;
+	//private String handicap;
 	private String createdAt;
 	private String updatedAt;
 	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
-	private ContractType contractType;
-	// Why not with an Enum? 
+	private ContractType contractType; // Why not with an Enum? 
+	private City localization;
+	private Enterprise company;
+	private Headhunter headhunter;
+	private List<Skill> skills;
 	
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public double getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(double id) {
 		this.id = id;
 	}
 	/**
@@ -59,15 +64,15 @@ public class Proposal {
 	/**
 	 * @return the handicap
 	 */
-	public String getHandicap() {
-		return handicap;
-	}
+//	public String getHandicap() {
+//		return handicap;
+//	}
 	/**
 	 * @param handicap the handicap to set
 	 */
-	public void setHandicap(String handicap) {
-		this.handicap = handicap;
-	}
+//	public void setHandicap(String handicap) {
+//		this.handicap = handicap;
+//	}
 	/**
 	 * @return the createdAt
 	 */
@@ -104,25 +109,72 @@ public class Proposal {
 	public void setContractType(ContractType contractType) {
 		this.contractType = contractType;
 	}
-	
-	
-	public Proposal (String name, ContractType contractType, String createdAt) {
-		this.name = name;
-		this.contractType = contractType;
-		this.createdAt = createdAt;
+		
+	/**
+	 * @return the localization
+	 */
+	public City getLocalization() {
+		return localization;
+	}
+	/**
+	 * @param localization the localization to set
+	 */
+	public void setLocalization(City localization) {
+		this.localization = localization;
+	}
+	/**
+	 * @return the company
+	 */
+	public Enterprise getCompany() {
+		return company;
+	}
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Enterprise company) {
+		this.company = company;
+	}
+	/**
+	 * @return the headhunter
+	 */
+	public Headhunter getHeadhunter() {
+		return headhunter;
+	}
+	/**
+	 * @param headhunter the headhunter to set
+	 */
+	public void setHeadhunter(Headhunter headhunter) {
+		this.headhunter = headhunter;
+	}
+	/**
+	 * @return the skills
+	 */
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	/**
+	 * @param skills the skills to set
+	 */
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
 	}
 	
-	
+	/**
+	 * Constructor
+	 * @param name
+	 * @param contractType
+	 */
+	public Proposal (String name, ContractType contractType) {
+		this.name = name;
+		this.contractType = contractType;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", handicap=" + handicap
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", contractType=" + contractType + "]";
+		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", contractType=" + contractType + ", skills=" + skills + "]";
 	}
-	
-	
-	
 	
 }
