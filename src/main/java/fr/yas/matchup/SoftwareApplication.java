@@ -37,7 +37,7 @@ public class SoftwareApplication {
 	 */
 	public static void main(String[] args) {
 
-		//ViewsManager.getInstance().start();
+		ViewsManager.getInstance().start();
 		
 
 //		SkillDAO skillDAO = new SkillDAO();
@@ -157,29 +157,29 @@ public class SoftwareApplication {
 //		
 //		headhunterDAO.insert(h);
 		
-		AdministratorDAO adminDAO = new AdministratorDAO();
-		Administrator a = new Administrator();
-		
-		a.setFirstname("le pouvoir absolu");
-		a.setLastname(null);
-		a.setPhone(Double.valueOf("0250250"));
-		a.setEmail(null);
-		a.setRole(null);
-		a.setLogin(null);
-		a.setPassword(null);
-		
-		adminDAO.insert(a);
-		
-		ResultSet resultSet = adminDAO.executeRequest("SELECT * FROM ADMINISTRATOR");
-		
-		try {
-			while (resultSet.next()) {
-				System.out.println(resultSet.getInt(adminDAO.ID)+","+resultSet.getString(adminDAO.FIRSTNAME));
-			}
-		} catch (SQLException b) {
-			// TODO Auto-generated catch block
-			b.printStackTrace();
-		}
+//		AdministratorDAO adminDAO = new AdministratorDAO();
+//		Administrator a = new Administrator();
+//		
+//		a.setFirstname("le pouvoir absolu");
+//		a.setLastname(null);
+//		a.setPhone(Double.valueOf("0250250"));
+//		a.setEmail(null);
+//		a.setRole(null);
+//		a.setLogin(null);
+//		a.setPassword(null);
+//		
+//		adminDAO.insert(a);
+//		
+//		ResultSet resultSet = adminDAO.executeRequest("SELECT * FROM ADMINISTRATOR");
+//		
+//		try {
+//			while (resultSet.next()) {
+//				System.out.println(resultSet.getInt(adminDAO.ID)+","+resultSet.getString(adminDAO.FIRSTNAME));
+//			}
+//		} catch (SQLException b) {
+//			// TODO Auto-generated catch block
+//			b.printStackTrace();
+//		}
 		
 	}
 
