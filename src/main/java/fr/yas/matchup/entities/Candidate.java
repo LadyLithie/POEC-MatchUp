@@ -12,30 +12,16 @@ import java.util.List;
  *
  */
 public class Candidate extends RegisteredUser {
+	
 	private String firstname;
 	private String lastname;
 	private String birstdate;
 	private String address;
 	private String role;
+	
 	private ArrayList<Diploma> qualifications;
 	private ArrayList<String> mobility;
-//<<<<<<< HEAD
-//	private ArrayList<Skill> candidateSkills = new ArrayList<>();
-//
-//	/**
-//	 * @return the candidateSkills
-//	 */
-//	public ArrayList<Skill> getCandidateSkills() {
-//		return candidateSkills;
-//	}
-//
-//	/**
-//	 * @param candidateSkills the candidateSkills to set
-//	 */
-//	public void setCandidateSkills(ArrayList<Skill> candidateSkills) {
-//		this.candidateSkills = candidateSkills;
-//	}
-//=======
+
 	private List<Skill> skills = new ArrayList<Skill>();
 
 	/**
