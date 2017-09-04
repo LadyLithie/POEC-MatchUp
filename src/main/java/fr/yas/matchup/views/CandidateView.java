@@ -14,6 +14,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+
+import fr.yas.matchup.database.SkillDAO;
+import fr.yas.matchup.entities.Skill;
+import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.views.usercontrols.MenuBar;
 
 import javax.swing.JTextArea;
@@ -22,12 +26,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
 public class CandidateView extends BaseView {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textField_firstname;
+	private JTextField textField_Lastname;
+	private JTextField textFieldMail;
+	private JTextField textFieldPhone;
 	private JLabel lblListeDeSkills;
-	private JList list;
+	private JList<String> list;
 	private JButton btnEdit;
 	private JTextArea textArea;
 	private JButton btnSelectSkill;
@@ -82,7 +86,12 @@ public class CandidateView extends BaseView {
 		
 	
 		model = new DefaultTableModel(null, new String [] {"CheckMe", "Compétences"}) {
-            public Class getColumnClass(int c) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = -6608977305023118577L;
+
+			public Class<?> getColumnClass(int c) {
               switch (c) {
                 case 0: return Boolean.class;
                 default: return String.class;
@@ -91,16 +100,12 @@ public class CandidateView extends BaseView {
 		
 		table = new JTable(model);
 		
-		for (int i = 0; i < 10; i++) {	
-			model.addRow(new Object [] {false,"Java"});
-			model.addRow(new Object [] {false,"PHP"});
-			model.addRow(new Object [] {false,"SQL"});
-			model.addRow(new Object [] {false,"CSS"});
-			model.addRow(new Object [] {false,"HTML"});
-			model.addRow(new Object [] {false,"C++"});
-			model.addRow(new Object [] {false,"C"});
-			model.addRow(new Object [] {false,"C#"});
-		}
+		SkillDAO skillDAO = new SkillDAO();
+		
+		for (BaseEntity entity : skillDAO.get()) {
+			 Skill skill = (Skill) entity;
+			 model.addRow(new Object [] {false,skill.getName()});
+		}	
 		
 		table.setEnabled(false);
 		
@@ -117,85 +122,85 @@ public class CandidateView extends BaseView {
 		gbc_table.gridy = 2;
 		contentPane.add(scroll, gbc_table);
 		
-		JLabel lblNewLabel = new JLabel("Pr\u00E9nom");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 4;
-		gbc_lblNewLabel.gridy = 2;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lblNewLabelFirstname = new JLabel("Pr\u00E9nom");
+		GridBagConstraints gbc_lblNewLabelFirstname = new GridBagConstraints();
+		gbc_lblNewLabelFirstname.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabelFirstname.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabelFirstname.gridx = 4;
+		gbc_lblNewLabelFirstname.gridy = 2;
+		contentPane.add(lblNewLabelFirstname, gbc_lblNewLabelFirstname);
 		
-		textField = new JTextField("Sacha");
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 2;
-		gbc_textField.weightx = 1.0;
-		gbc_textField.fill = GridBagConstraints.BOTH;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 5;
-		gbc_textField.gridy = 2;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
-		textField.setEnabled(false);
+		textField_firstname = new JTextField();
+		GridBagConstraints gbc_textField_firstname = new GridBagConstraints();
+		gbc_textField_firstname.gridwidth = 2;
+		gbc_textField_firstname.weightx = 1.0;
+		gbc_textField_firstname.fill = GridBagConstraints.BOTH;
+		gbc_textField_firstname.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_firstname.gridx = 5;
+		gbc_textField_firstname.gridy = 2;
+		contentPane.add(textField_firstname, gbc_textField_firstname);
+		textField_firstname.setColumns(10);
+		textField_firstname.setEditable(false);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nom");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 4;
-		gbc_lblNewLabel_1.gridy = 3;
-		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lblNewLabelLastname = new JLabel("Nom");
+		GridBagConstraints gbc_lblNewLabelLastname = new GridBagConstraints();
+		gbc_lblNewLabelLastname.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabelLastname.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabelLastname.gridx = 4;
+		gbc_lblNewLabelLastname.gridy = 3;
+		contentPane.add(lblNewLabelLastname, gbc_lblNewLabelLastname);
 		
-		textField_1 = new JTextField("Markides");
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.gridwidth = 2;
-		gbc_textField_1.weightx = 1.0;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.BOTH;
-		gbc_textField_1.gridx = 5;
-		gbc_textField_1.gridy = 3;
-		contentPane.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
-		textField_1.setEnabled(false);
+		textField_Lastname = new JTextField();
+		GridBagConstraints gbc_textField_Lastname = new GridBagConstraints();
+		gbc_textField_Lastname.gridwidth = 2;
+		gbc_textField_Lastname.weightx = 1.0;
+		gbc_textField_Lastname.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_Lastname.fill = GridBagConstraints.BOTH;
+		gbc_textField_Lastname.gridx = 5;
+		gbc_textField_Lastname.gridy = 3;
+		contentPane.add(textField_Lastname, gbc_textField_Lastname);
+		textField_Lastname.setColumns(10);
+		textField_Lastname.setEditable(false);
 		
-		JLabel lblNewLabel_2 = new JLabel("Email");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 4;
-		gbc_lblNewLabel_2.gridy = 4;
-		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lblNewLabelMail = new JLabel("Email");
+		GridBagConstraints gbc_lblNewLabelMail = new GridBagConstraints();
+		gbc_lblNewLabelMail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabelMail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabelMail.gridx = 4;
+		gbc_lblNewLabelMail.gridy = 4;
+		contentPane.add(lblNewLabelMail, gbc_lblNewLabelMail);
 		
-		textField_2 = new JTextField("Lejavacesttropdelaballe@orange.fr");
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.gridwidth = 2;
-		gbc_textField_2.weightx = 1.0;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 5;
-		gbc_textField_2.gridy = 4;
-		contentPane.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
-		textField_2.setEnabled(false);
+		textFieldMail = new JTextField();
+		GridBagConstraints gbc_textFieldMail = new GridBagConstraints();
+		gbc_textFieldMail.gridwidth = 2;
+		gbc_textFieldMail.weightx = 1.0;
+		gbc_textFieldMail.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldMail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldMail.gridx = 5;
+		gbc_textFieldMail.gridy = 4;
+		contentPane.add(textFieldMail, gbc_textFieldMail);
+		textFieldMail.setColumns(10);
+		textFieldMail.setEditable(false);
 		
-		JLabel lblNewLabel_3 = new JLabel("T\u00E9l\u00E9phone\r\n");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 4;
-		gbc_lblNewLabel_3.gridy = 5;
-		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel lblNewLabelPhone = new JLabel("T\u00E9l\u00E9phone\r\n");
+		GridBagConstraints gbc_lblNewLabelPhone = new GridBagConstraints();
+		gbc_lblNewLabelPhone.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabelPhone.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabelPhone.gridx = 4;
+		gbc_lblNewLabelPhone.gridy = 5;
+		contentPane.add(lblNewLabelPhone, gbc_lblNewLabelPhone);
 		
-		textField_3 = new JTextField("01-02-03-04-05");
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.gridwidth = 2;
-		gbc_textField_3.weightx = 1.0;
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 5;
-		gbc_textField_3.gridy = 5;
-		contentPane.add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
-		textField_3.setEnabled(false);
+		textFieldPhone = new JTextField();
+		GridBagConstraints gbc_textFieldPhone = new GridBagConstraints();
+		gbc_textFieldPhone.gridwidth = 2;
+		gbc_textFieldPhone.weightx = 1.0;
+		gbc_textFieldPhone.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldPhone.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldPhone.gridx = 5;
+		gbc_textFieldPhone.gridy = 5;
+		contentPane.add(textFieldPhone, gbc_textFieldPhone);
+		textFieldPhone.setColumns(10);
+		textFieldPhone.setEditable(false);
 		
 		btnEditLink = new JButton("Edit");
 		GridBagConstraints gbc_btnEditLink = new GridBagConstraints();
@@ -213,7 +218,7 @@ public class CandidateView extends BaseView {
 		gbc_textArea.gridx = 4;
 		gbc_textArea.gridy = 7;
 		contentPane.add(textArea, gbc_textArea);
-		textArea.setEnabled(false);
+		textArea.setEditable(false);
 		
 		btnEdit = new JButton("Edit");
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
@@ -343,11 +348,11 @@ public class CandidateView extends BaseView {
 		return lblListeDeSkills;
 	}
 
-	public JList getList() {
+	public JList<String> getList() {
 		return list;
 	}
 
-	public void setList(JList list) {
+	public void setList(JList<String> list) {
 		this.list = list;
 	}
 
@@ -363,36 +368,36 @@ public class CandidateView extends BaseView {
 		this.btnEdit = btnEdit;
 	}
 
-	public JTextField getTextField() {
-		return textField;
+	public JTextField getTextFieldFirstname() {
+		return textField_firstname;
 	}
 
-	public void setTextField(JTextField textField) {
-		this.textField = textField;
+	public void setTextFieldFirstname(JTextField textField) {
+		this.textField_firstname = textField;
 	}
 
-	public JTextField getTextField_1() {
-		return textField_1;
+	public JTextField getTextFieldLastname() {
+		return textField_Lastname;
 	}
 
-	public void setTextField_1(JTextField textField_1) {
-		this.textField_1 = textField_1;
+	public void setTextFieldLastname(JTextField textField_1) {
+		this.textField_Lastname = textField_1;
 	}
 
-	public JTextField getTextField_2() {
-		return textField_2;
+	public JTextField getTextFieldMail() {
+		return textFieldMail;
 	}
 
-	public void setTextField_2(JTextField textField_2) {
-		this.textField_2 = textField_2;
+	public void setTextFieldMail(JTextField textField_2) {
+		this.textFieldMail = textField_2;
 	}
 
-	public JTextField getTextField_3() {
-		return textField_3;
+	public JTextField getTextFieldPhone() {
+		return textFieldPhone;
 	}
 
-	public void setTextField_3(JTextField textField_3) {
-		this.textField_3 = textField_3;
+	public void setTextFieldPhone(JTextField textField_3) {
+		this.textFieldPhone = textField_3;
 	}
 	
 	public JTextArea getTextArea() {

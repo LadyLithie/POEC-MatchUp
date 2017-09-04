@@ -78,9 +78,8 @@ public class MenuBar extends BaseView {
 
 		lblWelcome = new JLabel(ViewsTerms.MENUBAR_WELCOME);
 		panel.add(lblWelcome);
-				
-		
-		lblUserName = new JLabel("");
+						
+		lblUserName = new JLabel();
 		panel.add(lblUserName);
 
 		
