@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.LoginView;
 import fr.yas.matchup.controllers.ViewsDatasTerms;
+import fr.yas.matchup.database.RegisteredUserDAO;
 
 /**
  * @author Audrey
@@ -89,23 +91,21 @@ public class LoginController extends BaseController {
 					} else {
 						view.getTextFieldLogin().setBackground(Color.WHITE);
 					}
-				} else
-				// version with hard value for user
-				// normal version must consult the database for a user with those datas
-				if (view.getTextFieldLogin().getText().equals(user.getLogin())
-						&& user.getPassword().equals(view.getTextFieldPwd().getText())) {
-					switch (user.getClass().getSimpleName()) {
-					case "Enterprise":
-						ViewsManager.getInstance().next(new ProfileEController(frame));
-						break;
-					case "Candidate":
+				} else {
+					// version with hard value for user
+					// normal version must consult the database for a user with those datas
+					RegisteredUserDAO userDAO = new RegisteredUserDAO();
+					RegisteredUser user = userDAO.connection(view.getTextFieldLogin().getText(),
+							view.getTextFieldPwd().getText());
 
-						break;
-					case "Headhunter":
-						ViewsManager.getInstance().next(new HeadhunterController(frame));
-						break;
-					default:
-						break;
+					if (userDAO != null) {
+						if (user instanceof Enterprise) {
+							ViewsManager.getInstance().next(controller);
+						}else if (condition) {
+							
+						}else if (condition) {
+							
+						}
 					}
 				}
 			}

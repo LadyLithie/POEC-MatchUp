@@ -2,7 +2,7 @@ package fr.yas.matchup.managers;
 
 import fr.yas.matchup.controllers.AdminController;
 import fr.yas.matchup.controllers.BaseController;
-
+import fr.yas.matchup.controllers.LoginController;
 import fr.yas.matchup.controllers.ProfileEController;
 import fr.yas.matchup.controllers.RegisterController;
 
@@ -43,7 +43,7 @@ public class ViewsManager {
 	 */
 	public void start() {
 		ViewsUtils.configureFirstJFrame(frame);
-		currentController = new RegisterController(frame);
+		currentController = new LoginController(frame);
 		//currentController = new AdminController(frame);
 
 		controllers.add(currentController);
