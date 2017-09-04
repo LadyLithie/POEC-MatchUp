@@ -293,7 +293,7 @@ public class CandidateView extends BaseView {
 		gbc_btnAnnulerButton.gridy = 16;
 		contentPane.add(btnAnnulerButton, gbc_btnAnnulerButton);
 		
-		ImageIcon image = new ImageIcon("image/linkedin-icon2.png");
+		ImageIcon image = new ImageIcon("image\\linkedin-icon2.png");
 		linkLinkedin = new JLabel();
 		linkLinkedin.setIcon(image);
 		GridBagConstraints gbc_linkLinkedin = new GridBagConstraints();

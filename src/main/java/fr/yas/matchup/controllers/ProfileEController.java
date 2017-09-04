@@ -65,8 +65,8 @@ public class ProfileEController extends BaseController {
 	public ProfileEController(JFrame frame) {
 		super();
 		super.frame = frame;
-		super.view = new ProfileEView(this.frame);
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		super.view = new ProfileEView(this.frame);
 	}
 
 	/*

@@ -93,13 +93,13 @@ public class LoginController extends BaseController {
 						view.getTextFieldLogin().setBackground(Color.WHITE);
 					}
 				} else {
-					// version with hard value for user
 					// normal version must consult the database for a user with those datas
 					RegisteredUserDAO userDAO = new RegisteredUserDAO();
-					RegisteredUser user = userDAO.connection(view.getTextFieldLogin().getText(),
+					user = userDAO.connection(view.getTextFieldLogin().getText(),
 							view.getTextFieldPwd().getText());
 
-					if (userDAO != null) {
+					if (user != null) {
+						setupDatas();
 						if (user instanceof Enterprise) {
 							ViewsManager.getInstance().next(new ProfileEController(frame));
 						}else if (user instanceof Headhunter) {
