@@ -29,3 +29,5 @@ INSERT INTO Job VALUES ('Développeur/gamer','Recherche un développeur qui joue à
 INSERT INTO Job VALUES ('Troll','On vous prendra pas pas,la peine de postuler',' ',8562,null,null);
 
 INSERT INTO Administrator VALUES ('leboss','dujava','lebossdujava@orange.fr',7845126398,'admin','admin','admin');
+
+INSERT INTO Headhunter Values ('Markides','Sacha',1245789656,'sacha.markides@orange.fr',null,'sacha.markides@twitter.fr','sacha.markides@linkedin.fr','bonjour je suis un headhunter', 'root','root','headhunter');
