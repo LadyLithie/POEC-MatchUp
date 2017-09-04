@@ -7,16 +7,13 @@ package fr.yas.matchup.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Headhunter;
-import fr.yas.matchup.entities.Skill;
 
 public class EnterpriseDAO extends RegisteredUserDAO {
 	
