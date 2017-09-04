@@ -9,6 +9,8 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
+import fr.yas.matchup.database.CandidateDAO;
+import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.views.BaseView;
 import fr.yas.matchup.views.ViewsTerms;
 
@@ -76,8 +78,9 @@ public class MenuBar extends BaseView {
 
 		lblWelcome = new JLabel(ViewsTerms.MENUBAR_WELCOME);
 		panel.add(lblWelcome);
-
-		lblUserName = new JLabel("Trololo");
+				
+		
+		lblUserName = new JLabel("");
 		panel.add(lblUserName);
 
 		

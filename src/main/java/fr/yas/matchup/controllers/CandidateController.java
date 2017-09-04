@@ -299,7 +299,7 @@ public class CandidateController extends BaseController {
 					gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 					contentPanel.setLayout(gbl_contentPane);
 
-					ImageIcon image = new ImageIcon("C:/linkedin-icon2.png");
+					ImageIcon image = new ImageIcon("image/linkedin-icon2.png");
 					JLabel imageJlabel = new JLabel();
 					imageJlabel.setIcon(image);
 					GridBagConstraints gbc_1 = new GridBagConstraints();
@@ -315,7 +315,7 @@ public class CandidateController extends BaseController {
 					gbc_2.gridy = 1;
 					contentPanel.add(newlink, gbc_2);
 
-					ImageIcon image2 = new ImageIcon("C:/Twitterbird2.png");
+					ImageIcon image2 = new ImageIcon("image/Twitterbird2.png");
 					JLabel imageJlabel2 = new JLabel();
 					imageJlabel2.setIcon(image2);
 					GridBagConstraints gbc_3 = new GridBagConstraints();
@@ -330,7 +330,7 @@ public class CandidateController extends BaseController {
 					gbc_4.gridy = 2;
 					contentPanel.add(new JTextField(), gbc_4);
 
-					ImageIcon image3 = new ImageIcon("C:/viadeo.png");
+					ImageIcon image3 = new ImageIcon("image/viadeo.png");
 					JLabel imageJlabel3 = new JLabel();
 					imageJlabel3.setIcon(image3);
 					GridBagConstraints gbc_5 = new GridBagConstraints();

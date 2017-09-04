@@ -293,7 +293,7 @@ public class CandidateView extends BaseView {
 		gbc_btnAnnulerButton.gridy = 16;
 		contentPane.add(btnAnnulerButton, gbc_btnAnnulerButton);
 		
-		ImageIcon image = new ImageIcon("C:/linkedin-icon2.png");
+		ImageIcon image = new ImageIcon("image/linkedin-icon2.png");
 		linkLinkedin = new JLabel();
 		linkLinkedin.setIcon(image);
 		GridBagConstraints gbc_linkLinkedin = new GridBagConstraints();
@@ -302,7 +302,7 @@ public class CandidateView extends BaseView {
 		gbc_linkLinkedin.gridy = 5;
 		contentPane.add(linkLinkedin,gbc_linkLinkedin);
 		
-		ImageIcon image2 = new ImageIcon("C:/Twitterbird2.png");
+		ImageIcon image2 = new ImageIcon("image/Twitterbird2.png");
 		linkTwitter = new JLabel();
 		linkTwitter.setIcon(image2);
 		GridBagConstraints gbc_linkTwitter = new GridBagConstraints();
@@ -311,7 +311,7 @@ public class CandidateView extends BaseView {
 		gbc_linkTwitter.gridy = 5;
 		contentPane.add(linkTwitter,gbc_linkTwitter);
 		
-		ImageIcon image3 = new ImageIcon("C:/viadeo.png");
+		ImageIcon image3 = new ImageIcon("image/viadeo.png");
 		linkViadeo = new JLabel();
 		linkViadeo.setIcon(image3);
 		GridBagConstraints gbc_linkViadeo = new GridBagConstraints();
