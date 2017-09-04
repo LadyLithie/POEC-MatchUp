@@ -273,7 +273,7 @@ public class ProposalController extends BaseController {
 		result.add(new ContractType("CDI"));
 		result.add(new ContractType("Contrat d'apprentissage"));
 		result.add(new ContractType("Contrat de professionnalisation"));
-		result.add(new ContractType("Interim"));
+		result.add(new ContractType("dro"));
 
 		return result;
 	}

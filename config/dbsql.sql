@@ -56,10 +56,10 @@ CREATE TABLE administrator(
 	login_admin VARCHAR(255),
 	password_admin VARCHAR(255)
 	)ENGINE=InnoDB;
-	
+
 CREATE TABLE contract_type(
 	id_contract INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	name_contract ENUM ('CDI', 'CDD', 'ALTERNANCE', 'CONTRAT DE PROFESSIONALISATION')
+	name_contract ENUM ('CDI', 'CDD', 'ALTERNANCE', 'CONTRAT DE PROFESSIONALISATION', 'INTERIM')
 	)ENGINE=InnoDB;
 
 

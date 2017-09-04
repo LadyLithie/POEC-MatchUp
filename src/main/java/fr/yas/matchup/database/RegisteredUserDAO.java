@@ -42,7 +42,7 @@ public class RegisteredUserDAO extends BaseDAO {
 	public RegisteredUser connection(String login, String password) {
 		RegisteredUser user = null;
 		//Test dans la table Entreprise
-		ResultSet rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE " + EnterpriseDAO.LOGIN +" = " + login + " AND " + EnterpriseDAO.PASSWORD + " = " + password);
+		ResultSet rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE " + EnterpriseDAO.LOGIN +" = '" + login + "' AND " + EnterpriseDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
 				user = new Enterprise();
@@ -56,7 +56,7 @@ public class RegisteredUserDAO extends BaseDAO {
 		}
 		
 		//Test dans la table Headhunter
-		rs = executeRequest("SELECT * FROM " + HeadhunterDAO.TABLE + " WHERE " + HeadhunterDAO.LOGIN +" = " + login + " AND " + HeadhunterDAO.PASSWORD + " = " + password);
+		rs = executeRequest("SELECT * FROM " + HeadhunterDAO.TABLE + " WHERE " + HeadhunterDAO.LOGIN +" = '" + login + "' AND " + HeadhunterDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
 				user = new Headhunter();
@@ -70,7 +70,7 @@ public class RegisteredUserDAO extends BaseDAO {
 		}
 		
 		//Test dans la table Candidate
-		rs = executeRequest("SELECT * FROM " + CandidateDAO.TABLE + " WHERE " + CandidateDAO.LOGIN +" = " + login + " AND " + CandidateDAO.PASSWORD + " = " + password);
+		rs = executeRequest("SELECT * FROM " + CandidateDAO.TABLE + " WHERE " + CandidateDAO.LOGIN +" = '" + login + "' AND " + CandidateDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
 				user = new Candidate();
@@ -81,7 +81,7 @@ public class RegisteredUserDAO extends BaseDAO {
 		}
 
 		//Test dans la table Administrator
-		rs = executeRequest("SELECT * FROM " + AdministratorDAO.TABLE + " WHERE " + AdministratorDAO.LOGIN +" = " + login + " AND " + AdministratorDAO.PASSWORD + " = " + password);
+		rs = executeRequest("SELECT * FROM " + AdministratorDAO.TABLE + " WHERE " + AdministratorDAO.LOGIN +" = '" + login + "' AND " + AdministratorDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
 				user = new Administrator();
