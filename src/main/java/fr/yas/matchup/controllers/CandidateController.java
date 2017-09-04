@@ -3,7 +3,6 @@ package fr.yas.matchup.controllers;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -22,8 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.yas.matchup.entities.Candidate;
-import fr.yas.matchup.entities.Enterprise;
-import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.utils.views.ViewsUtils;
@@ -33,25 +30,14 @@ public class CandidateController extends BaseController {
 
 	private Candidate c;
 	private ArrayList<Skill> skills = new ArrayList<>();
-	// private CandidateView view;
-	// private JFrame frame;
+
 
 	public CandidateController(JFrame frame) {
 
 		super.frame = frame;
 		super.view = new CandidateView(frame);
 		c = (Candidate) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		/*
-		 * EventQueue.invokeLater(new Runnable() { public void run() { try {
-		 * view = new CandidateView(CandidateController.this.frame);
-		 * frame.setVisible(true); eventEdit(); eventEditLink();
-		 * eventSelectSkil(); eventLinkLinkedin(view.getNameLinkLinkedin());
-		 * eventLinkTwitter(view.getNameLinkTwitter());
-		 * eventLinkViadeo(view.getNameLinkViadeo()); } catch (Exception e) {
-		 * e.printStackTrace(); } }
-		 * 
-		 * });
-		 */
+		
 	}
 	
 	/* (non-Javadoc)

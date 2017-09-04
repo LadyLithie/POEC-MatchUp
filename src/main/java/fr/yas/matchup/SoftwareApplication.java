@@ -17,7 +17,8 @@ public class SoftwareApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ViewsManager.getInstance().start();
+		ViewsManager.getInstance().start();	
+		
 	}
 
 	
