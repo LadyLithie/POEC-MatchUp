@@ -259,7 +259,7 @@ public class HeadhunterView extends BaseView {
 		gbc_lblFirstname.gridy = 0;
 		panel_HeadhunterPresentation.add(lblFirstname, gbc_lblFirstname);
 		
-		JTextField textField_Firstname = new JTextField();
+		textField_Firstname = new JTextField();
 		textField_Firstname.setEditable(false);
 		textField_Firstname.setBackground(Color.white);
 		GridBagConstraints gbc_textField_Firstname = new GridBagConstraints();
@@ -279,7 +279,7 @@ public class HeadhunterView extends BaseView {
 		gbc_lblLinkedin.gridy = 0;
 		panel_HeadhunterPresentation.add(lblLinkedin, gbc_lblLinkedin);
 		
-		JTextField textField_Linkedin = new JTextField();
+		textField_Linkedin = new JTextField();
 		textField_Linkedin.setEditable(false);
 		GridBagConstraints gbc_textField_Linkedin = new GridBagConstraints();
 		gbc_textField_Linkedin.gridwidth = 2;
@@ -328,7 +328,7 @@ public class HeadhunterView extends BaseView {
 		gbc_lblTwitter.gridy = 1;
 		panel_HeadhunterPresentation.add(lblTwitter, gbc_lblTwitter);
 		
-		JTextField textField_Twitter = new JTextField();
+		textField_Twitter = new JTextField();
 		textField_Twitter.setEditable(false);
 		GridBagConstraints gbc_textField_Twitter = new GridBagConstraints();
 		gbc_textField_Twitter.gridwidth = 2;
@@ -347,17 +347,17 @@ public class HeadhunterView extends BaseView {
 		gbc_lblPhone.gridy = 2;
 		panel_HeadhunterPresentation.add(lblPhone, gbc_lblPhone);
 		
-		JTextField textField_Phone_1 = new JTextField();
-		textField_Phone_1.setEditable(false);
-		textField_Phone_1.setBackground(Color.white);
+		textField_Phone = new JTextField();
+		textField_Phone.setEditable(false);
+		textField_Phone.setBackground(Color.white);
 		GridBagConstraints gbc_textField_Phone_1 = new GridBagConstraints();
 		gbc_textField_Phone_1.gridwidth = 2;
 		gbc_textField_Phone_1.fill = GridBagConstraints.BOTH;
 		gbc_textField_Phone_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_Phone_1.gridx = 1;
 		gbc_textField_Phone_1.gridy = 2;
-		panel_HeadhunterPresentation.add(textField_Phone_1, gbc_textField_Phone_1);
-		textField_Phone_1.setColumns(10);
+		panel_HeadhunterPresentation.add(textField_Phone, gbc_textField_Phone_1);
+		textField_Phone.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -367,17 +367,17 @@ public class HeadhunterView extends BaseView {
 		gbc_lblNewLabel_1.gridy = 2;
 		panel_HeadhunterPresentation.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		JTextField textField_Email_1 = new JTextField();
-		textField_Email_1.setEditable(false);
-		textField_Email_1.setBackground(Color.white);
+		textField_Email = new JTextField();
+		textField_Email.setEditable(false);
+		textField_Email.setBackground(Color.white);
 		GridBagConstraints gbc_textField_Email_1 = new GridBagConstraints();
 		gbc_textField_Email_1.gridwidth = 2;
 		gbc_textField_Email_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_Email_1.fill = GridBagConstraints.BOTH;
 		gbc_textField_Email_1.gridx = 4;
 		gbc_textField_Email_1.gridy = 2;
-		panel_HeadhunterPresentation.add(textField_Email_1, gbc_textField_Email_1);
-		textField_Email_1.setColumns(10);
+		panel_HeadhunterPresentation.add(textField_Email, gbc_textField_Email_1);
+		textField_Email.setColumns(10);
 		
 		JLabel lblPresentation = new JLabel("Presentation");
 		GridBagConstraints gbc_lblPresentation = new GridBagConstraints();
@@ -387,7 +387,7 @@ public class HeadhunterView extends BaseView {
 		gbc_lblPresentation.gridy = 4;
 		panel_HeadhunterPresentation.add(lblPresentation, gbc_lblPresentation);
 		
-		JTextArea textArea_Presentation = new JTextArea();
+		textArea_Presentation = new JTextArea();
 		textArea_Presentation.setEditable(false);
 		textArea_Presentation.setRows(4);
 		GridBagConstraints gbc_textArea_Presentation = new GridBagConstraints();
