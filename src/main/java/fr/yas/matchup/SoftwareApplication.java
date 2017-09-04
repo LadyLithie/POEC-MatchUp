@@ -14,10 +14,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import fr.yas.matchup.database.AdministratorDAO;
 import fr.yas.matchup.database.CandidateDAO;
 import fr.yas.matchup.database.EnterpriseDAO;
 import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.database.SkillDAO;
+import fr.yas.matchup.entities.Administrator;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
@@ -138,32 +140,45 @@ public class SoftwareApplication {
 //		
 //		enterpriseDAO.insert(e);
 		
-		HeadhunterDAO headhunterDAO = new HeadhunterDAO();
-		Headhunter h = new Headhunter();
+//		HeadhunterDAO headhunterDAO = new HeadhunterDAO();
+//		Headhunter h = new Headhunter();
+//		
+//		h.setFirstname("sacha");
+//		h.setLastname(null);
+//		h.setPhone(Double.valueOf("0250250"));
+//		h.setEmail(null);
+//		h.setAvatar(null);
+//		h.setTwitter(null);
+//		h.setLinkedin(null);
+//		h.setPresentation(null);
+//		h.setLogin(null);
+//		h.setPassword(null);
+//		h.setRole(null);
+//		
+//		headhunterDAO.insert(h);
 		
-		h.setFirstname("sacha");
-		h.setLastname(null);
-		h.setPhone(Double.valueOf("0250250"));
-		h.setEmail(null);
-		h.setAvatar(null);
-		h.setTwitter(null);
-		h.setLinkedin(null);
-		h.setPresentation(null);
-		h.setLogin(null);
-		h.setPassword(null);
-		h.setRole(null);
+		AdministratorDAO adminDAO = new AdministratorDAO();
+		Administrator a = new Administrator();
 		
-		headhunterDAO.insert(h);
+		a.setFirstname("le pouvoir absolu");
+		a.setLastname(null);
+		a.setPhone(Double.valueOf("0250250"));
+		a.setEmail(null);
+		a.setRole(null);
+		a.setLogin(null);
+		a.setPassword(null);
 		
-		ResultSet resultSet = headhunterDAO.executeRequest("SELECT * FROM HEADHUNTER");
+		adminDAO.insert(a);
+		
+		ResultSet resultSet = adminDAO.executeRequest("SELECT * FROM ADMINISTRATOR");
 		
 		try {
 			while (resultSet.next()) {
-				System.out.println(resultSet.getInt(headhunterDAO.ID)+","+resultSet.getString(headhunterDAO.FIRSTNAME));
+				System.out.println(resultSet.getInt(adminDAO.ID)+","+resultSet.getString(adminDAO.FIRSTNAME));
 			}
-		} catch (SQLException a) {
+		} catch (SQLException b) {
 			// TODO Auto-generated catch block
-			a.printStackTrace();
+			b.printStackTrace();
 		}
 		
 	}

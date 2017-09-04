@@ -13,7 +13,7 @@ import fr.yas.matchup.entities.base.BaseEntity;
 public class AdministratorDAO extends BaseDAO{
 	
 	public static final String TABLE ="administrator";
-	public static final String ID ="id_administrator";
+	public static final String ID ="id_admin";
 	public static final String LASTNAME = "lastname_admin";
 	public static final String FIRSTNAME = "firstname_admin";
 	public static final String MAIL = "mail_admin";
@@ -62,7 +62,7 @@ public class AdministratorDAO extends BaseDAO{
 		res += "'"+admin.getPhone()+"',";
 		res += "'"+admin.getRole()+"',";
 		res += "'"+admin.getLogin()+"',";
-		res += "'"+admin.getPassword()+"',";
+		res += "'"+admin.getPassword()+"'";
 
 		return res;
 	}
@@ -78,7 +78,7 @@ public class AdministratorDAO extends BaseDAO{
 		res += PHONE + " = '"+admin.getPhone()+"',";
 		res += ROLE + " = '"+admin.getRole()+"',";
 		res += LOGIN + " = '"+admin.getLogin()+"',";
-		res += PASSWORD + " = '"+admin.getPassword()+"',";
+		res += PASSWORD + " = '"+admin.getPassword()+"'";
 
 		return res;
 	}
