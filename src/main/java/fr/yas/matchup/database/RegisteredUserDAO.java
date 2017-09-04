@@ -70,13 +70,13 @@ public class RegisteredUserDAO extends BaseDAO {
 		}
 		
 		//Test dans la table Candidate
-		rs = executeRequest("SELECT * FROM " + CandidateDAO.TABLE + " WHERE " + CandidateDAO.LOGIN +" = '" + login + "' AND " + CandidateDAO.PASSWORD + " = '" + password + "'");
+		rs = executeRequest("SELECT * FROM " + CandidateDAO.TABLE + " WHERE " + CandidateDAO.LOGIN +" = '" +  login + "' AND " + CandidateDAO.PASSWORD + " = '" + password + "'");
 		try {
 			if (rs.next()) {
 				user = new Candidate();
 				user.setId(rs.getDouble(CandidateDAO.ID));
 				CandidateDAO candidateDAO = new CandidateDAO();
-				user = (Candidate) candidateDAO.get(user.getId());
+				user = (Candidate) candidateDAO.get( user.getId());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -223,58 +223,58 @@ public class CandidateView extends BaseView {
 		gbc_btnEdit.gridy = 10;
 		contentPane.add(btnEdit, gbc_btnEdit);
 		
-		JLabel lblTitle = new JLabel("Title");
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.gridwidth = 7;
-		gbc_lblTitle.fill = GridBagConstraints.VERTICAL;
-		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitle.gridx = 4;
-		gbc_lblTitle.gridy = 12;
-		contentPane.add(lblTitle, gbc_lblTitle);
-		
-		JButton btnButton = new JButton("button");
-		GridBagConstraints gbc_btnButton = new GridBagConstraints();
-		gbc_btnButton.gridwidth = 2;
-		gbc_btnButton.fill = GridBagConstraints.BOTH;
-		gbc_btnButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnButton.gridx = 9;
-		gbc_btnButton.gridy = 13;
-		contentPane.add(btnButton, gbc_btnButton);
-		
-		JLabel lblOption_1 = new JLabel("Option 1");
-		GridBagConstraints gbc_lblOption_1 = new GridBagConstraints();
-		gbc_lblOption_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblOption_1.gridx = 4;
-		gbc_lblOption_1.gridy = 14;
-		contentPane.add(lblOption_1, gbc_lblOption_1);
-		
-		JList list_1 = new JList();
-		GridBagConstraints gbc_list_1 = new GridBagConstraints();
-		gbc_list_1.gridwidth = 2;
-		gbc_list_1.gridheight = 3;
-		gbc_list_1.insets = new Insets(0, 0, 0, 5);
-		gbc_list_1.fill = GridBagConstraints.BOTH;
-		gbc_list_1.gridx = 5;
-		gbc_list_1.gridy = 14;
-		contentPane.add(list_1, gbc_list_1);
-		
-		JList list_2 = new JList();
-		GridBagConstraints gbc_list_2 = new GridBagConstraints();
-		gbc_list_2.insets = new Insets(0, 0, 0, 5);
-		gbc_list_2.gridheight = 3;
-		gbc_list_2.gridwidth = 4;
-		gbc_list_2.fill = GridBagConstraints.BOTH;
-		gbc_list_2.gridx = 7;
-		gbc_list_2.gridy = 14;
-		contentPane.add(list_2, gbc_list_2);
-		
-		JLabel lblOption_2 = new JLabel("Option 2");
-		GridBagConstraints gbc_lblOption_2 = new GridBagConstraints();
-		gbc_lblOption_2.anchor = GridBagConstraints.NORTH;
-		gbc_lblOption_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblOption_2.gridx = 4;
-		gbc_lblOption_2.gridy = 15;
-		contentPane.add(lblOption_2, gbc_lblOption_2);
+//		JLabel lblTitle = new JLabel("Title");
+//		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+//		gbc_lblTitle.gridwidth = 7;
+//		gbc_lblTitle.fill = GridBagConstraints.VERTICAL;
+//		gbc_lblTitle.insets = new Insets(0, 0, 5, 5);
+//		gbc_lblTitle.gridx = 4;
+//		gbc_lblTitle.gridy = 12;
+//		contentPane.add(lblTitle, gbc_lblTitle);
+//		
+//		JButton btnButton = new JButton("button");
+//		GridBagConstraints gbc_btnButton = new GridBagConstraints();
+//		gbc_btnButton.gridwidth = 2;
+//		gbc_btnButton.fill = GridBagConstraints.BOTH;
+//		gbc_btnButton.insets = new Insets(0, 0, 5, 5);
+//		gbc_btnButton.gridx = 9;
+//		gbc_btnButton.gridy = 13;
+//		contentPane.add(btnButton, gbc_btnButton);
+//		
+//		JLabel lblOption_1 = new JLabel("Option 1");
+//		GridBagConstraints gbc_lblOption_1 = new GridBagConstraints();
+//		gbc_lblOption_1.insets = new Insets(0, 0, 5, 5);
+//		gbc_lblOption_1.gridx = 4;
+//		gbc_lblOption_1.gridy = 14;
+//		contentPane.add(lblOption_1, gbc_lblOption_1);
+//		
+//		JList list_1 = new JList();
+//		GridBagConstraints gbc_list_1 = new GridBagConstraints();
+//		gbc_list_1.gridwidth = 2;
+//		gbc_list_1.gridheight = 3;
+//		gbc_list_1.insets = new Insets(0, 0, 0, 5);
+//		gbc_list_1.fill = GridBagConstraints.BOTH;
+//		gbc_list_1.gridx = 5;
+//		gbc_list_1.gridy = 14;
+//		contentPane.add(list_1, gbc_list_1);
+//		
+//		JList list_2 = new JList();
+//		GridBagConstraints gbc_list_2 = new GridBagConstraints();
+//		gbc_list_2.insets = new Insets(0, 0, 0, 5);
+//		gbc_list_2.gridheight = 3;
+//		gbc_list_2.gridwidth = 4;
+//		gbc_list_2.fill = GridBagConstraints.BOTH;
+//		gbc_list_2.gridx = 7;
+//		gbc_list_2.gridy = 14;
+//		contentPane.add(list_2, gbc_list_2);
+//		
+//		JLabel lblOption_2 = new JLabel("Option 2");
+//		GridBagConstraints gbc_lblOption_2 = new GridBagConstraints();
+//		gbc_lblOption_2.anchor = GridBagConstraints.NORTH;
+//		gbc_lblOption_2.insets = new Insets(0, 0, 5, 5);
+//		gbc_lblOption_2.gridx = 4;
+//		gbc_lblOption_2.gridy = 15;
+//		contentPane.add(lblOption_2, gbc_lblOption_2);
 		
 		btnSelectSkill = new JButton("Sélectionner Skill");
 		Dimension preferredSize1 = new Dimension(180, 25);

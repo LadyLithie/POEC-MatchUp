@@ -106,7 +106,7 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public BaseEntity get(double id) {
 		BaseEntity entity = null;
-		ResultSet rSet = executeRequest("SELECT * FROM "+ table +"WHERE "+ this.id +" = "+ id);
+		ResultSet rSet = executeRequest("SELECT * FROM "+ table +" WHERE "+ this.id +" = "+ (int) id);
 		try {
 			rSet.next();
 			entity = parseToObject(rSet);
