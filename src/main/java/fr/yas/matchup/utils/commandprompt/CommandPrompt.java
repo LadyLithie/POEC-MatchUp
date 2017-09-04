@@ -25,7 +25,7 @@ public class CommandPrompt {
 	 * @param message
 	 * @return int
 	 */
-	public int CallIntMessage(int valMin, int valMax,
+	public int callIntMessage(int valMin, int valMax,
 			String message) {
 
 		int result;
@@ -47,7 +47,7 @@ public class CommandPrompt {
 	 * @param message
 	 * @return String
 	 */
-	public String CallStringMessage(String[] acceptable,
+	public String callStringMessage(String[] acceptable,
 			String message) {
 		String result;
 		boolean isNOK = true;

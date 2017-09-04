@@ -9,29 +9,23 @@
  *********/
 package fr.yas.matchup.entities;
 
-public class Proposal {
-	private int id;
+import java.util.List;
+
+import fr.yas.matchup.entities.base.BaseEntity;
+
+public class Proposal extends BaseEntity {
 	private String name;
 	private String presentation;
-	private String handicap;
+	//private String handicap;
 	private String createdAt;
 	private String updatedAt;
 	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
-	private ContractType contractType;
-	// Why not with an Enum? 
+	private ContractType contractType; // Why not with an Enum? 
+	private Location localization;
+	private Enterprise company;
+	private Headhunter headhunter;
+	private List<Skill> skills;
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
 	/**
 	 * @return the name
 	 */
@@ -59,15 +53,15 @@ public class Proposal {
 	/**
 	 * @return the handicap
 	 */
-	public String getHandicap() {
-		return handicap;
-	}
+//	public String getHandicap() {
+//		return handicap;
+//	}
 	/**
 	 * @param handicap the handicap to set
 	 */
-	public void setHandicap(String handicap) {
-		this.handicap = handicap;
-	}
+//	public void setHandicap(String handicap) {
+//		this.handicap = handicap;
+//	}
 	/**
 	 * @return the createdAt
 	 */
@@ -104,25 +98,98 @@ public class Proposal {
 	public void setContractType(ContractType contractType) {
 		this.contractType = contractType;
 	}
-	
-	
-	public Proposal (String name, ContractType contractType, String createdAt) {
-		this.name = name;
-		this.contractType = contractType;
-		this.createdAt = createdAt;
+		
+	/**
+	 * @return the localization
+	 */
+	public Location getLocalization() {
+		return localization;
+	}
+	/**
+	 * @param localization the localization to set
+	 */
+	public void setLocalization(Location localization) {
+		this.localization = localization;
+	}
+	public String getStringLocalization() {
+		return localization.getPays() + ":" + localization.getAddress() + "," + localization.getDepartement() + "," + localization.getCity();
+	}
+	/**
+	 * WARNING : need test on pattern
+	 * @param string (format:PAYS:address,CodePostal,VILLE)
+	 */
+	public void setLocalization(String string) {
+		Location location = new Location();
+		String[] ad = string.split(":");
+		location.setPays(ad[0]);
+		ad = ad[1].split(",");		
+		location.setAddress(ad[0]);
+		location.setDepartement(new Integer(ad[1]));
+		location.setCity(ad[2]);
+		
+		this.localization = location;
+		
+		
+	}	/**
+	 * @return the company
+	 */
+	public Enterprise getCompany() {
+		return company;
+	}
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Enterprise company) {
+		this.company = company;
+	}
+	/**
+	 * @return the headhunter
+	 */
+	public Headhunter getHeadhunter() {
+		return headhunter;
+	}
+	/**
+	 * @param headhunter the headhunter to set
+	 */
+	public void setHeadhunter(Headhunter headhunter) {
+		this.headhunter = headhunter;
+	}
+	/**
+	 * @return the skills
+	 */
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	/**
+	 * @param skills the skills to set
+	 */
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
 	}
 	
+	/**
+	 * Constructor
+	 * @param name
+	 * @param contractType
+	 */
+	public Proposal (String name, ContractType contractType) {
+		super();
+		this.name = name;
+		this.contractType = contractType;
+	}
 	
+	public Proposal() {
+		super();
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", handicap=" + handicap
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", contractType=" + contractType + "]";
+		return "Proposal [name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", contractType=" + contractType + ", localization=" + localization + ", company="
+				+ company + ", headhunter=" + headhunter + ", skills=" + skills + "]";
 	}
-	
-	
-	
-	
+
+
 }

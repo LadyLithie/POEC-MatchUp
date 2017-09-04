@@ -52,19 +52,20 @@ public class Administrator extends RegisteredUser {
 	 * @param firstname
 	 * @param lastname
 	 */
-	public Administrator(String login, boolean isConnected, String name, String phone, String email,
+	public Administrator(String login, String name, String phone, String email,
 			String presentation, String avatar, String created_at, String updated_at, String firstname,
 			String lastname) {
-		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
+		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
 		this.lastname = lastname;
+		super.setName(firstname + " " + lastname);
 	}
 
 	/**
 	 * 
 	 */
 	public Administrator() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 }

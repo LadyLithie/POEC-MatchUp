@@ -11,7 +11,10 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private ArrayList<String> phones;
 	private ArrayList<String> emails;
-	
+
+	private ArrayList<Proposal> jobs;
+	private ArrayList<Enterprise> associates;
+
 	/**
 	 * @return the firstname
 	 */
@@ -69,15 +72,46 @@ public class Headhunter extends RegisteredUser {
 	}
 
 	/**
+	 * @return the jobs
+	 */
+	public ArrayList<Proposal> getJobs() {
+		return jobs;
+	}
+
+	/**
+	 * @param jobs the jobs to set
+	 */
+	public void setJobs(ArrayList<Proposal> jobs) {
+		this.jobs = jobs;
+	}
+
+	/**
+	 * @return the associates
+	 */
+	public ArrayList<Enterprise> getAssociates() {
+		return associates;
+	}
+
+	/**
+	 * @param associates the associates to set
+	 */
+	public void setAssociates(ArrayList<Enterprise> associates) {
+		this.associates = associates;
+	}
+
+	/**
 	 * Void constructor
 	 */
 	public Headhunter() {
+		super();
 		this.phones = new ArrayList<String>();
 		this.getPhones().add(super.getPhone());
 		
 		this.emails = new ArrayList<String>();
 		this.getEmails().add(super.getEmail());
-	}
+		
+		associates = new ArrayList<>();
+		jobs = new ArrayList<>();	}
 
 	/**
 	 * Full constructor
@@ -97,10 +131,10 @@ public class Headhunter extends RegisteredUser {
 	 * *********************
 	 * To review the lists
 	 */
-	public Headhunter(String login, boolean isConnected, String name, String phone, String email, String presentation,
+	public Headhunter(String login, String name, String phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String firstname, String lastname,
 			ArrayList<String> phones, ArrayList<String> emails) {
-		super(login, isConnected, name, phone, email, presentation, avatar, created_at, updated_at);
+		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		
 		this.phones = new ArrayList<String>();
 		// This is optional, depend how we want to treat multiple
@@ -114,7 +148,10 @@ public class Headhunter extends RegisteredUser {
 		
 		this.firstname = firstname;
 		this.lastname = lastname;
+		super.setName(firstname + " " + lastname);
 
+		associates = new ArrayList<>();
+		jobs = new ArrayList<>();
 	}
 	
 }

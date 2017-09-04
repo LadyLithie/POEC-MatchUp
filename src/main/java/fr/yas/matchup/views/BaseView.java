@@ -9,7 +9,7 @@ import fr.yas.matchup.utils.views.ViewsUtils;
 
 public abstract class BaseView implements IBaseView {
 
-	protected JPanel contentPane;
+	protected JPanel panel;
 	protected String pageName;
 
 	/**
@@ -23,9 +23,13 @@ public abstract class BaseView implements IBaseView {
 	 * @return the contentPane
 	 */
 	public JPanel getContentPane() {
-		return contentPane;
+		return panel;
 	}
 
+	//Interface override
+	/**
+	 * load a view on a current frame by overriding its contents
+	 */
 	@Override
 	public void loadView(JFrame frame) {
 		frame.setTitle(getPageName());
