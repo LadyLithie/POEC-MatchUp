@@ -13,8 +13,8 @@ import fr.yas.matchup.entities.base.BaseEntity;
 
 public class CandidateDAO extends RegisteredUserDAO {
 	
-	public static final String TABLE = "Candidate";
-	public static final String ID = "id_Candidate";
+	public static final String TABLE = "candidate";
+	public static final String ID = "id_candidate";
 	public static final String LASTNAME = "lastname_candidate";
 	public static final String FIRSTNAME = "firstname_candidate";
 	public static final String PHONE = "phone_candidate";

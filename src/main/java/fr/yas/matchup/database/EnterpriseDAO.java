@@ -17,7 +17,7 @@ import fr.yas.matchup.entities.Headhunter;
 
 public class EnterpriseDAO extends RegisteredUserDAO {
 	
-	public static final String TABLE ="Enterprise";
+	public static final String TABLE ="enterprise";
 	public static final String ID ="id_enterprise";
 	public static final String NAME ="name_enterprise";
 	public static final String PHONE ="phone_enterprise";
