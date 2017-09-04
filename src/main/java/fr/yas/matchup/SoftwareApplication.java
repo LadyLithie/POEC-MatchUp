@@ -4,6 +4,7 @@
 package fr.yas.matchup;
 
 
+import fr.yas.matchup.database.CandidateDAO;
 import fr.yas.matchup.managers.ViewsManager;
 
 

@@ -17,6 +17,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 	public static final String ID = "id_Candidate";
 	public static final String LASTNAME = "lastname_candidate";
 	public static final String FIRSTNAME = "firstname_candidate";
+	public static final String PHONE = "phone_candidate";
 	public static final String BIRTHDAY = "birthday_candidate";
 	public static final String ADDRESS = "address_candidate";
 	public static final String MAIL = "mail_candidate";
@@ -43,6 +44,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setId(rs.getDouble(ID));
 			candidate.setLastname(rs.getString(LASTNAME));
 			candidate.setFirstname(rs.getString(FIRSTNAME));
+			candidate.setPhone(rs.getString(PHONE));
 			candidate.setBirstdate(rs.getString(BIRTHDAY));
 			candidate.setAddress(rs.getString(ADDRESS));
 			candidate.setEmail(rs.getString(MAIL));
@@ -66,6 +68,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 
 		result += "'" + candidate.getLastname() + "',";
 		result += "'" + candidate.getFirstname() + "',";
+		result += "'" + candidate.getPhone() + "',";
 		result += "'" + candidate.getBirstdate() + "',";
 		result += "'" + candidate.getAddress() + "',";
 		result += "'" + candidate.getEmail() + "',";
@@ -85,6 +88,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 
 		result += LASTNAME + " = '" + candidate.getLastname() + "',";
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
+		result += PHONE + " = '" + candidate.getPhone() + "',";
 		result += BIRTHDAY + " = '" + candidate.getBirstdate() + "',";
 		result += ADDRESS + " = '" + candidate.getAddress() + "',";
 		result += MAIL + " = '" + candidate.getEmail() + "',";

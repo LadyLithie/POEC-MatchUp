@@ -35,9 +35,9 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setId(rs.getDouble(ID));
 			headhunter.setLastname(rs.getString(LASTNAME));
 			headhunter.setFirstname(rs.getString(FIRSTNAME));
-			headhunter.setPhone(rs.getDouble(PHONE));
+			headhunter.setPhone(rs.getString(PHONE));
 			headhunter.setEmail(rs.getString(MAIL));
-			headhunter.setPicture(rs.getString(PICTURE));
+			headhunter.setAvatar(rs.getString(PICTURE));
 			headhunter.setTwitter(rs.getString(TWITTER));
 			headhunter.setLinkedin(rs.getString(LINKEDIN));
 			headhunter.setPresentation(rs.getString(PRESENTATION));
@@ -61,7 +61,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		result += "'" + headhunter.getFirstname() + "',";
 		result += "'" + headhunter.getPhone() + "',";
 		result += "'" + headhunter.getEmail() + "',";
-		result += "'" + headhunter.getPicture() + "',";
+		result += "'" + headhunter.getAvatar() + "',";
 		result += "'" + headhunter.getTwitter() + "',";
 		result += "'" + headhunter.getLinkedin() + "',";
 		result += "'" + headhunter.getPresentation() +"',";
@@ -81,7 +81,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		res += FIRSTNAME + " = '" + headhunter.getFirstname() + "',";
 		res += PHONE + " = "+ headhunter.getPhone()+"',";
 		res += MAIL + " = "+ headhunter.getEmail()+"',";
-		res += PICTURE + " = "+ headhunter.getPicture()+"',";
+		res += PICTURE + " = "+ headhunter.getAvatar()+"',";
 		res += TWITTER + " = "+ headhunter.getTwitter()+"',";
 		res += LINKEDIN + " = "+ headhunter.getLinkedin()+"',";
 		res += PRESENTATION + " = "+ headhunter.getPresentation()+"',";

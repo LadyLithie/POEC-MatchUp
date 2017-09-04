@@ -33,7 +33,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 			admin.setLastname(resultSet.getString(LASTNAME));
 			admin.setFirstname(resultSet.getString(FIRSTNAME));
 			admin.setEmail(resultSet.getString(MAIL));
-			admin.setPhone(resultSet.getDouble(PHONE));
+			admin.setPhone(resultSet.getString(PHONE));
 			admin.setRole(resultSet.getString(ROLE));
 			admin.setLogin(resultSet.getString(LOGIN));
 			admin.setPassword(resultSet.getString(PASSWORD));

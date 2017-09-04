@@ -50,7 +50,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		try {
 			e.setId(resultSet.getDouble(ID));
 			e.setName(resultSet.getString(NAME));
-			e.setPhone(resultSet.getDouble(PHONE));
+			e.setPhone(resultSet.getString(PHONE));
 			e.setAddress(resultSet.getString(ADDRESS));
 			e.setCity(resultSet.getString(CITY));
 			e.setWebsite(resultSet.getString(WEBSITE));

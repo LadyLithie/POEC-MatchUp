@@ -17,6 +17,7 @@ CREATE TABLE candidate(
 	id_candidate INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	lastname_candidate VARCHAR(255),
 	firstname_candidate VARCHAR(255),
+	phone_candidate VARCHAR(12),
 	birthday_candidate DATE,
 	address_candidate VARCHAR(255),
 	mail_candidate VARCHAR(255),
