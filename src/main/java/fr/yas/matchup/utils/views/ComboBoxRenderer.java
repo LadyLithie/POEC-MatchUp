@@ -5,7 +5,7 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-import fr.yas.matchup.entities.City;
+import fr.yas.matchup.entities.Location;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.RegisteredUser;
 
@@ -21,9 +21,9 @@ public class ComboBoxRenderer extends DefaultListCellRenderer {
 			ContractType item = (ContractType) value;
 			setText(item.getName());
 			// setIcon(ingredient.getIcon());
-		}else if (value instanceof City) {
-			City item = (City) value;
-			setText(item.getPays() + ":" + item.getDepartement() + " " + item.getName());
+		}else if (value instanceof Location) {
+			Location item = (Location) value;
+			setText(item.getPays() + ":" + item.getDepartement() + " " + item.getCity());
 		}else if (value instanceof RegisteredUser) {
 			RegisteredUser item = (RegisteredUser) value;
 			setText(item.getName());

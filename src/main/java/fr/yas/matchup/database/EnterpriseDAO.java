@@ -6,6 +6,7 @@ package fr.yas.matchup.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.base.BaseEntity;
 
@@ -13,7 +14,7 @@ import fr.yas.matchup.entities.base.BaseEntity;
  * @author Audrey
  *
  */
-public class DAOEnterprise extends BaseDAO {
+public class EnterpriseDAO extends BaseDAO {
 	public static final String TABLE = "enterprise";
 	public static final String ID = "id_enterprise";
 	public static final String NAME = "name_enterprise";
@@ -32,7 +33,7 @@ public class DAOEnterprise extends BaseDAO {
 	/**
 	 * 
 	 */
-	public DAOEnterprise() {
+	public EnterpriseDAO() {
 		super(TABLE, ID);
 	}
 

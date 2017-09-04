@@ -21,7 +21,7 @@ public class Proposal extends BaseEntity {
 	private String updatedAt;
 	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
 	private ContractType contractType; // Why not with an Enum? 
-	private City localization;
+	private Location localization;
 	private Enterprise company;
 	private Headhunter headhunter;
 	private List<Skill> skills;
@@ -102,16 +102,35 @@ public class Proposal extends BaseEntity {
 	/**
 	 * @return the localization
 	 */
-	public City getLocalization() {
+	public Location getLocalization() {
 		return localization;
 	}
 	/**
 	 * @param localization the localization to set
 	 */
-	public void setLocalization(City localization) {
+	public void setLocalization(Location localization) {
 		this.localization = localization;
 	}
+	public String getStringLocalization() {
+		return localization.getPays() + ":" + localization.getAddress() + "," + localization.getDepartement() + "," + localization.getCity();
+	}
 	/**
+	 * WARNING : need test on pattern
+	 * @param string (format:PAYS:address,CodePostal,VILLE)
+	 */
+	public void setLocalization(String string) {
+		Location location = new Location();
+		String[] ad = string.split(":");
+		location.setPays(ad[0]);
+		ad = ad[1].split(",");		
+		location.setAddress(ad[0]);
+		location.setDepartement(new Integer(ad[1]));
+		location.setCity(ad[2]);
+		
+		this.localization = location;
+		
+		
+	}	/**
 	 * @return the company
 	 */
 	public Enterprise getCompany() {
@@ -171,5 +190,6 @@ public class Proposal extends BaseEntity {
 				+ updatedAt + ", contractType=" + contractType + ", localization=" + localization + ", company="
 				+ company + ", headhunter=" + headhunter + ", skills=" + skills + "]";
 	}
+
 
 }

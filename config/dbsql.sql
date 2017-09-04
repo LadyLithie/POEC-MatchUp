@@ -63,6 +63,7 @@ CREATE TABLE contract_type(
 CREATE TABLE job(
 	id_job INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title_job VARCHAR(255),
+	address VARCHAR(255),
 	presentation_job TEXT,
 	contract_id INT NULL,
 	enterprise_id INT NULL,

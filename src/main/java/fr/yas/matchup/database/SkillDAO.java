@@ -5,6 +5,8 @@ package fr.yas.matchup.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.yas.matchup.database;
+package fr.yas.matchup.database.base;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.yas.matchup.database.DBManager;
+import fr.yas.matchup.database.IDAOBase;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 /**

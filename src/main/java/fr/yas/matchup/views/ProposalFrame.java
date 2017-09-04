@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
-import fr.yas.matchup.entities.City;
+import fr.yas.matchup.entities.Location;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
@@ -37,7 +37,7 @@ public class ProposalFrame extends BaseView implements IVisibility {
 	//Zone options
 	private JComboBox<RegisteredUser> comboBox_linkedUser;
 	private JComboBox<ContractType> comboBox_contract;
-	private JComboBox<City> comboBox_location;
+	private JComboBox<Location> comboBox_location;
 	//Zone skills
 	private ArrayList<JCheckBox> listSkills;
 	//Zone description
@@ -78,7 +78,7 @@ public class ProposalFrame extends BaseView implements IVisibility {
 	/**
 	 * @return the comboBox_location
 	 */
-	public JComboBox<City> getComboBox_location() {
+	public JComboBox<Location> getComboBox_location() {
 		return comboBox_location;
 	}
 	//Zone options end
@@ -265,7 +265,7 @@ public class ProposalFrame extends BaseView implements IVisibility {
 		gbc_lblGeographicLocation.gridy = 0;
 		panelComboBox.add(lblGeographicLocation, gbc_lblGeographicLocation);
 		
-		comboBox_location = new JComboBox<City>();
+		comboBox_location = new JComboBox<Location>();
 		GridBagConstraints gbc_comboBox_location = new GridBagConstraints();
 		gbc_comboBox_location.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_location.fill = GridBagConstraints.HORIZONTAL;

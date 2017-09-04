@@ -30,6 +30,10 @@ public class ContractType extends BaseEntity {
 		this.name = name;
 	}
 
+	public ContractType() {
+		super();
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

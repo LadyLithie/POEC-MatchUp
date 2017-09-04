@@ -7,27 +7,42 @@ package fr.yas.matchup.entities;
  * @author Audrey
  *
  */
-public class City {
+public class Location {
 	public static final String INTERNATIONAL = "Internationnal";
 	public static final String FRANCE = "France";
 	public static final String EUROPE = "Union Européenne";
 
-	private String name;
+	private String address;
+	private String city;
 	private int departement;
 	private String pays;
 
 	/**
-	 * @return the name
+	 * @return the address
 	 */
-	public String getName() {
-		return name;
+	public String getAddress() {
+		return address;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param address the address to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String name) {
+		this.city = name;
 	}
 
 	/**
@@ -61,18 +76,20 @@ public class City {
 	/**
 	 * 
 	 */
-	public City() {
+	public Location() {
 		super();
 	}
 
 	/**
-	 * @param name
+	 * @param address
+	 * @param city
 	 * @param departement
 	 * @param pays
 	 */
-	public City(String name, int departement, String pays) {
+	public Location(String address, String city, int departement, String pays) {
 		super();
-		this.name = name;
+		this.address = address;
+		this.city = city;
 		this.departement = departement;
 		this.pays = pays;
 	}
