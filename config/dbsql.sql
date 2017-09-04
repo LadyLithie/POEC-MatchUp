@@ -59,7 +59,7 @@ CREATE TABLE administrator(
 
 CREATE TABLE contract_type(
 	id_contract INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	name_contract ENUM ('CDI', 'CDD', 'ALTERNANCE', 'CONTRAT DE PROFESSIONALISATION', 'INTERIM')
+	name_contract VARCHAR (50)
 	)ENGINE=InnoDB;
 
 
