@@ -8,17 +8,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 /**
  * @author Audrey
  *
  */
 public class PanelAdminUser extends JPanel {
-
-	private JTextField textFieldNameUser;
-	private JTextField textFieldMailUser;
-	private JTextField textFieldTypeUser;
-	private JTextField textFieldCreationUser;
 	private JButton btnValidateUser;
 	private JButton btnDeleteUser;
 	private JButton btnResetPasswordUser;
@@ -81,40 +78,9 @@ public class PanelAdminUser extends JPanel {
 	 */
 	public PanelAdminUser() {
 		super();
-		setLayout(new GridLayout(1, 0, 0, 0));
-//		textFieldNameUser = new JTextField();
-//		textFieldNameUser.setEditable(false);
-//		GridBagConstraints gbc_textFieldNameUser = new GridBagConstraints();
-//		gbc_textFieldNameUser.insets = new Insets(0, 0, 5, 5);
-//		gbc_textFieldNameUser.fill = GridBagConstraints.HORIZONTAL;
-//		add(textFieldNameUser);
-//		textFieldNameUser.setColumns(10);
-//		
-//		textFieldMailUser = new JTextField();
-//		textFieldMailUser.setEditable(false);
-//		GridBagConstraints gbc_textFieldMailUser = new GridBagConstraints();
-//		gbc_textFieldMailUser.insets = new Insets(0, 0, 5, 5);
-//		gbc_textFieldMailUser.fill = GridBagConstraints.HORIZONTAL;
-//		add(textFieldMailUser);
-//		textFieldMailUser.setColumns(10);
-//		
-//		textFieldTypeUser = new JTextField();
-//		textFieldTypeUser.setEditable(false);
-//		GridBagConstraints gbc_textFieldTypeUser = new GridBagConstraints();
-//		gbc_textFieldTypeUser.insets = new Insets(0, 0, 5, 5);
-//		gbc_textFieldTypeUser.fill = GridBagConstraints.HORIZONTAL;
-//		add(textFieldTypeUser);
-//		textFieldTypeUser.setColumns(10);
-//		
-//		textFieldCreationUser = new JTextField();
-//		textFieldCreationUser.setEditable(false);
-//		GridBagConstraints gbc_textFieldCreationUser = new GridBagConstraints();
-//		gbc_textFieldCreationUser.insets = new Insets(0, 0, 5, 5);
-//		gbc_textFieldCreationUser.fill = GridBagConstraints.HORIZONTAL;
-//		add(textFieldCreationUser);
-//		textFieldCreationUser.setColumns(10);
-
-		
+		setBorder(null);
+		setLayout(new GridLayout(1, 0, 0, 1));
+	
 		lblName = new JLabel("Name");
 		add(lblName);
 		
@@ -124,8 +90,8 @@ public class PanelAdminUser extends JPanel {
 		lblType = new JLabel("Type");
 		add(lblType);
 		
-		lblDateCreation = new JLabel("Date de cr\u00E9ation");
-		add(lblDateCreation);
+//		lblDateCreation = new JLabel("Date de cr\u00E9ation");
+//		add(lblDateCreation);
 		
 		btnValidateUser = new JButton("Validate");
 		GridBagConstraints gbc_btnValidateUser = new GridBagConstraints();
@@ -141,6 +107,7 @@ public class PanelAdminUser extends JPanel {
 		GridBagConstraints gbc_btnResetPasswordUser = new GridBagConstraints();
 		gbc_btnResetPasswordUser.insets = new Insets(0, 0, 5, 5);
 		add(btnResetPasswordUser,gbc_btnResetPasswordUser);
+		
 	}
 
 }

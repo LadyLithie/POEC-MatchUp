@@ -53,6 +53,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setLogin(rs.getString(LOGIN));
 			candidate.setPassword(rs.getString(PASSWORD));
 			candidate.setRole(rs.getString(ROLE));
+			candidate.setName(candidate.getFirstname() + " " + candidate.getLastname());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			candidate = null;

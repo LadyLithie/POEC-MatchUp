@@ -37,6 +37,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 			admin.setRole(resultSet.getString(ROLE));
 			admin.setLogin(resultSet.getString(LOGIN));
 			admin.setPassword(resultSet.getString(PASSWORD));
+			admin.setName(admin.getFirstname() + " " + admin.getLastname());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

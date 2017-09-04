@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import fr.yas.matchup.entities.Administrator;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
@@ -106,6 +107,8 @@ public class LoginController extends BaseController {
 							ViewsManager.getInstance().next(new HeadhunterController(frame));
 						}else if (user instanceof Candidate) {
 							ViewsManager.getInstance().next(new CandidateController(frame));
+						}else if (user instanceof Administrator) {
+							ViewsManager.getInstance().next(new AdminController(frame));
 						}
 					}
 				}

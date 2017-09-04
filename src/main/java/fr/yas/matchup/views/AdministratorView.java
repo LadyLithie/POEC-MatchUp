@@ -42,6 +42,7 @@ public class AdministratorView extends BaseView {
 	// panel users
 	private ArrayList<PanelAdminUser> users;
 	private JPanel panelListUsers;
+	private JPanel listSkills;
 
 	// begin getters for panel user presentation
 	/**
@@ -125,6 +126,13 @@ public class AdministratorView extends BaseView {
 	}
 
 	/**
+	 * @return the listSkills
+	 */
+	public JPanel getListSkills() {
+		return listSkills;
+	}
+
+	/**
 	 * Create the panel.
 	 */
 	public AdministratorView(JFrame frame) {
@@ -134,7 +142,7 @@ public class AdministratorView extends BaseView {
 		super.panel = panel;
 
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 0.5};
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0 };
 		panel.setLayout(gbl_contentPane);
 
@@ -170,15 +178,15 @@ public class AdministratorView extends BaseView {
 //		gbc_titleListUser.gridx = 0;
 //		gbc_titleListUser.gridy = 1;
 //		panelUser.add(titleListUser, gbc_titleListUser);
-		titleListUser.setLayout(new GridLayout(1, 7, 0, 0));
+		titleListUser.setLayout(new GridLayout(1, 6, 0, 0));
 		JLabel label = new JLabel("Name");
 		titleListUser.add(label);
 		JLabel lblEmail = new JLabel("E-mail");
 		titleListUser.add(lblEmail);
 		JLabel lblType = new JLabel("Type");
 		titleListUser.add(lblType);
-		JLabel lblCreationDate = new JLabel("Creation Date");
-		titleListUser.add(lblCreationDate);
+//		JLabel lblCreationDate = new JLabel("Creation Date");
+//		titleListUser.add(lblCreationDate);
 		JLabel label_1 = new JLabel("");
 		titleListUser.add(label_1);
 		JLabel label_2 = new JLabel("");
@@ -200,17 +208,6 @@ public class AdministratorView extends BaseView {
 		panelListUsers = new JPanel();
 		scrollPaneUser.setViewportView(panelListUsers);
 		panelListUsers.setLayout(new GridLayout(0, 1));
-
-		for (int i = 0; i < 10; i++) {
-			PanelAdminUser user = new PanelAdminUser();
-			GridBagConstraints gbc_user = new GridBagConstraints();
-			gbc_user.fill = GridBagConstraints.HORIZONTAL;
-			gbc_user.anchor = GridBagConstraints.BASELINE_LEADING;
-			// gbc_user.gridwidth = 3;
-			gbc_user.insets = new Insets(0, 0, 0, 5);
-			panelListUsers.add(user, gbc_user);
-			users.add(user);
-		}
 
 		/*
 		 * Panel topRight : User presentation
@@ -371,19 +368,10 @@ public class AdministratorView extends BaseView {
 		panelSkill.add(scrollPane, gbc_scrollPane);
 		scrollPane.setColumnHeaderView(titleList);
 
-		JPanel listSkills = new JPanel();
+		listSkills = new JPanel();
 		scrollPane.setViewportView(listSkills);
 		listSkills.setLayout(new GridLayout(0, 1, 0, 0));
-		// individual skill
-		for (int i = 0; i < 10; i++) {
-			PanelAdminSkill skill = new PanelAdminSkill();
-			GridBagConstraints gbc_skill = new GridBagConstraints();
-			gbc_skill.anchor = GridBagConstraints.BASELINE_LEADING;
-			gbc_skill.gridwidth = 3;
-			gbc_skill.insets = new Insets(0, 0, 0, 5);
-			listSkills.add(skill, gbc_skill);
-			skills.add(skill);
-		}
+
 
 	}
 

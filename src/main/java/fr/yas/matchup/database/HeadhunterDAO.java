@@ -44,6 +44,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setRole(rs.getString(ROLE));
 			headhunter.setLogin(rs.getString(LOGIN));
 			headhunter.setPassword(rs.getString(PASSWORD));
+			headhunter.setName(headhunter.getFirstname() + " " + headhunter.getLastname());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			headhunter = null;
