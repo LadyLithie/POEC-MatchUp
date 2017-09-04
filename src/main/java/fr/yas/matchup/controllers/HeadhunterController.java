@@ -43,14 +43,14 @@ public class HeadhunterController extends BaseController {
 		user = (Headhunter) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		HeadhunterView view = ((HeadhunterView) getView());
 		
-//		view.getTextField_Firstname().setText(user.getFirstname());
-//		view.getTextField_Lastname().setText(user.getLastname());
-//		//view.getTextField_Email().setText(user.getEmails());
-//		view.getTextField_Phone().setText(user.getPhone());
-//		view.getTextField_Linkedin().setText(user.getLinkedin());
-//		view.getTextField_Twitter().setText(user.getTwitter());
-//		view.getTextArea_Presentation().setText(user.getPresentation());
-//		
+		view.getTextField_Firstname().setText(user.getFirstname());
+		view.getTextField_Lastname().setText(user.getLastname());
+		view.getTextField_Email().setText(user.getEmail());
+		view.getTextField_Phone().setText(user.getPhone());
+		view.getTextField_Linkedin().setText(user.getLinkedin());
+		view.getTextField_Twitter().setText(user.getTwitter());
+		view.getTextArea_Presentation().setText(user.getPresentation());
+		
 //		view.getTextArea_JobTitle().setText(user.getJobs().get(0).getName());
 //		view.getTextArea_Presentation().setText(user.getJobs().get(0).getPresentation());
 	
@@ -110,12 +110,12 @@ public class HeadhunterController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				user.setFirstname(view.getTextField_Firstname().toString());
-				user.setLastname(view.getTextField_Lastname().toString());
-				//user.setEmails(emails);
-				//user.setPhones(phones);
-				user.setLinkedin(view.getTextField_Linkedin().toString());
-				user.setTwitter(view.getTextField_Twitter().toString());
+				user.setFirstname(view.getTextField_Firstname().getText());
+				user.setLastname(view.getTextField_Lastname().getText());
+				user.setEmail(view.getTextField_Email().getText());
+				user.setPhone(view.getTextField_Phone().getText());
+				user.setLinkedin(view.getTextField_Linkedin().getText());
+				user.setTwitter(view.getTextField_Twitter().getText());
 				
 				view.getBtnAnnuler().setVisible(false);
 				view.getBtnValider().setVisible(false);

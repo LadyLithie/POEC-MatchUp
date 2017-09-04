@@ -21,7 +21,7 @@ public class Proposal extends BaseEntity {
 	private String createdAt;
 	private String updatedAt;
 	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
-	private ContractType contractType; // Why not with an Enum? 
+	private ContractType contractType;  
 	private Location localization;
 	private Enterprise company;
 	private Headhunter headhunter;

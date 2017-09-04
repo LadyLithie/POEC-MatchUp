@@ -40,6 +40,20 @@ public class HeadhunterView extends BaseView {
 	
 
 	/**
+	 * @return the textArea_JobTitle
+	 */
+	public JTextArea getTextArea_JobTitle() {
+		return textArea_JobTitle;
+	}
+
+	/**
+	 * @return the textField_EnterpriseName
+	 */
+	public JTextField getTextField_EnterpriseName() {
+		return textField_EnterpriseName;
+	}
+
+	/**
 	 * @return the textField_Lastname
 	 */
 	public JTextField getTextField_Lastname() {
