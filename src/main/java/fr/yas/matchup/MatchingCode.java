@@ -23,15 +23,15 @@ public class MatchingCode {
 		for (int i = 0 ; i < job.getSkills().size() ; i++) {
 			jobSkills.add(i, job.getSkills().get(i));
 		}
-		for (int i = 0 ; i < candidate.getCandidateSkills().size() ; i++) {
-			candidateSkills.add(i, candidate.getCandidateSkills().get(i));
+		for (int i = 0 ; i < candidate.getSkills().size() ; i++) {
+			candidateSkills.add(i, candidate.getSkills().get(i));
 		}
 		
 		
 		for (int i = 0; i < jobSkills.size(); i++) {
-			for (int j = 0; j < candidate.getCandidateSkills().size(); j++) {
+			for (int j = 0; j < candidate.getSkills().size(); j++) {
 				
-				if ( candidate.getCandidateSkills().get(j).getName() == job.getSkills().get(i).getName() ) {
+				if ( candidate.getSkills().get(j).getName() == job.getSkills().get(i).getName() ) {
 					
 					matchedSkills.add(i, job.getSkills().get(i));
 					

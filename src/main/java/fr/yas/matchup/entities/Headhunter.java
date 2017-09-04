@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class Headhunter extends RegisteredUser {
 	private String firstname;
 	private String lastname;
-	private ArrayList<String> phones;
+	private String twitter;
+	private String linkedin;
+	private String role;
+	private ArrayList<Double> phones;
 	private ArrayList<String> emails;
 
 	private ArrayList<Proposal> jobs;
 	private ArrayList<Enterprise> associates;
-
-	private String linkedin;
-	private String Twitter;
 	
 	/**
 	 * @return the linkedin
@@ -36,14 +36,14 @@ public class Headhunter extends RegisteredUser {
 	 * @return the twitter
 	 */
 	public String getTwitter() {
-		return Twitter;
+		return twitter;
 	}
 
 	/**
 	 * @param twitter the twitter to set
 	 */
 	public void setTwitter(String twitter) {
-		Twitter = twitter;
+		this.twitter = twitter;
 	}
 
 	/**
@@ -77,14 +77,14 @@ public class Headhunter extends RegisteredUser {
 	/**
 	 * @return the phones
 	 */
-	public ArrayList<String> getPhones() {
+	public ArrayList<Double> getPhones() {
 		return phones;
 	}
 
 	/**
 	 * @param phones the phones to set
 	 */
-	public void setPhones(ArrayList<String> phones) {
+	public void setPhones(ArrayList<Double> phones) {
 		this.phones = phones;
 	}
 
@@ -134,8 +134,9 @@ public class Headhunter extends RegisteredUser {
 	 * Void constructor
 	 */
 	public Headhunter() {
+
 		super();
-		this.phones = new ArrayList<String>();
+		this.phones = new ArrayList<Double>();
 		this.getPhones().add(super.getPhone());
 		
 		this.emails = new ArrayList<String>();
@@ -162,12 +163,12 @@ public class Headhunter extends RegisteredUser {
 	 * *********************
 	 * To review the lists
 	 */
-	public Headhunter(String login, String name, String phone, String email, String presentation,
+	public Headhunter(String login, String name, Double phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String firstname, String lastname,
-			ArrayList<String> phones, ArrayList<String> emails) {
+			ArrayList<Double> phones, ArrayList<String> emails) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		
-		this.phones = new ArrayList<String>();
+		this.phones = new ArrayList<Double>();
 		// This is optional, depend how we want to treat multiple
 		phones.add(super.getPhone());
 		this.setPhones(phones);
@@ -183,6 +184,20 @@ public class Headhunter extends RegisteredUser {
 
 		associates = new ArrayList<>();
 		jobs = new ArrayList<>();
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }

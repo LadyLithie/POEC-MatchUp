@@ -43,16 +43,19 @@ public interface IDAOBase {
 	 * @param item
 	 */
 	public void insert(BaseEntity item) ;
+
 	/**
 	 * Update the item in the table
 	 * @param item
 	 */
-	public void update(BaseEntity item) ;
+	public int update(BaseEntity item) ;
+	
 	/**
-	 * Delete an item from the corresponding table
+	 * Delete the item from the table
 	 * @param item
 	 */
 	public void delete(BaseEntity item) ;
+	
 	/**
 	 * Delete all items from the table
 	 */

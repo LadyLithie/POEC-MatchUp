@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 package fr.yas.matchup.database;
 
 import java.sql.ResultSet;
@@ -10,101 +11,151 @@ import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.base.BaseEntity;
 
-/**
- * @author Audrey
- *
- */
-public class EnterpriseDAO extends BaseDAO {
-	public static final String TABLE = "enterprise";
-	public static final String ID = "id_enterprise";
-	public static final String NAME = "name_enterprise";
-	public static final String EMAIL = "mail_enterprise";
-	public static final String LOGIN = "login";
-	public static final String PASSWORD = "password";
-	public static final String PRESENTATION = "presentation_enterprise";
-	public static final String LOGO = "logo_enterprise";
-	public static final String PHONE = "phone_enterprise";
-	public static final String ADDRESS = "address_enterprise";
-	public static final String WEBSITE = "website_enterprise";
-	public static final String TWITTER = "twitter_enterprise";
-	public static final String LINKEDIN = "linkedin_enterprise";
-	public static final String SIRET = "siret";
+import java.util.ArrayList;
+import java.util.List;
 
-	/**
-	 * 
-	 */
+import fr.yas.matchup.entities.Candidate;
+import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Skill;
+
+public class EnterpriseDAO extends RegisteredUserDAO {
+	
+	public static final String TABLE ="Enterprise";
+	public static final String ID ="id_enterprise";
+	public static final String NAME ="name_enterprise";
+	public static final String PHONE ="phone_enterprise";
+	public static final String ADDRESS ="address_enterprise";
+	public static final String CITY ="city_enterprise";
+	public static final String WEBSITE = "website_enterprise";
+	public static final String MAIL = "mail_enterprise";
+	public static final String PRESENTATION ="presentation_enterprise";
+	public static final String LOGO ="logo_enterprise";
+	public static final String TWITTER ="twitter_enterprise";
+	public static final String LINKEDIN ="linkedin_enterprise";
+	public static final String ACTIVITY ="activityfield_enterprise";
+	public static final String ROLE ="role_enterprise";
+	public static final String LOGIN ="login_enterprise";
+	public static final String PASSWORD="password_enterprise";
+	
+	public static final String ENTERPRISE_HEADHUNTER ="headhunter_enterprise";
+	public static final String ID_ENTERPRISE ="enterprise_id";
+	public static final String ID_HEADHUNTER ="headhunter_id";
+	
 	public EnterpriseDAO() {
 		super(TABLE, ID);
+		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#parseToObject(java.sql.ResultSet)
-	 */
 	@Override
 	public BaseEntity parseToObject(ResultSet resultSet) {
-		Enterprise user = new Enterprise();
+		Enterprise e = new Enterprise();
 		
 		try {
-			user.setId(resultSet.getDouble(ID));
-			user.setAddress(resultSet.getString(ADDRESS));
-			user.setLogin(resultSet.getString(LOGIN));
-			user.setName(resultSet.getString(NAME));
-			user.setPassword(resultSet.getString(PASSWORD));
-			user.setAvatar(resultSet.getString(LOGO));
-			user.setEmail(resultSet.getString(EMAIL));
-			user.setPhone(resultSet.getString(PHONE));
-			user.setPresentation(resultSet.getString(PRESENTATION));
-			user.setSiretNumber(resultSet.getString(SIRET));
-		} catch (SQLException e) {
+			e.setId(resultSet.getDouble(ID));
+			e.setName(resultSet.getString(NAME));
+			e.setPhone(resultSet.getDouble(PHONE));
+			e.setAddress(resultSet.getString(ADDRESS));
+			e.setCity(resultSet.getString(CITY));
+			e.setWebsite(resultSet.getString(WEBSITE));
+			e.setEmail(resultSet.getString(MAIL));
+			e.setPresentation(resultSet.getString(PRESENTATION));
+			e.setAvatar(resultSet.getString(LOGO));
+			e.setTwitter(resultSet.getString(TWITTER));
+			e.setLinkedin(resultSet.getString(LINKEDIN));
+			e.setActivity(resultSet.getString(ACTIVITY));
+			e.setRole(resultSet.getString(ROLE));
+			e.setLogin(resultSet.getString(LOGIN));
+			e.setPassword(resultSet.getString(PASSWORD));			
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
+			e = null;
 		}
-		return user;
+		
+		return e;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#parseToString(fr.yas.matchup.entities.base.BaseEntity)
-	 */
 	@Override
 	public String parseToString(BaseEntity item) {
-		String request;
+		String res = "null,";
+		Enterprise enterprise = (Enterprise) item;
 		
-		Enterprise enterprise = ((Enterprise)item);
-		request = String.valueOf(enterprise.getId());
-		request += ",'"+enterprise.getLogin()+"'";
-		request += ",'"+enterprise.getPassword()+"'";
-		request += ",'"+enterprise.getName()+"'";
-		request += ",'"+enterprise.getAddress()+"'";
-		request += ",'"+enterprise.getWebsite()+"'";
-		request += ",'"+enterprise.getEmail()+"'";
-		request += ",'"+enterprise.getPresentation()+"'";
-		request += ",'"+enterprise.getAvatar()+"'";
-		request += ",'"+enterprise.getSiretNumber()+"'";
-
-		return request;
-
+		res += "'"+enterprise.getName()+"',";
+		res += "'"+enterprise.getPhone()+"',";
+		res += "'"+enterprise.getAddress()+"',";
+		res += "'"+enterprise.getCity()+"',";
+		res += "'"+enterprise.getWebsite()+"',";
+		res += "'"+enterprise.getEmail()+"',";
+		res += "'"+enterprise.getPresentation()+"',";
+		res += "'"+enterprise.getAvatar()+"',";
+		res += "'"+enterprise.getTwitter()+"',";
+		res += "'"+enterprise.getLinkedin()+"',";
+		res += "'"+enterprise.getActivity()+"',";
+		res += "'"+enterprise.getRole()+"',";
+		res += "'"+enterprise.getLogin()+"',";
+		res += "'"+enterprise.getPassword()+"'";
+		
+		return res;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#parseUpdateToString(fr.yas.matchup.entities.base.BaseEntity)
-	 */
 	@Override
 	public String parseUpdateToString(BaseEntity item) {
-		String request;
+		String res = "";
+		Enterprise enterprise = (Enterprise) item;
 		
-		Enterprise enterprise = ((Enterprise)item);
-		request = NAME +" = '"+enterprise.getName()+"'";
-		request += ADDRESS +" = '"+enterprise.getAddress()+"'";
-		request += WEBSITE +" = '"+enterprise.getWebsite()+"'";
-		request += PHONE +" = '"+enterprise.getPhone()+"'";
-		request += EMAIL +" = '"+enterprise.getEmail()+"'";
-		request += PRESENTATION +" = '"+enterprise.getPresentation()+"'";
-		request += LOGO +" = '"+enterprise.getAvatar()+"'";
-		request += SIRET +" = '"+enterprise.getSiretNumber()+"'";
-//		request += ADDRESS +" = '"+enterprise.getAddress()+"'";
-//		request += ADDRESS +" = '"+enterprise.getAddress()+"'";
+		res += NAME + " = "+enterprise.getName()+"',";
+		res += PHONE + " = "+enterprise.getPhone()+"',";
+		res += ADDRESS + " = "+enterprise.getAddress()+"',";
+		res += CITY + " = "+enterprise.getCity()+"',";
+		res += WEBSITE + " = "+enterprise.getWebsite()+"',";
+		res += MAIL + " = "+enterprise.getEmail()+"',";
+		res += PRESENTATION + " = "+enterprise.getPresentation()+"',";
+		res += LOGO + " = "+enterprise.getAvatar()+"',";
+		res += TWITTER + " = "+enterprise.getTwitter()+"',";
+		res += LINKEDIN + " = "+enterprise.getLinkedin()+"',";
+		res += ACTIVITY + " = "+enterprise.getActivity()+"',";
+		res += ROLE + " = "+enterprise.getRole()+"',";
+		res += LOGIN + " = "+enterprise.getLogin()+"',";
+		res += PASSWORD + " = "+enterprise.getPassword()+"'";
 		
-		return request;
+		return res;
+	}
+
+	public Enterprise getHeadhunters(Enterprise enterprise) {
+		ResultSet rs = executeRequest("SELECT * FROM " + ENTERPRISE_HEADHUNTER
+				+ " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
+		List<Double> headhuntersId = new ArrayList<Double>();
+		try {
+			while (rs.next()) {
+				headhuntersId.add(rs.getDouble(ID_ENTERPRISE));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
+
+		for (Double id : headhuntersId) {
+			enterprise.getAssociates().add( (Headhunter) enterpriseDAO.get(id));
+		}
+
+		return enterprise;
+	}
+
+	public int insertHeadhunter(Enterprise enterprise) {
+		int result = 0;
+		deleteHeadhunter(enterprise);
+		for (Headhunter headhunter : enterprise.getAssociates()) {
+			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER
+					+ " VALUES(" + enterprise.getId() + "," + headhunter.getId()
+					+ ")");
+		}
+		return result;
+	}
+
+	public int deleteHeadhunter(Enterprise enterprise) {
+		return executeRequestUpdate("DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE "
+				+ ID_ENTERPRISE + " = " + enterprise.getId());
 	}
 
 }

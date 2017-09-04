@@ -12,6 +12,11 @@ public class Enterprise extends RegisteredUser {
 	// declare image as int ? chemin du fichier en String
 	private String siretNumber;
 	private String website;
+	private String city;
+	private String twitter;
+	private String linkedin;
+	private String activity;
+	private String role;
 	private ArrayList<Headhunter> associates;
 
 	private ArrayList<Proposal> jobs;
@@ -98,7 +103,75 @@ public class Enterprise extends RegisteredUser {
 	public void setJobs(ArrayList<Proposal> jobs) {
 		this.jobs = jobs;
 	}
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
 
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	/**
+	 * @return the twitter
+	 */
+	public String getTwitter() {
+		return twitter;
+	}
+
+	/**
+	 * @param twitter the twitter to set
+	 */
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	/**
+	 * @return the linkedin
+	 */
+	public String getLinkedin() {
+		return linkedin;
+	}
+
+	/**
+	 * @param linkedin the linkedin to set
+	 */
+	public void setLinkedin(String linkedin) {
+		this.linkedin = linkedin;
+	}
+
+	/**
+	 * @return the activity
+	 */
+	public String getActivity() {
+		return activity;
+	}
+
+	/**
+	 * @param activity the activity to set
+	 */
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
+	}
 	/**
 	 * 
 	 */
@@ -122,8 +195,8 @@ public class Enterprise extends RegisteredUser {
 	 * @param address
 	 * @param siretNumber
 	 */
-	public Enterprise(String login, String name, String phone, String email, String presentation, String avatar,
-			String created_at, String updated_at, String address, String siretNumber) {
+	public Enterprise(String login, String name, Double phone, String email, String presentation,
+			String avatar, String created_at, String updated_at, String address, String siretNumber) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.address = address;
 		this.siretNumber = siretNumber;
@@ -139,6 +212,5 @@ public class Enterprise extends RegisteredUser {
 	@Override
 	public String toString() {
 		return "Enterprise [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
-	}
-
+	}	
 }

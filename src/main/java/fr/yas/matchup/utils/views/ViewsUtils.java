@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.utils.views;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -51,5 +52,22 @@ public class ViewsUtils {
 		// taille de la fenêtre à l'affichage
 		jFrame.setBounds(screenMiddleWidth, screnMiddleHeight, frameWidth, frameHeight);
 
+	}
+	
+	public static void popUp(JFrame jFrame, JPanel contentPane) {
+		int frameWidth = 300;
+		int frameHeigth = 225;
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int screenWidth  = (int) screenSize.getWidth();
+		int screenHeight = (int) screenSize.getHeight();
+		
+		int screenMiddleWidth = (screenWidth/2) - (frameWidth/2);
+		int screenMiddleHeigth = (screenHeight/2) - (frameHeigth/2) ;
+		
+		jFrame.setBounds(screenMiddleWidth, screenMiddleHeigth, frameWidth, frameHeigth);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		jFrame.setContentPane(contentPane);
 	}
 }

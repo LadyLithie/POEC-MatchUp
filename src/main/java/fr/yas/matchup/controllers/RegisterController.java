@@ -61,7 +61,6 @@ public class RegisterController extends BaseController {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				ViewsManager.getInstance().next(new LoginController(frame));
 			}
 		});

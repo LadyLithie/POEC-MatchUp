@@ -14,6 +14,10 @@ public class RegisteredUserDAO extends BaseDAO {
 		super("NA", "NA");
 	}
 
+	public RegisteredUserDAO(String table, String id) {
+		super(table, id);
+	}
+
 	@Override
 	public BaseEntity parseToObject(ResultSet resultSet) {
 		// TODO Auto-generated method stub
@@ -70,5 +74,4 @@ public class RegisteredUserDAO extends BaseDAO {
 		
 		return user;
 	}
-
 }

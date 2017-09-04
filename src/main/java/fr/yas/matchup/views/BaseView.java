@@ -35,4 +35,6 @@ public abstract class BaseView implements IBaseView {
 		frame.setTitle(getPageName());
 		ViewsUtils.configureJFrame(frame, getContentPane());
 	}
+	
+	
 }

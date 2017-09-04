@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
+import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.LoginView;
@@ -79,7 +81,6 @@ public class LoginController extends BaseController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				if (view.getTextFieldLogin().getText().isEmpty() || view.getTextFieldPwd().getText().isEmpty()) {
 					if (view.getTextFieldPwd().getText().isEmpty()) {
 						view.getTextFieldPwd().setBackground(Color.PINK);
@@ -100,11 +101,11 @@ public class LoginController extends BaseController {
 
 					if (userDAO != null) {
 						if (user instanceof Enterprise) {
-							ViewsManager.getInstance().next(controller);
-						}else if (condition) {
-							
-						}else if (condition) {
-							
+							ViewsManager.getInstance().next(new ProfileEController(frame));
+						}else if (user instanceof Headhunter) {
+							ViewsManager.getInstance().next(new HeadhunterController(frame));
+						}else if (user instanceof Candidate) {
+							ViewsManager.getInstance().next(new CandidateController(frame));
 						}
 					}
 				}

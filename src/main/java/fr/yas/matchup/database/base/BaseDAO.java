@@ -155,8 +155,8 @@ public abstract class BaseDAO implements IDAOBase {
 	 * @see fr.yas.matchup.database.IDAOBase#update(fr.yas.matchup.entities.base.BaseEntity)
 	 */
 	@Override
-	public void update(BaseEntity item) {
-		int res = executeRequestUpdate("UPDATE "+ table + "SET "+parseUpdateToString(item)+" WHERE " + id + " = "+item.getId());
+	public int update(BaseEntity item) {
+		return executeRequestUpdate("UPDATE "+ table + " SET "+parseUpdateToString(item)+" WHERE " + id + " = "+item.getId());
 	}
 
 }

@@ -12,7 +12,8 @@ import fr.yas.matchup.entities.base.BaseEntity;
 public abstract class RegisteredUser extends BaseEntity {
 	private String login;
 	private String name;
-	private String phone;
+	
+	private Double phone;
 	private String email;
 	private String presentation;
 	private String avatar;
@@ -66,14 +67,14 @@ public abstract class RegisteredUser extends BaseEntity {
 	/**
 	 * @return the phone
 	 */
-	public String getPhone() {
+	public Double getPhone() {
 		return phone;
 	}
 
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(String phone) {
+	public void setPhone(Double phone) {
 		this.phone = phone;
 	}
 
@@ -165,7 +166,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	 * @param created_at
 	 * @param updated_at
 	 */
-	public RegisteredUser(String login, String name, String phone, String email,
+	public RegisteredUser(String login, String name, Double phone, String email,
 			String presentation, String avatar, String created_at, String updated_at) {
 		super();
 		this.login = login;
@@ -187,5 +188,7 @@ public abstract class RegisteredUser extends BaseEntity {
 				+ ", presentation=" + presentation + ", avatar=" + avatar + ", created_at=" + created_at
 				+ ", updated_at=" + updated_at + ", password=" + password + "]";
 	}
+
+	
 
 }
