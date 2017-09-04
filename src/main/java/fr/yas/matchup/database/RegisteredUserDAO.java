@@ -74,6 +74,9 @@ public class RegisteredUserDAO extends BaseDAO {
 		try {
 			if (rs.next()) {
 				user = new Candidate();
+				user.setId(rs.getDouble(CandidateDAO.ID));
+				CandidateDAO candidateDAO = new CandidateDAO();
+				user = (Candidate) candidateDAO.get(user.getId());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,6 +88,9 @@ public class RegisteredUserDAO extends BaseDAO {
 		try {
 			if (rs.next()) {
 				user = new Administrator();
+				user.setId(rs.getDouble(AdministratorDAO.ID));
+				AdministratorDAO administratorDAO = new AdministratorDAO();
+				user = (Administrator) administratorDAO.get(user.getId());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
