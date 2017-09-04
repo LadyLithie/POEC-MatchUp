@@ -11,7 +11,37 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private ArrayList<String> phones;
 	private ArrayList<String> emails;
+	private String linkedin;
+	private String Twitter;
 	
+	/**
+	 * @return the linkedin
+	 */
+	public String getLinkedin() {
+		return linkedin;
+	}
+
+	/**
+	 * @param linkedin the linkedin to set
+	 */
+	public void setLinkedin(String linkedin) {
+		this.linkedin = linkedin;
+	}
+
+	/**
+	 * @return the twitter
+	 */
+	public String getTwitter() {
+		return Twitter;
+	}
+
+	/**
+	 * @param twitter the twitter to set
+	 */
+	public void setTwitter(String twitter) {
+		Twitter = twitter;
+	}
+
 	/**
 	 * @return the firstname
 	 */

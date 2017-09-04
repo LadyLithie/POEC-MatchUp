@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup;
 
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.managers.ViewsManager;
 
 /**
@@ -18,4 +19,5 @@ public class SoftwareApplication {
 		ViewsManager.getInstance().start();
 	}
 
+	
 }

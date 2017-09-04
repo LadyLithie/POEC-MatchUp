@@ -79,7 +79,7 @@ public class LoginController extends BaseController {
 						
 						break;
 					case "Headhunter":
-						
+						ViewsManager.getInstance().next(new HeadhunterController(frame));
 						break;						
 					default:
 						break;

@@ -19,12 +19,15 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+
+import fr.yas.matchup.views.BaseView;
+
 import java.awt.Color;
 import javax.swing.JButton;
 
-public class ProposalFrame extends JFrame {
+public class ProposalView extends BaseView {
 
-	private JPanel contentPane;
+	private JPanel panelProposal;
 	
 	private JLabel lblLink;
 	private JButton btnCancel;
@@ -39,7 +42,7 @@ public class ProposalFrame extends JFrame {
 	 * @return the contentPane
 	 */
 	public JPanel getContentPane() {
-		return contentPane;
+		return panelProposal;
 	}
 
 	/**
@@ -98,40 +101,25 @@ public class ProposalFrame extends JFrame {
 		return checkBox_1;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProposalFrame frame = new ProposalFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public ProposalFrame() {
+	public ProposalView(JFrame frame) {
 		
+		super.pageName = "Postes";
+		JPanel panelProposal = new JPanel();
+		super.contentPane = panelProposal;
+		panelProposal.setBounds(100, 100, 750, 450);
+		panelProposal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 750, 450);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] {370, 370};
 		gbl_contentPane.rowHeights = new int[] {250, 150, 20};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0};
 		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0};
-		contentPane.setLayout(gbl_contentPane);
+		panelProposal.setLayout(gbl_contentPane);
 		
 		JPanel panelCheckBox = new JPanel();
 		panelCheckBox.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -140,7 +128,7 @@ public class ProposalFrame extends JFrame {
 		gbc_panelCheckBox.fill = GridBagConstraints.BOTH;
 		gbc_panelCheckBox.gridx = 0;
 		gbc_panelCheckBox.gridy = 0;
-		contentPane.add(panelCheckBox, gbc_panelCheckBox);
+		panelProposal.add(panelCheckBox, gbc_panelCheckBox);
 		GridBagLayout gbl_panelCheckBox = new GridBagLayout();
 		gbl_panelCheckBox.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panelCheckBox.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -243,7 +231,7 @@ public class ProposalFrame extends JFrame {
 		gbc_panelText.fill = GridBagConstraints.BOTH;
 		gbc_panelText.gridx = 1;
 		gbc_panelText.gridy = 0;
-		contentPane.add(panelText, gbc_panelText);
+		panelProposal.add(panelText, gbc_panelText);
 		GridBagLayout gbl_panelText = new GridBagLayout();
 		gbl_panelText.columnWidths = new int[]{0, 0};
 		gbl_panelText.rowHeights = new int[] {30, 0, 50, 0, 0, 0};
@@ -288,7 +276,7 @@ public class ProposalFrame extends JFrame {
 		gbc_panelComboBox.fill = GridBagConstraints.BOTH;
 		gbc_panelComboBox.gridx = 0;
 		gbc_panelComboBox.gridy = 1;
-		contentPane.add(panelComboBox, gbc_panelComboBox);
+		panelProposal.add(panelComboBox, gbc_panelComboBox);
 		GridBagLayout gbl_panelComboBox = new GridBagLayout();
 		gbl_panelComboBox.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_panelComboBox.rowHeights = new int[]{0, 0, 0, 0};
@@ -346,14 +334,14 @@ public class ProposalFrame extends JFrame {
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancel.gridx = 0;
 		gbc_btnCancel.gridy = 2;
-		contentPane.add(btnCancel, gbc_btnCancel);
+		panelProposal.add(btnCancel, gbc_btnCancel);
 		
 		JButton btnProposalCreation = new JButton("Ajouter");
 		GridBagConstraints gbc_btnProposalCreation = new GridBagConstraints();
 		gbc_btnProposalCreation.anchor = GridBagConstraints.WEST;
 		gbc_btnProposalCreation.gridx = 1;
 		gbc_btnProposalCreation.gridy = 2;
-		contentPane.add(btnProposalCreation, gbc_btnProposalCreation);
+		panelProposal.add(btnProposalCreation, gbc_btnProposalCreation);
 	}
 
 }
