@@ -16,9 +16,11 @@ import java.util.List;
 
 import fr.yas.matchup.database.CandidateDAO;
 import fr.yas.matchup.database.EnterpriseDAO;
+import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 
@@ -115,12 +117,12 @@ public class SoftwareApplication {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
-		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
-		Enterprise e = new Enterprise();
-		
+//		
+//		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
+//		Enterprise e = new Enterprise();
+//		
 //		e.setName("Mon Entreprise");
-//		e.setPhone("0687896554");
+//		e.setPhone(Double.valueOf("0687896554"));
 //		e.setAddress("1 rue winamax poker");
 //		e.setCity("Paris");
 //		e.setWebsite("erherhhre");
@@ -136,12 +138,28 @@ public class SoftwareApplication {
 //		
 //		enterpriseDAO.insert(e);
 		
+		HeadhunterDAO headhunterDAO = new HeadhunterDAO();
+		Headhunter h = new Headhunter();
 		
-		ResultSet resultSet = enterpriseDAO.executeRequest("SELECT * FROM ENTERPRISE");
+		h.setFirstname("sacha");
+		h.setLastname(null);
+		h.setPhone(Double.valueOf("0250250"));
+		h.setEmail(null);
+		h.setAvatar(null);
+		h.setTwitter(null);
+		h.setLinkedin(null);
+		h.setPresentation(null);
+		h.setLogin(null);
+		h.setPassword(null);
+		h.setRole(null);
+		
+		headhunterDAO.insert(h);
+		
+		ResultSet resultSet = headhunterDAO.executeRequest("SELECT * FROM HEADHUNTER");
 		
 		try {
 			while (resultSet.next()) {
-				System.out.println(resultSet.getInt(EnterpriseDAO.ID)+","+resultSet.getString(EnterpriseDAO.NAME));
+				System.out.println(resultSet.getInt(headhunterDAO.ID)+","+resultSet.getString(headhunterDAO.FIRSTNAME));
 			}
 		} catch (SQLException a) {
 			// TODO Auto-generated catch block
