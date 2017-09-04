@@ -12,12 +12,27 @@ public class Headhunter extends RegisteredUser {
 	private String twitter;
 	private String linkedin;
 	private String role;
+	private String picture;
 	private ArrayList<Double> phones;
 	private ArrayList<String> emails;
 
 	private ArrayList<Proposal> jobs;
 	private ArrayList<Enterprise> associates;
 	
+	/**
+	 * @return the picture
+	 */
+	public String getPicture() {
+		return picture;
+	}
+
+	/**
+	 * @param picture the picture to set
+	 */
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
 	/**
 	 * @return the linkedin
 	 */
@@ -164,9 +179,9 @@ public class Headhunter extends RegisteredUser {
 	 * To review the lists
 	 */
 	public Headhunter(String login, String name, Double phone, String email, String presentation,
-			String avatar, String created_at, String updated_at, String firstname, String lastname,
+			String picture, String created_at, String updated_at, String firstname, String lastname,
 			ArrayList<Double> phones, ArrayList<String> emails) {
-		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
+		super(login, name, phone, email, presentation, picture, created_at, updated_at);
 		
 		this.phones = new ArrayList<Double>();
 		// This is optional, depend how we want to treat multiple
@@ -199,5 +214,6 @@ public class Headhunter extends RegisteredUser {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 	
 }
