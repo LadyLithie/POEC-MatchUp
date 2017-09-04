@@ -12,6 +12,11 @@ public class Enterprise extends RegisteredUser {
 	//declare image as int ? chemin du fichier en String
 	private String siretNumber;
 	private String website;
+	private String city;
+	private String twitter;
+	private String linkedin;
+	private String activity;
+	private String role;
 	private ArrayList<Headhunter> associates;
 
 	/**
@@ -109,6 +114,76 @@ public class Enterprise extends RegisteredUser {
 	@Override
 	public String toString() {
 		return "Enterprise [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	/**
+	 * @return the twitter
+	 */
+	public String getTwitter() {
+		return twitter;
+	}
+
+	/**
+	 * @param twitter the twitter to set
+	 */
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	/**
+	 * @return the linkedin
+	 */
+	public String getLinkedin() {
+		return linkedin;
+	}
+
+	/**
+	 * @param linkedin the linkedin to set
+	 */
+	public void setLinkedin(String linkedin) {
+		this.linkedin = linkedin;
+	}
+
+	/**
+	 * @return the activity
+	 */
+	public String getActivity() {
+		return activity;
+	}
+
+	/**
+	 * @param activity the activity to set
+	 */
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}	
 
 }

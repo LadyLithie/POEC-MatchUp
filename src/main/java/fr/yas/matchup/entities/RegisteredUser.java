@@ -12,6 +12,7 @@ import fr.yas.matchup.entities.base.BaseEntity;
 public abstract class RegisteredUser extends BaseEntity {
 	private String login;
 	private String name;
+	
 	private String phone;
 	private String email;
 	private String presentation;
@@ -186,5 +187,7 @@ public abstract class RegisteredUser extends BaseEntity {
 				+ ", presentation=" + presentation + ", avatar=" + avatar + ", created_at=" + created_at
 				+ ", updated_at=" + updated_at + ", password=" + password + "]";
 	}
+
+	
 
 }

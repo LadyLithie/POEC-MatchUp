@@ -19,7 +19,7 @@ public interface IDAOBase {
 	public String parseToString(BaseEntity item);
 	public String parseUpdateToString(BaseEntity item);
 	public void insert(BaseEntity item) ;
-	public void update(BaseEntity item) ;
+	public int update(BaseEntity item) ;
 	public void delete(BaseEntity item) ;
 	public void delete();
 	public BaseEntity get(double id) ;

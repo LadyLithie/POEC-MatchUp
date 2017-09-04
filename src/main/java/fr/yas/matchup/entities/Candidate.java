@@ -4,6 +4,8 @@
 package fr.yas.matchup.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Audrey
@@ -13,8 +15,11 @@ public class Candidate extends RegisteredUser {
 	private String firstname;
 	private String lastname;
 	private String birstdate;
+	private String address;
+	private String role;
 	private ArrayList<Diploma> qualifications;
 	private ArrayList<String> mobility;
+	private List<Skill> skills = new ArrayList<Skill>();
 
 	/**
 	 * @return the firstname
@@ -52,10 +57,10 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param birstdate the birstdate to set
+	 * @param string the birstdate to set
 	 */
-	public void setBirstdate(String birstdate) {
-		this.birstdate = birstdate;
+	public void setBirstdate(String string) {
+		this.birstdate = string;
 	}
 
 	/**
@@ -111,13 +116,45 @@ public class Candidate extends RegisteredUser {
 	 */
 	public Candidate(String login, String name, String phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String firstname, String lastname, String birstdate,
-			ArrayList<Diploma> qualifications, ArrayList<String> mobility) {
+			ArrayList<Diploma> qualifications, ArrayList<String> mobility, String address,String role) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.address = address;
 		this.birstdate = birstdate;
 		this.qualifications = qualifications;
 		this.mobility = mobility;
+		this.role = role;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	/**
+	 * @return the skills
+	 */
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	/**
+	 * @param skills the skills to set
+	 */
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
 	}
 
 }

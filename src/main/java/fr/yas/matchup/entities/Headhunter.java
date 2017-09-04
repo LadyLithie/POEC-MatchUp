@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class Headhunter extends RegisteredUser {
 	private String firstname;
 	private String lastname;
+	private String twitter;
+	private String linkedin;
+	private String role;
 	private ArrayList<String> phones;
 	private ArrayList<String> emails;
 	
@@ -115,6 +118,48 @@ public class Headhunter extends RegisteredUser {
 		this.firstname = firstname;
 		this.lastname = lastname;
 
+	}
+
+	/**
+	 * @return the twitter
+	 */
+	public String getTwitter() {
+		return twitter;
+	}
+
+	/**
+	 * @param twitter the twitter to set
+	 */
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	/**
+	 * @return the linkedin
+	 */
+	public String getLinkedin() {
+		return linkedin;
+	}
+
+	/**
+	 * @param linkedin the linkedin to set
+	 */
+	public void setLinkedin(String linkedin) {
+		this.linkedin = linkedin;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }

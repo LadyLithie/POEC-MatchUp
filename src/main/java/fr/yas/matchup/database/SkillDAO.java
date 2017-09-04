@@ -14,7 +14,7 @@ import fr.yas.matchup.entities.base.BaseEntity;
  */
 public class SkillDAO extends BaseDAO {
 	public static final String TABLE = "Skill";
-	public static final String ID = "id";
+	public static final String ID = "id_skill";
 	public static final String NAME = "name_skill";
 	public static final String TYPE = "type_skill";
 	
