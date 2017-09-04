@@ -37,7 +37,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setFirstname(rs.getString(FIRSTNAME));
 			headhunter.setPhone(rs.getString(PHONE));
 			headhunter.setEmail(rs.getString(MAIL));
-			headhunter.setAvatar(rs.getString(PICTURE));
+			headhunter.setPicture(rs.getString(PICTURE));
 			headhunter.setTwitter(rs.getString(TWITTER));
 			headhunter.setLinkedin(rs.getString(LINKEDIN));
 			headhunter.setPresentation(rs.getString(PRESENTATION));

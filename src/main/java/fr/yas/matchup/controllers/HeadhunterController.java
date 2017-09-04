@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sun.jmx.snmp.UserAcl;
+
+import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
@@ -25,6 +28,7 @@ public class HeadhunterController extends BaseController {
 	private ArrayList<Enterprise> enterprises = new ArrayList<>();
 	private ArrayList<String> phones = new ArrayList<>();
 	private ArrayList<String> emails = new ArrayList<>();
+	
 	
 	public HeadhunterController (JFrame frame) {
 		super.frame = frame;
@@ -116,6 +120,9 @@ public class HeadhunterController extends BaseController {
 				user.setPhone(view.getTextField_Phone().getText());
 				user.setLinkedin(view.getTextField_Linkedin().getText());
 				user.setTwitter(view.getTextField_Twitter().getText());
+				
+//				HeadhunterDAO hd = new HeadhunterDAO();
+//				executeUpdate ("UPDATE headhunter SET " + hd.parseUpdateToString(user) + " WHERE " + hd.ID + " = " + (int)user.getId() + ";");
 				
 				view.getBtnAnnuler().setVisible(false);
 				view.getBtnValider().setVisible(false);
