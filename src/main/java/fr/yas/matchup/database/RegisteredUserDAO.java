@@ -4,7 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.yas.matchup.database.base.BaseDAO;
+import fr.yas.matchup.entities.Administrator;
+import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.base.BaseEntity;
 
@@ -38,7 +41,7 @@ public class RegisteredUserDAO extends BaseDAO {
 	
 	public RegisteredUser connection(String login, String password) {
 		RegisteredUser user = null;
-		
+		//Test dans la table Entreprise
 		ResultSet rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE login = " + login + " AND password = " + password);
 		try {
 			if (rs.next()) {
@@ -52,26 +55,42 @@ public class RegisteredUserDAO extends BaseDAO {
 			e.printStackTrace();
 		}
 		
-		rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE login = " + login + " AND password = " + password);
+		//Test dans la table Headhunter
+		rs = executeRequest("SELECT * FROM " + HeadhunterDAO.TABLE + " WHERE login = " + login + " AND password = " + password);
 		try {
 			if (rs.next()) {
-				user = new Enterprise();
+				user = new Headhunter();
+				user.setId(rs.getDouble(HeadhunterDAO.ID));
+				HeadhunterDAO headhunterDAO = new HeadhunterDAO();
+				user = (Headhunter) headhunterDAO.get(user.getId());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		rs = executeRequest("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE login = " + login + " AND password = " + password);
+		//Test dans la table Candidate
+		rs = executeRequest("SELECT * FROM " + CandidateDAO.TABLE + " WHERE login = " + login + " AND password = " + password);
 		try {
 			if (rs.next()) {
-				user = new Enterprise();
+				user = new Candidate();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		//Test dans la table Administrator
+		rs = executeRequest("SELECT * FROM " + AdministratorDAO.TABLE + " WHERE login = " + login + " AND password = " + password);
+		try {
+			if (rs.next()) {
+				user = new Administrator();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return user;
 	}
 }
