@@ -14,12 +14,15 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.border.LineBorder;
+
+import fr.yas.matchup.views.BaseView;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 
-public class PanelDetailedResult extends JPanel {
+public class MatchingResultView extends BaseView {
 
 	private JButton btnSeeOldMatch;
 	private JButton btnSeeNewMatch;
@@ -45,16 +48,18 @@ public class PanelDetailedResult extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public PanelDetailedResult() {
-		this.setName("DetailedResultFrame");
-		setBounds(100, 100, 900, 600);
+	public MatchingResultView(JFrame frame) {
+		
+		JPanel panelMatchingResult = new JPanel();
+		panelMatchingResult.setName("Matching Result");
+		panelMatchingResult.setBounds(100, 100, 900, 600);
 		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		setLayout(gbl_contentPane);
+		panelMatchingResult.setLayout(gbl_contentPane);
 		
 		JPanel panel_MatchedCandidate = new JPanel();
 		GridBagConstraints gbc_panel_MatchedCandidate = new GridBagConstraints();
@@ -62,7 +67,7 @@ public class PanelDetailedResult extends JPanel {
 		gbc_panel_MatchedCandidate.fill = GridBagConstraints.BOTH;
 		gbc_panel_MatchedCandidate.gridx = 0;
 		gbc_panel_MatchedCandidate.gridy = 0;
-		add(panel_MatchedCandidate, gbc_panel_MatchedCandidate);
+		panelMatchingResult.add(panel_MatchedCandidate, gbc_panel_MatchedCandidate);
 		GridBagLayout gbl_panel_MatchedCandidate = new GridBagLayout();
 		gbl_panel_MatchedCandidate.columnWidths = new int[]{0, 0};
 		gbl_panel_MatchedCandidate.rowHeights = new int[]{0, 0, 0};
@@ -101,7 +106,7 @@ public class PanelDetailedResult extends JPanel {
 		panel_NewMatch1.setLayout(gbl_panel_NewMatch1);
 		
 		JLabel lblPhotoNewMatch = new JLabel("");
-		lblPhotoNewMatch.setIcon(new ImageIcon(PanelDetailedResult.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		lblPhotoNewMatch.setIcon(new ImageIcon(MatchingResultView.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		GridBagConstraints gbc_lblPhotoNewMatch = new GridBagConstraints();
 		gbc_lblPhotoNewMatch.gridheight = 2;
 		gbc_lblPhotoNewMatch.insets = new Insets(0, 0, 5, 5);
@@ -204,7 +209,7 @@ public class PanelDetailedResult extends JPanel {
 		panel_OldMatch1.setLayout(gbl_panel_OldMatch1);
 		
 		JLabel label_PhotoOldMatch = new JLabel("");
-		label_PhotoOldMatch.setIcon(new ImageIcon(PanelDetailedResult.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		label_PhotoOldMatch.setIcon(new ImageIcon(MatchingResultView.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		GridBagConstraints gbc_label_PhotoOldMatch = new GridBagConstraints();
 		gbc_label_PhotoOldMatch.gridheight = 2;
 		gbc_label_PhotoOldMatch.insets = new Insets(0, 0, 5, 5);
@@ -283,7 +288,7 @@ public class PanelDetailedResult extends JPanel {
 		gbc_panel_JobDescription.fill = GridBagConstraints.BOTH;
 		gbc_panel_JobDescription.gridx = 1;
 		gbc_panel_JobDescription.gridy = 0;
-		add(panel_JobDescription, gbc_panel_JobDescription);
+		panelMatchingResult.add(panel_JobDescription, gbc_panel_JobDescription);
 		GridBagLayout gbl_panel_JobDescription = new GridBagLayout();
 		gbl_panel_JobDescription.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_JobDescription.rowHeights = new int[] {25, 25, 25, 190, 25, 190};

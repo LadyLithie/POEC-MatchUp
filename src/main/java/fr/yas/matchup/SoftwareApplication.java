@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Skill;
 
+import fr.yas.matchup.entities.Headhunter;
+
 import fr.yas.matchup.managers.ViewsManager;
 
 
@@ -43,4 +45,5 @@ public class SoftwareApplication {
 
 	}
 
+	
 }

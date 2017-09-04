@@ -23,6 +23,7 @@ public class LoginController extends BaseController {
 
 	/**
 	 * Basic constructor
+	 * 
 	 * @param frame
 	 */
 	public LoginController(JFrame frame) {
@@ -32,6 +33,7 @@ public class LoginController extends BaseController {
 
 	/**
 	 * Constructor with data transfer
+	 * 
 	 * @param frame
 	 * @param newUser
 	 */
@@ -40,41 +42,46 @@ public class LoginController extends BaseController {
 		super.frame = frame;
 		super.view = new LoginView(this.frame);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.controllers.BaseController#initView()
 	 */
 	@Override
 	public void initView() {
 		if (getViewDatas().get("newUser") != null) {
 			this.user = (RegisteredUser) getViewDatas().get("newUser");
-		}else if (getViewDatas().get("currentUser") != null) {
+		} else if (getViewDatas().get("currentUser") != null) {
 			this.user = (RegisteredUser) getViewDatas().get("currentUser");
 		}
-		
-		if(user != null) {
+
+		if (user != null) {
 			((LoginView) getView()).getTextFieldLogin().setText(this.user.getLogin());
-			((LoginView) getView()).getTextFieldPwd().setText(this.user.getPassword());			
+			((LoginView) getView()).getTextFieldPwd().setText(this.user.getPassword());
 		}
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.controllers.BaseController#initEvent()
 	 */
 	@Override
 	public void initEvent() {
 		LoginView view = (LoginView) super.view;
-		
+
 		// Connect and go to Profile
 		view.getBtnLogin().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				if (view.getTextFieldLogin().getText().isEmpty() || view.getTextFieldPwd().getText().isEmpty()) {
 					if (view.getTextFieldPwd().getText().isEmpty()) {
 						view.getTextFieldPwd().setBackground(Color.PINK);
-					}else {
+					} else {
 						view.getTextFieldPwd().setBackground(Color.WHITE);
 					}
 					if (view.getTextFieldLogin().getText().isEmpty()) {
@@ -82,31 +89,31 @@ public class LoginController extends BaseController {
 					} else {
 						view.getTextFieldLogin().setBackground(Color.WHITE);
 					}
-				}else
-					//version with hard value for user
-					//normal version must consult the database for a user with those datas
-					if(view.getTextFieldLogin().getText().equals(user.getLogin()) && user.getPassword().equals(view.getTextFieldPwd().getText())) {
-						switch (user.getClass().getSimpleName()) {
-						case "Enterprise":
-							ViewsManager.getInstance().next(new ProfileEController(frame));
-							break;
-						case "Candidate":
-							
-							break;
-						case "Headhunter":
-							
-							break;						
-						default:
-							break;
-						}
+				} else
+				// version with hard value for user
+				// normal version must consult the database for a user with those datas
+				if (view.getTextFieldLogin().getText().equals(user.getLogin())
+						&& user.getPassword().equals(view.getTextFieldPwd().getText())) {
+					switch (user.getClass().getSimpleName()) {
+					case "Enterprise":
+						ViewsManager.getInstance().next(new ProfileEController(frame));
+						break;
+					case "Candidate":
+
+						break;
+					case "Headhunter":
+						ViewsManager.getInstance().next(new HeadhunterController(frame));
+						break;
+					default:
+						break;
 					}
-				
+				}
 			}
 		});
-		
+
 		// Go to Register
 		view.getBtnRegister().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ViewsManager.getInstance().next(new RegisterController(frame));
@@ -118,5 +125,5 @@ public class LoginController extends BaseController {
 	@Override
 	public void setupDatas() {
 		this.viewDatas.put(ViewsDatasTerms.CURRENT_USER, user);
-	}	
+	}
 }

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 
-public class MatchingCandidateProfil extends JFrame {
+public class MatchedCandidate extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -32,7 +32,7 @@ public class MatchingCandidateProfil extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MatchingCandidateProfil frame = new MatchingCandidateProfil();
+					MatchedCandidate frame = new MatchedCandidate();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class MatchingCandidateProfil extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MatchingCandidateProfil() {
+	public MatchedCandidate() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 580, 400);
 		contentPane = new JPanel();
@@ -58,7 +58,7 @@ public class MatchingCandidateProfil extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblPhoto = new JLabel("");
-		lblPhoto.setIcon(new ImageIcon(MatchingCandidateProfil.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		lblPhoto.setIcon(new ImageIcon(MatchedCandidate.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
 		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhoto.gridx = 0;
