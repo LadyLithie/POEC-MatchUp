@@ -3,7 +3,7 @@ CREATE TABLE headhunter(
 	lastname_headhunter VARCHAR(255),
 	firstname_headhunter VARCHAR(255),
 	phone_headhunter VARCHAR(12),
-	email_headhunter VARCHAR(255),
+	mail_headhunter VARCHAR(255),
 	picture_headhunter BLOB,
 	twitter_headhunter VARCHAR(255),
 	linkedin_headhunter VARCHAR(255),
