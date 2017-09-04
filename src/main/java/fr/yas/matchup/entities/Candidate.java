@@ -15,6 +15,21 @@ public class Candidate extends RegisteredUser {
 	private String birstdate;
 	private ArrayList<Diploma> qualifications;
 	private ArrayList<String> mobility;
+	private ArrayList<Skill> candidateSkills = new ArrayList<>();
+
+	/**
+	 * @return the candidateSkills
+	 */
+	public ArrayList<Skill> getCandidateSkills() {
+		return candidateSkills;
+	}
+
+	/**
+	 * @param candidateSkills the candidateSkills to set
+	 */
+	public void setCandidateSkills(ArrayList<Skill> candidateSkills) {
+		this.candidateSkills = candidateSkills;
+	}
 
 	/**
 	 * @return the firstname

@@ -9,17 +9,33 @@
  *********/
 package fr.yas.matchup.entities;
 
+import java.util.ArrayList;
+
 public class Proposal {
 	private int id;
 	private String name;
 	private String presentation;
-	private String handicap;
+	
 	private String createdAt;
 	private String updatedAt;
 	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
 	private ContractType contractType;
-	// Why not with an Enum? 
+	// Why not with an Enum?
+	private ArrayList<Skill> proposalSkills = new ArrayList<>();
 	
+	
+	/**
+	 * @return the proposalSkills
+	 */
+	public ArrayList<Skill> getProposalSkills() {
+		return proposalSkills;
+	}
+	/**
+	 * @param proposalSkills the proposalSkills to set
+	 */
+	public void setProposalSkills(ArrayList<Skill> proposalSkills) {
+		this.proposalSkills = proposalSkills;
+	}
 	/**
 	 * @return the id
 	 */
@@ -59,15 +75,7 @@ public class Proposal {
 	/**
 	 * @return the handicap
 	 */
-	public String getHandicap() {
-		return handicap;
-	}
-	/**
-	 * @param handicap the handicap to set
-	 */
-	public void setHandicap(String handicap) {
-		this.handicap = handicap;
-	}
+	
 	/**
 	 * @return the createdAt
 	 */
@@ -118,8 +126,8 @@ public class Proposal {
 	 */
 	@Override
 	public String toString() {
-		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", handicap=" + handicap
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", contractType=" + contractType + "]";
+		return "Proposal [id=" + id + ", name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", contractType=" + contractType + ", jobSkills=" + proposalSkills + "]";
 	}
 	
 	
