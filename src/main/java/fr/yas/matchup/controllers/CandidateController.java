@@ -49,6 +49,12 @@ public class CandidateController extends BaseController {
 		c = (Candidate) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		CandidateView view = (CandidateView) getView();		
 		
+		view.getMenuBar().getLblUserName().setText(c.getFirstname());
+		view.getTextFieldFirstname().setText(c.getFirstname());
+		view.getTextFieldLastname().setText(c.getLastname());
+		view.getTextFieldMail().setText(c.getEmail());
+		view.getTextFieldPhone().setText(c.getPhone());
+		view.getTextArea().setText(c.getPresentation());
 	}
 	
 
@@ -64,21 +70,21 @@ public class CandidateController extends BaseController {
 				// TODO Auto-generated method stub
 				if (bool == false) {
 					if (e.getSource() == view.getBtnEdit()) {
-						view.getTextArea().setEnabled(true);
-						view.getTextField().setEnabled(true);
-						view.getTextField_1().setEnabled(true);
-						view.getTextField_2().setEnabled(true);
-						view.getTextField_3().setEnabled(true);
+						view.getTextArea().setEditable(true);
+						view.getTextFieldFirstname().setEditable(true);
+						view.getTextFieldLastname().setEditable(true);
+						view.getTextFieldMail().setEditable(true);
+						view.getTextFieldPhone().setEditable(true);
 
 						bool = true;
 					}
 				} else {
 					if (e.getSource() == view.getBtnEdit()) {
-						view.getTextArea().setEnabled(false);
-						view.getTextField().setEnabled(false);
-						view.getTextField_1().setEnabled(false);
-						view.getTextField_2().setEnabled(false);
-						view.getTextField_3().setEnabled(false);
+						view.getTextArea().setEditable(false);
+						view.getTextFieldFirstname().setEditable(false);
+						view.getTextFieldLastname().setEditable(false);
+						view.getTextFieldMail().setEditable(false);
+						view.getTextFieldPhone().setEditable(false);
 
 						bool = false;
 					}
