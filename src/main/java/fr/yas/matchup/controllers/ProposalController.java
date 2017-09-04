@@ -17,12 +17,15 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import fr.yas.matchup.database.ContractDAO;
+import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
+import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.utils.views.ComboBoxRenderer;
 import fr.yas.matchup.views.ProposalFrame;
@@ -34,7 +37,7 @@ import fr.yas.matchup.views.ProposalFrame;
 public class ProposalController extends BaseController {
 
 	private RegisteredUser user;
-	private ArrayList<Skill> skills;
+	private List<BaseEntity> skills;
 	private Proposal job;
 
 	/**
@@ -44,9 +47,8 @@ public class ProposalController extends BaseController {
 	 */
 	public ProposalController(JFrame frame) {
 		super();
-		skills = (ArrayList<Skill>) generateSkills();
-		// use viewData in future
-
+		SkillDAO sDao = new SkillDAO();
+		skills = sDao.get();
 		super.frame = frame;
 		super.view = new ProposalFrame(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
@@ -63,7 +65,8 @@ public class ProposalController extends BaseController {
 	public ProposalController(JFrame frame, Proposal job) {
 		super();
 		super.frame = frame;
-		skills = (ArrayList<Skill>) generateSkills();
+		SkillDAO sDao = new SkillDAO();
+		skills = sDao.get();
 		super.view = new ProposalFrame(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		// DAO : skills = all registered skills
@@ -83,8 +86,10 @@ public class ProposalController extends BaseController {
 		if (job == null) { // mode creation
 			vFrame.setMode(true);
 			// Contracts
-			for (ContractType type : generateContracts()) {
-				vFrame.getComboBox_contract().addItem(type);
+			ContractDAO contractDAO = new ContractDAO();
+			List<BaseEntity> contracts = contractDAO.get();
+			for (BaseEntity type : contracts) {
+				vFrame.getComboBox_contract().addItem((ContractType) type);
 			}
 			// Link
 			if (user instanceof Enterprise) {
@@ -155,41 +160,6 @@ public class ProposalController extends BaseController {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-=======
-package fr.yas.matchup.controllers;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-
-import fr.yas.matchup.entities.Enterprise;
-import fr.yas.matchup.entities.Headhunter;
-import fr.yas.matchup.entities.Skill;
-import fr.yas.matchup.managers.ViewsManager;
-import fr.yas.matchup.views.headhunter.ProposalView;
-import fr.yas.matchup.views.professionalMatching.MatchingProView;
-
-public class ProposalController extends BaseController {
-
-	private Enterprise enterprise;
-	private Headhunter headhunter;
-	private ArrayList<Skill> JobSkill = new ArrayList<>();
-	
-	public ProposalController (JFrame frame) {
-		
-		super.frame = frame;
-		super.view = new MatchingProView(this.frame);
-	}
-
-	/* (non-Javadoc)
->>>>>>> IHM
-	 * @see fr.yas.matchup.controllers.BaseController#initEvent()
-	 */
 	@Override
 	public void initEvent() {
 		ProposalFrame v = (ProposalFrame) super.view;
@@ -205,10 +175,8 @@ public class ProposalController extends BaseController {
 					// TODO Go previous page
 					if (user instanceof Enterprise) {
 						ViewsManager.getInstance().next(new ProfileEController(frame));
-
 					} else {
 						ViewsManager.getInstance().next(new ProfileEController(frame));
-
 					}
 				}
 			});
@@ -218,7 +186,7 @@ public class ProposalController extends BaseController {
 				public void actionPerformed(ActionEvent e) {
 					if (v.getTextField_JobTitle().getText().isEmpty()) {
 						v.getTextField_JobTitle().setBackground(Color.PINK);
-					}else {
+					} else {
 						if (job == null) {
 							job = new Proposal(v.getTextField_JobTitle().getText(),
 									(ContractType) v.getComboBox_contract().getSelectedItem());
@@ -226,10 +194,10 @@ public class ProposalController extends BaseController {
 							for (JCheckBox skill : v.getListSkills()) {
 								if (skill.isSelected()) {
 									int i = 0;
-									while (skills.get(i).getName() != skill.getText()) {
+									while (((Skill) skills.get(i)).getName() != skill.getText()) {
 										i++;
 									}
-									job.getSkills().add(skills.get(i));
+									job.getSkills().add((Skill) skills.get(i));
 								}
 							}
 							job.setPresentation(v.getTextArea().getText());
@@ -237,14 +205,13 @@ public class ProposalController extends BaseController {
 							for (JCheckBox skill : v.getListSkills()) {
 								if (skill.isSelected()) {
 									int i = 0;
-									while (skills.get(i).getName() != skill.getText()) {
+									while (((Skill) skills.get(i)).getName() != skill.getText()) {
 										i++;
 									}
 									// if the skill is not yet present in the job's skill list, it's added
 									if (!job.getSkills().contains(skills.get(i))) {
-										job.getSkills().add(skills.get(i));
+										job.getSkills().add((Skill) skills.get(i));
 									}
-
 								}
 							}
 						}
@@ -257,60 +224,11 @@ public class ProposalController extends BaseController {
 						} else {
 							((Headhunter) user).getJobs().add(job);
 							ViewsManager.getInstance().next(new HeadhunterController(frame));
-							//System.out.println("return profile headhunter");
+							// System.out.println("return profile headhunter");
 						}
-
 					}
 				}
 			});
 		}
-	}
-
-	private List<ContractType> generateContracts() {
-		List<ContractType> result = new ArrayList<>();
-
-		result.add(new ContractType("CDD"));
-		result.add(new ContractType("CDI"));
-		result.add(new ContractType("Contrat d'apprentissage"));
-		result.add(new ContractType("Contrat de professionnalisation"));
-		result.add(new ContractType("dro"));
-
-		return result;
-	}
-
-	private List<Skill> generateSkills() {
-		List<Skill> result = new ArrayList<>();
-		Skill s1 = new Skill();
-		s1.setId(1);
-		s1.setSkillType(Skill.TECHNIQUE);
-		s1.setName("JAVA");
-
-		Skill s2 = new Skill();
-		s2.setId(2);
-		s2.setSkillType(Skill.TECHNIQUE);
-		s2.setName("C");
-
-		Skill s3 = new Skill();
-		s3.setId(3);
-		s3.setSkillType(Skill.TECHNIQUE);
-		s3.setName("C++");
-
-		Skill s4 = new Skill();
-		s4.setId(4);
-		s4.setSkillType(Skill.TECHNIQUE);
-		s4.setName("HTML");
-
-		Skill s5 = new Skill();
-		s5.setId(5);
-		s5.setSkillType(Skill.TECHNIQUE);
-		s5.setName("CSS");
-
-		result.add(s1);
-		result.add(s2);
-		result.add(s3);
-		result.add(s4);
-		result.add(s5);
-
-		return result;
 	}
 }

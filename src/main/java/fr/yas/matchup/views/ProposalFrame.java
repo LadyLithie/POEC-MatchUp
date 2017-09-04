@@ -22,6 +22,7 @@ import fr.yas.matchup.entities.Location;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
+import fr.yas.matchup.entities.base.BaseEntity;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -123,7 +124,7 @@ public class ProposalFrame extends BaseView implements IVisibility {
 	/**
 	 * Create the frame.
 	 */
-	public ProposalFrame(JFrame frame,List<Skill> ls) {
+	public ProposalFrame(JFrame frame,List<BaseEntity> skills) {
 		super();
 		super.pageName = "Proposal";
 		JPanel panel = new JPanel();
@@ -161,8 +162,8 @@ public class ProposalFrame extends BaseView implements IVisibility {
 		panelCheckBox.setLayout(gbl_panelCheckBox);
 
 		listSkills = new ArrayList<JCheckBox>();
-		for (Skill skill : ls) {
-			JCheckBox box = new JCheckBox(skill.getName());
+		for (BaseEntity skill : skills) {
+			JCheckBox box = new JCheckBox(((Skill) skill).getName());
 			listSkills.add(box);
 			
 			GridBagConstraints gbc_box = new GridBagConstraints();

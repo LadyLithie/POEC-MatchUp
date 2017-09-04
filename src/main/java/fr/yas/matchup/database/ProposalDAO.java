@@ -16,7 +16,7 @@ import fr.yas.matchup.entities.base.BaseEntity;
  * @author Audrey
  *
  */
-public class DAOProposal extends BaseDAO {
+public class ProposalDAO extends BaseDAO {
 		public static final String TABLE = "job";
 		public static final String ID = "id_job";
 		public static final String NAME = "title_job";
@@ -28,7 +28,7 @@ public class DAOProposal extends BaseDAO {
 		public static final String HEADHUNTER = "headhunter_id";
 
 		
-		public DAOProposal() {
+		public ProposalDAO() {
 			super(TABLE, ID);
 		}
 
@@ -46,7 +46,7 @@ public class DAOProposal extends BaseDAO {
 				job.setLocalization(resultSet.getString(ADDRESS));
 				EnterpriseDAO enterprise = new EnterpriseDAO();
 				job.setCompany((Enterprise) enterprise.get(resultSet.getDouble(ENTERPRISE)));
-				DAOProposal proposal = new DAOProposal();
+				ProposalDAO proposal = new ProposalDAO();
 				job.setContractType((ContractType) proposal.get(resultSet.getDouble(CONTRACT)));
 				//missing DAOheadhunter
 			} catch (SQLException e) {
