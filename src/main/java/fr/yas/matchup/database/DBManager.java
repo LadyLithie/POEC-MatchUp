@@ -29,6 +29,7 @@ public class DBManager {
 			connect();
 		}else {
 			createDB("config","dbsql.sql");
+			createDB(CONFIG, "ScriptInsertValBase.sql");
 		}
 	}
 

@@ -53,7 +53,7 @@ public class Administrator extends RegisteredUser {
 	 * @param firstname
 	 * @param lastname
 	 */
-	public Administrator(String login, String name, Double phone, String email,
+	public Administrator(String login, String name, String phone, String email,
 			String presentation, String avatar, String created_at, String updated_at, String firstname,
 			String lastname) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);

@@ -13,7 +13,7 @@ public class Headhunter extends RegisteredUser {
 	private String linkedin;
 	private String role;
 	private String picture;
-	private ArrayList<Double> phones;
+	private ArrayList<String> phones;
 	private ArrayList<String> emails;
 
 	private ArrayList<Proposal> jobs;
@@ -92,14 +92,14 @@ public class Headhunter extends RegisteredUser {
 	/**
 	 * @return the phones
 	 */
-	public ArrayList<Double> getPhones() {
+	public ArrayList<String> getPhones() {
 		return phones;
 	}
 
 	/**
 	 * @param phones the phones to set
 	 */
-	public void setPhones(ArrayList<Double> phones) {
+	public void setPhones(ArrayList<String> phones) {
 		this.phones = phones;
 	}
 
@@ -151,7 +151,7 @@ public class Headhunter extends RegisteredUser {
 	public Headhunter() {
 
 		super();
-		this.phones = new ArrayList<Double>();
+		this.phones = new ArrayList<String>();
 		this.getPhones().add(super.getPhone());
 		
 		this.emails = new ArrayList<String>();
@@ -178,12 +178,12 @@ public class Headhunter extends RegisteredUser {
 	 * *********************
 	 * To review the lists
 	 */
-	public Headhunter(String login, String name, Double phone, String email, String presentation,
+	public Headhunter(String login, String name, String phone, String email, String presentation,
 			String picture, String created_at, String updated_at, String firstname, String lastname,
-			ArrayList<Double> phones, ArrayList<String> emails) {
+			ArrayList<String> phones, ArrayList<String> emails) {
 		super(login, name, phone, email, presentation, picture, created_at, updated_at);
 		
-		this.phones = new ArrayList<Double>();
+		this.phones = new ArrayList<String>();
 		// This is optional, depend how we want to treat multiple
 		phones.add(super.getPhone());
 		this.setPhones(phones);

@@ -37,7 +37,7 @@ public class AdminController extends BaseController {
 		user.setFirstname("Hal");
 		user.setLastname("One");
 		user.setEmail("admin@soft.fr");
-		user.setPhone(Double.valueOf("00 00 00 00 00"));
+		user.setPhone("00 00 00 00 00");
 	}
 
 	/*
@@ -106,7 +106,7 @@ public class AdminController extends BaseController {
 					user.setFirstname(v.getTextField_adminFirstName().getText());
 					user.setLastname(v.getTextField_AdminLastName().getText());
 					user.setEmail(v.getTextField_AdminEmail().getText());
-					user.setPhone(Double.valueOf(v.getTextField_AdminPhone().getText()));
+					user.setPhone(v.getTextField_AdminPhone().getText());
 					v.getLblPhoto().removeMouseListener(mouseChangeAvatar);
 				}
 			}

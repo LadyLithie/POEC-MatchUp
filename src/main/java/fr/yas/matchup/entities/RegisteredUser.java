@@ -13,7 +13,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	private String login;
 	private String name;
 	
-	private Double phone;
+	private String phone;
 	private String email;
 	private String presentation;
 	private String avatar;
@@ -67,14 +67,14 @@ public abstract class RegisteredUser extends BaseEntity {
 	/**
 	 * @return the phone
 	 */
-	public Double getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(Double phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -166,7 +166,7 @@ public abstract class RegisteredUser extends BaseEntity {
 	 * @param created_at
 	 * @param updated_at
 	 */
-	public RegisteredUser(String login, String name, Double phone, String email,
+	public RegisteredUser(String login, String name, String phone, String email,
 			String presentation, String avatar, String created_at, String updated_at) {
 		super();
 		this.login = login;
