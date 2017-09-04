@@ -2,7 +2,7 @@ CREATE TABLE headhunter(
 	id_headhunter INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	lastname_headhunter VARCHAR(255),
 	firstname_headhunter VARCHAR(255),
-	phone_headhunter INT(15),
+	phone_headhunter VARCHAR(12),
 	email_headhunter VARCHAR(255),
 	picture_headhunter BLOB,
 	twitter_headhunter VARCHAR(255),
@@ -30,7 +30,7 @@ CREATE TABLE candidate(
 CREATE TABLE enterprise(
 	id_enterprise INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name_enterprise VARCHAR(255),
-	phone_enterprise INT(15),
+	phone_enterprise VARCHAR(12),
 	address_enterprise VARCHAR(255),
 	city_enterprise VARCHAR(255),
 	website_enterprise VARCHAR(255),
@@ -50,7 +50,7 @@ CREATE TABLE administrator(
 	lastname_admin VARCHAR(255),
 	firstname_admin VARCHAR(255),
 	mail_admin VARCHAR(255),
-	phone_admin INT(15),
+	phone_admin VARCHAR(12),
 	role_admin VARCHAR(20),
 	login_admin VARCHAR(255),
 	password_admin VARCHAR(255)
