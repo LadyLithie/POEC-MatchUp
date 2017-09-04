@@ -9,6 +9,7 @@
  *********/
 package fr.yas.matchup.entities;
 
+
 import java.util.List;
 
 import fr.yas.matchup.entities.base.BaseEntity;
@@ -50,18 +51,6 @@ public class Proposal extends BaseEntity {
 	public void setPresentation(String presentation) {
 		this.presentation = presentation;
 	}
-	/**
-	 * @return the handicap
-	 */
-//	public String getHandicap() {
-//		return handicap;
-//	}
-	/**
-	 * @param handicap the handicap to set
-	 */
-//	public void setHandicap(String handicap) {
-//		this.handicap = handicap;
-//	}
 	/**
 	 * @return the createdAt
 	 */
@@ -127,10 +116,9 @@ public class Proposal extends BaseEntity {
 		location.setDepartement(new Integer(ad[1]));
 		location.setCity(ad[2]);
 		
-		this.localization = location;
-		
-		
-	}	/**
+		this.localization = location;	
+	}
+	/**
 	 * @return the company
 	 */
 	public Enterprise getCompany() {
@@ -189,7 +177,6 @@ public class Proposal extends BaseEntity {
 		return "Proposal [name=" + name + ", presentation=" + presentation + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + ", contractType=" + contractType + ", localization=" + localization + ", company="
 				+ company + ", headhunter=" + headhunter + ", skills=" + skills + "]";
+
 	}
-
-
 }
