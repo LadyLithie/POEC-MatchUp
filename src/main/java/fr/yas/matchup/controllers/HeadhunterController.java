@@ -89,9 +89,9 @@ public class HeadhunterController extends BaseController {
 //				panelJob.getPanelJobs().add(job, gbc_job);
 //				panelJob.getPanelJobs().getResumeJobs().add(job);
 //				panelJobs.add(job);
-			}
-			
-		}
+//			}
+//			
+//		}
 		
 		//view.getTextArea_JobTitle().setText(user.getJobs().get(1).getName());
 		//view.getTextArea_Presentation().setText(user.getJobs().get(1).getPresentation());
