@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -26,8 +25,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
-
-import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import fr.yas.matchup.database.AdministratorDAO;
 import fr.yas.matchup.database.CandidateDAO;
@@ -41,7 +38,6 @@ import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.AdministratorView;
-import fr.yas.matchup.views.panels.ConfirmMessage;
 import fr.yas.matchup.views.panels.PanelAdminSkill;
 import fr.yas.matchup.views.panels.PanelAdminUser;
 
