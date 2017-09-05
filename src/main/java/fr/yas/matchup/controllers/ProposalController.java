@@ -176,7 +176,7 @@ public class ProposalController extends BaseController {
 					if (user instanceof Enterprise) {
 						ViewsManager.getInstance().next(new ProfileEController(frame));
 					} else {
-						ViewsManager.getInstance().next(new ProfileEController(frame));
+						ViewsManager.getInstance().next(new HeadhunterController(frame));
 					}
 				}
 			});

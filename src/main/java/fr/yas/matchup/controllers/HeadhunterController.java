@@ -1,8 +1,11 @@
 package fr.yas.matchup.controllers;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,10 +17,12 @@ import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
+import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.LoginView;
 import fr.yas.matchup.views.RegisterView;
 import fr.yas.matchup.views.headhunter.HeadhunterView;
+import fr.yas.matchup.views.panels.PanelResumeJob;
 
 
 
@@ -55,8 +60,23 @@ public class HeadhunterController extends BaseController {
 		view.getTextField_Twitter().setText(user.getTwitter());
 		view.getTextArea_Presentation().setText(user.getPresentation());
 		
-//		view.getTextArea_JobTitle().setText(user.getJobs().get(0).getName());
-//		view.getTextArea_Presentation().setText(user.getJobs().get(0).getPresentation());
+//		if (user.getJobs() != null) {
+//			//jobs = new ArrayList<>();
+//			for (Proposal Ujob : user.getJobs()) {
+//				PanelResumeJob job = new PanelResumeJob(Ujob);
+//				job.setPreferredSize(new Dimension(130, 170));
+//				job.getLblLink().setText("Contact");
+//				GridBagConstraints gbc_job = new GridBagConstraints();
+//				gbc_job.anchor = GridBagConstraints.NORTHEAST;
+//				vListJobs.getPanelJobs().add(job, gbc_job);
+//				vListJobs.getPanelJobs().getResumeJobs().add(job);
+//				pJobs.add(job);
+//			}
+//			
+//		}
+		
+		//view.getTextArea_JobTitle().setText(user.getJobs().get(1).getName());
+		//view.getTextArea_Presentation().setText(user.getJobs().get(1).getPresentation());
 	
 	
 	/* (non-Javadoc)
@@ -120,9 +140,22 @@ public class HeadhunterController extends BaseController {
 				user.setPhone(view.getTextField_Phone().getText());
 				user.setLinkedin(view.getTextField_Linkedin().getText());
 				user.setTwitter(view.getTextField_Twitter().getText());
+				user.setPresentation(view.getTextArea_Presentation().getText());
 				
-//				HeadhunterDAO hd = new HeadhunterDAO();
-//				executeUpdate ("UPDATE headhunter SET " + hd.parseUpdateToString(user) + " WHERE " + hd.ID + " = " + (int)user.getId() + ";");
+				HeadhunterDAO dao = new HeadhunterDAO();
+				List<BaseEntity> hunters = dao.get();
+				
+				for (BaseEntity baseEntity : hunters) {
+					Headhunter user = ((Headhunter) baseEntity);
+					user.setFirstname(view.getTextField_Firstname().getText());
+					user.setLastname(view.getTextField_Lastname().getText());
+					user.setEmail(view.getTextField_Email().getText());
+					user.setPhone(view.getTextField_Phone().getText());
+					user.setLinkedin(view.getTextField_Linkedin().getText());
+					user.setTwitter(view.getTextField_Twitter().getText());
+					user.setPresentation(view.getTextArea_Presentation().getText());
+					dao.update(user);
+				}
 				
 				view.getBtnAnnuler().setVisible(false);
 				view.getBtnValider().setVisible(false);
@@ -145,7 +178,7 @@ public class HeadhunterController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//ViewsManager.getInstance().next(new ProposalController(frame, jobs.get(0)));
+				ViewsManager.getInstance().next(new ProposalController(frame));
 
 				
 			}

@@ -80,15 +80,15 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		
 		res += LASTNAME + " = '" + headhunter.getLastname() + "',";
 		res += FIRSTNAME + " = '" + headhunter.getFirstname() + "',";
-		res += PHONE + " = "+ headhunter.getPhone()+"',";
-		res += MAIL + " = "+ headhunter.getEmail()+"',";
-		res += PICTURE + " = "+ headhunter.getAvatar()+"',";
-		res += TWITTER + " = "+ headhunter.getTwitter()+"',";
-		res += LINKEDIN + " = "+ headhunter.getLinkedin()+"',";
-		res += PRESENTATION + " = "+ headhunter.getPresentation()+"',";
-		res += LOGIN + " = "+ headhunter.getLogin()+"',";
-		res += PASSWORD + " = "+ headhunter.getPassword()+"'";
-		res += ROLE + " = "+ headhunter.getRole()+"'";
+		res += PHONE + " = '"+ headhunter.getPhone()+"',";
+		res += MAIL + " = '"+ headhunter.getEmail()+"',";
+		res += PICTURE + " = '"+ headhunter.getAvatar()+"',";
+		res += TWITTER + " = '"+ headhunter.getTwitter()+"',";
+		res += LINKEDIN + " = '"+ headhunter.getLinkedin()+"',";
+		res += PRESENTATION + " = '"+ headhunter.getPresentation()+"',";
+		res += LOGIN + " = '"+ headhunter.getLogin()+"',";
+		res += PASSWORD + " = '"+ headhunter.getPassword()+"',";
+		res += ROLE + " = '"+ headhunter.getRole()+"'";
 		
 		return res;
 	}
