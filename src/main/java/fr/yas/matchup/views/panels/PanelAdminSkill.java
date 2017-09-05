@@ -8,11 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import fr.yas.matchup.entities.Skill;
+
 /**
  * @author Audrey
  *
  */
 public class PanelAdminSkill extends JPanel {
+	private Skill skill;
 
 	private JTextField tF_SkillType;
 	private JTextField tF_SkillName;
@@ -67,6 +70,20 @@ public class PanelAdminSkill extends JPanel {
 		gbc_btnModifySkill.insets = new Insets(0, 0, 5, 5);
 		add(btnModify, gbc_btnModifySkill);
 
+	}
+
+	/**
+	 * @return the skill
+	 */
+	public Skill getSkill() {
+		return skill;
+	}
+
+	/**
+	 * @param skill the skill to set
+	 */
+	public void setSkill(Skill skill) {
+		this.skill = skill;
 	}
 
 }

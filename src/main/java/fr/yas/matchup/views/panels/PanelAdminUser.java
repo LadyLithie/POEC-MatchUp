@@ -9,6 +9,9 @@ import javax.swing.JTextField;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import fr.yas.matchup.entities.RegisteredUser;
+
 import java.awt.Color;
 
 /**
@@ -23,6 +26,21 @@ public class PanelAdminUser extends JPanel {
 	private JLabel lblEmail;
 	private JLabel lblDateCreation;
 	private JLabel lblType;
+	private RegisteredUser user;
+
+	/**
+	 * @return the user
+	 */
+	public RegisteredUser getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(RegisteredUser user) {
+		this.user = user;
+	}
 
 	/**
 	 * @return the btnValidateUser
@@ -104,6 +122,7 @@ public class PanelAdminUser extends JPanel {
 		add(btnDeleteUser,gbc_btnDeleteUser);
 		
 		btnResetPasswordUser = new JButton("Reset password");
+		btnResetPasswordUser.setEnabled(false);
 		GridBagConstraints gbc_btnResetPasswordUser = new GridBagConstraints();
 		gbc_btnResetPasswordUser.insets = new Insets(0, 0, 5, 5);
 		add(btnResetPasswordUser,gbc_btnResetPasswordUser);

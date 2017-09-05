@@ -53,7 +53,7 @@ public class SkillDAO extends BaseDAO {
 		
 		Skill skill = ((Skill)item);
 		request = String.valueOf(skill.getId());
-		request += ",'"+skill.getName()+"'";
+		request += ",'"+skill.getName().replaceAll("'", " ")+"'";
 		request += ",'"+skill.getSkillType()+"'";
 		
 		return request;

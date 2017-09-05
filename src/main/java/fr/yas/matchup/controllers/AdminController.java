@@ -3,9 +3,12 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,9 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+
+import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import fr.yas.matchup.database.AdministratorDAO;
 import fr.yas.matchup.database.CandidateDAO;
@@ -29,7 +39,9 @@ import fr.yas.matchup.entities.Administrator;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
+import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.AdministratorView;
+import fr.yas.matchup.views.panels.ConfirmMessage;
 import fr.yas.matchup.views.panels.PanelAdminSkill;
 import fr.yas.matchup.views.panels.PanelAdminUser;
 
@@ -74,6 +86,7 @@ public class AdminController extends BaseController {
 		List<BaseEntity> skills = sDao.get();
 		for (BaseEntity entity : skills) {
 			PanelAdminSkill skill = new PanelAdminSkill();
+			skill.setSkill((Skill) entity);
 			skill.gettF_SkillName().setText(((Skill) entity).getName());
 			skill.gettF_SkillType().setText(((Skill) entity).getSkillType());
 			GridBagConstraints gbc_skill = new GridBagConstraints();
@@ -188,12 +201,98 @@ public class AdminController extends BaseController {
 		/*
 		 * Panel Skills manager
 		 */
-		v.getBtnAdd().setEnabled(false);
-//		v.getBtnAdd().addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//			}
-//		});
+		// v.getBtnAdd().setEnabled(false);
+		v.getBtnAdd().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == v.getBtnAdd()) {
+					JFrame edition = new JFrame("Confirmation");
+					// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
+					// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
+					JPanel contentPanel = new JPanel();
+					ViewsUtils.popUp(edition, contentPanel);
+
+					contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+					contentPanel.setLayout(new BorderLayout(0, 0));
+
+					JPanel buttonPane = new JPanel();
+					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+					contentPanel.add(buttonPane, BorderLayout.SOUTH);
+					// getRootPane().setDefaultButton(okButton);
+
+					JButton cancelButton = new JButton("Annuler");
+					cancelButton.setActionCommand("Non");
+					buttonPane.add(cancelButton);
+
+					JButton okButton = new JButton("Valider");
+					okButton.setActionCommand("Valider");
+					buttonPane.add(okButton);
+
+					JPanel panel = new JPanel();
+					contentPanel.add(panel, BorderLayout.CENTER);
+					GridBagLayout gbl_panel = new GridBagLayout();
+					gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
+					gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+					gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+					gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+					panel.setLayout(gbl_panel);
+
+					JLabel lblNom = new JLabel("Nom :");
+					GridBagConstraints gbc_lblNom = new GridBagConstraints();
+					gbc_lblNom.insets = new Insets(0, 0, 5, 5);
+					gbc_lblNom.gridx = 1;
+					gbc_lblNom.gridy = 1;
+					panel.add(lblNom, gbc_lblNom);
+
+					JTextField tF_Name = new JTextField();
+					GridBagConstraints gbc_tF_Name = new GridBagConstraints();
+					gbc_tF_Name.insets = new Insets(0, 0, 5, 0);
+					gbc_tF_Name.fill = GridBagConstraints.BOTH;
+					gbc_tF_Name.gridx = 3;
+					gbc_tF_Name.gridy = 1;
+					panel.add(tF_Name, gbc_tF_Name);
+					tF_Name.setColumns(10);
+
+					JLabel lblType = new JLabel("Type :");
+					GridBagConstraints gbc_lblType = new GridBagConstraints();
+					gbc_lblType.insets = new Insets(0, 0, 0, 5);
+					gbc_lblType.gridx = 1;
+					gbc_lblType.gridy = 3;
+					panel.add(lblType, gbc_lblType);
+
+					JTextField tF_Type = new JTextField();
+					GridBagConstraints gbc_tF_Type = new GridBagConstraints();
+					gbc_tF_Type.fill = GridBagConstraints.HORIZONTAL;
+					gbc_tF_Type.gridx = 3;
+					gbc_tF_Type.gridy = 3;
+					panel.add(tF_Type, gbc_tF_Type);
+					tF_Type.setColumns(10);
+
+					edition.setVisible(true);
+					edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					
+					okButton.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							if(e.getSource() == okButton) {
+								Skill skill = new Skill();
+								skill.setName(tF_Name.getText());
+								skill.setSkillType(tF_Type.getText());
+								SkillDAO sDao = new SkillDAO();
+								sDao.insert(skill);
+								PanelAdminSkill pSkill = new PanelAdminSkill();
+								pSkill.gettF_SkillName().setText(skill.getName());
+								pSkill.gettF_SkillType().setText(skill.getSkillType());
+								v.getListSkills().add(pSkill);
+								v.getSkills().add(pSkill);
+								
+								edition.setVisible(false);
+							}
+						}
+					});
+				}
+			}
+		});
 
 		for (PanelAdminSkill skillManager : v.getSkills()) {
 			skillManager.getBtnModify().addActionListener(new ActionListener() {
@@ -201,11 +300,62 @@ public class AdminController extends BaseController {
 				public void actionPerformed(ActionEvent e) {
 					String name = skillManager.gettF_SkillName().getText();
 					String type = skillManager.gettF_SkillType().getText();
-					if (name.isEmpty() && type.isEmpty()) {
+					if (name.isEmpty() && type.isEmpty()) { // Delete
 						System.out.println(
 								"Cette compétence devrait être supprimée\n mais cela aura des conséquences sur ceux qui les utilise");
+						// popup de confirmation
+						if (e.getSource() == skillManager.getBtnModify()) {
+							JFrame edition = new JFrame("Confirmation");
+							// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
+							// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
+							JPanel contentPanel = new JPanel();
+							ViewsUtils.popUp(edition, contentPanel);
 
-					} else if (name.isEmpty() || type.isEmpty()) {
+							JLabel lblMessage = new JLabel("Etes-vous sûr de vouloir supprimer \n" + "la compétence "
+									+ skillManager.getSkill().getName() + " ?");
+							lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+							contentPanel.add(lblMessage);
+
+							JPanel buttonPane = new JPanel();
+							buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+							contentPanel.add(buttonPane, BorderLayout.SOUTH);
+
+							JButton okButton = new JButton("Oui");
+							okButton.setActionCommand("Oui");
+							buttonPane.add(okButton);
+
+							JButton cancelButton = new JButton("Non");
+							cancelButton.setActionCommand("Non");
+							buttonPane.add(cancelButton);
+
+							edition.setVisible(true);
+							edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+							okButton.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									if (e.getSource() == okButton) {
+										v.getListSkills().remove(skillManager);
+										v.getSkills().remove(skillManager);
+										edition.setVisible(false);
+									}
+								}
+							});
+
+							cancelButton.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									if (e.getSource() == cancelButton) {
+										skillManager.gettF_SkillName().setText(skillManager.getSkill().getName());
+										skillManager.gettF_SkillType().setText(skillManager.getSkill().getSkillType());
+										edition.setVisible(false);
+									}
+								}
+							});
+
+						}
+
+					} else if (name.isEmpty() || type.isEmpty()) { // Error modification
 						if (name.isEmpty()) {
 							skillManager.gettF_SkillName().setBackground(Color.PINK);
 							skillManager.gettF_SkillType().setBackground(Color.WHITE);
@@ -213,9 +363,14 @@ public class AdminController extends BaseController {
 							skillManager.gettF_SkillName().setBackground(Color.WHITE);
 							skillManager.gettF_SkillType().setBackground(Color.PINK);
 						}
-					} else {
+					} else { // Modification valid
 						// use dao to correct in the database
 						System.out.println("use dao to correct in the database");
+						SkillDAO sDao = new SkillDAO();
+						Skill s = skillManager.getSkill();
+						s.setName(name);
+						s.setSkillType(type);
+						sDao.update(s);
 
 					}
 				}
@@ -227,29 +382,31 @@ public class AdminController extends BaseController {
 		 */
 		for (PanelAdminUser userManager : v.getUsers()) {
 			userManager.getBtnValidateUser().setEnabled(false);
-//			userManager.getBtnValidateUser().addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					// Update this user as valid
-//				}
-//			});
+			// userManager.getBtnValidateUser().addActionListener(new ActionListener() {
+			// @Override
+			// public void actionPerformed(ActionEvent e) {
+			// // Update this user as valid
+			// }
+			// });
 			userManager.getBtnDeleteUser().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("Only cosmetic for now");
 					// Delecte this user
 					v.getPanelListUsers().remove(userManager);
+
 					v.getPanelListUsers().validate();
 				}
 			});
 			userManager.getBtnResetPasswordUser().setEnabled(false);
-//			userManager.getBtnResetPasswordUser().addActionListener(new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					// Popup with random password of 6 character
-//					// set this new password for the user
-//				}
-//			});
+			// userManager.getBtnResetPasswordUser().addActionListener(new ActionListener()
+			// {
+			// @Override
+			// public void actionPerformed(ActionEvent e) {
+			// // Popup with random password of 6 character
+			// // set this new password for the user
+			// }
+			// });
 		}
 
 	}

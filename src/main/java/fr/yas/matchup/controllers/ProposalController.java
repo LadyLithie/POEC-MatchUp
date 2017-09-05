@@ -111,12 +111,16 @@ public class ProposalController extends BaseController {
 			vFrame.getTextArea().setText(job.getPresentation());
 			vFrame.getTextField_JobTitle().setText(job.getName());
 			ArrayList<JCheckBox> ls = vFrame.getListSkills();
+			System.out.println(ls.size());
 			for (Skill skill : job.getSkills()) {
 				int i = 0;
-				while (ls.get(i).getText() != skill.getName()) {
+				while ((ls.get(i).getText() != skill.getName()) && i<ls.size()) {
 					i++;
 				}
-				ls.get(i).setSelected(true);
+				if(i<ls.size()) {
+					ls.get(i).setSelected(true);					
+				}
+
 			}
 
 			// case specific to user
