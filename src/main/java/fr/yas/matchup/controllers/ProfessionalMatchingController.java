@@ -3,6 +3,7 @@ package fr.yas.matchup.controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.CandidateView;
 import fr.yas.matchup.views.ProfessionalMatchingView;
@@ -21,8 +22,16 @@ public class ProfessionalMatchingController extends BaseController{
 	 */
 	@Override
 	public void initView() {
-		// TODO Auto-generated method stub
-		super.initView();
+		// TODO Auto-generated method stub		
+		Candidate c = (Candidate) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		ProfessionalMatchingView view = (ProfessionalMatchingView) getView();		
+		
+		view.getMenuBar().getLblUserName().setText(c.getFirstname());
+		view.getTextFieldFirstname().setText(c.getFirstname());
+		view.getTextFieldLastname().setText(c.getLastname());
+		view.getTextFieldMail().setText(c.getEmail());
+		
+		
 	}
 
 	/* (non-Javadoc)
@@ -40,6 +49,7 @@ public class ProfessionalMatchingController extends BaseController{
 				ViewsManager.getInstance().next(new CandidateController(frame));
 			}
 		});
+		
 		
 	}
 	
