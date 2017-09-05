@@ -74,6 +74,7 @@ public class CandidateView extends BaseView {
 		gbc_menuBar.gridwidth = 10;
 		contentPane.add(menuBar.getContentPane(), gbc_menuBar);
 		
+		
 		lblListeDeSkills = new JLabel("Liste de Skills");
 		GridBagConstraints gbc_lblListeDeSkills = new GridBagConstraints();
 		gbc_lblListeDeSkills.gridwidth = 2;

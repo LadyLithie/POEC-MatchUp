@@ -1,14 +1,22 @@
 package fr.yas.matchup.controllers;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import com.sun.jmx.snmp.UserAcl;
 
@@ -22,6 +30,7 @@ import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.LoginView;
 import fr.yas.matchup.views.RegisterView;
 import fr.yas.matchup.views.headhunter.HeadhunterView;
+import fr.yas.matchup.views.panels.PanelHeadhunterJob;
 import fr.yas.matchup.views.panels.PanelResumeJob;
 
 
@@ -29,7 +38,10 @@ import fr.yas.matchup.views.panels.PanelResumeJob;
 public class HeadhunterController extends BaseController {
 
 	private Headhunter user;
+//	private Proposal job;
+	private JPanel panel_JobList;
 	private ArrayList<Proposal> jobs = new ArrayList<>();
+	private ArrayList<PanelHeadhunterJob> panelJobs = new ArrayList<>();
 	private ArrayList<Enterprise> enterprises = new ArrayList<>();
 	private ArrayList<String> phones = new ArrayList<>();
 	private ArrayList<String> emails = new ArrayList<>();
@@ -60,20 +72,26 @@ public class HeadhunterController extends BaseController {
 		view.getTextField_Twitter().setText(user.getTwitter());
 		view.getTextArea_Presentation().setText(user.getPresentation());
 		
+//		panel_JobList = (JPanel) view.getPanel_JobList();
 //		if (user.getJobs() != null) {
-//			//jobs = new ArrayList<>();
+//			
+//			panelJobs = new ArrayList<>();
+//			
 //			for (Proposal Ujob : user.getJobs()) {
-//				PanelResumeJob job = new PanelResumeJob(Ujob);
+//				
+//				PanelHeadhunterJob panelJob = new PanelHeadhunterJob(Ujob);
+//				
+//				
 //				job.setPreferredSize(new Dimension(130, 170));
 //				job.getLblLink().setText("Contact");
 //				GridBagConstraints gbc_job = new GridBagConstraints();
 //				gbc_job.anchor = GridBagConstraints.NORTHEAST;
-//				vListJobs.getPanelJobs().add(job, gbc_job);
-//				vListJobs.getPanelJobs().getResumeJobs().add(job);
-//				pJobs.add(job);
-//			}
-//			
-//		}
+//				panelJob.getPanelJobs().add(job, gbc_job);
+//				panelJob.getPanelJobs().getResumeJobs().add(job);
+//				panelJobs.add(job);
+			}
+			
+		}
 		
 		//view.getTextArea_JobTitle().setText(user.getJobs().get(1).getName());
 		//view.getTextArea_Presentation().setText(user.getJobs().get(1).getPresentation());
@@ -173,16 +191,16 @@ public class HeadhunterController extends BaseController {
 			}
 		});
 		
-		view.getBtnEditJob().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				ViewsManager.getInstance().next(new ProposalController(frame));
-
-				
-			}
-		});
+//		view.getBtnEditJob().addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				ViewsManager.getInstance().next(new ProposalController(frame));
+//
+//				
+//			}
+//		});
 		
 		view.getBtnAddJob().addActionListener(new ActionListener() {
 			
