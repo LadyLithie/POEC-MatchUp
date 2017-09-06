@@ -18,7 +18,6 @@ import javax.swing.border.EmptyBorder;
 public class ViewsUtils {
 	/**
 	 * Allow to configure all screen of application with default values.
-	 * Set it on the center of the screen
 	 * @param contentPane 
 	 * @param jFrame 
 	 * 
@@ -26,14 +25,21 @@ public class ViewsUtils {
 	public static void configureJFrame(JFrame jFrame, JPanel contentPane) {
 		// dimension des bordures
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//position?
-		contentPane.setLayout(new BorderLayout(0, 0));
 		jFrame.setContentPane(contentPane);
+		
+		// set minimum size to 640x480 in case of resize
+		jFrame.setMinimumSize(new Dimension(640, 480));
 	}
 	
+	/**
+	 * All to configure initial size and positionning.
+	 * Set it on the center of the screen
+	 * Determine close windows behavior
+	 * @param jFrame
+	 */
 	public static void configureFirstJFrame(JFrame jFrame) {
-		int frameWidth = 800;
-		int frameHeight = 600;
+		int frameWidth = 640;
+		int frameHeight = 480;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
 		int screnHeight = (int) screenSize.getHeight();
@@ -46,5 +52,22 @@ public class ViewsUtils {
 		// taille de la fenêtre à l'affichage
 		jFrame.setBounds(screenMiddleWidth, screnMiddleHeight, frameWidth, frameHeight);
 
+	}
+	
+	public static void popUp(JFrame jFrame, JPanel contentPane) {
+		int frameWidth = 300;
+		int frameHeigth = 225;
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int screenWidth  = (int) screenSize.getWidth();
+		int screenHeight = (int) screenSize.getHeight();
+		
+		int screenMiddleWidth = (screenWidth/2) - (frameWidth/2);
+		int screenMiddleHeigth = (screenHeight/2) - (frameHeigth/2) ;
+		
+		jFrame.setBounds(screenMiddleWidth, screenMiddleHeigth, frameWidth, frameHeigth);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		jFrame.setContentPane(contentPane);
 	}
 }
