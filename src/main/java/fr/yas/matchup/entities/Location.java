@@ -94,4 +94,25 @@ public class Location {
 		this.pays = pays;
 	}
 
+	/**
+	 * 
+	 */
+	public Location(String fulladress) {
+		super();
+			String[] ad = fulladress.split(":");
+			this.setPays(ad[0]);
+			ad = ad[1].split(",");		
+			this.setAddress(ad[0]);
+			this.setDepartement(Integer.valueOf(ad[1]));
+			this.setCity(ad[2]);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return pays + ":" + address + "," + departement + "," + city;
+	}
+
 }

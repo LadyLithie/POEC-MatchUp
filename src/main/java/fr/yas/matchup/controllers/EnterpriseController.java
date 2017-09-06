@@ -29,7 +29,7 @@ import fr.yas.matchup.views.panels.PanelResumeJob;
  * @author Audrey
  *
  */
-public class ProfileEController extends BaseController {
+public class EnterpriseController extends BaseController {
 	private Enterprise user;
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
 	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
@@ -62,7 +62,7 @@ public class ProfileEController extends BaseController {
 	 * 
 	 * @param frame
 	 */
-	public ProfileEController(JFrame frame) {
+	public EnterpriseController(JFrame frame) {
 		super();
 		super.frame = frame;
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
@@ -80,16 +80,23 @@ public class ProfileEController extends BaseController {
 		ProfileEView v = (ProfileEView) getView();
 		// Panel presentation
 		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
-
+		/*
+		 * Panel presentation
+		 * Add user's informations
+		 */
 		vP.getNamePanel().getInput().setText(user.getName());
 		vP.getEmailPanel().getInput().setText(user.getEmail());
 		vP.getWebsitePanel().getInput().setText(user.getWebsite());
 		vP.getSiretPanel().getInput().setText(user.getSiretNumber());
 		vP.getTextAreaPresentation().setText(user.getPresentation());
 
-		// Panel headhunters
+		/*
+		 *  Panel headhunters
+		 *  Create the list of headhunter working for the company
+		 */
 		PanelHeadhunters vH = (PanelHeadhunters) v.getPanel_bottomRight();
 		ArrayList<Panel2FieldButton> associates;
+		//See if we better not add them to pHeadhunters
 		if (vH.getAssociates() != null) {
 			associates = vH.getAssociates();	
 		} else {
@@ -114,7 +121,10 @@ public class ProfileEController extends BaseController {
 		vH.setMode(false);
 
 		
-		// Panel jobs
+		/*
+		 * Panel jobs
+		 * Create the list of jobs 
+		 */
 		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
 		if (user.getJobs() != null) {
 			pJobs = new ArrayList<>();
@@ -192,11 +202,11 @@ public class ProfileEController extends BaseController {
 					// assign to the entity the new associates
 					if (user.getAssociates() == null) {
 						user.setAssociates(headhunters);
-					} else {
+					} else { //need test if already present
 						user.getAssociates().addAll(headhunters);
 					}
 					headhunters = new ArrayList<>();
-					// assign on the profileEview the new associates panels
+					// assign on the EnterpriseView the new associates panels
 					if (vHeadhunters.getAssociates() == null) {
 						vHeadhunters.setAssociates(pHeadhunters);
 					} else {
@@ -235,7 +245,7 @@ public class ProfileEController extends BaseController {
 				Headhunter newHH = new Headhunter();
 				boolean valid = true;
 				// System.err.println(vHeadhunters.getNewHeadHunter().getTextField1().getText().isEmpty());
-				// test submited textfield for blank which provoke PINK background and invalid
+				// test submitted textfield for blank which provoke PINK background and invalid
 				// object
 				// firstname
 				if (!vHeadhunters.getNewHeadHunter().getTextField1().getText().isEmpty()) {

@@ -32,7 +32,7 @@ import javax.swing.JScrollPane;
  * @author Audrey
  *
  */
-public class ProposalFrame extends BaseView implements IVisibility {
+public class ProposalView extends BaseView implements IVisibility {
 	private JButton btnCancel;
 	private JButton btnProposalCreation;
 	//Zone options
@@ -124,7 +124,7 @@ public class ProposalFrame extends BaseView implements IVisibility {
 	/**
 	 * Create the frame.
 	 */
-	public ProposalFrame(JFrame frame,List<BaseEntity> skills) {
+	public ProposalView(JFrame frame,List<BaseEntity> skills) {
 		super();
 		super.pageName = "Proposal";
 		JPanel panel = new JPanel();

@@ -66,11 +66,31 @@ public class ProposalDAO extends BaseDAO {
 			Proposal job = ((Proposal)item);
 			request = String.valueOf(job.getId());
 			request += ",'"+job.getName()+"'";
-			request += ",'"+job.getStringLocalization()+"'";
-			request += ",'"+job.getPresentation()+"'";
-			request += ",'"+job.getContractType().getId()+"'";
-			request += ",'"+job.getCompany().getId()+"'";
-			request += ",'"+job.getHeadhunter().getId()+"'";
+			if(job.getLocalization() == null) {
+				request += ",null";				
+			}else {
+				request += ",'"+job.getLocalization()+"'";
+			}
+			if(job.getPresentation() == null) {
+				request += ",null";				
+			}else {
+				request += ",'"+job.getPresentation()+"'";
+			}
+			if(job.getContractType() == null) {
+				request += ",null";				
+			}else {
+				request += ",'"+job.getContractType().getId()+"'";
+			}
+			if(job.getCompany() == null) {
+				request += ",null";				
+			}else {
+				request += ",'"+job.getCompany().getId()+"'";				
+			}
+			if(job.getHeadhunter() == null) {
+				request += ",null";				
+			}else {
+				request += ",'"+job.getHeadhunter().getId()+"'";
+			}
 			
 			return request;
 
@@ -85,11 +105,31 @@ public class ProposalDAO extends BaseDAO {
 			
 			Proposal job = ((Proposal)item);
 			request = NAME +" = '"+job.getName()+"'";
-			request += ADDRESS +" = '"+job.getStringLocalization()+"'";
-			request += PRESENTATION +" = '"+job.getPresentation()+"'";
-			request += CONTRACT +" = '"+job.getContractType().getId()+"'";
-			request += ENTERPRISE +" = '"+job.getCompany().getId()+"'";
-			request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"'";
+			if(job.getLocalization() == null) {
+				request += ADDRESS +" = null";
+			}else {
+				request += ADDRESS +" = '"+job.getLocalization()+"'";
+			}
+			if(job.getPresentation() == null) {
+				request += PRESENTATION +" = null";
+			}else {
+				request += PRESENTATION +" = '"+job.getPresentation()+"'";
+			}
+			if(job.getContractType() == null) {
+				request += CONTRACT +" = null";
+			}else {
+				request += CONTRACT +" = '"+job.getContractType().getId()+"'";
+			}
+			if(job.getCompany() == null) {
+				request += ENTERPRISE +" = null";
+			}else {
+				request += ENTERPRISE +" = '"+job.getCompany().getId()+"'";
+			}
+			if(job.getHeadhunter() == null) {
+				request += HEADHUNTER +" = null";
+			}else {
+				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"'";
+			}
 			
 			return request;
 		}
