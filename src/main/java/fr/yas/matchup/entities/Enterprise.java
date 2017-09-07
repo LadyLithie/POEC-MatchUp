@@ -181,28 +181,28 @@ public class Enterprise extends RegisteredUser {
 		jobs = new ArrayList<>();
 	}
 
-	/**
-	 * Full constructor
-	 * 
-	 * @param login
-	 * @param name
-	 * @param phone
-	 * @param email
-	 * @param presentation
-	 * @param avatar
-	 * @param created_at
-	 * @param updated_at
-	 * @param address
-	 * @param siretNumber
-	 */
-	public Enterprise(String login, String name, String phone, String email, String presentation,
-			String avatar, String created_at, String updated_at, String address, String siretNumber) {
-		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
-		this.address = address;
-		this.siretNumber = siretNumber;
-		associates = new ArrayList<>();
-		jobs = new ArrayList<>();
-	}
+//	/**
+//	 * Full constructor
+//	 * 
+//	 * @param login
+//	 * @param name
+//	 * @param phone
+//	 * @param email
+//	 * @param presentation
+//	 * @param avatar
+//	 * @param created_at
+//	 * @param updated_at
+//	 * @param address
+//	 * @param siretNumber
+//	 */
+//	public Enterprise(String login, String name, String phone, String email, String presentation,
+//			String avatar, String created_at, String updated_at, String address, String siretNumber) {
+//		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
+//		this.address = address;
+//		this.siretNumber = siretNumber;
+//		associates = new ArrayList<>();
+//		jobs = new ArrayList<>();
+//	}
 
 	/*
 	 * (non-Javadoc)

@@ -230,7 +230,6 @@ public class ProposalController extends BaseController {
 									}
 								}
 							}
-							System.out.println(job.toString());
 							//Update the contract and the location
 							job.setContractType((ContractType) v.getComboBox_contract().getSelectedItem());
 						}

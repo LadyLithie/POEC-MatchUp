@@ -32,6 +32,7 @@ public class LoginController extends BaseController {
 	 * @param frame
 	 */
 	public LoginController(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new LoginView(this.frame);
 	}
@@ -43,6 +44,7 @@ public class LoginController extends BaseController {
 	 * @param newUser
 	 */
 	public LoginController(JFrame frame, RegisteredUser newUser) {
+		super();
 		this.user = newUser;
 		super.frame = frame;
 		super.view = new LoginView(this.frame);

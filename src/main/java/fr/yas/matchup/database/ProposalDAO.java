@@ -5,6 +5,8 @@ package fr.yas.matchup.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.ContractType;
@@ -134,4 +136,45 @@ public class ProposalDAO extends BaseDAO {
 			return request;
 		}
 
+		/**
+		 * 
+		 * @param id of the compagny (user)
+		 * @return
+		 */
+		public List<BaseEntity> getByCompany(double id) {
+			ArrayList<BaseEntity> jobs = new ArrayList<>();
+			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
+					+ " WHERE " + ENTERPRISE + " = " + id);
+
+			try {
+				while (rs.next()) {
+					jobs.add(parseToObject(rs));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return jobs;
+		}
+		
+		/**
+		 * 
+		 * @param id of the headhunter (user)
+		 * @return
+		 */
+		public List<BaseEntity> getByHeadhunter(double id) {
+			ArrayList<BaseEntity> jobs = new ArrayList<>();
+			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
+					+ " WHERE " + HEADHUNTER + " = " + id);
+
+			try {
+				while (rs.next()) {
+					jobs.add(parseToObject(rs));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return jobs;
+		}
 }

@@ -51,13 +51,9 @@ public class AdminController extends BaseController {
 	private MouseListener mouseChangeAvatar;
 
 	public AdminController(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new AdministratorView(this.frame);
-		// user = new Administrator();
-		// user.setFirstname("Hal");
-		// user.setLastname("One");
-		// user.setEmail("admin@soft.fr");
-		// user.setPhone("00 00 00 00 00");
 	}
 
 	/*
@@ -71,7 +67,6 @@ public class AdminController extends BaseController {
 		user = (Administrator) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 
 		v.getTextField_AdminEmail().setText(user.getEmail());
-		// v.getTextField_AdminName().setText(user.getName());
 		v.getTextField_adminFirstName().setText(user.getFirstname());
 		v.getTextField_AdminLastName().setText(user.getLastname());
 		v.getTextField_AdminPhone().setText(String.valueOf(user.getPhone()));
@@ -166,7 +161,7 @@ public class AdminController extends BaseController {
 		v.getBtnEditer().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (v.getBtnEditer().getText() == "Editer") {
+				if (v.getBtnEditer().getText().equals("Editer")) {
 					setMode(true);
 					v.getLblPhoto().addMouseListener(mouseChangeAvatar);
 				} else {
@@ -197,95 +192,12 @@ public class AdminController extends BaseController {
 		/*
 		 * Panel Skills manager
 		 */
-		// v.getBtnAdd().setEnabled(false);
+		//Add a new skill
 		v.getBtnAdd().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == v.getBtnAdd()) {
-					JFrame edition = new JFrame("Confirmation");
-					// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
-					// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
-					JPanel contentPanel = new JPanel();
-					ViewsUtils.popUp(edition, contentPanel);
-
-					contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-					contentPanel.setLayout(new BorderLayout(0, 0));
-
-					JPanel buttonPane = new JPanel();
-					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-					contentPanel.add(buttonPane, BorderLayout.SOUTH);
-					// getRootPane().setDefaultButton(okButton);
-
-					JButton cancelButton = new JButton("Annuler");
-					cancelButton.setActionCommand("Non");
-					buttonPane.add(cancelButton);
-
-					JButton okButton = new JButton("Valider");
-					okButton.setActionCommand("Valider");
-					buttonPane.add(okButton);
-
-					JPanel panel = new JPanel();
-					contentPanel.add(panel, BorderLayout.CENTER);
-					GridBagLayout gbl_panel = new GridBagLayout();
-					gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-					gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-					gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-					gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-					panel.setLayout(gbl_panel);
-
-					JLabel lblNom = new JLabel("Nom :");
-					GridBagConstraints gbc_lblNom = new GridBagConstraints();
-					gbc_lblNom.insets = new Insets(0, 0, 5, 5);
-					gbc_lblNom.gridx = 1;
-					gbc_lblNom.gridy = 1;
-					panel.add(lblNom, gbc_lblNom);
-
-					JTextField tF_Name = new JTextField();
-					GridBagConstraints gbc_tF_Name = new GridBagConstraints();
-					gbc_tF_Name.insets = new Insets(0, 0, 5, 0);
-					gbc_tF_Name.fill = GridBagConstraints.BOTH;
-					gbc_tF_Name.gridx = 3;
-					gbc_tF_Name.gridy = 1;
-					panel.add(tF_Name, gbc_tF_Name);
-					tF_Name.setColumns(10);
-
-					JLabel lblType = new JLabel("Type :");
-					GridBagConstraints gbc_lblType = new GridBagConstraints();
-					gbc_lblType.insets = new Insets(0, 0, 0, 5);
-					gbc_lblType.gridx = 1;
-					gbc_lblType.gridy = 3;
-					panel.add(lblType, gbc_lblType);
-
-					JTextField tF_Type = new JTextField();
-					GridBagConstraints gbc_tF_Type = new GridBagConstraints();
-					gbc_tF_Type.fill = GridBagConstraints.HORIZONTAL;
-					gbc_tF_Type.gridx = 3;
-					gbc_tF_Type.gridy = 3;
-					panel.add(tF_Type, gbc_tF_Type);
-					tF_Type.setColumns(10);
-
-					edition.setVisible(true);
-					edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					
-					okButton.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							if(e.getSource() == okButton) {
-								Skill skill = new Skill();
-								skill.setName(tF_Name.getText());
-								skill.setSkillType(tF_Type.getText());
-								SkillDAO sDao = new SkillDAO();
-								sDao.insert(skill);
-								PanelAdminSkill pSkill = new PanelAdminSkill();
-								pSkill.gettF_SkillName().setText(skill.getName());
-								pSkill.gettF_SkillType().setText(skill.getSkillType());
-								v.getListSkills().add(pSkill);
-								v.getSkills().add(pSkill);
-								
-								edition.setVisible(false);
-							}
-						}
-					});
+					popupAddForm(v);
 				}
 			}
 		});
@@ -301,56 +213,8 @@ public class AdminController extends BaseController {
 								"Cette compétence devrait être supprimée\n mais cela aura des conséquences sur ceux qui les utilise");
 						// popup de confirmation
 						if (e.getSource() == skillManager.getBtnModify()) {
-							JFrame edition = new JFrame("Confirmation");
-							// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
-							// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
-							JPanel contentPanel = new JPanel();
-							ViewsUtils.popUp(edition, contentPanel);
-
-							JLabel lblMessage = new JLabel("Etes-vous sûr de vouloir supprimer \n" + "la compétence "
-									+ skillManager.getSkill().getName() + " ?");
-							lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
-							contentPanel.add(lblMessage);
-
-							JPanel buttonPane = new JPanel();
-							buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-							contentPanel.add(buttonPane, BorderLayout.SOUTH);
-
-							JButton okButton = new JButton("Oui");
-							okButton.setActionCommand("Oui");
-							buttonPane.add(okButton);
-
-							JButton cancelButton = new JButton("Non");
-							cancelButton.setActionCommand("Non");
-							buttonPane.add(cancelButton);
-
-							edition.setVisible(true);
-							edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-							okButton.addActionListener(new ActionListener() {
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									if (e.getSource() == okButton) {
-										v.getListSkills().remove(skillManager);
-										v.getSkills().remove(skillManager);
-										edition.setVisible(false);
-									}
-								}
-							});
-
-							cancelButton.addActionListener(new ActionListener() {
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									if (e.getSource() == cancelButton) {
-										skillManager.gettF_SkillName().setText(skillManager.getSkill().getName());
-										skillManager.gettF_SkillType().setText(skillManager.getSkill().getSkillType());
-										edition.setVisible(false);
-									}
-								}
-							});
-
+							popupConfirmationSupp(skillManager,v);
 						}
-
 					} else if (name.isEmpty() || type.isEmpty()) { // Error modification
 						if (name.isEmpty()) {
 							skillManager.gettF_SkillName().setBackground(Color.PINK);
@@ -418,27 +282,166 @@ public class AdminController extends BaseController {
 		}
 
 		v.getTextField_adminFirstName().setEditable(b);
-		if (b)
+		if (b) {
 			v.getTextField_adminFirstName().setBorder(new TextFieldBorder());
-		else
+		} else {
 			v.getTextField_adminFirstName().setBorder(new EmptyBorder(0, 0, 0, 0));
+		}
 		v.getTextField_AdminLastName().setEditable(b);
-		if (b)
+		if (b) {
 			v.getTextField_AdminLastName().setBorder(new TextFieldBorder());
-		else
+		} else {
 			v.getTextField_AdminLastName().setBorder(new EmptyBorder(0, 0, 0, 0));
-
+		}
 		v.getTextField_AdminPhone().setEditable(b);
-		if (b)
+		if (b) {
 			v.getTextField_AdminPhone().setBorder(new TextFieldBorder());
-		else
+		} else {
 			v.getTextField_AdminPhone().setBorder(new EmptyBorder(0, 0, 0, 0));
-
+		}
 		v.getTextField_AdminEmail().setEditable(b);
-		if (b)
+		if (b) {
 			v.getTextField_AdminEmail().setBorder(new TextFieldBorder());
-		else
+		} else {
 			v.getTextField_AdminEmail().setBorder(new EmptyBorder(0, 0, 0, 0));
+		}
+	}
+
+	private void popupAddForm(AdministratorView v) {
+		JFrame edition = new JFrame("Confirmation");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
+		// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
+		JPanel contentPanel = new JPanel();
+		ViewsUtils.popUp(edition, contentPanel);
+
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setLayout(new BorderLayout(0, 0));
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		contentPanel.add(buttonPane, BorderLayout.SOUTH);
+		// getRootPane().setDefaultButton(okButton);
+
+		JButton cancelButton = new JButton("Annuler");
+		cancelButton.setActionCommand("Non");
+		buttonPane.add(cancelButton);
+
+		JButton okButton = new JButton("Valider");
+		okButton.setActionCommand("Valider");
+		buttonPane.add(okButton);
+
+		JPanel panel = new JPanel();
+		contentPanel.add(panel, BorderLayout.CENTER);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		panel.setLayout(gbl_panel);
+
+		JLabel lblNom = new JLabel("Nom :");
+		GridBagConstraints gbc_lblNom = new GridBagConstraints();
+		gbc_lblNom.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNom.gridx = 1;
+		gbc_lblNom.gridy = 1;
+		panel.add(lblNom, gbc_lblNom);
+
+		JTextField tF_Name = new JTextField();
+		GridBagConstraints gbc_tF_Name = new GridBagConstraints();
+		gbc_tF_Name.insets = new Insets(0, 0, 5, 0);
+		gbc_tF_Name.fill = GridBagConstraints.BOTH;
+		gbc_tF_Name.gridx = 3;
+		gbc_tF_Name.gridy = 1;
+		panel.add(tF_Name, gbc_tF_Name);
+		tF_Name.setColumns(10);
+
+		JLabel lblType = new JLabel("Type :");
+		GridBagConstraints gbc_lblType = new GridBagConstraints();
+		gbc_lblType.insets = new Insets(0, 0, 0, 5);
+		gbc_lblType.gridx = 1;
+		gbc_lblType.gridy = 3;
+		panel.add(lblType, gbc_lblType);
+
+		JTextField tF_Type = new JTextField();
+		GridBagConstraints gbc_tF_Type = new GridBagConstraints();
+		gbc_tF_Type.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tF_Type.gridx = 3;
+		gbc_tF_Type.gridy = 3;
+		panel.add(tF_Type, gbc_tF_Type);
+		tF_Type.setColumns(10);
+
+		edition.setVisible(true);
+		edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		okButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == okButton) {
+					Skill skill = new Skill();
+					skill.setName(tF_Name.getText());
+					skill.setSkillType(tF_Type.getText());
+					SkillDAO sDao = new SkillDAO();
+					sDao.insert(skill);
+					PanelAdminSkill pSkill = new PanelAdminSkill();
+					pSkill.gettF_SkillName().setText(skill.getName());
+					pSkill.gettF_SkillType().setText(skill.getSkillType());
+					v.getListSkills().add(pSkill);
+					v.getSkills().add(pSkill);
+
+					edition.setVisible(false);
+				}
+			}
+		});
+	}
+
+	private void popupConfirmationSupp(PanelAdminSkill skillManager, AdministratorView v) {
+		JFrame edition = new JFrame("Confirmation");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
+		// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
+		JPanel contentPanel = new JPanel();
+		ViewsUtils.popUp(edition, contentPanel);
+
+		JLabel lblMessage = new JLabel("Etes-vous sûr de vouloir supprimer \n" + "la compétence "
+				+ skillManager.getSkill().getName() + " ?");
+		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPanel.add(lblMessage);
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		contentPanel.add(buttonPane, BorderLayout.SOUTH);
+
+		JButton okButton = new JButton("Oui");
+		okButton.setActionCommand("Oui");
+		buttonPane.add(okButton);
+
+		JButton cancelButton = new JButton("Non");
+		cancelButton.setActionCommand("Non");
+		buttonPane.add(cancelButton);
+
+		edition.setVisible(true);
+		edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		okButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == okButton) {
+					v.getListSkills().remove(skillManager);
+					v.getSkills().remove(skillManager);
+					edition.setVisible(false);
+				}
+			}
+		});
+
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == cancelButton) {
+					skillManager.gettF_SkillName().setText(skillManager.getSkill().getName());
+					skillManager.gettF_SkillType().setText(skillManager.getSkill().getSkillType());
+					edition.setVisible(false);
+				}
+			}
+		});
 
 	}
 }
