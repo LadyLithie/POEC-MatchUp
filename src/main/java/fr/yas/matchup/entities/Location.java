@@ -25,7 +25,8 @@ public class Location {
 	}
 
 	/**
-	 * @param address the address to set
+	 * @param address
+	 *            the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -39,7 +40,8 @@ public class Location {
 	}
 
 	/**
-	 * @param city the city to set
+	 * @param city
+	 *            the city to set
 	 */
 	public void setCity(String name) {
 		this.city = name;
@@ -53,7 +55,8 @@ public class Location {
 	}
 
 	/**
-	 * @param departement the departement to set
+	 * @param departement
+	 *            the departement to set
 	 */
 	public void setDepartement(int departement) {
 		this.departement = departement;
@@ -67,7 +70,8 @@ public class Location {
 	}
 
 	/**
-	 * @param pays the pays to set
+	 * @param pays
+	 *            the pays to set
 	 */
 	public void setPays(String pays) {
 		this.pays = pays;
@@ -99,15 +103,17 @@ public class Location {
 	 */
 	public Location(String fulladress) {
 		super();
-			String[] ad = fulladress.split(":");
-			this.setPays(ad[0]);
-			ad = ad[1].split(",");		
-			this.setAddress(ad[0]);
-			this.setDepartement(Integer.valueOf(ad[1]));
-			this.setCity(ad[2]);
+		String[] ad = fulladress.split(":");
+		this.setPays(ad[0]);
+		ad = ad[1].split(",");
+		this.setAddress(ad[0]);
+		this.setDepartement(Integer.valueOf(ad[1]));
+		this.setCity(ad[2]);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

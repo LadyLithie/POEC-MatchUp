@@ -179,7 +179,7 @@ public class ProposalController extends BaseController {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Go previous page
 					if (user instanceof Enterprise) {
-						ViewsManager.getInstance().next(new EnterpriseController(frame));
+						ViewsManager.getInstance().next(new CompanyController(frame));
 					} else {
 						ViewsManager.getInstance().next(new HeadhunterController(frame));
 					}
@@ -251,7 +251,7 @@ public class ProposalController extends BaseController {
 							}
 
 							System.out.println(job.toString());
-							ViewsManager.getInstance().next(new EnterpriseController(frame));
+							ViewsManager.getInstance().next(new CompanyController(frame));
 
 						} else {//the current user is a headhunter
 							((Headhunter) user).getJobs().add(job);

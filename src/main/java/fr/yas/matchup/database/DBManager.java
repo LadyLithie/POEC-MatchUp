@@ -106,7 +106,7 @@ public class DBManager {
 		
 		try {
 			stmt = creaCon.createStatement();
-			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+";");
+			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+" CHARACTER SET utf8 COLLATE utf8_general_ci;");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

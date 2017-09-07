@@ -22,7 +22,7 @@ import fr.yas.matchup.views.panels.PanelPresentation;
  * @author Audrey
  *
  */
-public class ProfileEView extends BaseView {
+public class CompanyView extends BaseView {
 	private JPanel panel_left;
 	private JPanel panel_TopRight;
 	private JPanel panel_bottomRight;
@@ -61,7 +61,7 @@ public class ProfileEView extends BaseView {
 	/**
 	 * Create the frame.
 	 */
-	public ProfileEView(JFrame frame) {
+	public CompanyView(JFrame frame) {
 		super();
 		super.pageName = "Profile";
 		JPanel panel = new JPanel();

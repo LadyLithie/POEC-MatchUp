@@ -18,7 +18,7 @@ import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.managers.ViewsManager;
-import fr.yas.matchup.views.ProfileEView;
+import fr.yas.matchup.views.CompanyView;
 import fr.yas.matchup.views.panels.Panel2FieldButton;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelListJobs;
@@ -29,7 +29,7 @@ import fr.yas.matchup.views.panels.PanelResumeJob;
  * @author Audrey
  *
  */
-public class EnterpriseController extends BaseController {
+public class CompanyController extends BaseController {
 	private Enterprise user;
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
 	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
@@ -62,11 +62,11 @@ public class EnterpriseController extends BaseController {
 	 * 
 	 * @param frame
 	 */
-	public EnterpriseController(JFrame frame) {
+	public CompanyController(JFrame frame) {
 		super();
 		super.frame = frame;
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		super.view = new ProfileEView(this.frame);
+		super.view = new CompanyView(this.frame);
 	}
 
 	/*
@@ -77,7 +77,7 @@ public class EnterpriseController extends BaseController {
 	@Override
 	public void initView() {
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		ProfileEView v = (ProfileEView) getView();
+		CompanyView v = (CompanyView) getView();
 		// Panel presentation
 		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
 		/*
@@ -150,7 +150,7 @@ public class EnterpriseController extends BaseController {
 	 */
 	@Override
 	public void initEvent() {
-		ProfileEView v = (ProfileEView) super.view;
+		CompanyView v = (CompanyView) super.view;
 
 		/*
 		 * Panel Presentation Define the action on the buttons

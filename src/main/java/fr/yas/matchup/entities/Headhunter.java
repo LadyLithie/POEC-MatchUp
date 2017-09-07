@@ -1,6 +1,7 @@
 package fr.yas.matchup.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Audrey
@@ -16,7 +17,7 @@ public class Headhunter extends RegisteredUser {
 	private ArrayList<String> phones;
 	private ArrayList<String> emails;
 
-	private ArrayList<Proposal> jobs;
+	private List<Proposal> jobs;
 	private ArrayList<Enterprise> associates;
 	
 	/**
@@ -120,15 +121,15 @@ public class Headhunter extends RegisteredUser {
 	/**
 	 * @return the jobs
 	 */
-	public ArrayList<Proposal> getJobs() {
+	public List<Proposal> getJobs() {
 		return jobs;
 	}
 
 	/**
-	 * @param jobs the jobs to set
+	 * @param list the jobs to set
 	 */
-	public void setJobs(ArrayList<Proposal> jobs) {
-		this.jobs = jobs;
+	public void setJobs(List<Proposal> list) {
+		this.jobs = list;
 	}
 
 	/**

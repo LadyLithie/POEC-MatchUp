@@ -48,8 +48,8 @@ public class ProposalDAO extends BaseDAO {
 				job.setLocalization(resultSet.getString(ADDRESS));
 				EnterpriseDAO enterprise = new EnterpriseDAO();
 				job.setCompany((Enterprise) enterprise.get(resultSet.getDouble(ENTERPRISE)));
-				ProposalDAO proposal = new ProposalDAO();
-				job.setContractType((ContractType) proposal.get(resultSet.getDouble(CONTRACT)));
+				ContractDAO cDao = new ContractDAO();
+				job.setContractType((ContractType) cDao.get(resultSet.getDouble(CONTRACT)));
 				//missing DAOheadhunter
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -141,14 +141,14 @@ public class ProposalDAO extends BaseDAO {
 		 * @param id of the compagny (user)
 		 * @return
 		 */
-		public List<BaseEntity> getByCompany(double id) {
-			ArrayList<BaseEntity> jobs = new ArrayList<>();
+		public ArrayList<Proposal> getByCompany(double id) {
+			ArrayList<Proposal> jobs = new ArrayList<>();
 			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
 					+ " WHERE " + ENTERPRISE + " = " + id);
 
 			try {
 				while (rs.next()) {
-					jobs.add(parseToObject(rs));
+					jobs.add((Proposal) parseToObject(rs));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -162,14 +162,14 @@ public class ProposalDAO extends BaseDAO {
 		 * @param id of the headhunter (user)
 		 * @return
 		 */
-		public List<BaseEntity> getByHeadhunter(double id) {
-			ArrayList<BaseEntity> jobs = new ArrayList<>();
+		public List<Proposal> getByHeadhunter(double id) {
+			ArrayList<Proposal> jobs = new ArrayList<>();
 			ResultSet rs = executeRequest("SELECT * FROM " + TABLE
 					+ " WHERE " + HEADHUNTER + " = " + id);
 
 			try {
 				while (rs.next()) {
-					jobs.add(parseToObject(rs));
+					jobs.add((Proposal)parseToObject(rs));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
