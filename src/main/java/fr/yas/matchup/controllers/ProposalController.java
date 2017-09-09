@@ -83,6 +83,9 @@ public class ProposalController extends BaseController {
 	public void initView() {
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		ProposalView vFrame = ((ProposalView) getView());
+		vFrame.getComboBox_contract().setRenderer(new ComboBoxRenderer());
+		vFrame.getComboBox_linkedUser().setRenderer(new ComboBoxRenderer());
+		vFrame.getComboBox_location().setRenderer(new ComboBoxRenderer());
 		if (job == null) { // mode creation
 			vFrame.setMode(true);
 			// Contracts
@@ -159,10 +162,6 @@ public class ProposalController extends BaseController {
 				vFrame.setMode(false);
 			}
 		}
-		vFrame.getComboBox_contract().setRenderer(new ComboBoxRenderer());
-		vFrame.getComboBox_linkedUser().setRenderer(new ComboBoxRenderer());
-		vFrame.getComboBox_location().setRenderer(new ComboBoxRenderer());
-
 	}
 
 	@Override
@@ -185,7 +184,7 @@ public class ProposalController extends BaseController {
 					}
 				}
 			});
-			// Register a new job
+			// Register a new job or update an existing one
 			v.getBtnProposalCreation().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -240,28 +239,32 @@ public class ProposalController extends BaseController {
 						//Return to user profile
 						if (user instanceof Enterprise) { //the current user is a company
 							//Add the job to the user list
-							((Enterprise) user).getJobs().add(job);
 							job.setCompany((Enterprise) user);
 							job.setHeadhunter((Headhunter) v.getComboBox_linkedUser().getSelectedItem());
 							
 							if (exist) {
 								pDao.update(job);
+								pDao.insertSkills(job);
 							} else {
 								pDao.insert(job);
+								pDao.insertSkills(job);
+								((Enterprise) user).getJobs().add(job);
 							}
 
 							System.out.println(job.toString());
 							ViewsManager.getInstance().next(new CompanyController(frame));
 
 						} else {//the current user is a headhunter
-							((Headhunter) user).getJobs().add(job);
 							job.setHeadhunter((Headhunter) user);
 							job.setCompany((Enterprise) v.getComboBox_linkedUser().getSelectedItem());
 							
 							if (exist) {
 								pDao.update(job);
+								pDao.insertSkills(job);
 							} else {
 								pDao.insert(job);
+								pDao.insertSkills(job);
+								((Headhunter) user).getJobs().add(job);
 							}
 
 							System.out.println(job.toString());

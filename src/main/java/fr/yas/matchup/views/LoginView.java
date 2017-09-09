@@ -127,6 +127,8 @@ public class LoginView extends BaseView {
 		textFieldPwd.setColumns(10);
 		
 		JButton btnForgottenPassword = new JButton("Forgotten Password");
+		//For now : inactive (no associated action)
+		btnForgottenPassword.setEnabled(false);
 		GridBagConstraints gbc_btnForgottenPassword = new GridBagConstraints();
 		gbc_btnForgottenPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_btnForgottenPassword.gridx = 3;

@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.yas.matchup.database.base.BaseDAO;
+import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.Enterprise;
-import fr.yas.matchup.entities.Proposal;
+import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 /**
@@ -29,6 +30,9 @@ public class ProposalDAO extends BaseDAO {
 		public static final String ENTERPRISE = "enterprise_id";
 		public static final String HEADHUNTER = "headhunter_id";
 
+		public static final String JOB_SKILL = "job_skill";
+		public static final String ID_JOB = "job_id";
+		public static final String ID_SKILL = "skill_id";
 		
 		public ProposalDAO() {
 			super(TABLE, ID);
@@ -106,26 +110,26 @@ public class ProposalDAO extends BaseDAO {
 			String request;
 			
 			Proposal job = ((Proposal)item);
-			request = NAME +" = '"+job.getName()+"'";
+			request = NAME +" = '"+job.getName()+"',";
 			if(job.getLocalization() == null) {
-				request += ADDRESS +" = null";
+				request += ADDRESS +" = null,";
 			}else {
-				request += ADDRESS +" = '"+job.getLocalization()+"'";
+				request += ADDRESS +" = '"+job.getLocalization()+"',";
 			}
 			if(job.getPresentation() == null) {
-				request += PRESENTATION +" = null";
+				request += PRESENTATION +" = null,";
 			}else {
-				request += PRESENTATION +" = '"+job.getPresentation()+"'";
+				request += PRESENTATION +" = '"+job.getPresentation()+"',";
 			}
 			if(job.getContractType() == null) {
-				request += CONTRACT +" = null";
+				request += CONTRACT +" = null,";
 			}else {
-				request += CONTRACT +" = '"+job.getContractType().getId()+"'";
+				request += CONTRACT +" = '"+job.getContractType().getId()+"',";
 			}
 			if(job.getCompany() == null) {
-				request += ENTERPRISE +" = null";
+				request += ENTERPRISE +" = null,";
 			}else {
-				request += ENTERPRISE +" = '"+job.getCompany().getId()+"'";
+				request += ENTERPRISE +" = '"+job.getCompany().getId()+"',";
 			}
 			if(job.getHeadhunter() == null) {
 				request += HEADHUNTER +" = null";
@@ -148,7 +152,9 @@ public class ProposalDAO extends BaseDAO {
 
 			try {
 				while (rs.next()) {
-					jobs.add((Proposal) parseToObject(rs));
+					Proposal nJob = (Proposal) parseToObject(rs);
+					nJob = getSkills(nJob);
+					jobs.add(nJob);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -177,4 +183,62 @@ public class ProposalDAO extends BaseDAO {
 
 			return jobs;
 		}
+
+		/**
+		 * Return all skills associated to a given job
+		 * Use relational table job_skill which reference the job id and a skill id per row
+		 * @param job
+		 * @return
+		 */
+		public Proposal getSkills(Proposal job) {
+			ResultSet rs = executeRequest("SELECT * FROM " + JOB_SKILL
+					+ " WHERE " + ID_JOB + " = " + job.getId());
+			List<Double> skillsId = new ArrayList<Double>();
+			try {
+				while (rs.next()) {
+					skillsId.add(rs.getDouble(ID_SKILL));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			BaseDAO skillDAO = new SkillDAO();
+
+			for (Double id : skillsId) {
+				job.getSkills().add( (Skill) skillDAO.get(id));
+			}
+
+			return job;
+		}
+
+		/**
+		 * Insert the list of skills of the job in the data base
+		 * It is also use for update
+		 * Use relational table job_skill which reference the job id and a skill id per row
+		 * @param job
+		 * @return
+		 */
+		public int insertSkills(Proposal job) {
+			int result = 0;
+			deleteSkills(job);
+			for (Skill skill : job.getSkills()) {
+				result += executeRequestUpdate("INSERT INTO " + JOB_SKILL
+						+ " VALUES(" + job.getId() + "," + skill.getId()
+						+ ")");
+			}
+			return result;
+		}
+
+		/**
+		 * Delete all the skills associated to a given job
+		 * Use relational table job_skill which reference the job id and a skill id per row
+		 * @param job
+		 * @return
+		 */
+		public int deleteSkills(Proposal job) {
+			return executeRequestUpdate("DELETE FROM " + JOB_SKILL + " WHERE "
+					+ ID_JOB + " = " + job.getId());
+		}
+
+
 }

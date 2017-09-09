@@ -10,6 +10,7 @@
 package fr.yas.matchup.entities;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.yas.matchup.entities.base.BaseEntity;
@@ -119,7 +120,7 @@ public class Proposal extends BaseEntity {
 	 * @param string (format:PAYS:address,CodePostal,VILLE)
 	 */
 	public void setLocalization(String string) {
-		if (string.isEmpty()) {
+		if (string.trim().isEmpty()) {
 			localization = new Location();
 		}else {
 			localization = new Location(string);
@@ -171,10 +172,12 @@ public class Proposal extends BaseEntity {
 		super();
 		this.name = name;
 		this.contractType = contractType;
+		skills = new ArrayList<>();
 	}
 	
 	public Proposal() {
 		super();
+		skills = new ArrayList<>();
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

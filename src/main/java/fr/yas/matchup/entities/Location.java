@@ -10,7 +10,7 @@ package fr.yas.matchup.entities;
 public class Location {
 	public static final String INTERNATIONAL = "Internationnal";
 	public static final String FRANCE = "France";
-	public static final String EUROPE = "Union Européenne";
+	public static final String EUROPE = "Union EuropÃ©enne";
 
 	private String address;
 	private String city;
@@ -82,6 +82,9 @@ public class Location {
 	 */
 	public Location() {
 		super();
+		pays = "";
+		address = "";
+		city = "";
 	}
 
 	/**
@@ -105,10 +108,15 @@ public class Location {
 		super();
 		String[] ad = fulladress.split(":");
 		this.setPays(ad[0]);
+		if (ad[1].length() != 3) {
+			this.setCity(ad[2]);
+		} else {
+			this.setCity("");
+		}
 		ad = ad[1].split(",");
 		this.setAddress(ad[0]);
 		this.setDepartement(Integer.valueOf(ad[1]));
-		this.setCity(ad[2]);
+
 	}
 
 	/*

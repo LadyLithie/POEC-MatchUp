@@ -1,4 +1,4 @@
-﻿INSERT INTO candidate VALUES (0,'DRAGNIR','Natsu',0987654321,NOW(),'1 rue de la liberté','natsu.dragnir@orange.fr',null,'Bonjour je suis natsu DRAGNIR ','Nat','pwd','candidate');
+INSERT INTO candidate VALUES (null,'DRAGNIR','Natsu',0987654321,NOW(),'1 rue de la liberté','natsu.dragnir@orange.fr',null,'Bonjour je suis natsu DRAGNIR ','Nat','pwd','candidate');
 INSERT INTO candidate VALUES (null,'NEYMAR','Jean',1234567890,NOW(),'1 rue de PSG', 'jean.neymar@orange.fr',null,'Bonjour je vaux 222 millions €', 'Jean', 'foot','candidate' );
 
 INSERT INTO enterprise VALUES (null,'QUATAR',0102030405, '1 rue du quatar','PARIS','lesrichesduMoyenOrient.com','lesrichesduMoyenOrient@pretentieux.com','Bonjour je possede une carte bleue non je voulais dire une carte dieu',null,'lesrichesduMoyenOrient@twitter.com','lesrichesduMoyenOrient@linkedin.com','Recherche de footballeur sans le bac','enterprise','dieuxDuFoot','petrole');
