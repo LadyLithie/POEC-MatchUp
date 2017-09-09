@@ -12,14 +12,14 @@ import fr.yas.matchup.entities.base.BaseEntity;
 public abstract class RegisteredUser extends BaseEntity {
 	private String login;
 	private String name;
-	
+	private Role role;
 	private String phone;
 	private String email;
 	private String presentation;
 	private String avatar;
 	private String created_at;
 	private String updated_at;
-	//temporaire
+	//Temporary
 	private String password;
 	
 	/**
@@ -187,6 +187,20 @@ public abstract class RegisteredUser extends BaseEntity {
 		return "RegisteredUser [login=" + login + ", name=" + name + ", phone=" + phone + ", email=" + email
 				+ ", presentation=" + presentation + ", avatar=" + avatar + ", created_at=" + created_at
 				+ ", updated_at=" + updated_at + ", password=" + password + "]";
+	}
+
+	/**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	

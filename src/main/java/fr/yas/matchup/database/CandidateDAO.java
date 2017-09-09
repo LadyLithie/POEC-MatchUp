@@ -7,6 +7,7 @@ import java.util.List;
 
 import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Candidate;
+import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 
@@ -52,7 +53,12 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setPresentation(rs.getString(PRESENTATION));
 			candidate.setLogin(rs.getString(LOGIN));
 			candidate.setPassword(rs.getString(PASSWORD));
-			candidate.setRole(rs.getString(ROLE));
+			if (rs.getString(ROLE).equals("candidate")) {
+				candidate.setRole(Role.CANDIDATE);
+			} else {
+				candidate.setRole(Role.valueOf(rs.getString(ROLE)));
+			}
+			
 			candidate.setName(candidate.getFirstname() + " " + candidate.getLastname());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +76,13 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += "'" + candidate.getLastname() + "',";
 		result += "'" + candidate.getFirstname() + "',";
 		result += "'" + candidate.getPhone() + "',";
-		result += "'" + candidate.getBirstdate() + "',";
+		if (candidate.getBirstdate() != null) {
+			result += "'" + candidate.getBirstdate() + "',";
+			
+		} else {
+			result += null + ",";
+
+		}
 		result += "'" + candidate.getAddress() + "',";
 		result += "'" + candidate.getEmail() + "',";
 		result += "'" + candidate.getAvatar() + "',";

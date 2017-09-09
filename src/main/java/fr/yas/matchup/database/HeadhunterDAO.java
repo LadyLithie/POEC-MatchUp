@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class HeadhunterDAO extends RegisteredUserDAO {
@@ -41,7 +42,11 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setTwitter(rs.getString(TWITTER));
 			headhunter.setLinkedin(rs.getString(LINKEDIN));
 			headhunter.setPresentation(rs.getString(PRESENTATION));
-			headhunter.setRole(rs.getString(ROLE));
+			if (rs.getString(ROLE).equals("headhunter")) {
+				headhunter.setRole(Role.HEADHUNTER);
+			} else {
+				headhunter.setRole(Role.valueOf(rs.getString(ROLE)));
+			}
 			headhunter.setLogin(rs.getString(LOGIN));
 			headhunter.setPassword(rs.getString(PASSWORD));
 			headhunter.setName(headhunter.getFirstname() + " " + headhunter.getLastname());

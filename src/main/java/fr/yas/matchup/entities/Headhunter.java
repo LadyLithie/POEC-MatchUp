@@ -12,7 +12,6 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private String twitter;
 	private String linkedin;
-	private String role;
 	private String picture;
 	private ArrayList<String> phones;
 	private ArrayList<String> emails;
@@ -202,19 +201,4 @@ public class Headhunter extends RegisteredUser {
 		jobs = new ArrayList<>();
 	}
 
-	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	
 }

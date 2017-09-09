@@ -17,7 +17,6 @@ public class Candidate extends RegisteredUser {
 	private String lastname;
 	private String birstdate;
 	private String address;
-	private String role;
 	
 	private ArrayList<Diploma> qualifications;
 	private ArrayList<String> mobility;
@@ -115,14 +114,6 @@ public class Candidate extends RegisteredUser {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 	
 	/**
 	 * 
@@ -149,7 +140,7 @@ public class Candidate extends RegisteredUser {
 	 */
 	public Candidate(String login, String name, String phone, String email, String presentation,
 			String avatar, String created_at, String updated_at, String firstname, String lastname, String birstdate,
-			ArrayList<Diploma> qualifications, ArrayList<String> mobility, String address,String role) {
+			ArrayList<Diploma> qualifications, ArrayList<String> mobility, String address) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -159,6 +150,5 @@ public class Candidate extends RegisteredUser {
 		this.mobility = mobility;
 
 		super.setName(firstname + " " + lastname);
-		this.role = role;
 	}
 }

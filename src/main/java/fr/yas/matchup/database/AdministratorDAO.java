@@ -3,6 +3,7 @@ package fr.yas.matchup.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import fr.yas.matchup.entities.Administrator;
+import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class AdministratorDAO extends RegisteredUserDAO {
@@ -34,7 +35,11 @@ public class AdministratorDAO extends RegisteredUserDAO {
 			admin.setFirstname(resultSet.getString(FIRSTNAME));
 			admin.setEmail(resultSet.getString(MAIL));
 			admin.setPhone(resultSet.getString(PHONE));
-			admin.setRole(resultSet.getString(ROLE));
+			if (resultSet.getString(ROLE).equals("admin")) {
+				admin.setRole(Role.ADMIN);
+			} else {
+				admin.setRole(Role.valueOf(resultSet.getString(ROLE)));
+			}
 			admin.setLogin(resultSet.getString(LOGIN));
 			admin.setPassword(resultSet.getString(PASSWORD));
 			admin.setName(admin.getFirstname() + " " + admin.getLastname());

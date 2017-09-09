@@ -10,7 +10,6 @@ package fr.yas.matchup.entities;
 public class Administrator extends RegisteredUser {
 	private String firstname;
 	private String lastname;
-	private String role;
 	
 	/**
 	 * @return the firstname
@@ -69,18 +68,5 @@ public class Administrator extends RegisteredUser {
 		super();
 	}
 
-	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 }

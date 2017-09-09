@@ -16,7 +16,6 @@ public class Enterprise extends RegisteredUser {
 	private String twitter;
 	private String linkedin;
 	private String activity;
-	private String role;
 	private ArrayList<Headhunter> associates;
 
 	private ArrayList<Proposal> jobs;
@@ -159,19 +158,6 @@ public class Enterprise extends RegisteredUser {
 		this.activity = activity;
 	}
 
-	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
 	/**
 	 * 
 	 */

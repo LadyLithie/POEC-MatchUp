@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Role;
 
 public class EnterpriseDAO extends RegisteredUserDAO {
 	
@@ -60,7 +61,11 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 			e.setTwitter(resultSet.getString(TWITTER));
 			e.setLinkedin(resultSet.getString(LINKEDIN));
 			e.setActivity(resultSet.getString(ACTIVITY));
-			e.setRole(resultSet.getString(ROLE));
+			if (resultSet.getString(ROLE).equals("enterprise")) {
+				e.setRole(Role.COMPANY);
+			} else {
+				e.setRole(Role.valueOf(resultSet.getString(ROLE)));
+			}
 			e.setLogin(resultSet.getString(LOGIN));
 			e.setPassword(resultSet.getString(PASSWORD));			
 		} catch (SQLException e1) {
