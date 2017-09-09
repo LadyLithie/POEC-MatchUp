@@ -66,13 +66,20 @@ public class AdminController extends BaseController {
 		AdministratorView v = (AdministratorView) super.view;
 		user = (Administrator) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 
+		/*
+		 * Panel presentation
+		 * Add user's informations
+		 */
 		v.getTextField_AdminEmail().setText(user.getEmail());
 		v.getTextField_adminFirstName().setText(user.getFirstname());
 		v.getTextField_AdminLastName().setText(user.getLastname());
 		v.getTextField_AdminPhone().setText(String.valueOf(user.getPhone()));
 		v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 
-		// Set complete list of skills
+		/*
+		 * Panel skills manager
+		 * Set complete list of skills
+		 */
 		SkillDAO sDao = new SkillDAO();
 		List<BaseEntity> skills = sDao.get();
 		for (BaseEntity entity : skills) {
@@ -88,7 +95,10 @@ public class AdminController extends BaseController {
 			v.getSkills().add(skill);
 		}
 
-		// Set complete list of users
+		/*
+		 * Panel users
+		 * Set complete list of users
+		 */
 		createListUsers(new AdministratorDAO(), v);
 		createListUsers(new HeadhunterDAO(), v);
 		createListUsers(new EnterpriseDAO(), v);
@@ -172,6 +182,8 @@ public class AdminController extends BaseController {
 					user.setEmail(v.getTextField_AdminEmail().getText());
 					user.setPhone(v.getTextField_AdminPhone().getText());
 					v.getLblPhoto().removeMouseListener(mouseChangeAvatar);
+					AdministratorDAO aDao = new AdministratorDAO();
+					aDao.update(user);
 				}
 			}
 		});
@@ -210,7 +222,7 @@ public class AdminController extends BaseController {
 					String type = skillManager.gettF_SkillType().getText();
 					if (name.isEmpty() && type.isEmpty()) { // Delete
 						System.out.println(
-								"Cette compétence devrait être supprimée\n mais cela aura des conséquences sur ceux qui les utilise");
+								"Cette compï¿½tence devrait ï¿½tre supprimï¿½e\n mais cela aura des consï¿½quences sur ceux qui les utilise");
 						// popup de confirmation
 						if (e.getSource() == skillManager.getBtnModify()) {
 							popupConfirmationSupp(skillManager,v);
@@ -309,8 +321,8 @@ public class AdminController extends BaseController {
 
 	private void popupAddForm(AdministratorView v) {
 		JFrame edition = new JFrame("Confirmation");
-		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
-		// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sï¿½r de vouloir
+		// supprimer la compï¿½tence "+skillManager.getSkill().getName()+" ?");
 		JPanel contentPanel = new JPanel();
 		ViewsUtils.popUp(edition, contentPanel);
 
@@ -396,12 +408,12 @@ public class AdminController extends BaseController {
 
 	private void popupConfirmationSupp(PanelAdminSkill skillManager, AdministratorView v) {
 		JFrame edition = new JFrame("Confirmation");
-		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
-		// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sï¿½r de vouloir
+		// supprimer la compï¿½tence "+skillManager.getSkill().getName()+" ?");
 		JPanel contentPanel = new JPanel();
 		ViewsUtils.popUp(edition, contentPanel);
 
-		JLabel lblMessage = new JLabel("Etes-vous sûr de vouloir supprimer \n" + "la compétence "
+		JLabel lblMessage = new JLabel("Etes-vous sï¿½r de vouloir supprimer \n" + "la compï¿½tence "
 				+ skillManager.getSkill().getName() + " ?");
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblMessage);

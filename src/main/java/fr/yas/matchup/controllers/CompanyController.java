@@ -95,14 +95,15 @@ public class CompanyController extends BaseController {
 		 *  Create the list of headhunter working for the company
 		 */
 		PanelHeadhunters vH = (PanelHeadhunters) v.getPanel_bottomRight();
-		ArrayList<Panel2FieldButton> associates;
-		//See if we better not add them to pHeadhunters
-		if (vH.getAssociates() != null) {
-			associates = vH.getAssociates();	
-		} else {
-			associates = new ArrayList<>();
-		}
+//		ArrayList<Panel2FieldButton> associates;
+//		//See if we better not add them to pHeadhunters
+//		if (vH.getAssociates() != null) {
+//			associates = vH.getAssociates();	
+//		} else {
+//			associates = new ArrayList<>();
+//		}
 		if (user.getAssociates() != null) {
+			pHeadhunters = new ArrayList<>();
 			for (Headhunter headhunter : user.getAssociates()) {
 				//posX = posX + 2;
 				Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
@@ -115,11 +116,11 @@ public class CompanyController extends BaseController {
 				gbc_test.gridy =GridBagConstraints.RELATIVE;
 				vH.getPanelContent().add(test, gbc_test);
 				vH.getAssociates().add(test);
-				associates.add(test);
+//				associates.add(test);
+				pHeadhunters.add(test);
 			}			
 		}
 		vH.setMode(false);
-
 		
 		/*
 		 * Panel jobs
@@ -138,9 +139,7 @@ public class CompanyController extends BaseController {
 				vListJobs.getPanelJobs().getResumeJobs().add(job);
 				pJobs.add(job);
 			}
-			
 		}
-
 	}
 
 	/*

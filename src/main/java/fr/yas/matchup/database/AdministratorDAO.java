@@ -14,6 +14,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 	public static final String FIRSTNAME = "firstname_admin";
 	public static final String MAIL = "mail_admin";
 	public static final String PHONE = "phone_admin";
+	public static final String AVATAR = "logo_admin";
 	public static final String ROLE = "role_admin";
 	public static final String LOGIN = "login_admin";
 	public static final String PASSWORD = "password_admin";
@@ -35,6 +36,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 			admin.setFirstname(resultSet.getString(FIRSTNAME));
 			admin.setEmail(resultSet.getString(MAIL));
 			admin.setPhone(resultSet.getString(PHONE));
+			admin.setAvatar(resultSet.getBlob(AVATAR));
 			if (resultSet.getString(ROLE).equals("admin")) {
 				admin.setRole(Role.ADMIN);
 			} else {
