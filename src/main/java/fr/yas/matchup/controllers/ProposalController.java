@@ -23,6 +23,7 @@ import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Location;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
@@ -232,6 +233,7 @@ public class ProposalController extends BaseController {
 							//Update the contract and the location
 							job.setContractType((ContractType) v.getComboBox_contract().getSelectedItem());
 						}
+						job.setLocalization((Location) v.getComboBox_location().getSelectedItem());
 						ProposalDAO pDao = new ProposalDAO();
 						//Add the job to the user list, 
 						//the user to the job for foreign key

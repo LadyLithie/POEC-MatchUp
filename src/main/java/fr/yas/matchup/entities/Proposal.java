@@ -120,7 +120,7 @@ public class Proposal extends BaseEntity {
 	 * @param string (format:PAYS:address,CodePostal,VILLE)
 	 */
 	public void setLocalization(String string) {
-		if (string.trim().isEmpty()) {
+		if (string == null || string.trim().isEmpty()) {
 			localization = new Location();
 		}else {
 			localization = new Location(string);
