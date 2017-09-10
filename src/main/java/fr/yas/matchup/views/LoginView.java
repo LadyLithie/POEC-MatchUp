@@ -1,15 +1,20 @@
 package fr.yas.matchup.views;
 
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.awt.GridLayout;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class LoginView extends BaseView {
 	private JPasswordField textFieldPwd;
@@ -67,28 +72,34 @@ public class LoginView extends BaseView {
 		super.pageName = "Login";
 		JPanel panel = new JPanel();
 		super.panel = panel;
-
-		JPanel panel_1 = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 0;
-		panel.add(panel_1, gbc_panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] {50, 150, 150, 20};
-		gbl_panel_1.rowHeights = new int[] {60, 60, 60, 60, 60, 60, 60};
-		gbl_panel_1.columnWeights = new double[]{1.0, 1.0};
-		gbl_panel_1.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, 1.0};
-		panel_1.setLayout(gbl_panel_1);
+		panel.setLayout(new GridLayout(1, 2, 5, 0));
+		
+		JPanel panelLogin = new JPanel();
+		GridBagConstraints gbc_panelLogin = new GridBagConstraints();
+		gbc_panelLogin.insets = new Insets(10, 10, 10, 10);
+		gbc_panelLogin.fill = GridBagConstraints.BOTH;
+		gbc_panelLogin.gridx = 0;
+		gbc_panelLogin.gridy = 0;
+		panel.add(panelLogin,gbc_panelLogin);
+		GridBagLayout gbl_panelLogin = new GridBagLayout();
+		gbl_panelLogin.rowHeights = new int[]{0, 20, 0, 0, 0, 0};
+		gbl_panelLogin.columnWidths = new int[]{0, 0, 0, 0};
+//		gbl_panelLogin.columnWidths = new int[] {95, 93, 80, 48};
+//		gbl_panelLogin.rowHeights = new int[] {60, 60, 60, 60, 60, 60, 60};
+		gbl_panelLogin.columnWeights = new double[]{0.0, 0.0};
+		gbl_panelLogin.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0};
+		panelLogin.setLayout(gbl_panelLogin);
 		
 		JLabel lblIdentification = new JLabel("Identification");
+		lblIdentification.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblIdentification.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		GridBagConstraints gbc_lblIdentification = new GridBagConstraints();
 		gbc_lblIdentification.fill = GridBagConstraints.VERTICAL;
-		gbc_lblIdentification.gridwidth = 2;
-		gbc_lblIdentification.insets = new Insets(0, 0, 5, 5);
-		gbc_lblIdentification.gridx = 1;
+		gbc_lblIdentification.gridwidth = 4;
+		gbc_lblIdentification.insets = new Insets(0, 0, 5, 0);
+		gbc_lblIdentification.gridx = 0;
 		gbc_lblIdentification.gridy = 0;
-		panel_1.add(lblIdentification, gbc_lblIdentification);
+		panelLogin.add(lblIdentification, gbc_lblIdentification);
 		
 		JLabel lblLogin = new JLabel("Login");
 		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
@@ -96,7 +107,7 @@ public class LoginView extends BaseView {
 		gbc_lblLogin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLogin.gridx = 0;
 		gbc_lblLogin.gridy = 2;
-		panel_1.add(lblLogin, gbc_lblLogin);
+		panelLogin.add(lblLogin, gbc_lblLogin);
 		
 		textFieldLogin = new JTextField();
 		GridBagConstraints gbc_textFieldLogin = new GridBagConstraints();
@@ -105,7 +116,7 @@ public class LoginView extends BaseView {
 		gbc_textFieldLogin.insets = new Insets(0, 0, 5, 5);
 		gbc_textFieldLogin.gridx = 1;
 		gbc_textFieldLogin.gridy = 2;
-		panel_1.add(textFieldLogin, gbc_textFieldLogin);
+		panelLogin.add(textFieldLogin, gbc_textFieldLogin);
 		textFieldLogin.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
@@ -114,7 +125,7 @@ public class LoginView extends BaseView {
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.gridx = 0;
 		gbc_lblPassword.gridy = 3;
-		panel_1.add(lblPassword, gbc_lblPassword);
+		panelLogin.add(lblPassword, gbc_lblPassword);
 		
 		textFieldPwd = new JPasswordField();
 		GridBagConstraints gbc_textFieldPwd = new GridBagConstraints();
@@ -123,31 +134,45 @@ public class LoginView extends BaseView {
 		gbc_textFieldPwd.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldPwd.gridx = 1;
 		gbc_textFieldPwd.gridy = 3;
-		panel_1.add(textFieldPwd, gbc_textFieldPwd);
+		panelLogin.add(textFieldPwd, gbc_textFieldPwd);
 		textFieldPwd.setColumns(10);
 		
-		JButton btnForgottenPassword = new JButton("Forgotten Password");
+		JButton btnForgottenPassword = new JButton("<html>Forgotten<br />Password</html>");
 		//For now : inactive (no associated action)
 		btnForgottenPassword.setEnabled(false);
 		GridBagConstraints gbc_btnForgottenPassword = new GridBagConstraints();
+		gbc_btnForgottenPassword.gridheight = 2;
 		gbc_btnForgottenPassword.insets = new Insets(0, 0, 5, 0);
 		gbc_btnForgottenPassword.gridx = 3;
-		gbc_btnForgottenPassword.gridy = 3;
-		panel_1.add(btnForgottenPassword, gbc_btnForgottenPassword);
+		gbc_btnForgottenPassword.gridy = 2;
+		panelLogin.add(btnForgottenPassword, gbc_btnForgottenPassword);
 		
-		btnLogin = new JButton("Login");
-		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
-		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
-		gbc_btnLogin.gridx = 2;
-		gbc_btnLogin.gridy = 5;
-		panel_1.add(btnLogin, gbc_btnLogin);
+		JPanel panelButtons = new JPanel();
+		GridBagConstraints gbc_panelButtons = new GridBagConstraints();
+		gbc_panelButtons.gridwidth = 4;
+		gbc_panelButtons.fill = GridBagConstraints.BOTH;
+		gbc_panelButtons.gridx = 0;
+		gbc_panelButtons.gridy = 5;
+		panelLogin.add(panelButtons, gbc_panelButtons);
 		
 		btnRegister = new JButton("Register");
-		GridBagConstraints gbc_btnRegister = new GridBagConstraints();
-		gbc_btnRegister.insets = new Insets(0, 0, 5, 5);
-		gbc_btnRegister.gridx = 1;
-		gbc_btnRegister.gridy = 5;
-		panel_1.add(btnRegister, gbc_btnRegister);
+		panelButtons.add(btnRegister);
+		
+		btnLogin = new JButton("Login");
+		panelButtons.add(btnLogin);
+		
+		//Right panel
+		JPanel panelAbout = new JPanel();
+		GridBagConstraints gbc_panelAbout = new GridBagConstraints();
+		gbc_panelAbout.insets = new Insets(10, 10, 10, 10);
+		gbc_panelAbout.gridx = 1;
+		gbc_panelAbout.gridy = 1;
+		gbc_panelAbout.fill = GridBagConstraints.BOTH;
+		panel.add(panelAbout, gbc_panelAbout);
+		
+		JLabel image = new JLabel(new ImageIcon("image/MatchUp 4f.png"));
+		panelAbout.setLayout(new BorderLayout());
+		panelAbout.add(image, BorderLayout.CENTER);
 	}
 
 }
