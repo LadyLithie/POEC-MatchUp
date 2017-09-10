@@ -74,7 +74,7 @@ public class AdminController extends BaseController {
 		v.getTextField_adminFirstName().setText(user.getFirstname());
 		v.getTextField_AdminLastName().setText(user.getLastname());
 		v.getTextField_AdminPhone().setText(String.valueOf(user.getPhone()));
-		v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
+//		v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 
 		/*
 		 * Panel skills manager
@@ -176,7 +176,7 @@ public class AdminController extends BaseController {
 					v.getLblPhoto().addMouseListener(mouseChangeAvatar);
 				} else {
 					setMode(false);
-					user.setAvatar(((ImageIcon) v.getLblPhoto().getIcon()).getDescription());
+//					user.setAvatar(((ImageIcon) v.getLblPhoto().getIcon()).getDescription());
 					user.setFirstname(v.getTextField_adminFirstName().getText());
 					user.setLastname(v.getTextField_AdminLastName().getText());
 					user.setEmail(v.getTextField_AdminEmail().getText());
@@ -197,7 +197,7 @@ public class AdminController extends BaseController {
 				v.getTextField_adminFirstName().setText(user.getFirstname());
 				v.getTextField_AdminLastName().setText(user.getLastname());
 				v.getTextField_AdminPhone().setText(String.valueOf(user.getPhone()));
-				v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
+//				v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 			}
 		});
 

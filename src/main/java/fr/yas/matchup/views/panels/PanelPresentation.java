@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -213,7 +215,7 @@ public class PanelPresentation extends JPanel implements IVisibility{
 		gbl_panelLogo.rowWeights = new double[] { 0, 0, 0, 0, Double.MIN_VALUE };
 		panelLogo.setLayout(gbl_panelLogo);
 
-		lblLogo = new JLabel("Logo");
+		lblLogo = new JLabel(new ImageIcon("image/GenericAvatar.png"));
 		lblLogo.setSize(100, 100);
 		GridBagConstraints gbc_lblLogo = new GridBagConstraints();
 		gbc_lblLogo.insets = new Insets(0, 0, 1, 1);

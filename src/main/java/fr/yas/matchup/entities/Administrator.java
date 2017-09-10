@@ -3,6 +3,8 @@
  */
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
+
 /**
  * @author Audrey
  *
@@ -53,7 +55,7 @@ public class Administrator extends RegisteredUser {
 	 * @param lastname
 	 */
 	public Administrator(String login, String name, String phone, String email,
-			String presentation, String avatar, String created_at, String updated_at, String firstname,
+			String presentation, Blob avatar, String created_at, String updated_at, String firstname,
 			String lastname) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;

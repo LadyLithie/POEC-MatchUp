@@ -4,6 +4,7 @@
 
 package fr.yas.matchup.database;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -57,7 +58,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 			e.setWebsite(resultSet.getString(WEBSITE));
 			e.setEmail(resultSet.getString(MAIL));
 			e.setPresentation(resultSet.getString(PRESENTATION));
-			e.setAvatar(resultSet.getString(LOGO));
+			e.setAvatar((Blob) resultSet.getBinaryStream(LOGO));
 			e.setTwitter(resultSet.getString(TWITTER));
 			e.setLinkedin(resultSet.getString(LINKEDIN));
 			e.setActivity(resultSet.getString(ACTIVITY));

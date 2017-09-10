@@ -173,6 +173,11 @@ public class LoginView extends BaseView {
 		JLabel image = new JLabel(new ImageIcon("image/MatchUp 4f.png"));
 		panelAbout.setLayout(new BorderLayout());
 		panelAbout.add(image, BorderLayout.CENTER);
+		
+		JLabel lblTitle = new JLabel("Match Up");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 30));
+		panelAbout.add(lblTitle, BorderLayout.SOUTH);
 	}
 
 }

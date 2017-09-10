@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,7 +140,7 @@ public class Candidate extends RegisteredUser {
 	 * @param mobility
 	 */
 	public Candidate(String login, String name, String phone, String email, String presentation,
-			String avatar, String created_at, String updated_at, String firstname, String lastname, String birstdate,
+			Blob avatar, String created_at, String updated_at, String firstname, String lastname, String birstdate,
 			ArrayList<Diploma> qualifications, ArrayList<String> mobility, String address) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;

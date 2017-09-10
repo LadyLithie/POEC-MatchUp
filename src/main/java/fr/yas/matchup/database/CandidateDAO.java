@@ -1,5 +1,6 @@
 package fr.yas.matchup.database;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setBirstdate(rs.getString(BIRTHDAY));
 			candidate.setAddress(rs.getString(ADDRESS));
 			candidate.setEmail(rs.getString(MAIL));
-			candidate.setAvatar(rs.getString(PICTURE));
+			candidate.setAvatar((Blob) rs.getBinaryStream(PICTURE));
 			candidate.setPresentation(rs.getString(PRESENTATION));
 			candidate.setLogin(rs.getString(LOGIN));
 			candidate.setPassword(rs.getString(PASSWORD));

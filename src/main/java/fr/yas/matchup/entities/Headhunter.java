@@ -1,5 +1,6 @@
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,7 +180,7 @@ public class Headhunter extends RegisteredUser {
 	 * To review the lists
 	 */
 	public Headhunter(String login, String name, String phone, String email, String presentation,
-			String picture, String created_at, String updated_at, String firstname, String lastname,
+			Blob picture, String created_at, String updated_at, String firstname, String lastname,
 			ArrayList<String> phones, ArrayList<String> emails) {
 		super(login, name, phone, email, presentation, picture, created_at, updated_at);
 		

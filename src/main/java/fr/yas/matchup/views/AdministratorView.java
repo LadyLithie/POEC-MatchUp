@@ -229,8 +229,7 @@ public class AdministratorView extends BaseView {
 		panelAdminPresentation.setLayout(gbl_panelAdminPresentation);
 
 		lblPhoto = new JLabel("");
-		lblPhoto.setIcon(
-				new ImageIcon(AdministratorView.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		lblPhoto.setIcon(new ImageIcon("image/GenericAvatar.png"));
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
 		gbc_lblPhoto.gridheight = 3;
 		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
