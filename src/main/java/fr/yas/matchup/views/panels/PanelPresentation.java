@@ -17,35 +17,35 @@ import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.yas.matchup.views.IVisibility;
 
-import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
 
-public class PanelPresentation extends JPanel implements IVisibility{
+public class PanelPresentation extends JPanel implements IVisibility {
 	private GridBagLayout gridBagLayout;
-	
+
 	private PanelField namePanel;
 	private PanelField siretPanel;
 	private PanelField emailPanel;
 	private PanelField websitePanel;
-	
+
 	private JLabel lblLogo;
 	private JButton btnModifier;
-	
+
 	private JLabel lblIcon;
 	private JButton btnAjout;
 	private JTextField textFieldNetwork;
-	
+
 	private JButton btnAnnuler;
 	private JButton btnEditer;
-	private JButton btnValider;
 
 	private JTextArea textAreaPresentation;
+	private JPanel panelInfos;
+	private JPanel panelSocio;
 
 	/**
 	 * @return the btnEditer
 	 */
-	public JButton getBtnEditer() {
+	public JButton getBtnEdit() {
 		return btnEditer;
 	}
 
@@ -127,87 +127,95 @@ public class PanelPresentation extends JPanel implements IVisibility{
 	}
 
 	/**
-	 * @return the btnValider
-	 */
-	public JButton getBtnValider() {
-		return btnValider;
-	}
-	
-	/**
 	 * Create the panel.
 	 */
 	public PanelPresentation() {
 		super();
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 5, 0, 0, 10, 5, 0 };
-		gridBagLayout.rowHeights = new int[] { 5, 0, 0, 0, 0, 0, 2, 0, 2, 0, 5, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowHeights = new int[]{2, 0, 2, 0, 0, 2, 0};
+		gridBagLayout.columnWidths = new int[]{5, 0, 10, 0, 5};
+		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 2.0, 0.0, 1.0 };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0 };
 		setLayout(gridBagLayout);
+
+		panelInfos = new JPanel();
+		GridBagConstraints gbc_panelInfos = new GridBagConstraints();
+		gbc_panelInfos.insets = new Insets(5, 5, 5, 5);
+		gbc_panelInfos.fill = GridBagConstraints.BOTH;
+		gbc_panelInfos.gridx = 1;
+		gbc_panelInfos.gridy = 1;
+		add(panelInfos, gbc_panelInfos);
+		GridBagLayout gbl_panelInfos = new GridBagLayout();
+		gbl_panelInfos.columnWeights = new double[] { 0.0 };
+		gbl_panelInfos.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0 };
+		panelInfos.setLayout(gbl_panelInfos);
 
 		// A field Panel with label and its associate textField
 		namePanel = new PanelField("Nom");
-		namePanel.getInput().setBorder(new LineBorder(null, 0));
-		GridBagLayout gridBagLayout_1 = (GridBagLayout) namePanel.getLayout();
-		gridBagLayout_1.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
-		namePanel.getInput().setEditable(false);
 		GridBagConstraints gbc_namePanel = new GridBagConstraints();
+		gbc_namePanel.gridy = 0;
 		gbc_namePanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_namePanel.insets = new Insets(0, 0, 1, 1);
-		gbc_namePanel.gridx = 1;
-		gbc_namePanel.gridy = 1;
-		add(namePanel, gbc_namePanel);
-		
+		gbc_namePanel.insets = new Insets(0, 0, 5, 0);
+		gbc_namePanel.gridx = 0;
+		panelInfos.add(namePanel, gbc_namePanel);
+		namePanel.getInput().setBorder(new LineBorder(null, 0));
+		namePanel.getInput().setEditable(false);
+
 		// A field Panel with label and its associate textField
 		siretPanel = new PanelField("SIRET");
+		GridBagConstraints gbc_siretPanel = new GridBagConstraints();
+		gbc_siretPanel.gridy = 1;
+		gbc_siretPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_siretPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_siretPanel.gridx = 0;
+		panelInfos.add(siretPanel, gbc_siretPanel);
 		siretPanel.getInput().setToolTipText("Chiffres uniquement");
 		siretPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-		GridBagLayout gridBagLayout_2 = (GridBagLayout) siretPanel.getLayout();
-		gridBagLayout_2.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
 		siretPanel.getInput().setEditable(false);
-		GridBagConstraints gbc_siretPanel = new GridBagConstraints();
-		gbc_siretPanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_siretPanel.insets = new Insets(0, 0, 1, 1);
-		gbc_siretPanel.gridx = 1;
-		gbc_siretPanel.gridy = 2;
-		add(siretPanel, gbc_siretPanel);
 
 		// A field Panel with label and its associate textField
 		emailPanel = new PanelField("Email");
-		emailPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-		GridBagLayout gridBagLayout_3 = (GridBagLayout) emailPanel.getLayout();
-		gridBagLayout_3.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
-		emailPanel.getInput().setEditable(false);
 		GridBagConstraints gbc_emailPanel = new GridBagConstraints();
+		gbc_emailPanel.gridy = 2;
 		gbc_emailPanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_emailPanel.insets = new Insets(0, 0, 1, 1);
-		gbc_emailPanel.gridx = 1;
-		gbc_emailPanel.gridy = 3;
-		add(emailPanel, gbc_emailPanel);
+		gbc_emailPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_emailPanel.gridx = 0;
+		panelInfos.add(emailPanel, gbc_emailPanel);
+		emailPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		emailPanel.getInput().setEditable(false);
 
 		// A field Panel with label and its associate textField
 		websitePanel = new PanelField("Website");
-		websitePanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
-		GridBagLayout gridBagLayout_4 = (GridBagLayout) websitePanel.getLayout();
-		gridBagLayout_4.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0};
-		websitePanel.getInput().setEditable(false);
 		GridBagConstraints gbc_websitePanel = new GridBagConstraints();
+		gbc_websitePanel.insets = new Insets(0, 0, 5, 0);
+		gbc_websitePanel.gridy = 3;
 		gbc_websitePanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_websitePanel.insets = new Insets(0, 0, 1, 1);
-		gbc_websitePanel.gridx = 1;
-		gbc_websitePanel.gridy = 4;
-		add(websitePanel, gbc_websitePanel);
-		
-		//Zone logo
+		gbc_websitePanel.gridx = 0;
+		panelInfos.add(websitePanel, gbc_websitePanel);
+		websitePanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		websitePanel.getInput().setEditable(false);
+
+		panelSocio = new JPanel();
+		GridBagConstraints gbc_panelSocio = new GridBagConstraints();
+		gbc_panelSocio.insets = new Insets(5, 5, 5, 5);
+		gbc_panelSocio.fill = GridBagConstraints.BOTH;
+		gbc_panelSocio.gridx = 3;
+		gbc_panelSocio.gridy = 1;
+		add(panelSocio, gbc_panelSocio);
+		GridBagLayout gbl_panelSocio = new GridBagLayout();
+		gbl_panelSocio.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panelSocio.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		panelSocio.setLayout(gbl_panelSocio);
+
+		// Zone logo
 		JPanel panelLogo = new JPanel();
 		GridBagConstraints gbc_panelLogo = new GridBagConstraints();
-		gbc_panelLogo.anchor = GridBagConstraints.EAST;
-		gbc_panelLogo.gridheight = 2;
-		gbc_panelLogo.insets = new Insets(0, 0, 1, 1);
-		gbc_panelLogo.gridx = 3;
-		gbc_panelLogo.gridy = 1;
-		add(panelLogo, gbc_panelLogo);
+		gbc_panelLogo.fill = GridBagConstraints.BOTH;
+		gbc_panelLogo.insets = new Insets(0, 0, 5, 0);
+		gbc_panelLogo.gridx = 0;
+		gbc_panelLogo.gridy = 0;
+		panelSocio.add(panelLogo, gbc_panelLogo);
 		GridBagLayout gbl_panelLogo = new GridBagLayout();
 		gbl_panelLogo.columnWidths = new int[] { 2, 0, 0, 2, 0 };
 		gbl_panelLogo.rowHeights = new int[] { 2, 23, 0, 2, 0 };
@@ -234,13 +242,11 @@ public class PanelPresentation extends JPanel implements IVisibility{
 		// Panel SocialNetwork
 		JPanel panelSocialNetwork = new JPanel();
 		GridBagConstraints gbc_panelSocialNetwork = new GridBagConstraints();
-		gbc_panelSocialNetwork.anchor = GridBagConstraints.EAST;
-		gbc_panelSocialNetwork.gridheight = 3;
-		gbc_panelSocialNetwork.insets = new Insets(1, 1, 1, 1);
-		gbc_panelSocialNetwork.fill = GridBagConstraints.VERTICAL;
-		gbc_panelSocialNetwork.gridx = 3;
-		gbc_panelSocialNetwork.gridy = 3;
-		add(panelSocialNetwork, gbc_panelSocialNetwork);
+		gbc_panelSocialNetwork.insets = new Insets(0, 0, 5, 0);
+		gbc_panelSocialNetwork.fill = GridBagConstraints.BOTH;
+		gbc_panelSocialNetwork.gridx = 0;
+		gbc_panelSocialNetwork.gridy = 1;
+		panelSocio.add(panelSocialNetwork, gbc_panelSocialNetwork);
 		GridBagLayout gbl_panelSocialNetwork = new GridBagLayout();
 		gbl_panelSocialNetwork.columnWidths = new int[] { 2, 0, 5, 0, 2, 0 };
 		gbl_panelSocialNetwork.rowHeights = new int[] { 2, 0, 1, 0, 2, 0 };
@@ -276,14 +282,13 @@ public class PanelPresentation extends JPanel implements IVisibility{
 		gbc_textFieldNetwork.gridy = 3;
 		panelSocialNetwork.add(textFieldNetwork, gbc_textFieldNetwork);
 
-
 		// Panel for the user presentation
 		JLabel lblPrsentation = new JLabel("Pr\u00E9sentation :");
 		GridBagConstraints gbc_lblPrsentation = new GridBagConstraints();
-		gbc_lblPrsentation.anchor = GridBagConstraints.WEST;
-		gbc_lblPrsentation.insets = new Insets(1, 1, 1, 1);
+		gbc_lblPrsentation.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblPrsentation.insets = new Insets(1, 1, 5, 5);
 		gbc_lblPrsentation.gridx = 1;
-		gbc_lblPrsentation.gridy = 6;
+		gbc_lblPrsentation.gridy = 3;
 		add(lblPrsentation, gbc_lblPrsentation);
 		textAreaPresentation = new JTextArea();
 		textAreaPresentation.setWrapStyleWord(true);
@@ -292,50 +297,66 @@ public class PanelPresentation extends JPanel implements IVisibility{
 		textAreaPresentation.setEditable(false);
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridwidth = 3;
-		gbc_textArea.insets = new Insets(1, 1, 1, 1);
+		gbc_textArea.insets = new Insets(1, 1, 5, 5);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 7;
+		gbc_textArea.gridy = 4;
 		add(textAreaPresentation, gbc_textArea);
 
 		// Validation or Cancellation sections
 		JPanel panelDecision = new JPanel();
 		GridBagConstraints gbc_panelDecision = new GridBagConstraints();
-		gbc_panelDecision.gridwidth = 3;
-		gbc_panelDecision.insets = new Insets(0, 0, 1, 1);
-		gbc_panelDecision.gridx = 1;
-		gbc_panelDecision.gridy = 9;
+		gbc_panelDecision.anchor = GridBagConstraints.EAST;
+		gbc_panelDecision.gridwidth = 6;
+		gbc_panelDecision.insets = new Insets(0, 0, 0, 5);
+		gbc_panelDecision.gridx = 0;
+		gbc_panelDecision.gridy = 6;
 		add(panelDecision, gbc_panelDecision);
-		panelDecision.setLayout(new GridLayout(1, 0, 0, 0));
+		GridBagLayout gbl_panelDecision = new GridBagLayout();
+		gbl_panelDecision.columnWeights = new double[]{0.0, 0.0, 0.0};
+		gbl_panelDecision.rowWeights = new double[]{0.0};
+		panelDecision.setLayout(gbl_panelDecision);
 		btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setVisible(false);
-		panelDecision.add(btnAnnuler);
+		GridBagConstraints gbc_btnAnnuler = new GridBagConstraints();
+//		gbc_btnAnnuler.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnAnnuler.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAnnuler.gridx = 1;
+		gbc_btnAnnuler.gridy = 0;
+		panelDecision.add(btnAnnuler, gbc_btnAnnuler);
 		btnEditer = new JButton("Editer");
-		panelDecision.add(btnEditer);
-		btnValider = new JButton("Valider");
-		btnValider.setVisible(false);
-		panelDecision.add(btnValider);
-
+		GridBagConstraints gbc_btnEditer = new GridBagConstraints();
+//		gbc_btnEditer.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnEditer.gridx = 2;
+		gbc_btnEditer.gridy = 0;
+		panelDecision.add(btnEditer, gbc_btnEditer);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.views.IVisibility#setMode(boolean)
 	 */
 	@Override
 	public void setMode(boolean b) {
-		this.getBtnEditer().setVisible(!b);
+		// this.getBtnEdit().setVisible(!b);
+		if (b) {
+			this.getBtnEdit().setText("Valider");
+		} else {
+			this.getBtnEdit().setText("Editer");
+		}
 		this.getBtnAjout().setVisible(b);
 		this.getBtnAnnuler().setVisible(b);
 		this.getBtnModifier().setVisible(b);
-		this.getBtnValider().setVisible(b);
-		
+		// this.getBtnValider().setVisible(b);
+
 		this.getNamePanel().setMode(b);
 		this.getSiretPanel().setMode(b);
 		this.getEmailPanel().setMode(b);
 		this.getWebsitePanel().setMode(b);
 		this.getTextAreaPresentation().setEditable(b);
-		
-		if(b) {
+
+		if (b) {
 			this.getTextAreaPresentation().setBackground(UIManager.getColor("TextArea.background"));
 			this.getTextAreaPresentation().setBorder(new TextFieldBorder());
 		} else {

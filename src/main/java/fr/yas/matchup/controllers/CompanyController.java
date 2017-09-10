@@ -3,23 +3,37 @@
  */
 package fr.yas.matchup.controllers;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.managers.ViewsManager;
+import fr.yas.matchup.utils.views.ActionModSocialLink;
+import fr.yas.matchup.utils.views.ViewsUtils;
+import fr.yas.matchup.views.AdministratorView;
 import fr.yas.matchup.views.CompanyView;
 import fr.yas.matchup.views.panels.Panel2FieldButton;
+import fr.yas.matchup.views.panels.PanelAdminSkill;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelPresentation;
@@ -37,6 +51,7 @@ public class CompanyController extends BaseController {
 
 	/**
 	 * Nested class for shared ActionListener
+	 * 
 	 * @author Audrey
 	 *
 	 */
@@ -48,6 +63,7 @@ public class CompanyController extends BaseController {
 			this.view = view;
 			this.headhunter = headhunter;
 		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// identify the headhunter and remove it from the user list
@@ -81,8 +97,7 @@ public class CompanyController extends BaseController {
 		// Panel presentation
 		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
 		/*
-		 * Panel presentation
-		 * Add user's informations
+		 * Panel presentation Add user's informations
 		 */
 		vP.getNamePanel().getInput().setText(user.getName());
 		vP.getEmailPanel().getInput().setText(user.getEmail());
@@ -91,21 +106,20 @@ public class CompanyController extends BaseController {
 		vP.getTextAreaPresentation().setText(user.getPresentation());
 
 		/*
-		 *  Panel headhunters
-		 *  Create the list of headhunter working for the company
+		 * Panel headhunters Create the list of headhunter working for the company
 		 */
 		PanelHeadhunters vH = (PanelHeadhunters) v.getPanel_bottomRight();
-//		ArrayList<Panel2FieldButton> associates;
-//		//See if we better not add them to pHeadhunters
-//		if (vH.getAssociates() != null) {
-//			associates = vH.getAssociates();	
-//		} else {
-//			associates = new ArrayList<>();
-//		}
+		// ArrayList<Panel2FieldButton> associates;
+		// //See if we better not add them to pHeadhunters
+		// if (vH.getAssociates() != null) {
+		// associates = vH.getAssociates();
+		// } else {
+		// associates = new ArrayList<>();
+		// }
 		if (user.getAssociates() != null) {
 			pHeadhunters = new ArrayList<>();
 			for (Headhunter headhunter : user.getAssociates()) {
-				//posX = posX + 2;
+				// posX = posX + 2;
 				Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
 				test.getTextField1().setText(headhunter.getFirstname());
 				test.getTextField2().setText(headhunter.getLastname());
@@ -113,18 +127,17 @@ public class CompanyController extends BaseController {
 				gbc_test.fill = GridBagConstraints.NONE;
 				gbc_test.anchor = GridBagConstraints.CENTER;
 				gbc_test.gridx = 1;
-				gbc_test.gridy =GridBagConstraints.RELATIVE;
+				gbc_test.gridy = GridBagConstraints.RELATIVE;
 				vH.getPanelContent().add(test, gbc_test);
 				vH.getAssociates().add(test);
-//				associates.add(test);
+				// associates.add(test);
 				pHeadhunters.add(test);
-			}			
+			}
 		}
 		vH.setMode(false);
-		
+
 		/*
-		 * Panel jobs
-		 * Create the list of jobs 
+		 * Panel jobs Create the list of jobs
 		 */
 		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
 		if (user.getJobs() != null) {
@@ -156,26 +169,25 @@ public class CompanyController extends BaseController {
 		 */
 		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
 		// mode view
-		vPresentation.getBtnEditer().addActionListener(new ActionListener() {
+		vPresentation.getBtnEdit().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				vPresentation.setMode(true);
-			}
-		});
-		// Mode modification
-		vPresentation.getBtnValider().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				vPresentation.setMode(false);
-				user.setName(vPresentation.getNamePanel().getInput().getText());
-				if (!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText())) {
-					vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());
+				if (vPresentation.getBtnEdit().getText().equals("Editer")) {
+					vPresentation.setMode(true);
+					//remove listener?
+				} else {
+					// Mode modification : valid change
+					vPresentation.setMode(false);
+					user.setName(vPresentation.getNamePanel().getInput().getText());
+					if (!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText())) {
+						vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());
+					}
+					user.setWebsite(vPresentation.getWebsitePanel().getInput().getText());
+					user.setPresentation(vPresentation.getTextAreaPresentation().getText());
 				}
-				user.setWebsite(vPresentation.getWebsitePanel().getInput().getText());
-				user.setPresentation(vPresentation.getTextAreaPresentation().getText());
 			}
 		});
-		
+
 		vPresentation.getBtnAnnuler().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -186,6 +198,19 @@ public class CompanyController extends BaseController {
 				vPresentation.getTextAreaPresentation().setText(user.getPresentation());
 			}
 		});
+		//Modif avatar
+		vPresentation.getBtnModifier().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO popup
+				String chemin = popupCheminAvatar();
+				vPresentation.getLblIcon().setIcon(new ImageIcon(chemin));
+//				user.setAvatar(chemin);
+			}
+		});
+		//Modif Social Networks
+		ActionListener sNetworkLinks = new ActionModSocialLink();
+		vPresentation.getBtnAjout().addActionListener(sNetworkLinks);
 
 		/*
 		 * Panel Head-hunters Define the action on the buttons
@@ -201,7 +226,7 @@ public class CompanyController extends BaseController {
 					// assign to the entity the new associates
 					if (user.getAssociates() == null) {
 						user.setAssociates(headhunters);
-					} else { //need test if already present
+					} else { // need test if already present
 						user.getAssociates().addAll(headhunters);
 					}
 					headhunters = new ArrayList<>();
@@ -292,13 +317,12 @@ public class CompanyController extends BaseController {
 		for (Panel2FieldButton headhunter : pHeadhunters) {
 			headhunter.getButton().addActionListener(new deleteHHListener(vHeadhunters, headhunter));
 		}
-		
+
 		/*
 		 * Panel Jobs Define the action on the buttons
 		 */
 		PanelListJobs vListJobs = (PanelListJobs) v.getPanel_left();
 		vListJobs.addComponentListener(new ComponentAdapter() {
-
 			/*
 			 * (non-Javadoc)
 			 * 
@@ -315,7 +339,6 @@ public class CompanyController extends BaseController {
 				vListJobs.validate();
 				vListJobs.getPanelJobs().validate();
 			}
-
 		});
 		vListJobs.getBtnAdd().addActionListener(new ActionListener() {
 			@Override
@@ -325,14 +348,70 @@ public class CompanyController extends BaseController {
 		});
 		for (PanelResumeJob resumeJob : vListJobs.getPanelJobs().getResumeJobs()) {
 			resumeJob.getBtnEditer().addActionListener(new ActionListener() {
-				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					ViewsManager.getInstance().next(new ProposalController(frame, resumeJob.getJob()));
-					
 				}
 			});
 		}
+	}
+
+	private String popupCheminAvatar() {
+		JFrame edition = new JFrame("Confirmation");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous s�r de vouloir
+		// supprimer la comp�tence "+skillManager.getSkill().getName()+" ?");
+		JPanel contentPanel = new JPanel();
+		ViewsUtils.popUp(edition, contentPanel);
+
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		contentPanel.add(buttonPane, BorderLayout.SOUTH);
+
+		JButton okButton = new JButton("Oui");
+		okButton.setActionCommand("Oui");
+		buttonPane.add(okButton);
+
+		JButton cancelButton = new JButton("Non");
+		cancelButton.setActionCommand("Non");
+		buttonPane.add(cancelButton);
+		
+		JPanel panel = new JPanel();
+		contentPanel.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		JLabel lblMessage = new JLabel("Indiquer le chemin de votre image :");
+		lblMessage.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(lblMessage);
+		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JTextField textField = new JTextField();
+		panel.add(textField);
+		textField.setColumns(10);
+		edition.setVisible(true);
+		edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		okButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == okButton) {
+//					final result = textField.getText();
+					edition.setVisible(false);
+				}
+			}
+		});
+
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == cancelButton) {
+//					result = "";
+					textField.setText("");
+					edition.setVisible(false);
+				}
+			}
+		});
+		String result = textField.getText();
+		return result;
+
 	}
 
 }
