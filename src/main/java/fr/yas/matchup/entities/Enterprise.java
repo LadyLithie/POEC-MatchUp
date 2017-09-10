@@ -198,5 +198,7 @@ public class Enterprise extends RegisteredUser {
 	@Override
 	public String toString() {
 		return "Enterprise [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
-	}	
+	}
+
+
 }

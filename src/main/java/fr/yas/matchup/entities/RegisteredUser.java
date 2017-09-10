@@ -23,7 +23,21 @@ public abstract class RegisteredUser extends BaseEntity {
 	private String updated_at;
 	//Temporary
 	private String password;
+	private Validity valid;
 	
+	/**
+	 * @return the valid
+	 */
+	public Validity getValid() {
+		return valid;
+	}
+
+	/**
+	 * @param valid the valid to set
+	 */
+	public void setValid(Validity valid) {
+		this.valid = valid;
+	}		
 	/**
 	 * @return the password
 	 */

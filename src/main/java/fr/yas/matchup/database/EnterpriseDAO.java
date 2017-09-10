@@ -16,6 +16,7 @@ import java.util.List;
 
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
 
 public class EnterpriseDAO extends RegisteredUserDAO {
 	
@@ -35,6 +36,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	public static final String ROLE ="role_enterprise";
 	public static final String LOGIN ="login_enterprise";
 	public static final String PASSWORD="password_enterprise";
+	public static final String VALID="valid";
 	
 	public static final String ENTERPRISE_HEADHUNTER ="headhunter_enterprise";
 	public static final String ID_ENTERPRISE ="enterprise_id";
@@ -58,7 +60,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 			e.setWebsite(resultSet.getString(WEBSITE));
 			e.setEmail(resultSet.getString(MAIL));
 			e.setPresentation(resultSet.getString(PRESENTATION));
-			e.setAvatar((Blob) resultSet.getBinaryStream(LOGO));
+//			e.setAvatar((Blob) resultSet.getBinaryStream(LOGO));
+			e.setAvatar(resultSet.getBlob(LOGO));
 			e.setTwitter(resultSet.getString(TWITTER));
 			e.setLinkedin(resultSet.getString(LINKEDIN));
 			e.setActivity(resultSet.getString(ACTIVITY));
@@ -68,7 +71,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 				e.setRole(Role.valueOf(resultSet.getString(ROLE)));
 			}
 			e.setLogin(resultSet.getString(LOGIN));
-			e.setPassword(resultSet.getString(PASSWORD));			
+			e.setPassword(resultSet.getString(PASSWORD));
+			e.setValid(Validity.valueOf(resultSet.getString(VALID)));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -96,7 +100,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		res += "'"+enterprise.getActivity()+"',";
 		res += "'"+enterprise.getRole()+"',";
 		res += "'"+enterprise.getLogin()+"',";
-		res += "'"+enterprise.getPassword()+"'";
+		res += "'"+enterprise.getPassword()+"',";
+		res += "'"+enterprise.getValid()+"'";
 		
 		return res;
 	}
@@ -119,7 +124,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		res += ACTIVITY + " = "+enterprise.getActivity()+"',";
 		res += ROLE + " = "+enterprise.getRole()+"',";
 		res += LOGIN + " = "+enterprise.getLogin()+"',";
-		res += PASSWORD + " = "+enterprise.getPassword()+"'";
+		res += PASSWORD + " = "+enterprise.getPassword()+"',";
+		res += VALID + " = "+enterprise.getValid()+"'";
 		
 		return res;
 	}

@@ -14,17 +14,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
+
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 
 import fr.yas.matchup.database.AdministratorDAO;
 import fr.yas.matchup.database.CandidateDAO;
@@ -33,8 +38,12 @@ import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Administrator;
+import fr.yas.matchup.entities.Candidate;
+import fr.yas.matchup.entities.Enterprise;
+import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.AdministratorView;
@@ -47,6 +56,7 @@ import fr.yas.matchup.views.panels.PanelAdminUser;
  */
 public class AdminController extends BaseController {
 	private Administrator user;
+//	private List<RegisteredUser> users;
 
 	private MouseListener mouseChangeAvatar;
 
@@ -54,6 +64,7 @@ public class AdminController extends BaseController {
 		super();
 		super.frame = frame;
 		super.view = new AdministratorView(this.frame);
+//		users = new ArrayList<>();
 	}
 
 	/*
@@ -67,18 +78,16 @@ public class AdminController extends BaseController {
 		user = (Administrator) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 
 		/*
-		 * Panel presentation
-		 * Add user's informations
+		 * Panel presentation Add user's informations
 		 */
 		v.getTextField_AdminEmail().setText(user.getEmail());
 		v.getTextField_adminFirstName().setText(user.getFirstname());
 		v.getTextField_AdminLastName().setText(user.getLastname());
 		v.getTextField_AdminPhone().setText(String.valueOf(user.getPhone()));
-//		v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
+		// v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 
 		/*
-		 * Panel skills manager
-		 * Set complete list of skills
+		 * Panel skills manager Set complete list of skills
 		 */
 		SkillDAO sDao = new SkillDAO();
 		List<BaseEntity> skills = sDao.get();
@@ -96,8 +105,7 @@ public class AdminController extends BaseController {
 		}
 
 		/*
-		 * Panel users
-		 * Set complete list of users
+		 * Panel users Set complete list of users
 		 */
 		createListUsers(new AdministratorDAO(), v);
 		createListUsers(new HeadhunterDAO(), v);
@@ -117,17 +125,21 @@ public class AdminController extends BaseController {
 	private void createListUsers(BaseDAO bDao, AdministratorView view) {
 		List<BaseEntity> list = bDao.get();
 		for (BaseEntity entity : list) {
-			PanelAdminUser user = new PanelAdminUser();
-			user.getLblName().setText(((RegisteredUser) entity).getName());
-			user.getLblEmail().setText(((RegisteredUser) entity).getEmail());
-			user.getLblType().setText(entity.getClass().getSimpleName());
-			GridBagConstraints gbc_user = new GridBagConstraints();
-			gbc_user.fill = GridBagConstraints.HORIZONTAL;
-			gbc_user.anchor = GridBagConstraints.BASELINE_LEADING;
-			// gbc_user.gridwidth = 3;
-			gbc_user.insets = new Insets(5, 5, 5, 5);
-			view.getPanelListUsers().add(user, gbc_user);
-			view.getUsers().add(user);
+			if (entity.getId() != user.getId()) {
+				PanelAdminUser user = new PanelAdminUser();
+				user.setUser((RegisteredUser) entity);
+				user.getLblName().setText(((RegisteredUser) entity).getName());
+				user.getLblEmail().setText(((RegisteredUser) entity).getEmail());
+				user.getLblType().setText(entity.getClass().getSimpleName());
+				GridBagConstraints gbc_user = new GridBagConstraints();
+				gbc_user.fill = GridBagConstraints.HORIZONTAL;
+				gbc_user.anchor = GridBagConstraints.BASELINE_LEADING;
+				// gbc_user.gridwidth = 3;
+				gbc_user.insets = new Insets(5, 5, 5, 5);
+				view.getPanelListUsers().add(user, gbc_user);
+				view.getUsers().add(user);
+//				users.add((RegisteredUser) entity);
+			}
 		}
 	}
 
@@ -176,7 +188,7 @@ public class AdminController extends BaseController {
 					v.getLblPhoto().addMouseListener(mouseChangeAvatar);
 				} else {
 					setMode(false);
-//					user.setAvatar(((ImageIcon) v.getLblPhoto().getIcon()).getDescription());
+					// user.setAvatar(((ImageIcon) v.getLblPhoto().getIcon()).getDescription());
 					user.setFirstname(v.getTextField_adminFirstName().getText());
 					user.setLastname(v.getTextField_AdminLastName().getText());
 					user.setEmail(v.getTextField_AdminEmail().getText());
@@ -197,14 +209,14 @@ public class AdminController extends BaseController {
 				v.getTextField_adminFirstName().setText(user.getFirstname());
 				v.getTextField_AdminLastName().setText(user.getLastname());
 				v.getTextField_AdminPhone().setText(String.valueOf(user.getPhone()));
-//				v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
+				// v.getLblPhoto().setIcon(new ImageIcon(user.getAvatar()));
 			}
 		});
 
 		/*
 		 * Panel Skills manager
 		 */
-		//Add a new skill
+		// Add a new skill
 		v.getBtnAdd().addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -225,7 +237,7 @@ public class AdminController extends BaseController {
 								"Cette comp�tence devrait �tre supprim�e\n mais cela aura des cons�quences sur ceux qui les utilise");
 						// popup de confirmation
 						if (e.getSource() == skillManager.getBtnModify()) {
-							popupConfirmationSupp(skillManager,v);
+							popupConfirmationSupp(skillManager, v);
 						}
 					} else if (name.isEmpty() || type.isEmpty()) { // Error modification
 						if (name.isEmpty()) {
@@ -253,35 +265,97 @@ public class AdminController extends BaseController {
 		 * Panel Users manager
 		 */
 		for (PanelAdminUser userManager : v.getUsers()) {
-			userManager.getBtnValidateUser().setEnabled(false);
-			// userManager.getBtnValidateUser().addActionListener(new ActionListener() {
-			// @Override
-			// public void actionPerformed(ActionEvent e) {
-			// // Update this user as valid
-			// }
-			// });
+			// Validation of an user account
+			if (userManager.getUser().getValid().equals(Validity.TRUE)) {
+				userManager.getBtnValidateUser().setEnabled(false);
+			} else {
+				userManager.getBtnValidateUser().setEnabled(true);
+				userManager.getBtnValidateUser().addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						RegisteredUser user = userManager.getUser();
+						int res = JOptionPane.showConfirmDialog(null,
+								"Souhaitez-vous definitivement valider " + user.getName(), "Validation",
+								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+						if (res == JOptionPane.YES_OPTION) {
+							user.setValid(Validity.TRUE);
+							// DAO with instance :(
+							BaseDAO dao;
+							if (user instanceof Enterprise) {
+								dao = new EnterpriseDAO();
+								dao.update(user);
+							} else if (user instanceof Headhunter) {
+								dao = new HeadhunterDAO();
+								dao.update(user);
+							} else if (user instanceof Candidate) {
+								dao = new CandidateDAO();
+								dao.update(user);
+							} else if (user instanceof Administrator) {
+								dao = new AdministratorDAO();
+								dao.update(user);
+							}
+							userManager.getBtnValidateUser().setEnabled(false);
+						}
+					}
+				});
+			}
+
+			// Suppression of an account
 			userManager.getBtnDeleteUser().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					System.out.println("Only cosmetic for now");
+					JOptionPane.showMessageDialog(null, "Only cosmetic for now", "Suppression",
+							JOptionPane.INFORMATION_MESSAGE);
 					// Delecte this user
 					v.getPanelListUsers().remove(userManager);
 
 					v.getPanelListUsers().validate();
 				}
 			});
-			userManager.getBtnResetPasswordUser().setEnabled(false);
-			// userManager.getBtnResetPasswordUser().addActionListener(new ActionListener()
-			// {
-			// @Override
-			// public void actionPerformed(ActionEvent e) {
-			// // Popup with random password of 6 character
-			// // set this new password for the user
-			// }
-			// });
-		}
 
+			//Reset the user password
+			userManager.getBtnResetPasswordUser().setEnabled(true);
+			userManager.getBtnResetPasswordUser().addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// Popup with random password of 6 character
+					// set this new password for the user
+					RegisteredUser user = userManager.getUser();
+					int res = JOptionPane.showConfirmDialog(null,
+							"Confirmez le reset du mot de passe de " + user.getName(), "Validation",
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (res == JOptionPane.YES_OPTION) {
+						PasswordGenerator pwdGen = new PasswordGenerator();
+						ArrayList<CharacterRule> rule = new ArrayList<>();
+						rule.add(new CharacterRule(EnglishCharacterData.Alphabetical, 5));
+						rule.add(new CharacterRule(EnglishCharacterData.Digit, 2));
+						String pwd = pwdGen.generatePassword(8, rule);
+						JOptionPane.showMessageDialog(null, "Le nouveau mot de passe est : "+pwd, "Suppression",
+								JOptionPane.INFORMATION_MESSAGE);
+						// DAO with instance :(
+						BaseDAO dao;
+						if (user instanceof Enterprise) {
+							dao = new EnterpriseDAO();
+							dao.update(user);
+						} else if (user instanceof Headhunter) {
+							dao = new HeadhunterDAO();
+							dao.update(user);
+						} else if (user instanceof Candidate) {
+							dao = new CandidateDAO();
+							dao.update(user);
+						} else if (user instanceof Administrator) {
+							dao = new AdministratorDAO();
+							dao.update(user);
+						}
+					}
+				}
+			});
+		}
 	}
+
+	
 
 	private void setMode(boolean b) {
 		AdministratorView v = (AdministratorView) super.view;
@@ -413,8 +487,8 @@ public class AdminController extends BaseController {
 		JPanel contentPanel = new JPanel();
 		ViewsUtils.popUp(edition, contentPanel);
 
-		JLabel lblMessage = new JLabel("Etes-vous s�r de vouloir supprimer \n" + "la comp�tence "
-				+ skillManager.getSkill().getName() + " ?");
+		JLabel lblMessage = new JLabel(
+				"Etes-vous s�r de vouloir supprimer \n" + "la comp�tence " + skillManager.getSkill().getName() + " ?");
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblMessage);
 

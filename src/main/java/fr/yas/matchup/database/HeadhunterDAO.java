@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class HeadhunterDAO extends RegisteredUserDAO {
@@ -22,6 +23,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 	public static final String ROLE ="role_headhunter";
 	public static final String LOGIN ="login_headhunter";
 	public static final String PASSWORD="password_headhunter";
+	public static final String VALID = "valid";
 	
 	public HeadhunterDAO() {
 		super(TABLE, ID);
@@ -50,6 +52,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setLogin(rs.getString(LOGIN));
 			headhunter.setPassword(rs.getString(PASSWORD));
 			headhunter.setName(headhunter.getFirstname() + " " + headhunter.getLastname());
+			headhunter.setValid(Validity.valueOf(rs.getString(VALID)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			headhunter = null;

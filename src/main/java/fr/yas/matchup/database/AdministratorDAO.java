@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import fr.yas.matchup.entities.Administrator;
 import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class AdministratorDAO extends RegisteredUserDAO {
@@ -18,7 +19,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 	public static final String ROLE = "role_admin";
 	public static final String LOGIN = "login_admin";
 	public static final String PASSWORD = "password_admin";
-
+	public static final String VALID = "valid";
 	
 	
 	public AdministratorDAO() {
@@ -45,6 +46,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 			admin.setLogin(resultSet.getString(LOGIN));
 			admin.setPassword(resultSet.getString(PASSWORD));
 			admin.setName(admin.getFirstname() + " " + admin.getLastname());
+			admin.setValid(Validity.valueOf(resultSet.getString(VALID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
