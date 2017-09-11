@@ -1,41 +1,29 @@
 package fr.yas.matchup.controllers;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-
-import com.sun.jmx.snmp.UserAcl;
-
 import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
-import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.ViewsManager;
-import fr.yas.matchup.views.LoginView;
-import fr.yas.matchup.views.RegisterView;
 import fr.yas.matchup.views.headhunter.HeadhunterView;
 import fr.yas.matchup.views.panels.PanelEnterpriseAssociated;
 import fr.yas.matchup.views.panels.PanelHeadhunterJob;
+
 import fr.yas.matchup.views.panels.PanelHeadhunterPresentation;
 import fr.yas.matchup.views.panels.PanelLinkedEnterprises;
 import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelResumeJob;
+
 
 
 

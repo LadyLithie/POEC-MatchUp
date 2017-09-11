@@ -102,7 +102,7 @@ public class LoginController extends BaseController {
 					if (user != null) {
 						setupDatas();
 						if (user instanceof Enterprise) {
-							ViewsManager.getInstance().next(new ProfileEController(frame));
+							ViewsManager.getInstance().next(new EnterpriseController(frame));
 						}else if (user instanceof Headhunter) {
 							ViewsManager.getInstance().next(new HeadhunterController(frame));
 						}else if (user instanceof Candidate) {

@@ -5,14 +5,9 @@ import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
-
 import fr.yas.matchup.entities.RegisteredUser;
-
-import java.awt.Color;
 
 /**
  * @author Audrey
@@ -24,7 +19,7 @@ public class PanelAdminUser extends JPanel {
 	private JButton btnResetPasswordUser;
 	private JLabel lblName;
 	private JLabel lblEmail;
-	private JLabel lblDateCreation;
+//	private JLabel lblDateCreation;
 	private JLabel lblType;
 	private RegisteredUser user;
 
@@ -80,9 +75,9 @@ public class PanelAdminUser extends JPanel {
 	/**
 	 * @return the lblDateCreation
 	 */
-	public JLabel getLblDateCreation() {
-		return lblDateCreation;
-	}
+//	public JLabel getLblDateCreation() {
+//		return lblDateCreation;
+//	}
 
 	/**
 	 * @return the lblType

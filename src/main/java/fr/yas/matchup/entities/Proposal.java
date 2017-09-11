@@ -100,23 +100,30 @@ public class Proposal extends BaseEntity {
 	public void setLocalization(Location localization) {
 		this.localization = localization;
 	}
-	public String getStringLocalization() {
-		return localization.getPays() + ":" + localization.getAddress() + "," + localization.getDepartement() + "," + localization.getCity();
-	}
+	
+	/**
+	 * 
+	 * @return the localization in a String for sql
+	 */
+//	public String getStringLocalization() {
+//		String result;
+//		if (localization != null) {
+//			result = localization.toString();
+//		} else {
+//			result = "";
+//		}
+//		return result;
+//	}
 	/**
 	 * WARNING : need test on pattern
 	 * @param string (format:PAYS:address,CodePostal,VILLE)
 	 */
 	public void setLocalization(String string) {
-		Location location = new Location();
-		String[] ad = string.split(":");
-		location.setPays(ad[0]);
-		ad = ad[1].split(",");		
-		location.setAddress(ad[0]);
-		location.setDepartement(new Integer(ad[1]));
-		location.setCity(ad[2]);
-		
-		this.localization = location;	
+		if (string.isEmpty()) {
+			localization = new Location();
+		}else {
+			localization = new Location(string);
+		}
 	}
 	/**
 	 * @return the company
