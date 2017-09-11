@@ -76,7 +76,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		result += "'" + headhunter.getPresentation() +"',";
 		result += "'" + headhunter.getLogin() + "',";
 		result += "'" + headhunter.getPassword() + "',";
-		result += "'" + headhunter.getRole() + "'";
+		result += "'" + headhunter.getRole() + "',";
+		result += "'" + headhunter.getValid() + "'";
 
 		return result;
 	}
@@ -96,7 +97,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		res += PRESENTATION + " = '"+ headhunter.getPresentation()+"',";
 		res += LOGIN + " = '"+ headhunter.getLogin()+"',";
 		res += PASSWORD + " = '"+ headhunter.getPassword()+"',";
-		res += ROLE + " = '"+ headhunter.getRole()+"'";
+		res += ROLE + " = '"+ headhunter.getRole()+"',";
+		res += ROLE + " = '"+ headhunter.getValid()+"'";
 		
 		return res;
 	}

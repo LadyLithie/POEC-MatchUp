@@ -111,21 +111,21 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		String res = "";
 		Enterprise enterprise = (Enterprise) item;
 		
-		res += NAME + " = "+enterprise.getName()+"',";
-		res += PHONE + " = "+enterprise.getPhone()+"',";
-		res += ADDRESS + " = "+enterprise.getAddress()+"',";
-		res += CITY + " = "+enterprise.getCity()+"',";
-		res += WEBSITE + " = "+enterprise.getWebsite()+"',";
-		res += MAIL + " = "+enterprise.getEmail()+"',";
-		res += PRESENTATION + " = "+enterprise.getPresentation()+"',";
-		res += LOGO + " = "+enterprise.getAvatar()+"',";
-		res += TWITTER + " = "+enterprise.getTwitter()+"',";
-		res += LINKEDIN + " = "+enterprise.getLinkedin()+"',";
-		res += ACTIVITY + " = "+enterprise.getActivity()+"',";
-		res += ROLE + " = "+enterprise.getRole()+"',";
-		res += LOGIN + " = "+enterprise.getLogin()+"',";
-		res += PASSWORD + " = "+enterprise.getPassword()+"',";
-		res += VALID + " = "+enterprise.getValid()+"'";
+		res += NAME + " = '"+enterprise.getName()+"',";
+		res += PHONE + " = '"+enterprise.getPhone()+"',";
+		res += ADDRESS + " = '"+enterprise.getAddress()+"',";
+		res += CITY + " = '"+enterprise.getCity()+"',";
+		res += WEBSITE + " = '"+enterprise.getWebsite()+"',";
+		res += MAIL + " = '"+enterprise.getEmail()+"',";
+		res += PRESENTATION + " = '"+enterprise.getPresentation()+"',";
+		res += LOGO + " = '"+enterprise.getAvatar()+"',";
+		res += TWITTER + " = '"+enterprise.getTwitter()+"',";
+		res += LINKEDIN + " = '"+enterprise.getLinkedin()+"',";
+		res += ACTIVITY + " = '"+enterprise.getActivity()+"',";
+		res += ROLE + " = '"+enterprise.getRole()+"',";
+		res += LOGIN + " = '"+enterprise.getLogin()+"',";
+		res += PASSWORD + " = '"+enterprise.getPassword()+"',";
+		res += VALID + " = '"+enterprise.getValid()+"'";
 		
 		return res;
 	}

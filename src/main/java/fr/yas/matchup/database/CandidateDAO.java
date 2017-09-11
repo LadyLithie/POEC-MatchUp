@@ -1,6 +1,5 @@
 package fr.yas.matchup.database;
 
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -83,10 +82,8 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += "'" + candidate.getPhone() + "',";
 		if (candidate.getBirstdate() != null) {
 			result += "'" + candidate.getBirstdate() + "',";
-			
 		} else {
 			result += null + ",";
-
 		}
 		result += "'" + candidate.getAddress() + "',";
 		result += "'" + candidate.getEmail() + "',";
@@ -94,7 +91,8 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += "'" + candidate.getPresentation() +"',";
 		result += "'" + candidate.getLogin() + "',";
 		result += "'" + candidate.getPassword() + "',";
-		result += "'" + candidate.getRole() + "'";
+		result += "'" + candidate.getRole() + "',";
+		result += "'" + candidate.getValid() + "'";
 
 		return result;
 	}
@@ -115,6 +113,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += LOGIN + " = '" + candidate.getLogin() + "',";
 		result += PASSWORD + " = '" + candidate.getPassword() + "',";
 		result += ROLE + " = '" + candidate.getRole() + "'";
+		result += VALID + " = '" + candidate.getValid() + "'";
 
 		return result;
 	}

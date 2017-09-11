@@ -67,6 +67,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 		res += "'"+admin.getPhone()+"',";
 		res += "'"+admin.getRole()+"',";
 		res += "'"+admin.getLogin()+"',";
+		res += "'"+admin.getPassword()+"',";
 		res += "'"+admin.getPassword()+"'";
 
 		return res;
@@ -83,7 +84,8 @@ public class AdministratorDAO extends RegisteredUserDAO {
 		res += PHONE + " = '"+admin.getPhone()+"',";
 		res += ROLE + " = '"+admin.getRole()+"',";
 		res += LOGIN + " = '"+admin.getLogin()+"',";
-		res += PASSWORD + " = '"+admin.getPassword()+"'";
+		res += PASSWORD + " = '"+admin.getPassword()+"',";
+		res += VALID + " = '"+admin.getValid()+"'";
 
 		return res;
 	}
