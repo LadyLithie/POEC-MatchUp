@@ -17,18 +17,21 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import fr.yas.matchup.database.CityDAO;
 import fr.yas.matchup.database.ContractDAO;
 import fr.yas.matchup.database.SkillDAO;
+import fr.yas.matchup.entities.City;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Location;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.utils.views.ComboBoxRenderer;
-import fr.yas.matchup.views.ProposalFrame;
+import fr.yas.matchup.views.ProposalView;
 
 /**
  * @author Audrey
@@ -50,7 +53,7 @@ public class ProposalController extends BaseController {
 		SkillDAO sDao = new SkillDAO();
 		skills = sDao.get();
 		super.frame = frame;
-		super.view = new ProposalFrame(this.frame, skills);
+		super.view = new ProposalView(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		// DAO : skills = all registered skills
 
@@ -67,7 +70,7 @@ public class ProposalController extends BaseController {
 		super.frame = frame;
 		SkillDAO sDao = new SkillDAO();
 		skills = sDao.get();
-		super.view = new ProposalFrame(this.frame, skills);
+		super.view = new ProposalView(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		// DAO : skills = all registered skills
 		this.job = job;
@@ -82,7 +85,7 @@ public class ProposalController extends BaseController {
 	@Override
 	public void initView() {
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		ProposalFrame vFrame = ((ProposalFrame) getView());
+		ProposalView vFrame = ((ProposalView) getView());
 		if (job == null) { // mode creation
 			vFrame.setMode(true);
 			// Contracts
@@ -90,6 +93,12 @@ public class ProposalController extends BaseController {
 			List<BaseEntity> contracts = contractDAO.get();
 			for (BaseEntity type : contracts) {
 				vFrame.getComboBox_contract().addItem((ContractType) type);
+			}
+			//City
+			CityDAO cityDAO = new CityDAO();
+			List<BaseEntity> cities = cityDAO.get();
+			for (BaseEntity town : cities) {
+				vFrame.getComboBox_location().addItem((City) town);
 			}
 			// Link
 			if (user instanceof Enterprise) {
@@ -106,7 +115,7 @@ public class ProposalController extends BaseController {
 			// init view with the job infos
 			vFrame.getComboBox_contract().addItem(job.getContractType());
 			vFrame.getComboBox_contract().setSelectedIndex(0);
-			vFrame.getComboBox_location().addItem(job.getLocalization());
+			//vFrame.getComboBox_location().addItem(job.getLocalization());
 			vFrame.getComboBox_contract().setSelectedIndex(0);
 			vFrame.getTextArea().setText(job.getPresentation());
 			vFrame.getTextField_JobTitle().setText(job.getName());
@@ -166,7 +175,7 @@ public class ProposalController extends BaseController {
 
 	@Override
 	public void initEvent() {
-		ProposalFrame v = (ProposalFrame) super.view;
+		ProposalView v = (ProposalView) super.view;
 		// must test if job and user are linked
 		if (user instanceof Enterprise || user instanceof Headhunter) {
 			/*

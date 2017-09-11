@@ -124,7 +124,7 @@ public class DBManager {
 			stmt = con.createStatement();
 			for(String it : creationRequest.split(";")) {
 				if(!it.equals("") && !it.equals("\n")) {
-					//System.out.println(it);
+					System.out.println(it);
 					stmt.execute(it);					
 				}
 			}
