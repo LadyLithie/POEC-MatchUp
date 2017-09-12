@@ -150,22 +150,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 			this.associates = new ArrayList<Panel2FieldButton>();
 		}
 			
-//		for (Headhunter headhunter : associates) {
-//			//posX = posX + 2;
-//			Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
-//			test.getTextField1().setText(headhunter.getFirstname());
-//			test.getTextField2().setText(headhunter.getLastname());
-//			GridBagConstraints gbc_test = new GridBagConstraints();
-//			gbc_test.fill = GridBagConstraints.NONE;
-//			gbc_test.anchor = GridBagConstraints.CENTER;
-//			gbc_test.gridx = 1;
-//			gbc_test.gridy =GridBagConstraints.RELATIVE;
-//			panelContent.add(test, gbc_test);
-//			this.associates.add(test);
-//		}
-
 		this.setMode(false);
-
 	}
 
 	/* (non-Javadoc)
