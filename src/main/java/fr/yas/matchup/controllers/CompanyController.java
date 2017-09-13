@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import fr.yas.matchup.database.EnterpriseDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
@@ -107,13 +108,6 @@ public class CompanyController extends BaseController {
 		 * Panel headhunters Create the list of headhunter working for the company
 		 */
 		PanelHeadhunters vH = (PanelHeadhunters) v.getPanel_bottomRight();
-		// ArrayList<Panel2FieldButton> associates;
-		// //See if we better not add them to pHeadhunters
-		// if (vH.getAssociates() != null) {
-		// associates = vH.getAssociates();
-		// } else {
-		// associates = new ArrayList<>();
-		// }
 		if (user.getAssociates() != null) {
 			pHeadhunters = new ArrayList<>();
 			for (Headhunter headhunter : user.getAssociates()) {
@@ -127,8 +121,8 @@ public class CompanyController extends BaseController {
 				gbc_test.gridx = 1;
 				gbc_test.gridy = GridBagConstraints.RELATIVE;
 				vH.getPanelContent().add(test, gbc_test);
+				//add all to sub-panel
 				vH.getAssociates().add(test);
-				// associates.add(test);
 				pHeadhunters.add(test);
 			}
 		}
@@ -209,6 +203,7 @@ public class CompanyController extends BaseController {
 		//Modif Social Networks
 		ActionListener sNetworkLinks = new ActionModSocialLink();
 		vPresentation.getBtnAjout().addActionListener(sNetworkLinks);
+		//need to add icon with external links
 
 		/*
 		 * Panel Head-hunters Define the action on the buttons
@@ -241,6 +236,13 @@ public class CompanyController extends BaseController {
 					// //v.getContentPane().remove(vHeadhunters);
 					// v.setPanel_bottomRight(vHeadhunters);
 					vHeadhunters.setMode(false);
+					//record in database
+					/* Bug with id=0, 
+					 * we must test if allready exist to add it's id
+					 * if not we may want to create a new one before adding it (login=first+last & pwd = random passay or ask for mailing?)
+					 */
+					EnterpriseDAO eDao = new EnterpriseDAO();
+					eDao.insertHeadhunter(user);
 				}
 			}
 		});
@@ -255,7 +257,12 @@ public class CompanyController extends BaseController {
 				}
 				pHeadhunters = vHeadhunters.getAssociates();
 				for (Panel2FieldButton headhunter : pHeadhunters) {
-					vHeadhunters.getPanelContent().add(headhunter);
+					GridBagConstraints gbc_temp = new GridBagConstraints();
+					gbc_temp.fill = GridBagConstraints.HORIZONTAL;
+					gbc_temp.anchor = GridBagConstraints.CENTER;
+					gbc_temp.gridx = 1;
+					gbc_temp.gridy = GridBagConstraints.RELATIVE;
+					vHeadhunters.getPanelContent().add(headhunter,gbc_temp);
 				}
 				headhunters = new ArrayList<>();
 			}
