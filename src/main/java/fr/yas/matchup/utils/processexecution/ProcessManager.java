@@ -23,7 +23,11 @@ public class ProcessManager {
 			System.out.println("Opening "+ programName);
 			Runtime runTime = Runtime.getRuntime();
 			process  = runTime.exec(program);
-
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
