@@ -104,31 +104,31 @@ public class ProposalDAO extends BaseDAO {
 			String request;
 			
 			Proposal job = ((Proposal)item);
-			request = NAME +" = '"+job.getName()+"'";
+			request = NAME +" = '"+job.getName()+"',";
 			if(job.getLocalization() == null) {
-				request += ADDRESS +" = null";
+				request += ADDRESS +" = null,";
 			}else {
-				request += ADDRESS +" = '"+job.getLocalization()+"'";
+				request += ADDRESS +" = '"+job.getLocalization()+"',";
 			}
 			if(job.getPresentation() == null) {
-				request += PRESENTATION +" = null";
+				request += PRESENTATION +" = null,";
 			}else {
 				request += PRESENTATION +" = '"+job.getPresentation()+"'";
 			}
 			if(job.getContractType() == null) {
-				request += CONTRACT +" = null";
+				request += CONTRACT +" = null,";
 			}else {
 				request += CONTRACT +" = '"+job.getContractType().getId()+"'";
 			}
 			if(job.getCompany() == null) {
-				request += ENTERPRISE +" = null";
+				request += ENTERPRISE +" = null,";
 			}else {
-				request += ENTERPRISE +" = '"+job.getCompany().getId()+"'";
+				request += ENTERPRISE +" = '"+job.getCompany().getId()+"',";
 			}
 			if(job.getHeadhunter() == null) {
-				request += HEADHUNTER +" = null";
+				request += HEADHUNTER +" = null,";
 			}else {
-				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"'";
+				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"',";
 			}
 			
 			return request;
