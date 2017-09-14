@@ -14,25 +14,10 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private String twitter;
 	private String linkedin;
-	private String picture;
 	
 	private ArrayList<Proposal> jobs;
 	private ArrayList<Enterprise> associates;
 	
-	/**
-	 * @return the picture
-	 */
-	public String getPicture() {
-		return picture;
-	}
-
-	/**
-	 * @param picture the picture to set
-	 */
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
 	/**
 	 * @return the linkedin
 	 */
@@ -101,7 +86,7 @@ public class Headhunter extends RegisteredUser {
 	 * @param list the jobs to set
 	 */
 	public void setJobs(List<Proposal> list) {
-		this.jobs = list;
+		this.jobs = (ArrayList<Proposal>) list;
 	}
 
 	/**
@@ -119,27 +104,10 @@ public class Headhunter extends RegisteredUser {
 	}
 	
 	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	
-	/**
 	 * Void constructor
 	 */
 	public Headhunter() {
-
-		super();
-		
+		super();		
 		associates = new ArrayList<>();
 		jobs = new ArrayList<>();	
 		}
@@ -163,7 +131,7 @@ public class Headhunter extends RegisteredUser {
 	 * To review the lists
 	 */
 	public Headhunter(String login, String name, String phone, String email, String presentation,
-			String picture, String created_at, String updated_at, String firstname, String lastname) {
+			Blob picture, String created_at, String updated_at, String firstname, String lastname) {
 		
 		super(login, name, phone, email, presentation, picture, created_at, updated_at);
 		
