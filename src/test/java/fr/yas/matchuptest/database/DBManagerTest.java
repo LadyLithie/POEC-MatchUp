@@ -34,6 +34,12 @@ public class DBManagerTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		process = new ProcessManager(ProcessManager.WAMP);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**

@@ -28,7 +28,7 @@ public class DBManager {
 		if (canConnect()) {
 			connect();
 		}else {
-			createDB("config","dbsql.sql");
+			createDB(CONFIG,"structDB.sql");
 			createDB(CONFIG, "ScriptInsertValBase.sql");
 		}
 	}
