@@ -20,6 +20,19 @@ repositories {
     mavenCentral()
 }
 
+sourceSets{ 
+	main{ 
+		java{ 
+			srcDirs = [javasRoot]
+		}
+	}
+	test {
+		resources{ 
+			srcDirs = [testJavaRoot]
+		}
+	}
+}
+
 dependencies {
     //compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     compile 'mysql:mysql-connector-java:5.1.37'
