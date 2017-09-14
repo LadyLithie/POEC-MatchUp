@@ -41,6 +41,8 @@ public class SoftwareApplicationTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	//At function level
+	//delete something
 	@After
 	public void tearDown() throws Exception {
 	}

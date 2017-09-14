@@ -190,17 +190,6 @@ public class DBManager {
 			// Localize our database and how to access it
 			con = DriverManager.getConnection("jdbc:mysql://" + serverAddress + ":" + port + "/" + dbName, login,
 					password);
-			// here sonoo is database name, root is username and password
-
-			// //Statement = define query
-			// Statement stmt = con.createStatement();
-			// //ResultSet = sql result
-			// ResultSet rs = stmt.executeQuery("select * from emp");
-			// //Treat the data
-			// while (rs.next())
-			// System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " +
-			// rs.getString(3));
-
 			// Close connection
 			// con.close();
 		} catch (Exception e) {
