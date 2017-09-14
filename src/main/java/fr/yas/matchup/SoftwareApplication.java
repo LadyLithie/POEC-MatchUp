@@ -2,7 +2,6 @@ package fr.yas.matchup;
 
 import fr.yas.matchup.managers.ViewsManager;
 
-
 /**
  * @author Audrey
  *

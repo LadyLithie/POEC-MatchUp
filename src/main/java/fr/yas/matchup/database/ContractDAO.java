@@ -49,8 +49,11 @@ public class ContractDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseToString(BaseEntity item) {
-		// TODO Auto-generated method stub
-		return null;
+		String res = "null,";
+		ContractType contract = (ContractType) item;
+		
+		res += "'" + contract.getName() + "'";
+		return res;
 	}
 
 	/* (non-Javadoc)
@@ -58,8 +61,11 @@ public class ContractDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseUpdateToString(BaseEntity item) {
-		// TODO Auto-generated method stub
-		return null;
+		ContractType contract = (ContractType) item;
+		
+		String res = "";
+		res += NAME + " = '" + contract.getName() + "'";
+		return res;
 	}
 
 }

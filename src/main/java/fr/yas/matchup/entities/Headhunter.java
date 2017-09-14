@@ -1,6 +1,8 @@
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Audrey
@@ -12,7 +14,6 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private String twitter;
 	private String linkedin;
-	private String role;
 	private String picture;
 	
 	private ArrayList<Proposal> jobs;
@@ -92,15 +93,15 @@ public class Headhunter extends RegisteredUser {
 	/**
 	 * @return the jobs
 	 */
-	public ArrayList<Proposal> getJobs() {
+	public List<Proposal> getJobs() {
 		return jobs;
 	}
 
 	/**
-	 * @param jobs the jobs to set
+	 * @param list the jobs to set
 	 */
-	public void setJobs(ArrayList<Proposal> jobs) {
-		this.jobs = jobs;
+	public void setJobs(List<Proposal> list) {
+		this.jobs = list;
 	}
 
 	/**

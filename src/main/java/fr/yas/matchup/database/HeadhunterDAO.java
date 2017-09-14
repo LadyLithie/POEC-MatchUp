@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class HeadhunterDAO extends RegisteredUserDAO {
@@ -23,6 +25,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 	public static final String ROLE ="role_headhunter";
 	public static final String LOGIN ="login_headhunter";
 	public static final String PASSWORD="password_headhunter";
+	public static final String VALID = "valid";
 	
 	public HeadhunterDAO() {
 		super(TABLE, ID);
@@ -43,10 +46,15 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setTwitter(rs.getString(TWITTER));
 			headhunter.setLinkedin(rs.getString(LINKEDIN));
 			headhunter.setPresentation(rs.getString(PRESENTATION));
-			headhunter.setRole(rs.getString(ROLE));
+			if (rs.getString(ROLE).equals("headhunter")) {
+				headhunter.setRole(Role.HEADHUNTER);
+			} else {
+				headhunter.setRole(Role.valueOf(rs.getString(ROLE)));
+			}
 			headhunter.setLogin(rs.getString(LOGIN));
 			headhunter.setPassword(rs.getString(PASSWORD));
 			headhunter.setName(headhunter.getFirstname() + " " + headhunter.getLastname());
+			headhunter.setValid(Validity.valueOf(rs.getString(VALID)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			headhunter = null;
@@ -70,7 +78,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		result += "'" + headhunter.getPresentation() +"',";
 		result += "'" + headhunter.getLogin() + "',";
 		result += "'" + headhunter.getPassword() + "',";
-		result += "'" + headhunter.getRole() + "'";
+		result += "'" + headhunter.getRole() + "',";
+		result += "'" + headhunter.getValid() + "'";
 
 		return result;
 	}
@@ -90,7 +99,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		res += PRESENTATION + " = '"+ headhunter.getPresentation()+"',";
 		res += LOGIN + " = '"+ headhunter.getLogin()+"',";
 		res += PASSWORD + " = '"+ headhunter.getPassword()+"',";
-		res += ROLE + " = '"+ headhunter.getRole()+"'";
+		res += ROLE + " = '"+ headhunter.getRole()+"',";
+		res += ROLE + " = '"+ headhunter.getValid()+"'";
 		
 		return res;
 	}

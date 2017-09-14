@@ -18,8 +18,6 @@ public class MatchingCode {
 	
 	public double matching() {
 		
-		
-		
 		for (int i = 0 ; i < job.getSkills().size() ; i++) {
 			jobSkills.add(i, job.getSkills().get(i));
 		}
@@ -38,7 +36,6 @@ public class MatchingCode {
 				}
 			}
 		}
-		
 		
 		percentage = ( (matchedSkills.size() / jobSkills.size()) * 100 );
 		

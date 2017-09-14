@@ -52,6 +52,7 @@ CREATE TABLE administrator(
 	firstname_admin VARCHAR(255),
 	mail_admin VARCHAR(255),
 	phone_admin VARCHAR(12),
+	logo_admin BLOB,
 	role_admin VARCHAR(20),
 	login_admin VARCHAR(255),
 	password_admin VARCHAR(255)

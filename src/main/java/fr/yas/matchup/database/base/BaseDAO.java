@@ -27,7 +27,7 @@ public abstract class BaseDAO implements IDAOBase {
 	public String getTable() {
 		return table;
 	}
-	
+
 	/**
 	 * @return the id
 	 */
@@ -48,7 +48,7 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public ResultSet executeRequest(String request) {
 		ResultSet result = null;
-		
+
 		try {
 			Statement stmt = DBManager.getInstance().getCon().createStatement();
 			result = stmt.executeQuery(request);
@@ -56,7 +56,7 @@ public abstract class BaseDAO implements IDAOBase {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 
@@ -79,48 +79,55 @@ public abstract class BaseDAO implements IDAOBase {
 		
 		try {
 			Statement stmt = DBManager.getInstance().getCon().createStatement();
-			result = stmt.executeUpdate(request,Statement.RETURN_GENERATED_KEYS);
-			
+			result = stmt.executeUpdate(request, Statement.RETURN_GENERATED_KEYS);
+
 			ResultSet rSet = stmt.getGeneratedKeys();
-			if(rSet.next()) {
+			if (rSet.next()) {
 				result = rSet.getInt(1);
 			}
 		} catch (SQLException e) {
 			result = -e.getErrorCode();
 //			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#delete(fr.yas.matchup.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.yas.matchup.database.IDAOBase#delete(fr.yas.matchup.entities.base.
+	 * BaseEntity)
 	 */
 	@Override
 	public void delete(BaseEntity item) {
-		executeRequest("DELETE FROM "+ table + "WHERE "+id+" = "+item.getId());
+		executeRequest("DELETE FROM " + table + "WHERE " + id + " = " + item.getId());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.database.IDAOBase#delete()
 	 */
 	@Override
 	public void delete() {
-		executeRequest("DELETE FROM "+ table);
+		executeRequest("DELETE FROM " + table);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.database.IDAOBase#get(double)
 	 */
 	@Override
 	public BaseEntity get(double id) {
 		BaseEntity entity = null;
-		ResultSet rSet = executeRequest("SELECT * FROM "+ table +" WHERE "+ this.id +" = "+ (int) id);
+		ResultSet rSet = executeRequest("SELECT * FROM " + table + " WHERE " + this.id + " = " + (int) id);
 
 		try {
-			rSet.next();
-			entity = parseToObject(rSet);
+			if (rSet.next()) {
+				entity = parseToObject(rSet);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -128,14 +135,16 @@ public abstract class BaseDAO implements IDAOBase {
 		return entity;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.database.IDAOBase#get()
 	 */
 	@Override
 	public List<BaseEntity> get() {
 		List<BaseEntity> entities = new ArrayList<BaseEntity>();
-		ResultSet rSet = executeRequest("SELECT * FROM "+ table);
-		
+		ResultSet rSet = executeRequest("SELECT * FROM " + table);
+
 		try {
 			while (rSet.next()) {
 				entities.add(parseToObject(rSet));
@@ -148,8 +157,11 @@ public abstract class BaseDAO implements IDAOBase {
 		return entities;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#insert(fr.yas.matchup.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.yas.matchup.database.IDAOBase#insert(fr.yas.matchup.entities.base.
+	 * BaseEntity)
 	 */
 	@Override
 	public void insert(BaseEntity item) {
@@ -161,12 +173,16 @@ public abstract class BaseDAO implements IDAOBase {
 		}	
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.database.IDAOBase#update(fr.yas.matchup.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.yas.matchup.database.IDAOBase#update(fr.yas.matchup.entities.base.
+	 * BaseEntity)
 	 */
 	@Override
 	public int update(BaseEntity item) {
-		return executeRequestUpdate("UPDATE "+ table + " SET "+parseUpdateToString(item)+" WHERE " + id + " = "+item.getId());
+		return executeRequestUpdate(
+				"UPDATE " + table + " SET " + parseUpdateToString(item) + " WHERE " + id + " = " + item.getId());
 	}
 
 }
