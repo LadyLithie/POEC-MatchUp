@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.yas.matchup;
 
 import fr.yas.matchup.managers.ViewsManager;
@@ -18,8 +15,6 @@ public class SoftwareApplication {
 		
 		ViewsManager.getInstance().start();	
 
-
 	}
 
-	
 }

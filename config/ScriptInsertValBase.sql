@@ -34,6 +34,19 @@ INSERT INTO job VALUES (null,'Pirate',' ','Recherche un pirate sympa et riche',4
 INSERT INTO job VALUES (null,'Développeur/gamer',' ','Recherche un développeur qui joue à league of legend et qui rage jamais',3,null,null);
 INSERT INTO job VALUES (null,'Troll',' ','On vous prendra pas, pas la peine de postuler',2,null,null);
 
-INSERT INTO administrator VALUES (null,'leboss','dujava','lebossdujava@orange.fr',7845126398,'admin','admin','admin');
+INSERT INTO administrator VALUES (null,'leboss','dujava','lebossdujava@orange.fr','7845126398','admin','admin','admin');
 
-INSERT INTO headhunter Values (null,'Markides','Sacha',1245789656,'sacha.markides@orange.fr',null,'sacha.markides@twitter.fr','sacha.markides@linkedin.fr','bonjour je suis un headhunter', 'root','root','headhunter');
+INSERT INTO headhunter Values (null,'Markides','Sacha','1245789656','sacha.markides@orange.fr',null,'sacha.markides@twitter.fr','sacha.markides@linkedin.fr','bonjour je suis un headhunter','root','root','headhunter');
+INSERT INTO headhunter Values (null,'Izzar','Yannick','0680913289','yannick.izzar@orange.fr',null,'yannick.izzar@twitter.fr','yannick.izzar@linkedin.fr','bonjour je suis un yannick','nouk','pwd','headhunter');
+
+INSERT INTO city VALUES (null,'Paris','75000');
+INSERT INTO city VALUES (null,'Lyon','69000');
+INSERT INTO city VALUES (null,'Marseille','13000');
+INSERT INTO city VALUES (null,'Lille','59000');
+INSERT INTO city VALUES (null,'Rennes','35000');
+INSERT INTO city VALUES (null,'Nantes','44000');
+INSERT INTO city VALUES (null,'Bordeaux','33000');
+INSERT INTO city VALUES (null,'Toulouse','64000');
+
+INSERT INTO headhunter_enterprise VALUES (1, 1);
+INSERT INTO headhunter_enterprise VALUES (1, 2);

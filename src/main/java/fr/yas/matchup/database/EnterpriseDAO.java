@@ -19,13 +19,13 @@ import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.entities.Validity;
 
 public class EnterpriseDAO extends RegisteredUserDAO {
-	
-	public static final String TABLE ="enterprise";
-	public static final String ID ="id_enterprise";
-	public static final String NAME ="name_enterprise";
-	public static final String PHONE ="phone_enterprise";
-	public static final String ADDRESS ="address_enterprise";
-	public static final String CITY ="city_enterprise";
+
+	public static final String TABLE = "enterprise";
+	public static final String ID = "id_enterprise";
+	public static final String NAME = "name_enterprise";
+	public static final String PHONE = "phone_enterprise";
+	public static final String ADDRESS = "address_enterprise";
+	public static final String CITY = "city_enterprise";
 	public static final String WEBSITE = "website_enterprise";
 	public static final String MAIL = "mail_enterprise";
 	public static final String PRESENTATION ="presentation_enterprise";
@@ -50,7 +50,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	@Override
 	public BaseEntity parseToObject(ResultSet resultSet) {
 		Enterprise e = new Enterprise();
-		
+
 		try {
 			e.setId(resultSet.getDouble(ID));
 			e.setName(resultSet.getString(NAME));
@@ -78,7 +78,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 			e1.printStackTrace();
 			e = null;
 		}
-		
+
 		return e;
 	}
 
@@ -131,8 +131,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	}
 
 	public Enterprise getHeadhunters(Enterprise enterprise) {
-		ResultSet rs = executeRequest("SELECT * FROM " + ENTERPRISE_HEADHUNTER
-				+ " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
+		ResultSet rs = executeRequest(
+				"SELECT * FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
 		List<Double> headhuntersId = new ArrayList<Double>();
 		try {
 			while (rs.next()) {
@@ -145,26 +145,31 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
 
 		for (Double id : headhuntersId) {
-			enterprise.getAssociates().add( (Headhunter) enterpriseDAO.get(id));
+			enterprise.getAssociates().add((Headhunter) enterpriseDAO.get(id));
 		}
 
 		return enterprise;
 	}
 
+	/**
+	 * 
+	 * @param enterprise
+	 * @return int = 
+	 * 				number of inserted headhunters
+	 */
 	public int insertHeadhunter(Enterprise enterprise) {
 		int result = 0;
 		deleteHeadhunter(enterprise);
 		for (Headhunter headhunter : enterprise.getAssociates()) {
-			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER
-					+ " VALUES(" + enterprise.getId() + "," + headhunter.getId()
-					+ ")");
+			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + enterprise.getId()
+					+ "," + headhunter.getId() + ")");
 		}
 		return result;
 	}
 
 	public int deleteHeadhunter(Enterprise enterprise) {
-		return executeRequestUpdate("DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE "
-				+ ID_ENTERPRISE + " = " + enterprise.getId());
+		return executeRequestUpdate(
+				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
 	}
 
 }

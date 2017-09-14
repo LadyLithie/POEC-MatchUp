@@ -54,7 +54,7 @@ public abstract class BaseDAO implements IDAOBase {
 			result = stmt.executeQuery(request);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 
 		return result;
@@ -62,13 +62,21 @@ public abstract class BaseDAO implements IDAOBase {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see fr.yas.matchup.database.IDAOBase#executeRequestUpdate(java.lang.String)
+	 */
+	/**
+	 * Excecute a resquest asking to modify the database
+	 * @param request
+	 * @return :
+	 * 			positive : valid request executed
+	 * 			 		0 : request without sql return
+	 * 	 			 	others : id of the entity impacted
+	 * 			negative : SQL error code
 	 */
 	@Override
 	public int executeRequestUpdate(String request) {
-		int result = 0;
-
+		int result=-1;
+		
 		try {
 			Statement stmt = DBManager.getInstance().getCon().createStatement();
 			result = stmt.executeUpdate(request, Statement.RETURN_GENERATED_KEYS);
@@ -78,8 +86,8 @@ public abstract class BaseDAO implements IDAOBase {
 				result = rSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			result = -e.getErrorCode();
+//			e.printStackTrace();
 		}
 
 		return result;
@@ -157,14 +165,12 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public void insert(BaseEntity item) {
-		// System.out.println("INSERT INTO "+ table + " VALUES
-		// ("+parseToString(item)+")");
-		int res = executeRequestUpdate("INSERT INTO " + table + " VALUES (" + parseToString(item) + ")");
-		// System.out.println(res);
-		if (res > 0) {
+//		System.out.println("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
+		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
+//		System.out.println(res);
+		if(res > 0) {
 			item.setId(res);
-		}
-
+		}	
 	}
 
 	/*

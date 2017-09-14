@@ -132,9 +132,9 @@ public class ProposalDAO extends BaseDAO {
 				request += ENTERPRISE +" = '"+job.getCompany().getId()+"',";
 			}
 			if(job.getHeadhunter() == null) {
-				request += HEADHUNTER +" = null";
+				request += HEADHUNTER +" = null,";
 			}else {
-				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"'";
+				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"',";
 			}
 			
 			return request;

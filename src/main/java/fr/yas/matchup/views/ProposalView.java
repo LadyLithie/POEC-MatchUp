@@ -19,6 +19,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.yas.matchup.entities.Location;
+import fr.yas.matchup.entities.City;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
@@ -38,14 +39,22 @@ public class ProposalView extends BaseView implements IVisibility {
 	// Zone options
 	private JComboBox<RegisteredUser> comboBox_linkedUser;
 	private JComboBox<ContractType> comboBox_contract;
-	private JComboBox<Location> comboBox_location;
-	// Zone skills
+	//private JComboBox<Location> comboBox_location;
+	private JComboBox<City> comboBox_location;
+	//Zone skills
 	private ArrayList<JCheckBox> listSkills;
 	// Zone description
 	private JTextArea textArea;
 	private JTextField textField_JobTitle;
 	private JPanel panelCheckBox;
 	private JLabel lblLink;
+
+	/**
+	 * @return the comboBox_location
+	 */
+	public JComboBox<City> getComboBox_location() {
+		return comboBox_location;
+	}
 
 	/**
 	 * @return the btnCancel
@@ -76,13 +85,14 @@ public class ProposalView extends BaseView implements IVisibility {
 		return comboBox_contract;
 	}
 
-	/**
-	 * @return the comboBox_location
-	 */
-	public JComboBox<Location> getComboBox_location() {
-		return comboBox_location;
-	}
-	// Zone options end
+//	/**
+//	 * @return the comboBox_location
+//	 */
+//	public JComboBox<Location> getComboBox_location() {
+//		return comboBox_location;
+//	}
+	
+	//Zone options end
 
 	/**
 	 * @return the listSkills
@@ -129,13 +139,11 @@ public class ProposalView extends BaseView implements IVisibility {
 		super.pageName = "Proposal";
 		JPanel panel = new JPanel();
 		super.panel = panel;
-		// setBounds(100, 100, 750, 450);
-		// contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 370, 370 };
-		gbl_contentPane.rowHeights = new int[] { 250, 150, 20 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };
-		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, 0.0 };
+		gbl_contentPane.columnWidths = new int[] {315, 315};
+		gbl_contentPane.rowHeights = new int[] {250, 150, 20};
+		gbl_contentPane.columnWeights = new double[]{1.0, 1.0};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0};
 		panel.setLayout(gbl_contentPane);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -154,6 +162,7 @@ public class ProposalView extends BaseView implements IVisibility {
 		panelCheckBox = new JPanel();
 		scrollPane.setViewportView(panelCheckBox);
 		panelCheckBox.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
 		GridBagLayout gbl_panelCheckBox = new GridBagLayout();
 		gbl_panelCheckBox.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_panelCheckBox.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -264,8 +273,9 @@ public class ProposalView extends BaseView implements IVisibility {
 		gbc_lblGeographicLocation.gridx = 0;
 		gbc_lblGeographicLocation.gridy = 0;
 		panelComboBox.add(lblGeographicLocation, gbc_lblGeographicLocation);
-
-		comboBox_location = new JComboBox<Location>();
+		
+		//comboBox_location = new JComboBox<Location>();
+		comboBox_location = new JComboBox<City>();
 		GridBagConstraints gbc_comboBox_location = new GridBagConstraints();
 		gbc_comboBox_location.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_location.fill = GridBagConstraints.HORIZONTAL;

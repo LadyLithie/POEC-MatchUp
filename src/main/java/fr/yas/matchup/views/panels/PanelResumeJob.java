@@ -21,10 +21,18 @@ import java.awt.Color;
  *
  */
 public class PanelResumeJob extends JPanel {
+	
 	private JTextField textField;
 	private JLabel lblLink;
 	private Proposal job;
 	private JButton btnEditer;
+
+	/**
+	 * @return the textField
+	 */
+	public JTextField getTextField() {
+		return textField;
+	}
 
 	/**
 	 * @return the lblLink

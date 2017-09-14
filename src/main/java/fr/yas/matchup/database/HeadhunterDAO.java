@@ -2,6 +2,8 @@ package fr.yas.matchup.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Role;
@@ -103,6 +105,21 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		return res;
 	}
 	
-	
+	@Override
+	public List<BaseEntity> get() {
+		List<BaseEntity> associates = new ArrayList<BaseEntity>();
+		ResultSet rSet = executeRequest("SELECT * FROM HEADHUNTER_ENTERPRISE WHERE HEADHUNTER_ID " + " = " + ID);
+		
+		try {
+			while (rSet.next()) {
+				associates.add(parseToObject(rSet));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return associates;
+	}
 
 }
