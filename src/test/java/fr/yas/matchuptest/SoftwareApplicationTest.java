@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * @author Audrey
+ * @author Yannick
  *
  */
 public class SoftwareApplicationTest {
@@ -20,8 +20,6 @@ public class SoftwareApplicationTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	//Execute at Class level
-	//Prepare configuration for the test
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -29,8 +27,6 @@ public class SoftwareApplicationTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	//Execute at Class level
-	//Suppress configuration of the test
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
@@ -38,8 +34,6 @@ public class SoftwareApplicationTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	//At function level
-	// Datas to send
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -47,8 +41,6 @@ public class SoftwareApplicationTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	//At function level
-	//delete something
 	@After
 	public void tearDown() throws Exception {
 	}
