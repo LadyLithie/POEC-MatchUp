@@ -3,6 +3,8 @@
  */
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
+
 /**
  * @author Audrey
  *
@@ -10,7 +12,6 @@ package fr.yas.matchup.entities;
 public class Administrator extends RegisteredUser {
 	private String firstname;
 	private String lastname;
-	private String role;
 	
 	/**
 	 * @return the firstname
@@ -54,7 +55,7 @@ public class Administrator extends RegisteredUser {
 	 * @param lastname
 	 */
 	public Administrator(String login, String name, String phone, String email,
-			String presentation, String avatar, String created_at, String updated_at, String firstname,
+			String presentation, Blob avatar, String created_at, String updated_at, String firstname,
 			String lastname) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
@@ -69,18 +70,5 @@ public class Administrator extends RegisteredUser {
 		super();
 	}
 
-	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 }

@@ -21,10 +21,18 @@ import java.awt.Color;
  *
  */
 public class PanelResumeJob extends JPanel {
+	
 	private JTextField textField;
 	private JLabel lblLink;
 	private Proposal job;
 	private JButton btnEditer;
+
+	/**
+	 * @return the textField
+	 */
+	public JTextField getTextField() {
+		return textField;
+	}
 
 	/**
 	 * @return the lblLink
@@ -77,6 +85,7 @@ public class PanelResumeJob extends JPanel {
 			shortResume = job.getPresentation().substring(0,50) + " ...";
 		}
 		txtpnPresentation.setText(shortResume);
+		txtpnPresentation.setEditable(false);
 		txtpnPresentation.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_txtpnPresentation = new GridBagConstraints();
 		gbc_txtpnPresentation.insets = new Insets(0, 0, 5, 5);

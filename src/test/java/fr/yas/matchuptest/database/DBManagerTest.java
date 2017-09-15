@@ -24,32 +24,35 @@ import org.junit.Test;
 import fr.yas.matchup.database.DBManager;
 import fr.yas.matchup.utils.processexecution.ProcessManager;
 
-
-
 /**
- * @author Sacha
+ * @author Audrey
  *
  */
 public class DBManagerTest {
-	
-	private static ProcessManager process;
-	private static Connection conCrea;
 
+	private static ProcessManager process = null;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		process = new ProcessManager(ProcessManager.WAMP);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception {	
+	public static void tearDownAfterClass() throws Exception {
 		process.close();
-	}
+		}
 
 	/**
 	 * @throws java.lang.Exception
@@ -68,9 +71,21 @@ public class DBManagerTest {
 	/**
 	 * Test method for {@link fr.yas.matchup.database.DBManager#getInstance()}.
 	 */
+	//test of singleton
 	@Test
 	public void testGetInstance() {
-		fail("Not yet implemented");
+		assertNotNull(DBManager.getInstance());
+	}
+	
+	/**
+	 * Test method for {@link fr.yas.matchup.database.DBManager#getInstance()}.
+	 */
+	//test of singleton
+	@Test
+	public void testGetInstanceValid() {
+		DBManager test1 = DBManager.getInstance();
+		
+		assertEquals(DBManager.getInstance(), test1);
 	}
 
 	/**
@@ -81,42 +96,66 @@ public class DBManagerTest {
 		fail("Not yet implemented");
 	}
 
+	/**
+	 * Test method for {@link fr.yas.matchup.database.DBManager#getCreaCon()}.
+	 */
 	@Test
 	public void testGetCreaConNotNull() {
-		assertNotNull (DBManager.getInstance().getCreaCon());
+		assertNotNull(DBManager.getInstance().getCreaCon());
 	}
 	
+	/**
+	 * Test method for {@link fr.yas.matchup.database.DBManager#getCreaCon()}.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
 	@Test
-	public void testGetCreaConValid() throws ClassNotFoundException, SQLException {
-		conCrea = DBManager.getInstance().getCreaCon();
-		Connection creaCon =null;
-							
-		Class.forName("com.mysql.jdbc.Driver");	
-		creaCon = DriverManager.getConnection(conCrea.getMetaData().getURL(), "root", "");
-		
+	public void testGetCreaConValid() throws SQLException, ClassNotFoundException {
+		Connection conCrea = DBManager.getInstance().getCreaCon();
+		Connection creaCon = null;
+
+			// Charge the class Driver from added libs
+			Class.forName("com.mysql.jdbc.Driver");
+			// DriverMangaer = Manager the drivers in java
+			// Localize our database and how to access it
+			creaCon = DriverManager.getConnection(conCrea.getMetaData().getURL(), "root", "");
+
 		assertEquals(conCrea.getMetaData().getURL(), creaCon.getMetaData().getURL());
-		
 	}
-	
+
+	/**
+	 * Test method for {@link fr.yas.matchup.database.DBManager#getCreaCon()}.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
 	@Test(expected = SQLException.class)
-	public void testGetCreaConNotValid() throws ClassNotFoundException, SQLException {
-		conCrea = DBManager.getInstance().getCreaCon();
-		Connection creaCon =null;
-							
-		Class.forName("com.mysql.jdbc.Driver");	
-		creaCon = DriverManager.getConnection(conCrea.getMetaData().getURL(), "toto", "eltata");
-		assertNotEquals(conCrea, creaCon);
-		
+	public void testGetCreaConNotValid() throws SQLException, ClassNotFoundException {
+		Connection conCrea = DBManager.getInstance().getCreaCon();
+		Connection creaCon = null;
+
+			// Charge the class Driver from added libs
+			Class.forName("com.mysql.jdbc.Driver");
+			// DriverMangaer = Manager the drivers in java
+			// Localize our database and how to access it
+			creaCon = DriverManager.getConnection(conCrea.getMetaData().getURL(), "jean-luison", "patator");
+
+		fail("Exception not correctly returned");
 	}
 	
-	public void testGetCreaConRequest(){
-		String dbName = "dbtestpoec2017";
+	/**
+	 * Test method for {@link fr.yas.matchup.database.DBManager#getCreaCon()}.
+	 */
+	@Test
+	public void testGetCreaConRequest() {
 		Statement stmt;
+		String dbName = "dbTest";
+		
 		try {
 			stmt = DBManager.getInstance().getCreaCon().createStatement();
-			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+ " ;");		
-		}catch(SQLException e){
-			e.printStackTrace();
+
+			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName +";");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 		
 		Statement stmt1;
@@ -143,7 +182,6 @@ public class DBManagerTest {
 		
 		
 	}
-
 	/**
 	 * Test method for {@link fr.yas.matchup.database.DBManager#getDbName()}.
 	 */
@@ -237,10 +275,27 @@ public class DBManagerTest {
 
 	/**
 	 * Test method for {@link fr.yas.matchup.database.DBManager#connectCrea(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+	 * @throws ClassNotFoundException 
 	 */
-	@Test
-	public void testConnectCreaStringStringStringString() {
-		fail("Not yet implemented");
+	@Test(expected = ClassNotFoundException.class)
+	public void testConnectCreaStringStringStringStringDriver() throws ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Drive");
+		
+		fail("Exception not correctly return");
+	}
+	
+	/**
+	 * Test method for {@link fr.yas.matchup.database.DBManager#connectCrea(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+	 * @throws SQLException 
+	 */
+	@Test(expected = SQLException.class)
+	public void testConnectCreaStringStringStringString() throws SQLException {
+		String login = "test";
+		String pwd = "";
+		String port = "33";
+		String serverAddress = "localhost";
+		
+		DriverManager.getConnection("jdbc:mysql://" + serverAddress + ":" + port + "/", login, pwd);
 	}
 
 }

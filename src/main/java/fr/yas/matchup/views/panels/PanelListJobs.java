@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.GridBagLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
@@ -43,16 +44,19 @@ public class PanelListJobs extends JPanel {
 	 */
 	public PanelListJobs() {
 		super();
+		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{43, 0, 0};
+		gridBagLayout.rowHeights = new int[]{30, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		setBorder(new LineBorder(new Color(0, 0, 0)));
+		setMinimumSize(new Dimension(315, 445));
 		
 		//Title part
 		JPanel panelTitle = new JPanel();
+		panelTitle.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panelTitle = new GridBagConstraints();
 		gbc_panelTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_panelTitle.fill = GridBagConstraints.BOTH;
@@ -68,6 +72,7 @@ public class PanelListJobs extends JPanel {
 		
 		JLabel lbllTitle = new JLabel("Liste des postes proposés");
 		GridBagConstraints gbc_lbllTitle = new GridBagConstraints();
+		gbc_lbllTitle.gridwidth = 2;
 		gbc_lbllTitle.insets = new Insets(5, 5, 5, 5);
 		gbc_lbllTitle.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lbllTitle.gridx = 0;
@@ -84,12 +89,13 @@ public class PanelListJobs extends JPanel {
 		
 		//main part
 		panelJobs = new PanelJobs();
+		panelJobs.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panelJobs = new GridBagConstraints();
 		gbc_panelJobs.gridx = 0;
 		gbc_panelJobs.gridy = 1;
 		gbc_panelJobs.fill = GridBagConstraints.BOTH;
 		gbc_panelJobs.anchor = GridBagConstraints.WEST;
-		JScrollPane scrollJobs = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrollJobs = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		add(scrollJobs,gbc_panelJobs);
 		scrollJobs.setViewportView(panelJobs);
 	}

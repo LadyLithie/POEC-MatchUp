@@ -5,6 +5,7 @@
  */
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 
 public class Enterprise extends RegisteredUser {
@@ -16,7 +17,6 @@ public class Enterprise extends RegisteredUser {
 	private String twitter;
 	private String linkedin;
 	private String activity;
-	private String role;
 	private ArrayList<Headhunter> associates;
 
 	private ArrayList<Proposal> jobs;
@@ -160,19 +160,6 @@ public class Enterprise extends RegisteredUser {
 	}
 
 	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
-	/**
 	 * 
 	 */
 	public Enterprise() {
@@ -196,7 +183,7 @@ public class Enterprise extends RegisteredUser {
 	 * @param siretNumber
 	 */
 	public Enterprise(String login, String name, String phone, String email, String presentation,
-			String avatar, String created_at, String updated_at, String address, String siretNumber) {
+			Blob avatar, String created_at, String updated_at, String address, String siretNumber) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.address = address;
 		this.siretNumber = siretNumber;
@@ -212,5 +199,7 @@ public class Enterprise extends RegisteredUser {
 	@Override
 	public String toString() {
 		return "Enterprise [address=" + address + ", siretNumber=" + siretNumber + ", website=" + website + "]";
-	}	
+	}
+
+
 }

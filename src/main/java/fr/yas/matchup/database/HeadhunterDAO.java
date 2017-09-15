@@ -2,8 +2,12 @@ package fr.yas.matchup.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class HeadhunterDAO extends RegisteredUserDAO {
@@ -21,6 +25,7 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 	public static final String ROLE ="role_headhunter";
 	public static final String LOGIN ="login_headhunter";
 	public static final String PASSWORD="password_headhunter";
+	public static final String VALID = "valid";
 	
 	public HeadhunterDAO() {
 		super(TABLE, ID);
@@ -37,14 +42,18 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 			headhunter.setFirstname(rs.getString(FIRSTNAME));
 			headhunter.setPhone(rs.getString(PHONE));
 			headhunter.setEmail(rs.getString(MAIL));
-			headhunter.setPicture(rs.getString(PICTURE));
 			headhunter.setTwitter(rs.getString(TWITTER));
 			headhunter.setLinkedin(rs.getString(LINKEDIN));
 			headhunter.setPresentation(rs.getString(PRESENTATION));
-			headhunter.setRole(rs.getString(ROLE));
+			if (rs.getString(ROLE).equals("headhunter")) {
+				headhunter.setRole(Role.HEADHUNTER);
+			} else {
+				headhunter.setRole(Role.valueOf(rs.getString(ROLE)));
+			}
 			headhunter.setLogin(rs.getString(LOGIN));
 			headhunter.setPassword(rs.getString(PASSWORD));
 			headhunter.setName(headhunter.getFirstname() + " " + headhunter.getLastname());
+			headhunter.setValid(Validity.valueOf(rs.getString(VALID)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			headhunter = null;
@@ -68,7 +77,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		result += "'" + headhunter.getPresentation() +"',";
 		result += "'" + headhunter.getLogin() + "',";
 		result += "'" + headhunter.getPassword() + "',";
-		result += "'" + headhunter.getRole() + "'";
+		result += "'" + headhunter.getRole() + "',";
+		result += "'" + headhunter.getValid() + "'";
 
 		return result;
 	}
@@ -88,11 +98,27 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		res += PRESENTATION + " = '"+ headhunter.getPresentation()+"',";
 		res += LOGIN + " = '"+ headhunter.getLogin()+"',";
 		res += PASSWORD + " = '"+ headhunter.getPassword()+"',";
-		res += ROLE + " = '"+ headhunter.getRole()+"'";
+		res += ROLE + " = '"+ headhunter.getRole()+"',";
+		res += ROLE + " = '"+ headhunter.getValid()+"'";
 		
 		return res;
 	}
 	
-	
+	@Override
+	public List<BaseEntity> get() {
+		List<BaseEntity> associates = new ArrayList<BaseEntity>();
+		ResultSet rSet = executeRequest("SELECT * FROM HEADHUNTER_ENTERPRISE WHERE HEADHUNTER_ID " + " = " + ID);
+		
+		try {
+			while (rSet.next()) {
+				associates.add(parseToObject(rSet));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return associates;
+	}
 
 }

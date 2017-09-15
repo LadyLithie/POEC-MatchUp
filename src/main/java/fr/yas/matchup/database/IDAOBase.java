@@ -19,6 +19,13 @@ public interface IDAOBase {
 	 * @return
 	 */
 	public ResultSet executeRequest(String request);
+	/**
+	 * Excecute a resquest asking to modify the database
+	 * @param request
+	 * @return :
+	 * 			positive : valid request executed
+	 * 			negative : error code
+	 */
 	public int executeRequestUpdate(String request);
 	/**
 	 * Study the result of the SQL query result of the get(id) from BaseDAO
