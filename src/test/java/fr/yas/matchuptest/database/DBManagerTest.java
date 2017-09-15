@@ -160,15 +160,17 @@ public class DBManagerTest {
 		String dbName = "test";
 		Statement stmt;
 		try {
-			stmt = DBManager.getInstance().getCreaCon().createStatement();
+			stmt = DBManager.getInstance().getCon().createStatement();
 			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+ " ;");		
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		
+		DBManager.getInstance().deleteDB();
+		
 		Statement stmt1;
 		try {
-			stmt1 = DBManager.getInstance().getCreaCon().createStatement();
+			stmt1 = DBManager.getInstance().getCon().createStatement();
 			ResultSet rs = (stmt1.executeQuery("SHOW DATABASES;"));
 			while(rs.next()){
 				if (rs.getString(1).equals(dbName)){
@@ -180,7 +182,7 @@ public class DBManagerTest {
 			e.printStackTrace();
 		}finally{
 			try {
-				stmt1 = DBManager.getInstance().getCreaCon().createStatement();
+				stmt1 = DBManager.getInstance().getCon().createStatement();
 				stmt1.execute("DROP DATABASE IF EXISTS "+dbName+ " ;");		
 			}catch(SQLException e){
 				e.printStackTrace();

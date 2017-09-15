@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fr.yas.matchup.views.CandidateView;
+
 public class CandidateViewTest {
 
 	@BeforeClass
@@ -28,7 +30,8 @@ public class CandidateViewTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		CandidateView c = new CandidateView(null);
+		assertTrue(true);
 	}
 
 }

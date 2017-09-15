@@ -1,32 +1,3 @@
-CREATE TABLE headhunter(
-	id_headhunter INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	lastname_headhunter VARCHAR(255),
-	firstname_headhunter VARCHAR(255),
-	phone_headhunter VARCHAR(12),
-	mail_headhunter VARCHAR(255),
-	picture_headhunter BLOB,
-	twitter_headhunter VARCHAR(255),
-	linkedin_headhunter VARCHAR(255),
-	presentation_headhunter TEXT,
-	login_headhunter VARCHAR(255),
-	password_headhunter VARCHAR(255),
-	role_headhunter VARCHAR(20)
-	)ENGINE=InnoDB;
-
-CREATE TABLE candidate(
-	id_candidate INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	lastname_candidate VARCHAR(255),
-	firstname_candidate VARCHAR(255),
-	phone_candidate VARCHAR(12),
-	birthday_candidate DATE,
-	address_candidate VARCHAR(255),
-	mail_candidate VARCHAR(255),
-	picture_candidate BLOB,
-	presentation_candidate TEXT,
-	login_candidate VARCHAR(255),
-	password_candidate VARCHAR(255),
-	role_candidate VARCHAR(20)
-	)ENGINE=InnoDB;
 
 CREATE TABLE enterprise(
 	id_enterprise INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -46,6 +17,37 @@ CREATE TABLE enterprise(
 	password_enterprise VARCHAR(255)
 	)ENGINE=InnoDB;
 
+	CREATE TABLE headhunter(
+		id_headhunter INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		lastname_headhunter VARCHAR(255),
+		firstname_headhunter VARCHAR(255),
+		phone_headhunter VARCHAR(12),
+		mail_headhunter VARCHAR(255),
+		picture_headhunter BLOB,
+		twitter_headhunter VARCHAR(255),
+		linkedin_headhunter VARCHAR(255),
+		presentation_headhunter TEXT,
+		login_headhunter VARCHAR(255),
+		password_headhunter VARCHAR(255),
+		role_headhunter VARCHAR(20)
+		)ENGINE=InnoDB;
+
+
+	CREATE TABLE candidate(
+			id_candidate INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+			lastname_candidate VARCHAR(255),
+			firstname_candidate VARCHAR(255),
+			phone_candidate VARCHAR(12),
+			birthday_candidate DATE,
+			address_candidate VARCHAR(255),
+			mail_candidate VARCHAR(255),
+			picture_candidate BLOB,
+			presentation_candidate TEXT,
+			login_candidate VARCHAR(255),
+			password_candidate VARCHAR(255),
+			role_candidate VARCHAR(20)
+			)ENGINE=InnoDB;
+
 CREATE TABLE administrator(
 	id_admin INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	lastname_admin VARCHAR(255),
@@ -61,7 +63,6 @@ CREATE TABLE contract_type(
 	id_contract INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name_contract VARCHAR (50)
 	)ENGINE=InnoDB;
-
 
 CREATE TABLE job(
 	id_job INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

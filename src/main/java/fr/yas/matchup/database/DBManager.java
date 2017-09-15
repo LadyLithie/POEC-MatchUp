@@ -123,7 +123,7 @@ public class DBManager {
 		try {
 			stmt = con.createStatement();
 			for(String it : creationRequest.split(";")) {
-				if(!it.equals("") && !it.equals("\n")) {
+				if(!it.equals("\n") && !it.equals("#")) {
 					//System.out.println(it);
 					stmt.execute(it);					
 				}

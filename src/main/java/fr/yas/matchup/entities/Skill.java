@@ -42,9 +42,8 @@ public class Skill extends BaseEntity {
 	}
 	
 	
-	public Skill (double id, String name, String skillType) {
+	public Skill (String name, String skillType) {
 		super();
-		super.setId(id);
 		this.name = name;
 		this.skillType = skillType;
 	}

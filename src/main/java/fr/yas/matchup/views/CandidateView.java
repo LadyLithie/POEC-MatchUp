@@ -123,7 +123,7 @@ public class CandidateView extends BaseView {
 		gbc_table.gridy = 2;
 		contentPane.add(scroll, gbc_table);
 		
-		JLabel lblNewLabelFirstname = new JLabel("Pr\u00E9nom");
+		JLabel lblNewLabelFirstname = new JLabel("Prenom");
 		GridBagConstraints gbc_lblNewLabelFirstname = new GridBagConstraints();
 		gbc_lblNewLabelFirstname.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabelFirstname.insets = new Insets(0, 0, 5, 5);
