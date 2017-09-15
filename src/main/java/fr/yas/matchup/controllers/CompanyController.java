@@ -99,6 +99,8 @@ public class CompanyController extends BaseController {
 		 * Panel presentation Add user's informations
 		 */
 		vP.getNamePanel().getInput().setText(user.getName());
+		vP.getPhonePanel().getInput().setText(user.getPhone());
+		vP.getAddressPanel().getInput().setText(user.getAddress());
 		vP.getEmailPanel().getInput().setText(user.getEmail());
 		vP.getWebsitePanel().getInput().setText(user.getWebsite());
 		vP.getSiretPanel().getInput().setText(user.getSiretNumber());
@@ -157,7 +159,8 @@ public class CompanyController extends BaseController {
 		CompanyView v = (CompanyView) super.view;
 
 		/*
-		 * Panel Presentation Define the action on the buttons
+		 * Panel Presentation 
+		 * 					Define the action on the buttons
 		 */
 		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
 		// mode view
@@ -174,8 +177,14 @@ public class CompanyController extends BaseController {
 					if (!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText())) {
 						vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());
 					}
+					user.setAddress(vPresentation.getAddressPanel().getInput().getText());
+					//Will need testing for numeric string
+					user.setPhone(vPresentation.getPhonePanel().getInput().getText());
 					user.setWebsite(vPresentation.getWebsitePanel().getInput().getText());
 					user.setPresentation(vPresentation.getTextAreaPresentation().getText());
+					
+					EnterpriseDAO eDao = new EnterpriseDAO();
+					eDao.update(user);
 				}
 			}
 		});
