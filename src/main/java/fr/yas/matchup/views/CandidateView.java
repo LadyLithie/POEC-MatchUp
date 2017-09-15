@@ -26,8 +26,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 
 public class CandidateView extends BaseView {
-	private JTextField textField_firstname;
-	private JTextField textField_Lastname;
+	private JTextField textFieldFirstname;
+	private JTextField textFieldLastname;
 	private JTextField textFieldMail;
 	private JTextField textFieldPhone;
 	private JLabel lblListeDeSkills;
@@ -123,7 +123,7 @@ public class CandidateView extends BaseView {
 		gbc_table.gridy = 2;
 		contentPane.add(scroll, gbc_table);
 		
-		JLabel lblNewLabelFirstname = new JLabel("Pr\u00E9nom");
+		JLabel lblNewLabelFirstname = new JLabel("Prenom");
 		GridBagConstraints gbc_lblNewLabelFirstname = new GridBagConstraints();
 		gbc_lblNewLabelFirstname.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabelFirstname.insets = new Insets(0, 0, 5, 5);
@@ -131,7 +131,7 @@ public class CandidateView extends BaseView {
 		gbc_lblNewLabelFirstname.gridy = 2;
 		contentPane.add(lblNewLabelFirstname, gbc_lblNewLabelFirstname);
 		
-		textField_firstname = new JTextField();
+		textFieldFirstname = new JTextField();
 		GridBagConstraints gbc_textField_firstname = new GridBagConstraints();
 		gbc_textField_firstname.gridwidth = 2;
 		gbc_textField_firstname.weightx = 1.0;
@@ -139,9 +139,9 @@ public class CandidateView extends BaseView {
 		gbc_textField_firstname.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_firstname.gridx = 5;
 		gbc_textField_firstname.gridy = 2;
-		contentPane.add(textField_firstname, gbc_textField_firstname);
-		textField_firstname.setColumns(10);
-		textField_firstname.setEditable(false);
+		contentPane.add(textFieldFirstname, gbc_textField_firstname);
+		textFieldFirstname.setColumns(10);
+		textFieldFirstname.setEditable(false);
 		
 		JLabel lblNewLabelLastname = new JLabel("Nom");
 		GridBagConstraints gbc_lblNewLabelLastname = new GridBagConstraints();
@@ -151,7 +151,7 @@ public class CandidateView extends BaseView {
 		gbc_lblNewLabelLastname.gridy = 3;
 		contentPane.add(lblNewLabelLastname, gbc_lblNewLabelLastname);
 		
-		textField_Lastname = new JTextField();
+		textFieldLastname = new JTextField();
 		GridBagConstraints gbc_textField_Lastname = new GridBagConstraints();
 		gbc_textField_Lastname.gridwidth = 2;
 		gbc_textField_Lastname.weightx = 1.0;
@@ -159,9 +159,9 @@ public class CandidateView extends BaseView {
 		gbc_textField_Lastname.fill = GridBagConstraints.BOTH;
 		gbc_textField_Lastname.gridx = 5;
 		gbc_textField_Lastname.gridy = 3;
-		contentPane.add(textField_Lastname, gbc_textField_Lastname);
-		textField_Lastname.setColumns(10);
-		textField_Lastname.setEditable(false);
+		contentPane.add(textFieldLastname, gbc_textField_Lastname);
+		textFieldLastname.setColumns(10);
+		textFieldLastname.setEditable(false);
 		
 		JLabel lblNewLabelMail = new JLabel("Email");
 		GridBagConstraints gbc_lblNewLabelMail = new GridBagConstraints();
@@ -328,167 +328,191 @@ public class CandidateView extends BaseView {
 		
 		
 	}
-	
-	public JLabel getLinkViadeo() {
-		return linkViadeo;
-	}
-
-	public void setLinkViadeo(JLabel linkViadeo) {
-		this.linkViadeo = linkViadeo;
-	}
-
-	public JTable getTable() {
-		return table;
-	}
-
-	public void setTable(JTable table) {
-		this.table = table;
-	}
-
-	public JLabel getLblListeDeSkills() {
-		return lblListeDeSkills;
-	}
-
-	public JList<String> getList() {
-		return list;
-	}
-
-	public void setList(JList<String> list) {
-		this.list = list;
-	}
-
-	public void setLblListeDeSkills(JLabel lblListeDeSkills) {
-		this.lblListeDeSkills = lblListeDeSkills;
-	}
-
-	public JButton getBtnEdit() {
-		return btnEdit;
-	}
-
-	public void setBtnEdit(JButton btnEdit) {
-		this.btnEdit = btnEdit;
-	}
-
-	public JTextField getTextFieldFirstname() {
-		return textField_firstname;
-	}
-
-	public void setTextFieldFirstname(JTextField textField) {
-		this.textField_firstname = textField;
-	}
-
-	public JTextField getTextFieldLastname() {
-		return textField_Lastname;
-	}
-
-	public void setTextFieldLastname(JTextField textField_1) {
-		this.textField_Lastname = textField_1;
-	}
-
-	public JTextField getTextFieldMail() {
-		return textFieldMail;
-	}
-
-	public void setTextFieldMail(JTextField textField_2) {
-		this.textFieldMail = textField_2;
-	}
-
-	public JTextField getTextFieldPhone() {
-		return textFieldPhone;
-	}
-
-	public void setTextFieldPhone(JTextField textField_3) {
-		this.textFieldPhone = textField_3;
-	}
-	
-	public JTextArea getTextArea() {
-		return textArea;
-	}
-
-	public void setTextArea(JTextArea textArea) {
-		this.textArea = textArea;
-	}
-
-	public JButton getBtnSelectSkill() {
-		return btnSelectSkill;
-	}
-
-	public void setBtnSelectSkill(JButton btnAddSkill) {
-		this.btnSelectSkill = btnAddSkill;
-	} 
-	
-	public DefaultListModel<JCheckBox> getListModel() {
-		return listModel;
-	}
-
-	public void setListModel(DefaultListModel<JCheckBox> listModel) {
-		this.listModel = listModel;
-	}
-	
-	public JButton getBtnAnnulerButton() {
-		return btnAnnulerButton;
-	}
-
-	public void setBtnAnnulerButton(JButton btnAnnulerButton) {
-		this.btnAnnulerButton = btnAnnulerButton;
-	}
-	
-	public DefaultTableModel getModel() {
-		return model;
-	}
-
-	public void setModel(DefaultTableModel model) {
-		this.model = model;
-	}
 
 
+	/**
+	 * @return the linkTwitter
+	 */
 	public JLabel getLinkTwitter() {
 		return linkTwitter;
 	}
 
+
+	/**
+	 * @param linkTwitter the linkTwitter to set
+	 */
 	public void setLinkTwitter(JLabel linkTwitter) {
 		this.linkTwitter = linkTwitter;
 	}
 
+
+	/**
+	 * @return the linkLinkedin
+	 */
 	public JLabel getLinkLinkedin() {
 		return linkLinkedin;
 	}
 
+
+	/**
+	 * @param linkLinkedin the linkLinkedin to set
+	 */
 	public void setLinkLinkedin(JLabel linkLinkedin) {
 		this.linkLinkedin = linkLinkedin;
 	}
-	
+
+
+	/**
+	 * @return the linkViadeo
+	 */
+	public JLabel getLinkViadeo() {
+		return linkViadeo;
+	}
+
+
+	/**
+	 * @param linkViadeo the linkViadeo to set
+	 */
+	public void setLinkViadeo(JLabel linkViadeo) {
+		this.linkViadeo = linkViadeo;
+	}
+
+
+	/**
+	 * @return the textFieldFirstname
+	 */
+	public JTextField getTextFieldFirstname() {
+		return textFieldFirstname;
+	}
+
+
+	/**
+	 * @return the textFieldLastname
+	 */
+	public JTextField getTextFieldLastname() {
+		return textFieldLastname;
+	}
+
+
+	/**
+	 * @return the textFieldMail
+	 */
+	public JTextField getTextFieldMail() {
+		return textFieldMail;
+	}
+
+
+	/**
+	 * @return the textFieldPhone
+	 */
+	public JTextField getTextFieldPhone() {
+		return textFieldPhone;
+	}
+
+
+	/**
+	 * @return the lblListeDeSkills
+	 */
+	public JLabel getLblListeDeSkills() {
+		return lblListeDeSkills;
+	}
+
+
+	/**
+	 * @return the list
+	 */
+	public JList<String> getList() {
+		return list;
+	}
+
+
+	/**
+	 * @return the btnEdit
+	 */
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+
+
+	/**
+	 * @return the textArea
+	 */
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+
+	/**
+	 * @return the btnSelectSkill
+	 */
+	public JButton getBtnSelectSkill() {
+		return btnSelectSkill;
+	}
+
+
+	/**
+	 * @return the listModel
+	 */
+	public DefaultListModel<JCheckBox> getListModel() {
+		return listModel;
+	}
+
+
+	/**
+	 * @return the table
+	 */
+	public JTable getTable() {
+		return table;
+	}
+
+
+	/**
+	 * @return the btnAnnulerButton
+	 */
+	public JButton getBtnAnnulerButton() {
+		return btnAnnulerButton;
+	}
+
+
+	/**
+	 * @return the model
+	 */
+	public DefaultTableModel getModel() {
+		return model;
+	}
+
+
+	/**
+	 * @return the nameLinkLinkedin
+	 */
 	public String getNameLinkLinkedin() {
 		return nameLinkLinkedin;
 	}
 
-	public void setNameLinkLinkedin(String nameLinkLinkedin) {
-		this.nameLinkLinkedin = nameLinkLinkedin;
-	}
 
+	/**
+	 * @return the nameLinkTwitter
+	 */
 	public String getNameLinkTwitter() {
 		return nameLinkTwitter;
 	}
 
-	public void setNameLinkTwitter(String nameLinkTwitter) {
-		this.nameLinkTwitter = nameLinkTwitter;
-	}
 
+	/**
+	 * @return the nameLinkViadeo
+	 */
 	public String getNameLinkViadeo() {
 		return nameLinkViadeo;
 	}
 
-	public void setNameLinkViadeo(String nameLinkViadeo) {
-		this.nameLinkViadeo = nameLinkViadeo;
-	}	
 
+	/**
+	 * @return the btnEditLink
+	 */
 	public JButton getBtnEditLink() {
 		return btnEditLink;
 	}
 
-	public void setBtnEditLink(JButton btnEditLink) {
-		this.btnEditLink = btnEditLink;
-	}
 
 	/**
 	 * @return the menuBar
@@ -496,5 +520,31 @@ public class CandidateView extends BaseView {
 	public MenuBar getMenuBar() {
 		return menuBar;
 	}
+
+
+	/**
+	 * @param nameLinkLinkedin the nameLinkLinkedin to set
+	 */
+	public void setNameLinkLinkedin(String nameLinkLinkedin) {
+		this.nameLinkLinkedin = nameLinkLinkedin;
+	}
+
+
+	/**
+	 * @param nameLinkTwitter the nameLinkTwitter to set
+	 */
+	public void setNameLinkTwitter(String nameLinkTwitter) {
+		this.nameLinkTwitter = nameLinkTwitter;
+	}
+
+
+	/**
+	 * @param nameLinkViadeo the nameLinkViadeo to set
+	 */
+	public void setNameLinkViadeo(String nameLinkViadeo) {
+		this.nameLinkViadeo = nameLinkViadeo;
+	}
+	
+	
 
 }
