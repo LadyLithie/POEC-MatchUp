@@ -72,11 +72,12 @@ public class ProposalDAO extends BaseDAO {
 			Proposal job = ((Proposal)item);
 			request = String.valueOf(job.getId());
 			request += ",'"+job.getName()+"'";
-			if(job.getLocalization() == null) {
-				request += ",null";				
-			}else {
-				request += ",'"+job.getLocalization()+"'";
-			}
+			request += ","+(job.getLocalization() == null ? "null" : "'"+job.getLocalization()+"'");	
+//			if(job.getLocalization() == null) {
+//				request += ",null";				
+//			}else {
+//				request += ",'"+job.getLocalization()+"'";
+//			}
 			if(job.getPresentation() == null) {
 				request += ",null";				
 			}else {

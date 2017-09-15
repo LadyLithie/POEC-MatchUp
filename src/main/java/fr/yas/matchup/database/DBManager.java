@@ -79,6 +79,10 @@ public class DBManager {
 
 	/**
 	 * Try the connection to our DB
+	 * to allow the application to function
+	 * @return 	
+	 * 			true if present
+	 * 			false, if not -> so we need to create it 
 	 */
 	private boolean canConnect() {
 		try {

@@ -32,7 +32,7 @@ public class ViewsUtils {
 	}
 	
 	/**
-	 * All to configure initial size and positionning.
+	 * All to configure initial size and positioning.
 	 * Set it on the center of the screen
 	 * Determine close windows behavior
 	 * @param jFrame
@@ -49,7 +49,7 @@ public class ViewsUtils {
 
 		//envoie un code de retour en ligne de commande lors de la fermeture?
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// taille de la fenêtre à l'affichage
+		// taille de la fenï¿½tre ï¿½ l'affichage
 		jFrame.setBounds(screenMiddleWidth, screnMiddleHeight, frameWidth, frameHeight);
 
 	}
