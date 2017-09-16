@@ -171,13 +171,17 @@ public class ProposalView extends BaseView implements IVisibility {
 		panelCheckBox.setLayout(gbl_panelCheckBox);
 
 		listSkills = new ArrayList<JCheckBox>();
+		int i = 0;
 		for (BaseEntity skill : skills) {
 			JCheckBox box = new JCheckBox(((Skill) skill).getName());
 			listSkills.add(box);
 
 			GridBagConstraints gbc_box = new GridBagConstraints();
+			gbc_box.anchor = GridBagConstraints.WEST;
+			gbc_box.gridx = i % 3;
 			gbc_box.insets = new Insets(0, 0, 5, 5);
 			panelCheckBox.add(box, gbc_box);
+			i++;
 
 		}
 

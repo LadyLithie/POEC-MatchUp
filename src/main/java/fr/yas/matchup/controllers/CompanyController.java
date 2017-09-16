@@ -94,6 +94,7 @@ public class CompanyController extends BaseController {
 	public void initView() {
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		CompanyView v = (CompanyView) getView();
+
 		// MenuBar
 		v.getMenuBar().getLblWelcome().setVisible(false);
 

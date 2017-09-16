@@ -12,10 +12,14 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.text.html.HTML;
 
+import fr.yas.matchup.database.CandidateDAO;
+import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
+import fr.yas.matchup.entities.base.BaseEntity;
+import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.ProMatchingHomeView;
 import fr.yas.matchup.views.panels.PanelJobToMatch;
 
@@ -26,6 +30,7 @@ import fr.yas.matchup.views.panels.PanelJobToMatch;
 public class ProMatchingHomeController extends BaseController {
 	private RegisteredUser user;
 	private List<PanelJobToMatch> panelJobToMatchs;
+	private List<BaseEntity> candidates;
 
 	/**
 	 * 
@@ -34,6 +39,14 @@ public class ProMatchingHomeController extends BaseController {
 		super();
 		super.frame = jFrame;
 		super.view = new ProMatchingHomeView(jFrame);
+		
+		CandidateDAO cDao = new CandidateDAO();
+		candidates = cDao.get();
+		for (BaseEntity cUser : candidates) {
+			if (((Candidate) cUser).getSkills().isEmpty()) {
+				candidates.remove(cUser);
+			}
+		}
 	}
 
 	/* (non-Javadoc)
@@ -43,6 +56,8 @@ public class ProMatchingHomeController extends BaseController {
 	public void initView() {
 		ProMatchingHomeView view = (ProMatchingHomeView) getView();
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+		
+		view.getMenuBar().getLblUserName().setText(user.getName());
 		
 		if(((user instanceof Enterprise) && !((Enterprise) user).getJobs().isEmpty()) || 
 				((user instanceof Headhunter) && !((Headhunter) user).getJobs().isEmpty())) {
@@ -75,6 +90,23 @@ public class ProMatchingHomeController extends BaseController {
 	@Override
 	public void initEvent() {
 		ProMatchingHomeView view = (ProMatchingHomeView) getView();
+
+		/*
+		 * MenuBar
+		 */
+		view.getMenuBar().getNavigationBar().getBtnGoToProfil().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (user instanceof Enterprise) {
+					ViewsManager.getInstance().next(new CompanyController(frame));
+				} else {
+					ViewsManager.getInstance().next(new HeadhunterController(frame));
+				}
+			}
+		});
+
 		
 		if (!panelJobToMatchs.isEmpty()) {
 			for (PanelJobToMatch panelJobToMatch : panelJobToMatchs) {

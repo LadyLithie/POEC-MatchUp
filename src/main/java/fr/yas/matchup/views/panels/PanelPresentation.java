@@ -166,7 +166,7 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.rowHeights = new int[]{2, 0, 2, 0, 0, 2, 0};
 		gridBagLayout.columnWidths = new int[]{5, 0, 10, 0, 5};
-		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 2.0, 0.0, 1.0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, 2.0, 0.0, 1.0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0 };
 		setLayout(gridBagLayout);
 
@@ -358,7 +358,6 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		GridBagConstraints gbc_panelDecision = new GridBagConstraints();
 		gbc_panelDecision.anchor = GridBagConstraints.EAST;
 		gbc_panelDecision.gridwidth = 6;
-		gbc_panelDecision.insets = new Insets(0, 0, 0, 5);
 		gbc_panelDecision.gridx = 0;
 		gbc_panelDecision.gridy = 6;
 		add(panelDecision, gbc_panelDecision);
