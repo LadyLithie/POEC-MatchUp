@@ -45,6 +45,13 @@ public class ProMatchingHomeView extends BaseView {
 	}
 
 	/**
+	 * @return the panelResult
+	 */
+	public JPanel getPanelResult() {
+		return panelResult;
+	}
+
+	/**
 	 * Create the panel.
 	 * @param jFrame 
 	 */

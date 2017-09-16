@@ -10,18 +10,46 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
-import javax.swing.text.html.parser.Entity;
+import fr.yas.matchup.entities.base.BaseEntity;
 
 public class PanelMatchResume extends JPanel {
-	private Entity matched;
+	private BaseEntity matched;
 	private JLabel MatchResult;
 	private JButton btnSeeNewMatch;
 	private JLabel lblName;
 
 	/**
+	 * @return the matched
+	 */
+	public BaseEntity getMatched() {
+		return matched;
+	}
+
+	/**
+	 * @return the matchResult
+	 */
+	public JLabel getMatchResult() {
+		return MatchResult;
+	}
+
+	/**
+	 * @return the btnSeeNewMatch
+	 */
+	public JButton getBtnSeeNewMatch() {
+		return btnSeeNewMatch;
+	}
+
+	/**
+	 * @return the lblName
+	 */
+	public JLabel getLblName() {
+		return lblName;
+	}
+
+	/**
 	 * Create the panel.
 	 */
-	public PanelMatchResume(Entity matched) {
+	public PanelMatchResume(BaseEntity matched) {
 		this.matched = matched;
 		
 		setBorder(new LineBorder(new Color(0, 0, 0)));

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.text.html.HTML;
 
+import fr.yas.matchup.Matching;
 import fr.yas.matchup.database.CandidateDAO;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
@@ -19,9 +20,11 @@ import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.base.BaseEntity;
+import fr.yas.matchup.managers.MatchManager;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.ProMatchingHomeView;
 import fr.yas.matchup.views.panels.PanelJobToMatch;
+import fr.yas.matchup.views.panels.PanelMatchResume;
 
 /**
  * @author Audrey
@@ -40,13 +43,6 @@ public class ProMatchingHomeController extends BaseController {
 		super.frame = jFrame;
 		super.view = new ProMatchingHomeView(jFrame);
 		
-		CandidateDAO cDao = new CandidateDAO();
-		candidates = cDao.get();
-		for (BaseEntity cUser : candidates) {
-			if (((Candidate) cUser).getSkills().isEmpty()) {
-				candidates.remove(cUser);
-			}
-		}
 	}
 
 	/* (non-Javadoc)
@@ -107,7 +103,17 @@ public class ProMatchingHomeController extends BaseController {
 			}
 		});
 
-		
+		/*
+		 * List of jobs
+		 */
+		CandidateDAO cDao = new CandidateDAO();
+		candidates = new ArrayList<>();
+		for (BaseEntity cUser : cDao.get()) {
+			if (!((Candidate) cUser).getSkills().isEmpty()) {
+				candidates.add(cUser);
+			}
+		}
+
 		if (!panelJobToMatchs.isEmpty()) {
 			for (PanelJobToMatch panelJobToMatch : panelJobToMatchs) {
 				panelJobToMatch.getBtnSeeMore().addActionListener(new ActionListener() {
@@ -120,6 +126,17 @@ public class ProMatchingHomeController extends BaseController {
 						view.getLblResult().setText("<html><h1>Matching en cours</h1>job : " 
 								+ panelJobToMatch.getJob().getId() + " - "
 								+ panelJobToMatch.getJob().getName() + "</html>");
+						
+						/*
+						 * Start matching
+						 */
+						MatchManager jobMatcher = new MatchManager(candidates, panelJobToMatch.getJob());
+						for (Matching match : jobMatcher.basic()) {
+							PanelMatchResume mResume = new PanelMatchResume(match.getCandidate());
+							mResume.getMatchResult().setText(String.valueOf(match.getPercentage()));
+							mResume.getLblName().setText(match.getCandidate().getName());
+							view.getPanelResult().add(mResume);
+						}
 					}
 				});
 			}
