@@ -58,10 +58,10 @@ public class ProMatchingHomeController extends BaseController {
 			for (Proposal job : list) {
 				PanelJobToMatch pJob = new PanelJobToMatch(job);
 				GridBagConstraints gbc_pJob = new GridBagConstraints();
+				gbc_pJob.anchor = GridBagConstraints.NORTHWEST;
 				gbc_pJob.fill = GridBagConstraints.HORIZONTAL;
-				gbc_pJob.anchor = GridBagConstraints.CENTER;
-				gbc_pJob.gridx = 1;
-				gbc_pJob.gridy = GridBagConstraints.RELATIVE; //below the last one
+				gbc_pJob.gridx = 0;
+//				gbc_pJob.gridy = GridBagConstraints.RELATIVE; //below the last one
 				view.getPanelListJobs().add(pJob, gbc_pJob);
 				panelJobToMatchs.add(pJob);
 

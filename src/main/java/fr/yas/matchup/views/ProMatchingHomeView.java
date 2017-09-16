@@ -35,7 +35,7 @@ public class ProMatchingHomeView extends BaseView {
 	 */
 	public ProMatchingHomeView(JFrame jFrame) {
 		super();
-		super.pageName = "Proposal";
+		super.pageName = "Matching";
 		JPanel panel = new JPanel();
 		super.panel = panel;
 		

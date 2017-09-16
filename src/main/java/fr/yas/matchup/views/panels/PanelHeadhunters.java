@@ -17,17 +17,17 @@ import fr.yas.matchup.views.IVisibility;
 import javax.swing.JScrollPane;
 
 public class PanelHeadhunters extends JPanel implements IVisibility {
-	private Panel2FieldButton newHeadHunter;
+	private PanelFieldsButton newHeadHunter;
 	private JButton btnEdit;
 	private JButton btnAnnuler;
-	private ArrayList<Panel2FieldButton> associates;
+	private ArrayList<PanelFieldsButton> associates;
 	private JPanel panelContent;
 	private JScrollPane scrollPane;
 
 	/**
 	 * @return the newHeadHunter
 	 */
-	public Panel2FieldButton getNewHeadHunter() {
+	public PanelFieldsButton getNewHeadHunter() {
 		return newHeadHunter;
 	}
 
@@ -48,14 +48,14 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	/**
 	 * @return the associates
 	 */
-	public ArrayList<Panel2FieldButton> getAssociates() {
+	public ArrayList<PanelFieldsButton> getAssociates() {
 		return associates;
 	}
 
 	/**
 	 * @param associates the associates to set
 	 */
-	public void setAssociates(ArrayList<Panel2FieldButton> associates) {
+	public void setAssociates(ArrayList<PanelFieldsButton> associates) {
 		this.associates = associates;
 	}
 
@@ -122,7 +122,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		panelTitle.add(btnEdit, gbc_btnEdit);
 		
 		//Add new one
-		newHeadHunter = new Panel2FieldButton("Nouveau recruteur", "Ajouter");
+		newHeadHunter = new PanelFieldsButton("Nouveau recruteur", "Ajouter");
 		GridBagConstraints gbc_newHeadHunter = new GridBagConstraints();
 		gbc_newHeadHunter.insets = new Insets(0, 0, 5, 0);
 		gbc_newHeadHunter.gridx = 0;
@@ -147,7 +147,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		panelContent.setLayout(gbl_panelContent);
 		//List the present headhunters and offer possibility to delete
 		if(this.associates == null) {
-			this.associates = new ArrayList<Panel2FieldButton>();
+			this.associates = new ArrayList<PanelFieldsButton>();
 		}
 			
 		this.setMode(false);
@@ -164,7 +164,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		} else {
 			this.getBtnEdit().setText("Editer");
 		}
-		for (Panel2FieldButton headhunter : associates) {
+		for (PanelFieldsButton headhunter : associates) {
 			headhunter.setMode(b);
 		}
 		this.getNewHeadHunter().setVisible(b);

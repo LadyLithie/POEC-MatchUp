@@ -40,6 +40,7 @@ public class PanelJobToMatch extends JPanel {
 		panelMatch.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelMatch = new GridBagConstraints();
 		gbc_panelMatch.insets = new Insets(5, 5, 5, 5);
+		gbc_panelMatch.anchor = GridBagConstraints.NORTHEAST;
 		gbc_panelMatch.fill = GridBagConstraints.BOTH;
 		gbc_panelMatch.gridx = 0;
 		gbc_panelMatch.gridy = 0;

@@ -210,7 +210,7 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		gbc_addressPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_addressPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_addressPanel.gridx = 0;
-		panelInfos.add(websitePanel, gbc_addressPanel);
+		panelInfos.add(addressPanel, gbc_addressPanel);
 		addressPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
 		addressPanel.getInput().setEditable(false);
 
@@ -398,7 +398,6 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		this.getBtnAjout().setVisible(b);
 		this.getBtnAnnuler().setVisible(b);
 		this.getBtnModifier().setVisible(b);
-		// this.getBtnValider().setVisible(b);
 
 		this.getNamePanel().setMode(b);
 		this.getSiretPanel().setMode(b);
