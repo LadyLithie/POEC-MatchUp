@@ -3,17 +3,32 @@ package fr.yas.matchup.views;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JSplitPane;
+
+import fr.yas.matchup.views.usercontrols.MenuBar;
+
 import java.awt.GridBagConstraints;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Insets;
 import javax.swing.JScrollPane;
+import javax.swing.JMenuBar;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 public class ProMatchingHomeView extends BaseView {
 
 	private JPanel panelListJobs;
 	private JLabel lblResult;
+	private MenuBar menuBar;
+	private JPanel panelResult;
+
+	/**
+	 * @return the menuBar
+	 */
+	public MenuBar getMenuBar() {
+		return menuBar;
+	}
 
 	/**
 	 * @return the panelListJobs
@@ -30,35 +45,56 @@ public class ProMatchingHomeView extends BaseView {
 	}
 
 	/**
+	 * @return the panelResult
+	 */
+	public JPanel getPanelResult() {
+		return panelResult;
+	}
+
+	/**
 	 * Create the panel.
 	 * @param jFrame 
 	 */
 	public ProMatchingHomeView(JFrame jFrame) {
 		super();
-		super.pageName = "Proposal";
+		super.pageName = "Matching";
 		JPanel panel = new JPanel();
 		super.panel = panel;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gridBagLayout);
+		
+		menuBar = new MenuBar();
+		GridBagConstraints gbc_menuBar = new GridBagConstraints();
+		gbc_menuBar.anchor = GridBagConstraints.FIRST_LINE_START;
+		gbc_menuBar.gridx = 0;
+		gbc_menuBar.gridy = 0;
+		gbc_menuBar.gridwidth = GridBagConstraints.REMAINDER;
+		panel.add(menuBar.getContentPane(), gbc_menuBar);
 		
 		JSplitPane splitPane = new JSplitPane();
 		GridBagConstraints gbc_splitPane = new GridBagConstraints();
 		gbc_splitPane.fill = GridBagConstraints.BOTH;
 		gbc_splitPane.gridx = 0;
-		gbc_splitPane.gridy = 0;
+		gbc_splitPane.gridy = 1;
 		panel.add(splitPane, gbc_splitPane);
 		
 		//Panel for result
 		JPanel panelPreview = new JPanel();
 		splitPane.setRightComponent(panelPreview);
+		panelPreview.setLayout(new BorderLayout(0, 0));
 		
 		lblResult = new JLabel("result");
-		panelPreview.add(lblResult);
+		panelPreview.add(lblResult, BorderLayout.NORTH);
+		
+		panelResult = new JPanel();
+		panelPreview.add(panelResult);
+		
+		
 		
 		//Listing of user's jobs
 		JPanel panelLeft = new JPanel();

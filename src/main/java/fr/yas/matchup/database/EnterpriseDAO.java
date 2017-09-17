@@ -130,22 +130,31 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		return res;
 	}
 
+	/**
+	 * Retrieve the headhunters working with the company and add them to the entity
+	 * @param enterprise
+	 * @return
+	 */
 	public Enterprise getHeadhunters(Enterprise enterprise) {
+		//Search all rows where ID_ENTERPRISE = enterprise ID
 		ResultSet rs = executeRequest(
 				"SELECT * FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
+		
 		List<Double> headhuntersId = new ArrayList<Double>();
+		//Create the list of ID_HEADHUNTER
 		try {
 			while (rs.next()) {
-				headhuntersId.add(rs.getDouble(ID_ENTERPRISE));
+				headhuntersId.add(rs.getDouble(ID_HEADHUNTER));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
+		//Retrieve for each id of the list the representation of the entity
+		HeadhunterDAO hDao = new HeadhunterDAO();
 
 		for (Double id : headhuntersId) {
-			enterprise.getAssociates().add((Headhunter) enterpriseDAO.get(id));
+			enterprise.getAssociates().add((Headhunter) hDao.get(id));
 		}
 
 		return enterprise;

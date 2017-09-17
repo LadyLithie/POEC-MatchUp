@@ -29,6 +29,7 @@ public class ViewsUtils {
 		
 		// set minimum size to 640x480 in case of resize
 		jFrame.setMinimumSize(new Dimension(640, 480));
+		jFrame.setPreferredSize(new Dimension(800, 600));
 	}
 	
 	/**
@@ -38,14 +39,17 @@ public class ViewsUtils {
 	 * @param jFrame
 	 */
 	public static void configureFirstJFrame(JFrame jFrame) {
-		int frameWidth = 640;
-		int frameHeight = 480;
+		int frameWidth = 800;
+		int frameHeight = 600;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
 		int screnHeight = (int) screenSize.getHeight();
 		
 		int screenMiddleWidth = (screenWidth/2) - (frameWidth/2);
 		int screnMiddleHeight = (screnHeight/2) - (frameHeight/2);
+
+		// set minimum size to 640x480 in case of resize
+		jFrame.setMinimumSize(new Dimension(640, 480));
 
 		//envoie un code de retour en ligne de commande lors de la fermeture?
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

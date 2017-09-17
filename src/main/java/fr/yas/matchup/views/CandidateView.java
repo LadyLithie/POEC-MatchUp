@@ -86,7 +86,7 @@ public class CandidateView extends BaseView {
 		
 		
 	
-		model = new DefaultTableModel(null, new String [] {"CheckMe", "Compétences"}) {
+		model = new DefaultTableModel(null, new String [] {"CheckMe", "CompÃ©tences"}) {
             /**
 			 * 
 			 */
@@ -210,7 +210,7 @@ public class CandidateView extends BaseView {
 		gbc_btnEditLink.gridy = 5;
 		contentPane.add(btnEditLink, gbc_btnEditLink);
 		
-		textArea = new JTextArea("Présentation du profil");
+		textArea = new JTextArea("PrÃ©sentation du profil");
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridwidth = 9;
 		gbc_textArea.gridheight = 3;
@@ -282,7 +282,7 @@ public class CandidateView extends BaseView {
 //		gbc_lblOption_2.gridy = 15;
 //		contentPane.add(lblOption_2, gbc_lblOption_2);
 		
-		btnSelectSkill = new JButton("Sélectionner Skill");
+		btnSelectSkill = new JButton("SÃ©lectionner Skill");
 		Dimension preferredSize1 = new Dimension(180, 25);
 		btnSelectSkill.setPreferredSize(preferredSize1);
 		GridBagConstraints gbc_btnSelectSkill = new GridBagConstraints();

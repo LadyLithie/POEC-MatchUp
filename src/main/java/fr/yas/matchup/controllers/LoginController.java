@@ -79,6 +79,7 @@ public class LoginController extends BaseController {
 	@Override
 	public void initEvent() {
 		LoginView view = (LoginView) super.view;
+		super.frame.getRootPane().setDefaultButton(view.getBtnLogin());
 
 		// Connect and go to Profile
 		view.getBtnLogin().addActionListener(new ActionListener() {
