@@ -387,6 +387,7 @@ public class CandidateController extends BaseController {
 							if (e2.getSource() == validate) {
 								view.setNameLinkLinkedin(newlink.getText());
 								view.setNameLinkTwitter(newlink.getText());
+								view.setNameLinkViadeo(newlink.getText());
 								edition.setVisible(false);
 							}
 						}

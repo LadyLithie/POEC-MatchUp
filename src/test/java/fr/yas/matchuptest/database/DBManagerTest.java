@@ -3,7 +3,11 @@
  */
 package fr.yas.matchuptest.database;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -157,20 +161,20 @@ public class DBManagerTest {
 		Statement stmt1;
 		try {
 			stmt1 = DBManager.getInstance().getCreaCon().createStatement();
-			ResultSet rSet = stmt1.executeQuery("SHOW DATABASES;");
-			while (rSet.next()) {
-				if(rSet.getString(1).equals(dbName)) {
+			ResultSet rs = (stmt1.executeQuery("SHOW DATABASES;"));
+			while(rs.next()){
+				if (rs.getString(1).equals(dbName)){
 					assertTrue(true);
 					break;
 				}
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}finally {
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
 			try {
 				stmt = DBManager.getInstance().getCreaCon().createStatement();
-				stmt.executeUpdate("DROP DATABASE IF EXISTS " + dbName + ";");
-			} catch (SQLException e) {
+				stmt.execute("DROP DATABASE IF EXISTS "+dbName+ " ;");		
+			}catch(SQLException e){
 				e.printStackTrace();
 				fail("Database not found");
 			}
@@ -183,7 +187,7 @@ public class DBManagerTest {
 	 */
 	@Test
 	public void testGetDbName() {
-		fail("Not yet implemented");
+		assertTrue(!DBManager.getInstance().getDbName().equals(""));
 	}
 
 	/**
@@ -191,9 +195,44 @@ public class DBManagerTest {
 	 */
 	@Test
 	public void testDeleteDB() {
+		String dbName = "test";
+		Statement stmt;
+		try {
+			stmt = DBManager.getInstance().getCon().createStatement();
+			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+ " ;");		
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		DBManager.getInstance().deleteDB();
+		
+		Statement stmt1;
+		try {
+			stmt1 = DBManager.getInstance().getCon().createStatement();
+			ResultSet rs = (stmt1.executeQuery("SHOW DATABASES;"));
+			while(rs.next()){
+				if (rs.getString(1).equals(dbName)){
+					assertTrue(true);
+					break;
+				}
+			}			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			try {
+				stmt1 = DBManager.getInstance().getCon().createStatement();
+				stmt1.execute("DROP DATABASE IF EXISTS "+dbName+ " ;");		
+			}catch(SQLException e){
+				e.printStackTrace();
+				fail("Database not found");
+			}
+		}	
+		
+	}
+	
+	public void closeConectionAfterDeleteDB(){
 		fail("Not yet implemented");
 	}
-
 	/**
 	 * Test method for {@link fr.yas.matchup.database.DBManager#connect()}.
 	 */

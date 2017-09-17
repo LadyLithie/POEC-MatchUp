@@ -7,7 +7,6 @@ INSERT INTO enterprise VALUES (null,'SCIENCEINFUSE',9874561236, '1 rue du savoir
 INSERT INTO enterprise VALUES (null,'ONEPIECE',8569741252, '1 rue de Redline','FUSCHIA','lespiratesdunouveaumonde.com','lespiratesdunouveaumonde@pirate.com','Bonjour je suis le roi des pirates',null,'lespiratesdunouveaumonde@twitter.com','lespiratesdunouveaumonde@linkedin.com','Recherche de pirate','enterprise','chapeauDePaille','luffy');
 INSERT INTO enterprise VALUES (null,'LOL',4578129632, '1 rue de riot games','LOS ANGELES','gamers.com','gamers@nolife.com','Bonjour je recherche des developpers/gamers',null,'gamers@twitter.com','gamers@linkedin.com','Recherche de joueurs très mauvais','enterprise','allstar','nexus');
 INSERT INTO enterprise VALUES (null,'TROLL',4525658579, '1 rue du cest pas ici','TROLLCITY','.com','cestpasici@vienspas.com','Bonjour je ne recherche pas des trolls cest faux',null,'cestpasici@twitter.com','cestpasici@linkedin.com','Recheche personne ','enterprise','carleric','non');
-
 INSERT INTO skill VALUES (null,'JAVA','Langage');
 INSERT INTO skill VALUES (null,'SQL','Langage');
 INSERT INTO skill VALUES (null,'C','Langage');
@@ -19,7 +18,6 @@ INSERT INTO skill VALUES (null,'Javascript','Langage');
 INSERT INTO skill VALUES (null,'Eclipse','Logiciel');
 INSERT INTO skill VALUES (null,'StarUML','Logiciel');
 INSERT INTO skill VALUES (null,'Git Bash','Logiciel');
-
 INSERT INTO contract_type VALUES (null,'CDD');
 INSERT INTO contract_type VALUES (null,'CDI');
 INSERT INTO contract_type VALUES (null,'ALTERNANCE');
