@@ -1,13 +1,10 @@
 package fr.yas.matchuptest.database;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
+import static org.junit.Assert.assertEquals;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,24 +12,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.yas.matchup.database.CandidateDAO;
-import fr.yas.matchup.database.DBManager;
-import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Candidate;
-import fr.yas.matchup.entities.Diploma;
-import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.utils.processexecution.ProcessManager;
+
 
 public class CandidateDAOTest {
 	
 	private static ProcessManager process;
-	private static Candidate candidate;
-	private static CandidateDAO candidateDAO;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		process = new ProcessManager(ProcessManager.WAMP);
-	//	DBManager.getInstance();
-		candidateDAO = new CandidateDAO();
 	}
 
 	@AfterClass
@@ -49,91 +39,88 @@ public class CandidateDAOTest {
 	}
 
 	@Test
-	public void testParseToObject() {
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-			new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
-		candidateDAO.insert(candidate);
+	public void testParseToObject() {		
+		CandidateDAO candidateDAO = new CandidateDAO();
+		ResultSet rs = null;
 		
-		ResultSet rs = null ;
+		Candidate c1 = new Candidate() ;
 		
+		Candidate c2 = null;
+				
 		try {
-			Statement stmt= DBManager.getInstance().getCon().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM "+CandidateDAO.TABLE+" ;");
-			while(rs.next()){
-				if(rs.getString(CandidateDAO.ID).equals(candidate.getId())){
-					assertTrue(true);
-					break;
-				}
-			}
+			c2.setId(rs.getDouble(CandidateDAO.ID));
+			c2.setLastname(rs.getString(CandidateDAO.LASTNAME));
+			c2.setFirstname(rs.getString(CandidateDAO.FIRSTNAME));
+			c2.setPhone(rs.getString(CandidateDAO.PHONE));
+			c2.setBirstdate(rs.getString(CandidateDAO.BIRTHDAY));
+			c2.setAddress(rs.getString(CandidateDAO.ADDRESS));
+			c2.setEmail(rs.getString(CandidateDAO.MAIL));
+			c2.setAvatar(rs.getBlob(CandidateDAO.PICTURE));
+			c2.setPresentation(rs.getString(CandidateDAO.PRESENTATION));
+			c2.setLogin(rs.getString(CandidateDAO.LOGIN));
+			c2.setPassword(rs.getString(CandidateDAO.PASSWORD));
+			c2.setName(c2.getFirstname() + " " + c2.getLastname());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			fail("Candidate not create");
-		}finally{
-			try {
-				Statement stmt1 = DBManager.getInstance().getCon().createStatement();
-				stmt1.execute("DELETE FROM "+CandidateDAO.TABLE+" WHERE "+CandidateDAO.ID+" ="+candidate.getId()+" ;");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}			
-		}
+		}	
 		
+		c1 = (Candidate) candidateDAO.parseToObject(rs);
+		
+		assertEquals(c1,c2);
 	}
 
 	@Test
 	public void testParseToString() {		
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-			new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");			
-		candidateDAO.insert(candidate);		
-		assertNotNull(candidate);
+		CandidateDAO candidateDAO = new CandidateDAO();
+		String rs = "null,";
 		
-		try {
-			Statement stmt1 = DBManager.getInstance().getCon().createStatement();
-			stmt1.execute("DELETE FROM "+CandidateDAO.TABLE+" WHERE "+CandidateDAO.ID+" ="+candidate.getId()+" ;");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Candidate c1 = new Candidate() ;
+		
+		Candidate c2 = null;
+		
+		rs += "'" + c1.getLastname() + "',";
+		rs += "'" + c1.getFirstname() + "',";
+		rs += "'" + c1.getPhone() + "',";
+		rs += "'" + c1.getBirstdate() + "',";
+		rs += "'" + c1.getAddress() + "',";
+		rs += "'" + c1.getEmail() + "',";
+		rs += "'" + c1.getAvatar() + "',";
+		rs += "'" + c1.getPresentation() +"',";
+		rs += "'" + c1.getLogin() + "',";
+		rs += "'" + c1.getPassword() + "',";
+		rs += "'" + c1.getRole() + "'";
+		
+		candidateDAO.parseToString(c2);
+		
+		assertEquals(c1,c2);
+		
 	}
 
 	@Test
-	public void testParseUpdateToString() {
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-				new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
-		Candidate candidatebis = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-				new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
+	public void testParseUpdateToString() {		
+		CandidateDAO candidateDAO = new CandidateDAO();
+		String rs = "";
 		
-		candidate.setLogin("sacha");
+		Candidate c1 = new Candidate() ;
 		
-		candidateDAO.update(candidate);
+		Candidate c2 = null;
 		
-		ResultSet rs;
+		rs += CandidateDAO.LASTNAME + " = '" + c2.getLastname() + "',";
+		rs += CandidateDAO.FIRSTNAME + " = '" + c2.getFirstname() + "',";
+		rs += CandidateDAO.PHONE + " = '" + c2.getPhone() + "',";
+		rs += CandidateDAO.BIRTHDAY + " = '" + c2.getBirstdate() + "',";
+		rs += CandidateDAO.ADDRESS + " = '" + c2.getAddress() + "',";
+		rs += CandidateDAO.MAIL + " = '" + c2.getEmail() + "',";
+		rs += CandidateDAO.PICTURE + " = '" + c2.getAvatar() + "',";
+		rs += CandidateDAO.PRESENTATION + " = '" + c2.getPresentation() +"',";
+		rs += CandidateDAO.LOGIN + " = '" + c2.getLogin() + "',";
+		rs += CandidateDAO.PASSWORD + " = '" + c2.getPassword() + "',";
+		rs += CandidateDAO.ROLE + " = '" + c2.getRole() + "'";
 		
-		try {
-			Statement stmt = DBManager.getInstance().getCon().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM "+CandidateDAO.TABLE+" ;" );
-			while (rs.next()){
-				if(!rs.getString(CandidateDAO.LOGIN).equals(candidatebis.getLogin())){
-					assertTrue(true);
-					break;
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			fail("Fail Update");
-		}finally{
-			try {
-				Statement stmt1 = DBManager.getInstance().getCon().createStatement();
-				stmt1.execute("DELETE FROM "+CandidateDAO.TABLE+" WHERE "+CandidateDAO.FIRSTNAME+"='"+ candidate.getFirstname() +"' ;");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		candidateDAO.parseUpdateToString(c1);
 		
-		
+		assertEquals(c1,c2);
 	}
 
 	@Test
@@ -143,49 +130,7 @@ public class CandidateDAOTest {
 
 	@Test
 	public void testGetSkills() {
-		SkillDAO skilldao = new SkillDAO();
-		Skill skill = new Skill("testName","testSkillType");
-		skilldao.insert(skill);
-		skilldao.get();
-		
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-				new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
-		candidateDAO.insert(candidate);
-		
-		ResultSet rs;
-		
-		try {
-			Statement stmt = DBManager.getInstance().getCon().createStatement();
-			stmt.execute("INSERT INTO "+CandidateDAO.CANDIDATE_SKILL+" VALUES("+ candidate.getId() +","+skill.getId()+") ;");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			Statement stmt1 = DBManager.getInstance().getCon().createStatement();
-			rs = stmt1.executeQuery("SELECT * FROM "+CandidateDAO.CANDIDATE_SKILL+" "
-					+ " WHERE "+CandidateDAO.ID_CANDIDATE+" = "+candidate.getId()+" AND "
-					+ CandidateDAO.ID_SKILL+" = "+skill.getId()+" ;");
-			if(rs.next()){
-				assertTrue(true);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			fail("Update fail");
-		}finally{
-			try {
-				Statement stmt2 = DBManager.getInstance().getCon().createStatement();
-				stmt2.execute("DELETE FROM "+CandidateDAO.CANDIDATE_SKILL+" WHERE "+CandidateDAO.ID_CANDIDATE+" = "+candidate.getId()+" AND "
-					+ CandidateDAO.ID_SKILL+" = "+skill.getId()+" ;");
-				Statement stmt3 = DBManager.getInstance().getCon().createStatement();
-				stmt3.execute("DELETE FROM "+CandidateDAO.TABLE+" WHERE "+CandidateDAO.FIRSTNAME+"='"+ candidate.getFirstname() +"' ;");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		fail("Not yet implemented");
 		
 	}
 
