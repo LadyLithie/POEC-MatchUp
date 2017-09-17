@@ -153,31 +153,31 @@ public class AdminController extends BaseController {
 	@Override
 	public void initEvent() {
 //		v = (AdministratorView) super.view;
-		this.mouseChangeAvatar = new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				v.getLblPhoto().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				v.getLblPhoto().setToolTipText("popup de confirmation avec textfield pour new link");
-				v.getLblPhoto().setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("popup de confirmation avec textfield pour new link");
-			}
-		};
+//		this.mouseChangeAvatar = new MouseListener() {
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				v.getLblPhoto().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//			}
+//
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				v.getLblPhoto().setToolTipText("popup de confirmation avec textfield pour new link");
+//				v.getLblPhoto().setCursor(new Cursor(Cursor.HAND_CURSOR));
+//			}
+//
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				System.out.println("popup de confirmation avec textfield pour new link");
+//			}
+//		};
 
 		/*
 		 * Panel presentation
@@ -407,8 +407,8 @@ public class AdminController extends BaseController {
 
 	private PanelAdminSkill popupAddForm(AdministratorView v) {
 		JFrame edition = new JFrame("Confirmation");
-		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous s�r de vouloir
-		// supprimer la comp�tence "+skillManager.getSkill().getName()+" ?");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
+		// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
 		JPanel contentPanel = new JPanel();
 		ViewsUtils.popUp(edition, contentPanel);
 

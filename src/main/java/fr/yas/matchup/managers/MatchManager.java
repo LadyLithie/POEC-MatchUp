@@ -6,7 +6,6 @@ package fr.yas.matchup.managers;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.yas.matchup.Matching;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.base.BaseEntity;

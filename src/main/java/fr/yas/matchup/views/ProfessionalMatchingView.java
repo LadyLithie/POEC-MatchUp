@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
-import fr.yas.matchup.views.professionalMatching.MatchedCandidate;
+import fr.yas.matchup.views.panels.MatchedCandidate;
 import fr.yas.matchup.views.usercontrols.MenuBar;
 
 public class ProfessionalMatchingView extends BaseView {

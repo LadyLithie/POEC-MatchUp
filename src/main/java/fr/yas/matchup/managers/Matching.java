@@ -1,4 +1,4 @@
-package fr.yas.matchup;
+package fr.yas.matchup.managers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +61,8 @@ public class Matching {
 		for (int i = 0; i < job.getSkills().size(); i++) {
 			for (int j = 0; j < candidate.getSkills().size(); j++) {
 
-				if (candidate.getSkills().get(j).getName() == job.getSkills().get(i).getName()) {
-					matchedSkills.add(i, job.getSkills().get(i));
+				if (candidate.getSkills().get(j).getName().equals(job.getSkills().get(i).getName())) {
+					matchedSkills.add(job.getSkills().get(i));
 				}
 			}
 		}

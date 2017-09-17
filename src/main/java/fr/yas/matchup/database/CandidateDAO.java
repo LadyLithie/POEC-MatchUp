@@ -64,6 +64,8 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setValid(Validity.valueOf(rs.getString(VALID)));
 			
 			candidate.setName(candidate.getFirstname() + " " + candidate.getLastname());
+			
+			candidate = getSkills(candidate);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			candidate = null;
