@@ -139,6 +139,7 @@ public class Headhunter extends RegisteredUser {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		super.setName(firstname + " " + lastname);
+		super.setRole(Role.HEADHUNTER);
 
 		associates = new ArrayList<>();
 		jobs = new ArrayList<>();

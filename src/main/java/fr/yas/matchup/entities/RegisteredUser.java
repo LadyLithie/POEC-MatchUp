@@ -194,6 +194,11 @@ public abstract class RegisteredUser extends BaseEntity {
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 	}
+	
+	public RegisteredUser(Role role){
+		this.role = role;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

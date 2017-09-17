@@ -75,7 +75,7 @@ public class SkillDAOTest {
 	 */
 	@Test
 	public void testParseToString() {
-		Skill test = new Skill(0,"test","test");
+		Skill test = new Skill("test","test");
 		
 		System.out.println(testDao.parseToString(test));
 		String sqlString = "";
@@ -88,7 +88,7 @@ public class SkillDAOTest {
 	 */
 	@Test
 	public void testParseUpdateToString() {
-		Skill test = new Skill(0,"test","test");
+		Skill test = new Skill("test","test");
 		
 		System.out.println(testDao.parseToString(test));
 		String sqlString = "";

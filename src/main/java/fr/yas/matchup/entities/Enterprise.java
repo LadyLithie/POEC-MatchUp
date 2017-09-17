@@ -185,6 +185,7 @@ public class Enterprise extends RegisteredUser {
 	public Enterprise(String login, String name, String phone, String email, String presentation,
 			Blob avatar, String created_at, String updated_at, String address, String siretNumber) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
+		super.setRole(Role.COMPANY);
 		this.address = address;
 		this.siretNumber = siretNumber;
 		associates = new ArrayList<>();

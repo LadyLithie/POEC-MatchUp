@@ -50,8 +50,8 @@ public class CandidateDAOTest {
 
 	@Test
 	public void testParseToObject() {
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-			new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
+		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+			new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
 		candidateDAO.insert(candidate);
 		
 		ResultSet rs = null ;
@@ -83,8 +83,8 @@ public class CandidateDAOTest {
 
 	@Test
 	public void testParseToString() {		
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-			new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");			
+		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
 		candidateDAO.insert(candidate);		
 		assertNotNull(candidate);
 		
@@ -99,10 +99,11 @@ public class CandidateDAOTest {
 
 	@Test
 	public void testParseUpdateToString() {
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-				new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
-		Candidate candidatebis = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-				new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
+		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
+		Candidate candidatebis = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
+
 		
 		candidate.setLogin("sacha");
 		
@@ -148,8 +149,8 @@ public class CandidateDAOTest {
 		skilldao.insert(skill);
 		skilldao.get();
 		
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", " ", " ", " ", "toto", "tata", "1999-12-12", 
-				new ArrayList<Diploma>(), new ArrayList<String>(), "address", "role");
+		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
 		candidateDAO.insert(candidate);
 		
 		ResultSet rs;
