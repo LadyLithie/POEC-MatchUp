@@ -133,7 +133,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	/**
 	 * Retrieve the headhunters working with the company and add them to the entity
 	 * @param enterprise
-	 * @return
+	 * @return the modified enterprise entity
 	 */
 	public Enterprise getHeadhunters(Enterprise enterprise) {
 		//Search all rows where ID_ENTERPRISE = enterprise ID
@@ -161,7 +161,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 	}
 
 	/**
-	 * 
+	 * Add all the associates of enterprise to the DB
 	 * @param enterprise
 	 * @return int = 
 	 * 				number of inserted headhunters
@@ -176,6 +176,11 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		return result;
 	}
 
+	/**
+	 * Delete all the associates of enterprise
+	 * @param enterprise
+	 * @return
+	 */
 	public int deleteHeadhunter(Enterprise enterprise) {
 		return executeRequestUpdate(
 				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());

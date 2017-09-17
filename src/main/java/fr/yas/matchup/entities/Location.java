@@ -14,7 +14,7 @@ public class Location {
 
 	private String address;
 	private String city;
-	private int departement;
+	private int postal_code;
 	private String pays;
 
 	/**
@@ -48,18 +48,18 @@ public class Location {
 	}
 
 	/**
-	 * @return the departement
+	 * @return the postal_code
 	 */
-	public int getDepartement() {
-		return departement;
+	public int getPostal_code() {
+		return postal_code;
 	}
 
 	/**
-	 * @param departement
-	 *            the departement to set
+	 * @param postal_code
+	 *            the postal_code to set
 	 */
-	public void setDepartement(int departement) {
-		this.departement = departement;
+	public void setPostal_code(int departement) {
+		this.postal_code = departement;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Location {
 	 */
 	public Location() {
 		super();
-		pays = "";
+		pays = Location.FRANCE;
 		address = "";
 		city = "";
 	}
@@ -90,15 +90,20 @@ public class Location {
 	/**
 	 * @param address
 	 * @param city
-	 * @param departement
+	 * @param postal_code
 	 * @param pays
 	 */
 	public Location(String address, String city, int departement, String pays) {
 		super();
 		this.address = address;
 		this.city = city;
-		this.departement = departement;
-		this.pays = pays;
+		this.postal_code = departement;
+		if (pays.isEmpty() || pays == null) {
+			pays = Location.FRANCE;
+		} else {
+			this.pays = pays;
+
+		}
 	}
 
 	/**
@@ -111,12 +116,12 @@ public class Location {
 		if (ad[1].length() != 3) {
 			ad = ad[1].split(",");
 			this.setAddress(ad[0]);
-			this.setDepartement(Integer.valueOf(ad[1]));
+			this.setPostal_code(Integer.valueOf(ad[1]));
 			this.setCity(ad[2]);
 		} else {
 			ad = ad[1].split(",");
 			this.setAddress(ad[0]);
-			this.setDepartement(Integer.valueOf(ad[1]));
+			this.setPostal_code(Integer.valueOf(ad[1]));
 			this.setCity("");
 		}
 
@@ -129,7 +134,7 @@ public class Location {
 	 */
 	@Override
 	public String toString() {
-		return pays + ":" + address + "," + departement + "," + city;
+		return pays + ":" + address + "," + postal_code + "," + city;
 	}
 
 }

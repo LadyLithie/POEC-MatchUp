@@ -161,4 +161,20 @@ public class Candidate extends RegisteredUser {
 		super.setRole(Role.CANDIDATE);
 		super.setName(firstname + " " + lastname);
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Candidate [" + (firstname != null ? "firstname=" + firstname + ", " : "")
+				+ (lastname != null ? "lastname=" + lastname + ", " : "")
+				+ (birstdate != null ? "birstdate=" + birstdate + ", " : "")
+				+ (address != null ? "address=" + address + ", " : "")
+				+ (qualifications != null ? "qualifications=" + qualifications + ", " : "")
+				+ (mobility != null ? "mobility=" + mobility + ", " : "")
+				+ (skills != null ? "skills=" + skills + ", " : "")
+				+ (super.toString() != null ? "toString()=" + super.toString() : "") + "]";
+	}
+
 }

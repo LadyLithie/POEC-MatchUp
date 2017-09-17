@@ -142,8 +142,8 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 
 	/**
 	 * Retrieve the companies which whom the headhunter works and add them to the entity
-	 * @param enterprise
-	 * @return
+	 * @param headhunter
+	 * @return the modified headhunter entity
 	 */
 	public Headhunter getAssociates(Headhunter headhunter) {
 		ResultSet rs = executeRequest(
@@ -167,14 +167,14 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 	}
 
 	/**
-	 * 
-	 * @param enterprise
+	 * Add all the associates of headhunter to the DB
+	 * @param headhunter
 	 * @return int = 
-	 * 				number of inserted headhunters
+	 * 				number of inserted associates
 	 */
-	public int insertHeadhunter(Headhunter headhunter) {
+	public int insertAssociates(Headhunter headhunter) {
 		int result = 0;
-		deleteHeadhunter(headhunter);
+		deleteAssociates(headhunter);
 		for (Enterprise enterprise : headhunter.getAssociates()) {
 			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + enterprise.getId()
 					+ "," + headhunter.getId() + ")");
@@ -182,7 +182,12 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		return result;
 	}
 
-	public int deleteHeadhunter(Headhunter headhunter) {
+	/**
+	 * Delete all the associates of headhunter from the DB
+	 * @param headhunter
+	 * @return
+	 */
+	public int deleteAssociates(Headhunter headhunter) {
 		return executeRequestUpdate(
 				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + headhunter.getId());
 	}
