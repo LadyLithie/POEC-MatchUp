@@ -109,13 +109,16 @@ public class Location {
 		String[] ad = fulladress.split(":");
 		this.setPays(ad[0]);
 		if (ad[1].length() != 3) {
+			ad = ad[1].split(",");
+			this.setAddress(ad[0]);
+			this.setDepartement(Integer.valueOf(ad[1]));
 			this.setCity(ad[2]);
 		} else {
+			ad = ad[1].split(",");
+			this.setAddress(ad[0]);
+			this.setDepartement(Integer.valueOf(ad[1]));
 			this.setCity("");
 		}
-		ad = ad[1].split(",");
-		this.setAddress(ad[0]);
-		this.setDepartement(Integer.valueOf(ad[1]));
 
 	}
 

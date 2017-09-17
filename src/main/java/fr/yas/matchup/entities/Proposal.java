@@ -18,10 +18,8 @@ import fr.yas.matchup.entities.base.BaseEntity;
 public class Proposal extends BaseEntity {
 	private String name;
 	private String presentation;
-	//private String handicap;
 	private String createdAt;
 	private String updatedAt;
-	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
 	private ContractType contractType;  
 	private Location localization;
 	private Enterprise company;

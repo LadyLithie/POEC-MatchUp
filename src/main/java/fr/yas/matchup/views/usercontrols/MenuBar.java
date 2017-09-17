@@ -1,6 +1,7 @@
+/**
+ * A graphic element integrated in a view that can possess its owns actions
+ */
 package fr.yas.matchup.views.usercontrols;
-
-
 
 import javax.swing.JPanel;
 
@@ -9,11 +10,8 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
-import fr.yas.matchup.database.CandidateDAO;
-import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.views.BaseView;
 import fr.yas.matchup.views.ViewsTerms;
-
 
 
 public class MenuBar extends BaseView {

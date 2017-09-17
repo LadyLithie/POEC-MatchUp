@@ -36,16 +36,20 @@ public class ViewsManager {
 
 	/**
 	 * The call start of the visual application
+	 * Initialization of the graphic
 	 */
 	public void start() {
+		//generate the first frame with independant attributes
 		ViewsUtils.configureFirstJFrame(frame);
 
 		currentController = new LoginController(frame);
 
 		controllers.add(currentController);
+		//initialized the eventQueue thread for our frame
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//charge a view
 					controllers.get(currentControllerIndex).loadController(
 							frame);
 					frame.setVisible(true);
@@ -94,7 +98,7 @@ public class ViewsManager {
 	}
 
 	/**
-	 * Forward behavior to existing view
+	 * Forward behavior to existing view if possible
 	 * @return
 	 */
 	public ViewsManager next() {
@@ -112,7 +116,7 @@ public class ViewsManager {
 	}
 
 	/**
-	 * Backtracking behavior
+	 * Backtracking behavior if possible
 	 * @return
 	 */
 	public ViewsManager back() {
@@ -155,7 +159,7 @@ public class ViewsManager {
 	}
 
 	/**
-	 *
+	 * For every element, allow to invoke it at the current level
 	 */
 	public void executeIntoUI() {
 		EventQueue.invokeLater(new Runnable() {

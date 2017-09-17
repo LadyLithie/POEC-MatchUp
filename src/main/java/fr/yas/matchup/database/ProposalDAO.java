@@ -72,11 +72,12 @@ public class ProposalDAO extends BaseDAO {
 			Proposal job = ((Proposal)item);
 			request = String.valueOf(job.getId());
 			request += ",'"+job.getName()+"'";
-			if(job.getLocalization() == null) {
-				request += ",null";				
-			}else {
-				request += ",'"+job.getLocalization()+"'";
-			}
+			request += ","+(job.getLocalization() == null ? "null" : "'"+job.getLocalization()+"'");	
+//			if(job.getLocalization() == null) {
+//				request += ",null";				
+//			}else {
+//				request += ",'"+job.getLocalization()+"'";
+//			}
 			if(job.getPresentation() == null) {
 				request += ",null";				
 			}else {
@@ -116,11 +117,12 @@ public class ProposalDAO extends BaseDAO {
 			}else {
 				request += ADDRESS +" = '"+job.getLocalization()+"',";
 			}
-			if(job.getPresentation() == null) {
-				request += PRESENTATION +" = null,";
-			}else {
-				request += PRESENTATION +" = '"+job.getPresentation()+"',";
-			}
+			request += PRESENTATION + (job.getPresentation() ==  null ? " = null," : " = '"+job.getPresentation()+"',");
+//			if(job.getPresentation() == null) {
+//				request += PRESENTATION +" = null,";
+//			}else {
+//				request += PRESENTATION +" = '"+job.getPresentation()+"',";
+//			}
 			if(job.getContractType() == null) {
 				request += CONTRACT +" = null,";
 			}else {
@@ -132,9 +134,9 @@ public class ProposalDAO extends BaseDAO {
 				request += ENTERPRISE +" = '"+job.getCompany().getId()+"',";
 			}
 			if(job.getHeadhunter() == null) {
-				request += HEADHUNTER +" = null,";
+				request += HEADHUNTER +" = null";
 			}else {
-				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"',";
+				request += HEADHUNTER +" = '"+job.getHeadhunter().getId()+"'";
 			}
 			
 			return request;

@@ -33,7 +33,7 @@ public class ViewsUtils {
 	}
 	
 	/**
-	 * All to configure initial size and positionning.
+	 * All to configure initial size and positioning.
 	 * Set it on the center of the screen
 	 * Determine close windows behavior
 	 * @param jFrame

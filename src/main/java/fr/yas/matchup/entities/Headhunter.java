@@ -14,25 +14,10 @@ public class Headhunter extends RegisteredUser {
 	private String lastname;
 	private String twitter;
 	private String linkedin;
-	private String picture;
 	
 	private ArrayList<Proposal> jobs;
 	private ArrayList<Enterprise> associates;
 	
-	/**
-	 * @return the picture
-	 */
-	public String getPicture() {
-		return picture;
-	}
-
-	/**
-	 * @param picture the picture to set
-	 */
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
 	/**
 	 * @return the linkedin
 	 */
@@ -122,9 +107,7 @@ public class Headhunter extends RegisteredUser {
 	 * Void constructor
 	 */
 	public Headhunter() {
-
-		super();
-		
+		super();		
 		associates = new ArrayList<>();
 		jobs = new ArrayList<>();	
 		}
