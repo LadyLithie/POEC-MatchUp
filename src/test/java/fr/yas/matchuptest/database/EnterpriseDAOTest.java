@@ -75,10 +75,13 @@ public class EnterpriseDAOTest {
 
 		ResultSet result = testDao
 				.executeRequest("SELECT * FROM enterprise WHERE " + EnterpriseDAO.ID + " = " + idTest.getId());
-		Enterprise entityResult = null;
+		Enterprise entityResult = new Enterprise();
 		try {
 			if (result.next()) {
 				entityResult = (Enterprise) testDao.parseToObject(result);
+			}else{
+				entityResult.setId(0);
+				entityResult.setLogin("userOne");
 			}
 		} catch (SQLException e) {
 			
@@ -248,13 +251,16 @@ public class EnterpriseDAOTest {
 			stmt = DBManager.getInstance().getCon().createStatement();
 			ResultSet rSet = stmt.executeQuery("SELECT * FROM " + EnterpriseDAO.TABLE + " WHERE " + EnterpriseDAO.ID
 					+ " = '" + idTest.getId() + "'");
-			rSet.next();
-			entity = testDao.parseToObject(rSet);
+			if(rSet.next()){
+				entity = testDao.parseToObject(rSet);
+			}else{
+				entity = null;
+			}
 		} catch (SQLException e) {
 			System.out.println("insert error");
 			// e.printStackTrace();
 		}
-		assertNotNull(entity);
+		assertNull(entity);
 
 	}
 

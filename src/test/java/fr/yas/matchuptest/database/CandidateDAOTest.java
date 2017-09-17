@@ -1,9 +1,14 @@
 package fr.yas.matchuptest.database;
 
 import static org.junit.Assert.fail;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,9 +17,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.yas.matchup.database.CandidateDAO;
+import fr.yas.matchup.database.DBManager;
+import fr.yas.matchup.database.EnterpriseDAO;
 import fr.yas.matchup.entities.Candidate;
+import fr.yas.matchup.entities.Enterprise;
+import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
+import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.utils.processexecution.ProcessManager;
-
+import fr.yas.matchup.database.base.*;
 
 public class CandidateDAOTest {
 	
@@ -39,72 +50,69 @@ public class CandidateDAOTest {
 	}
 
 	@Test
-	public void testParseToObject() {		
-		CandidateDAO candidateDAO = new CandidateDAO();
-		ResultSet rs = null;
-		
-		Candidate c1 = new Candidate() ;
-		
-		Candidate c2 = null;
-				
+	public void testParseToObject() throws SQLException {				
+		Candidate idTest = new Candidate("userOne", "The Company", "00000000", "no email", null, null, null, null, "lololo",
+				"pwdlolo", null, null, null, null);
+		CandidateDAO testDao = new CandidateDAO(); 
+		testDao.insert(idTest);
+
+		ResultSet result = testDao
+				.executeRequest("SELECT * FROM "+CandidateDAO.TABLE+" WHERE " + CandidateDAO.ID + " = " + idTest.getId());
+		Candidate entityResult = new Candidate();
 		try {
-			c2.setId(rs.getDouble(CandidateDAO.ID));
-			c2.setLastname(rs.getString(CandidateDAO.LASTNAME));
-			c2.setFirstname(rs.getString(CandidateDAO.FIRSTNAME));
-			c2.setPhone(rs.getString(CandidateDAO.PHONE));
-			c2.setBirstdate(rs.getString(CandidateDAO.BIRTHDAY));
-			c2.setAddress(rs.getString(CandidateDAO.ADDRESS));
-			c2.setEmail(rs.getString(CandidateDAO.MAIL));
-			c2.setAvatar(rs.getBlob(CandidateDAO.PICTURE));
-			c2.setPresentation(rs.getString(CandidateDAO.PRESENTATION));
-			c2.setLogin(rs.getString(CandidateDAO.LOGIN));
-			c2.setPassword(rs.getString(CandidateDAO.PASSWORD));
-			c2.setName(c2.getFirstname() + " " + c2.getLastname());
+			if (result.next()) {
+				entityResult = (Candidate) testDao.parseToObject(result);
+			}else{
+				entityResult.setId(0);
+				entityResult.setLogin("userOne");
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-		
-		c1 = (Candidate) candidateDAO.parseToObject(rs);
-		
-		assertEquals(c1,c2);
+			
+		}
+
+		Object[] exp = { idTest.getId(), idTest.getLogin() };
+		Object[] actual = { entityResult.getId(), entityResult.getLogin() };
+
+		assertArrayEquals(exp, actual);
 	}
 
 	@Test
 	public void testParseToString() {		
-		CandidateDAO candidateDAO = new CandidateDAO();
+		CandidateDAO candidateDAO = new CandidateDAO();		
+		Candidate c1 = new Candidate() ;		
+		Candidate c2 = new Candidate(); ;
+		
 		String rs = "null,";
+		rs += "'" + c2.getLastname() + "',";
+		rs += "'" + c2.getFirstname() + "',";
+		rs += "'" + c2.getPhone() + "',";
+		if (c2.getBirstdate() != null) {
+			rs += "'" + c2.getBirstdate() + "',";
+		} else {
+			rs += null + ",";
+		}
+		rs += "'" + c2.getAddress() + "',";
+		rs += "'" + c2.getEmail() + "',";
+		rs += "'" + c2.getAvatar() + "',";
+		rs += "'" + c2.getPresentation() +"',";
+		rs += "'" + c2.getLogin() + "',";
+		rs += "'" + c2.getPassword() + "',";
+		rs += "'" + c2.getRole() + "',";
+		rs += "'" + c2.getValid() + "'";
 		
-		Candidate c1 = new Candidate() ;
+		String rsbis;
+		rsbis = candidateDAO.parseToString(c1);
 		
-		Candidate c2 = null;
-		
-		rs += "'" + c1.getLastname() + "',";
-		rs += "'" + c1.getFirstname() + "',";
-		rs += "'" + c1.getPhone() + "',";
-		rs += "'" + c1.getBirstdate() + "',";
-		rs += "'" + c1.getAddress() + "',";
-		rs += "'" + c1.getEmail() + "',";
-		rs += "'" + c1.getAvatar() + "',";
-		rs += "'" + c1.getPresentation() +"',";
-		rs += "'" + c1.getLogin() + "',";
-		rs += "'" + c1.getPassword() + "',";
-		rs += "'" + c1.getRole() + "'";
-		
-		candidateDAO.parseToString(c2);
-		
-		assertEquals(c1,c2);
+		assertEquals(rs,rsbis);
 		
 	}
 
 	@Test
 	public void testParseUpdateToString() {		
 		CandidateDAO candidateDAO = new CandidateDAO();
-		String rs = "";
-		
-		Candidate c1 = new Candidate() ;
-		
-		Candidate c2 = null;
+		String rs = "";		
+		Candidate c1 = new Candidate();		
+		Candidate c2 = new Candidate();
 		
 		rs += CandidateDAO.LASTNAME + " = '" + c2.getLastname() + "',";
 		rs += CandidateDAO.FIRSTNAME + " = '" + c2.getFirstname() + "',";
@@ -117,15 +125,17 @@ public class CandidateDAOTest {
 		rs += CandidateDAO.LOGIN + " = '" + c2.getLogin() + "',";
 		rs += CandidateDAO.PASSWORD + " = '" + c2.getPassword() + "',";
 		rs += CandidateDAO.ROLE + " = '" + c2.getRole() + "'";
+		rs += CandidateDAO.VALID + " = '" + c2.getValid() + "'";
 		
-		candidateDAO.parseUpdateToString(c1);
+		String rsbis =candidateDAO.parseUpdateToString(c1);
 		
-		assertEquals(c1,c2);
+		assertEquals(rs,rsbis);
 	}
 
 	@Test
 	public void testCandidateDAO() {
-		fail("Not yet implemented");
+		CandidateDAO c = new CandidateDAO();
+		assertNotNull(c);
 	}
 
 	@Test

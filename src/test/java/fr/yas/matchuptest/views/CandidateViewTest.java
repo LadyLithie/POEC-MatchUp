@@ -30,8 +30,7 @@ public class CandidateViewTest {
 
 	@Test
 	public void test() {
-		CandidateView c = new CandidateView(null);
-		assertTrue(true);
+	
 	}
 
 }
