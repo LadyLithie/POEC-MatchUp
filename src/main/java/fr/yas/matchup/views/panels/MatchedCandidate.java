@@ -200,12 +200,12 @@ public class MatchedCandidate extends JPanel {
 		add(textFieldEmail, gbc_textFieldEmail);
 		textFieldEmail.setColumns(10);
 		
-		btnRetour = new JButton("Retour");
-		GridBagConstraints gbc_btnRetour = new GridBagConstraints();
-		gbc_btnRetour.gridwidth = 5;
-		gbc_btnRetour.gridx = 0;
-		gbc_btnRetour.gridy = 4;
-		add(btnRetour, gbc_btnRetour);
+//		btnRetour = new JButton("Retour");
+//		GridBagConstraints gbc_btnRetour = new GridBagConstraints();
+//		gbc_btnRetour.gridwidth = 5;
+//		gbc_btnRetour.gridx = 0;
+//		gbc_btnRetour.gridy = 4;
+//		add(btnRetour, gbc_btnRetour);
 	}
 
 }

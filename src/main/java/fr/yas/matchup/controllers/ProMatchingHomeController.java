@@ -40,6 +40,8 @@ public class ProMatchingHomeController extends BaseController {
 	private RegisteredUser user;
 	private List<PanelJobToMatch> panelJobToMatchs;
 	private List<BaseEntity> candidates;
+	private MatchedCandidate detail;
+	private boolean enMatching = false;
 
 	/**
 	 * 
@@ -48,29 +50,33 @@ public class ProMatchingHomeController extends BaseController {
 		super();
 		super.frame = jFrame;
 		super.view = new ProMatchingHomeView(jFrame);
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.controllers.BaseController#initView()
 	 */
 	@Override
 	public void initView() {
 		ProMatchingHomeView view = (ProMatchingHomeView) getView();
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		
+		setButtonsVisible(enMatching);
+
 		view.getMenuBar().getLblUserName().setText(user.getName());
-		
-		if(((user instanceof Enterprise) && !((Enterprise) user).getJobs().isEmpty()) || 
-				((user instanceof Headhunter) && !((Headhunter) user).getJobs().isEmpty())) {
-			//local list to avoid complication/doubleness
+
+		if (((user instanceof Enterprise) && !((Enterprise) user).getJobs().isEmpty())
+				|| ((user instanceof Headhunter) && !((Headhunter) user).getJobs().isEmpty())) {
+			// local list to avoid complication/doubleness
 			List<Proposal> list;
 			if (user instanceof Enterprise) {
 				list = ((Enterprise) user).getJobs();
 			} else {
 				list = ((Headhunter) user).getJobs();
 			}
-			//Create the jobs panel and add them to both the view and the listing for use in initevent()
+			// Create the jobs panel and add them to both the view and the listing for use
+			// in initevent()
 			panelJobToMatchs = new ArrayList<>();
 			for (Proposal job : list) {
 				PanelJobToMatch pJob = new PanelJobToMatch(job);
@@ -78,7 +84,7 @@ public class ProMatchingHomeController extends BaseController {
 				gbc_pJob.anchor = GridBagConstraints.NORTHWEST;
 				gbc_pJob.fill = GridBagConstraints.HORIZONTAL;
 				gbc_pJob.gridx = 0;
-//				gbc_pJob.gridy = GridBagConstraints.RELATIVE; //below the last one
+				// gbc_pJob.gridy = GridBagConstraints.RELATIVE; //below the last one
 				view.getPanelListJobs().add(pJob, gbc_pJob);
 				panelJobToMatchs.add(pJob);
 
@@ -86,7 +92,9 @@ public class ProMatchingHomeController extends BaseController {
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.yas.matchup.controllers.BaseController#initEvent()
 	 */
 	@Override
@@ -97,7 +105,7 @@ public class ProMatchingHomeController extends BaseController {
 		 * MenuBar
 		 */
 		view.getMenuBar().getNavigationBar().getBtnGoToProfil().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -123,15 +131,19 @@ public class ProMatchingHomeController extends BaseController {
 		if (!panelJobToMatchs.isEmpty()) {
 			for (PanelJobToMatch panelJobToMatch : panelJobToMatchs) {
 				panelJobToMatch.getBtnSeeMore().addActionListener(new ActionListener() {
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						if (!enMatching) {
+							enMatching = true;
+							setButtonsVisible(enMatching);
+						}
 						/*
-						 * Ceci est juste pour visuel de test
-						 * sera remplacé par un panel de resultat
+						 * Ceci est juste pour visuel de test sera remplacé par un panel de resultat
 						 */
-						view.getLblResult().setText("<html><h1>Matching en cours</h1>job : " 
-								+ panelJobToMatch.getJob().getId() + " - "
-								+ panelJobToMatch.getJob().getName() + "</html>");
+						view.getLblResult()
+								.setText("<html><h1>Matching en cours</h1>job : " + panelJobToMatch.getJob().getId()
+										+ " - " + panelJobToMatch.getJob().getName() + "</html>");
 						view.getPanelResult().removeAll();
 						/*
 						 * Start matching
@@ -140,49 +152,80 @@ public class ProMatchingHomeController extends BaseController {
 						for (Matching match : jobMatcher.basic()) {
 							PanelMatchResume mResume = new PanelMatchResume(match.getCandidate());
 							mResume.getMatchResult().setText(String.valueOf(match.getPercentage()) + "%");
-							mResume.getLblName().setText("<html>" + match.getCandidate().getFirstname() +"<br />"+ match.getCandidate().getLastname() + "</html>");
+							mResume.getLblName().setText("<html>" + match.getCandidate().getFirstname() + "<br />"
+									+ match.getCandidate().getLastname() + "</html>");
 							view.getPanelResult().add(mResume);
+
 							mResume.getBtnSeeNewMatch().addActionListener(new ActionListener() {
-								
+
 								@Override
 								public void actionPerformed(ActionEvent e) {
 									Candidate matched = (Candidate) mResume.getMatched();
-									JFrame frame = new JFrame(matched.getName());
-									JPanel panel = new JPanel();
-									MatchedCandidate content = new MatchedCandidate();
-//									frame.setContentPane(content);
-									ViewsUtils.popUp(frame, panel);
-									
-//									panel.add(content,GridBagConstraints.CENTER);
-//									content.setVisible(true);
-									
-									content.getTextFieldEmail().setText(matched.getEmail());
-									content.getTextFieldMatching().setText(match.getPercentage() + "%");
-									content.getTextFieldNom().setText(matched.getLastname());
-									content.getTextFieldPrenom().setText(matched.getFirstname());
-									content.getTextFieldPhone().setText(matched.getPhone());
+									if (detail == null) {
+										MatchedCandidate content = new MatchedCandidate();
+										view.getPanelPreview().add(content);
+										detail = content;
+									}
+									setPanelVisible(false);
+
+									detail.getTextFieldEmail().setText(matched.getEmail());
+									detail.getTextFieldMatching().setText(match.getPercentage() + "%");
+									detail.getTextFieldNom().setText(matched.getLastname());
+									detail.getTextFieldPrenom().setText(matched.getFirstname());
+									detail.getTextFieldPhone().setText(matched.getPhone());
 									for (Skill skill : matched.getSkills()) {
-										content.getListModel().addElement(skill);
+										detail.getListModel().addElement(skill);
 									}
 
-									frame.setVisible(true);
-									frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-									
-									content.getBtnRetour().addActionListener(new ActionListener() {
-										
-										@Override
-										public void actionPerformed(ActionEvent e) {
-											frame.setVisible(false);
-										}
-									});
-
+									// set the button activity
+									view.getBtnListe().setEnabled(true);
+									view.getBtnMore().setEnabled(false);
 								}
 							});
 						}
 					}
 				});
+
+				ActionListener[] aEs = view.getBtnMore().getActionListeners();
+				if (aEs.length == 0) {
+					// affiche le detail du dernier candidat visité si présent
+					view.getBtnMore().addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							view.getBtnListe().setEnabled(true);
+							view.getBtnMore().setEnabled(false);
+							setPanelVisible(false);
+							view.getPanelPreview().revalidate();
+						}
+					});
+				}
+				aEs = view.getBtnListe().getActionListeners();
+				if (aEs.length == 0) {
+					view.getBtnListe().addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// set the button activity
+							view.getBtnListe().setEnabled(false);
+							view.getBtnMore().setEnabled(true);
+							setPanelVisible(true);
+							view.getPanelPreview().revalidate();
+						}
+					});
+				}
 			}
 		}
 	}
 
+	private void setButtonsVisible(boolean b) {
+		((ProMatchingHomeView) view).getBtnListe().setVisible(b);
+		((ProMatchingHomeView) view).getBtnMore().setVisible(b);
+	}
+	
+	private void setPanelVisible(boolean b) {
+		((ProMatchingHomeView) view).getPanelResult().setVisible(b);
+		detail.setVisible(!b);
+
+	}
 }

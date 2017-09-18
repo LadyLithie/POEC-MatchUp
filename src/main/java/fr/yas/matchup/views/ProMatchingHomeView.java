@@ -24,6 +24,14 @@ public class ProMatchingHomeView extends BaseView {
 	private JPanel panelResult;
 	private JButton btnListe;
 	private JButton btnMore;
+	private JPanel panelPreview;
+
+	/**
+	 * @return the panelPreview
+	 */
+	public JPanel getPanelPreview() {
+		return panelPreview;
+	}
 
 	/**
 	 * @return the btnListe
@@ -100,7 +108,7 @@ public class ProMatchingHomeView extends BaseView {
 		panel.add(splitPane, gbc_splitPane);
 		
 		//Panel for result
-		JPanel panelPreview = new JPanel();
+		panelPreview = new JPanel();
 		splitPane.setRightComponent(panelPreview);
 		panelPreview.setLayout(new BorderLayout(0, 0));
 		
