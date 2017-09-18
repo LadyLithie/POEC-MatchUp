@@ -67,15 +67,6 @@ public class DBManagerTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	/**
-	 * Test method for {@link fr.yas.matchup.database.DBManager#getInstance()}.
-	 */
-	//test of singleton
-	@Test
-	public void testGetInstance() {
-		assertNotNull(DBManager.getInstance());
-	}
 	
 	/**
 	 * Test method for {@link fr.yas.matchup.database.DBManager#getInstance()}.
@@ -93,7 +84,7 @@ public class DBManagerTest {
 	 */
 	@Test
 	public void testGetCon() {
-		fail("Not yet implemented");
+		assertNotNull(DBManager.getInstance().getCon());
 	}
 
 	/**

@@ -127,15 +127,14 @@ public class DBManager {
 		try {
 			stmt = con.createStatement();
 			for(String it : creationRequest.split(";")) {
-				if(!it.equals("") && !it.equals("\n")) {
-					System.out.println(it);
+				if(!it.equals("\n") && !it.equals("")) {
 					stmt.execute(it);					
 				}
 			}
 			stmt.execute(creationRequest);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 	}
