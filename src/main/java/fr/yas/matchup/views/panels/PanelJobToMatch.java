@@ -1,17 +1,13 @@
 package fr.yas.matchup.views.panels;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-
 import fr.yas.matchup.entities.Proposal;
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 public class PanelJobToMatch extends JPanel {
 	private Proposal job;
@@ -37,7 +33,6 @@ public class PanelJobToMatch extends JPanel {
 	public PanelJobToMatch(Proposal job) {
 		this.job = job;
 		JPanel panelMatch = new JPanel();
-		panelMatch.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelMatch = new GridBagConstraints();
 		gbc_panelMatch.insets = new Insets(5, 5, 5, 5);
 		gbc_panelMatch.anchor = GridBagConstraints.NORTHEAST;
@@ -53,12 +48,12 @@ public class PanelJobToMatch extends JPanel {
 		} else {
 			shortResume = job.getPresentation().substring(0,50) + " ...";
 		}
-		panelMatch.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelMatch.setLayout(new BorderLayout(0, 0));
 		lblJobProposal.setToolTipText(shortResume);
-		panelMatch.add(lblJobProposal);
+		panelMatch.add(lblJobProposal, BorderLayout.WEST);
 		
 		btnSeeMore = new JButton("See more");
-		panelMatch.add(btnSeeMore);
+		panelMatch.add(btnSeeMore, BorderLayout.EAST);
 	}
 
 }

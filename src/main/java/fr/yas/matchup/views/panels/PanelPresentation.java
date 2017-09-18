@@ -162,7 +162,6 @@ public class PanelPresentation extends JPanel implements IVisibility {
 	 */
 	public PanelPresentation() {
 		super();
-		setBorder(new LineBorder(new Color(0, 0, 0)));
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.rowHeights = new int[]{2, 0, 2, 0, 0, 2, 0};
 		gridBagLayout.columnWidths = new int[]{5, 0, 10, 0, 5};

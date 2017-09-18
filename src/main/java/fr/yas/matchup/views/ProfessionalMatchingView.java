@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
+import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.panels.MatchedCandidate;
 import fr.yas.matchup.views.usercontrols.MenuBar;
 
@@ -50,7 +51,7 @@ public class ProfessionalMatchingView extends BaseView {
 		gbc_menuBar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_menuBar.gridx = 0;
 		gbc_menuBar.gridy = 0;
-		gbc_menuBar.gridwidth = 10;
+		gbc_menuBar.gridwidth = GridBagConstraints.REMAINDER;
 		contentPane.add(menuBar.getContentPane(), gbc_menuBar);
 		
 		lblPhoto = new JLabel("");

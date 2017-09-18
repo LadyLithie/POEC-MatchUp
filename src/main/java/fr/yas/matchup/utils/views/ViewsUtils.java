@@ -4,9 +4,11 @@
 package fr.yas.matchup.utils.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -58,6 +60,11 @@ public class ViewsUtils {
 
 	}
 	
+	/**
+	 * Configure the setup parameters for a pop-up window
+	 * @param jFrame
+	 * @param contentPane
+	 */
 	public static void popUp(JFrame jFrame, JPanel contentPane) {
 		int frameWidth = 300;
 		int frameHeigth = 225;
@@ -73,5 +80,35 @@ public class ViewsUtils {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		jFrame.setContentPane(contentPane);
+	}
+
+	/**
+	 * Matchup color theme
+	 * @param component
+	 */
+	public static void setColorLightSilver(JComponent component) {
+		component.setBackground(new Color(238,238,238));
+	}
+	/**
+	 * Matchup color theme
+	 * @param component
+	 */
+	public static void setColorLightOrange(JComponent component) {
+		component.setBackground(new Color(255,183,77));
+	}
+	
+	/**
+	 * 
+	 * @param component
+	 */
+	public static void setColorDarkSilver(JComponent component) {
+		component.setBackground(new Color(189,189,189));
+	}
+	/**
+	 * Matchup color theme
+	 * @param component
+	 */
+	public static void setColorDarkOrange(JComponent component) {
+		component.setBackground(new Color(255,152,0));
 	}
 }

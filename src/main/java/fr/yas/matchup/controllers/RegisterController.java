@@ -96,7 +96,7 @@ public class RegisterController extends BaseController {
 		// test validity of the password
 		boolean valid = true;
 		String pwd = new String(view.getPwdField().getPassword());
-		if (pwd.equals(new String(view.getPwdVerifField().getPassword()))) {
+		if (pwd.equals(new String(view.getPwdVerifField().getPassword())) && !pwd.isEmpty()) {
 
 			// Same password, we create the user depending on the type selected
 			if (view.getRdbtnCandidat().isSelected()) {

@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
+import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.BaseView;
 import fr.yas.matchup.views.ViewsTerms;
 

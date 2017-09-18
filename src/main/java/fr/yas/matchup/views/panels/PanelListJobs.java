@@ -5,10 +5,9 @@ package fr.yas.matchup.views.panels;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.LineBorder;
+import fr.yas.matchup.utils.views.ViewsUtils;
 
 import java.awt.GridBagLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -44,19 +43,17 @@ public class PanelListJobs extends JPanel {
 	 */
 	public PanelListJobs() {
 		super();
-		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{30, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setMinimumSize(new Dimension(315, 445));
 		
 		//Title part
 		JPanel panelTitle = new JPanel();
-		panelTitle.setBackground(Color.WHITE);
+		ViewsUtils.setColorDarkOrange(panelTitle);
 		GridBagConstraints gbc_panelTitle = new GridBagConstraints();
 		gbc_panelTitle.insets = new Insets(0, 0, 5, 0);
 		gbc_panelTitle.fill = GridBagConstraints.BOTH;
@@ -89,7 +86,6 @@ public class PanelListJobs extends JPanel {
 		
 		//main part
 		panelJobs = new PanelJobs();
-		panelJobs.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panelJobs = new GridBagConstraints();
 		gbc_panelJobs.gridx = 0;
 		gbc_panelJobs.gridy = 1;

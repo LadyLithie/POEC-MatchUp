@@ -3,6 +3,7 @@ package fr.yas.matchup.views.usercontrols;
 import javax.swing.JPanel;
 
 import fr.yas.matchup.managers.ViewsManager;
+import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.BaseView;
 import fr.yas.matchup.views.ViewsTerms;
 

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.border.LineBorder;
 
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.IVisibility;
 import javax.swing.JScrollPane;
 
@@ -72,7 +73,6 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 	public PanelHeadhunters(ArrayList<Headhunter> associates) {
 		super();
 		this.setName("Headhunters");
-		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
@@ -82,6 +82,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		
 		//Title panel
 		JPanel panelTitle = new JPanel();
+		ViewsUtils.setColorDarkOrange(panelTitle);
 		GridBagConstraints gbc_panelTitle = new GridBagConstraints();
 		gbc_panelTitle.fill = GridBagConstraints.BOTH;
 		gbc_panelTitle.insets = new Insets(0, 0, 5, 0);
@@ -89,9 +90,9 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		gbc_panelTitle.gridy = 0;
 		add(panelTitle, gbc_panelTitle);
 		GridBagLayout gbl_panelTitle = new GridBagLayout();
-		gbl_panelTitle.columnWidths = new int[]{5, 0, 10, 0, 5, 0};
+		gbl_panelTitle.columnWidths = new int[]{5, 0, 10, 0, 5};
 		gbl_panelTitle.rowHeights = new int[]{0, 0};
-		gbl_panelTitle.columnWeights = new double[]{0.0, 0.0, 1, 0.0, 0.0, 0.0};
+		gbl_panelTitle.columnWeights = new double[]{0.0, 0.0, 1, 0.0, 0.0};
 		gbl_panelTitle.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panelTitle.setLayout(gbl_panelTitle);
 		
@@ -115,7 +116,6 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		
 		btnEdit = new JButton("Editer");
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
-		gbc_btnEdit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEdit.anchor = GridBagConstraints.EAST;
 		gbc_btnEdit.gridx = 4;
 		gbc_btnEdit.gridy = 0;
@@ -138,6 +138,7 @@ public class PanelHeadhunters extends JPanel implements IVisibility {
 		
 		//List - Main panel
 		panelContent = new JPanel();
+		panelContent.setBorder(null);
 		scrollPane.setViewportView(panelContent);
 		GridBagLayout gbl_panelContent = new GridBagLayout();
 		gbl_panelContent.columnWidths = new int[]{10, 0, 10, 0};
