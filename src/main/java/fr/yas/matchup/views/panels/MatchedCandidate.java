@@ -1,15 +1,12 @@
 package fr.yas.matchup.views.panels;
 
 import javax.swing.JPanel;
-import fr.yas.matchup.entities.Skill;
-
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -21,8 +18,15 @@ public class MatchedCandidate extends JPanel {
 	private JTextField textFieldEmail;
 	private JTextField textFieldMatching;
 	private JTextField textFieldPhone;
-	private DefaultListModel<Skill> listModel;
 	private JButton btnRetour;
+	private JList<String> list;
+
+	/**
+	 * @return the list
+	 */
+	public JList<String> getList() {
+		return list;
+	}
 
 	/**
 	 * @return the textFieldPrenom
@@ -57,13 +61,6 @@ public class MatchedCandidate extends JPanel {
 	 */
 	public JTextField getTextFieldPhone() {
 		return textFieldPhone;
-	}
-
-	/**
-	 * @return the listModel
-	 */
-	public DefaultListModel<Skill> getListModel() {
-		return listModel;
 	}
 
 	/**
@@ -179,8 +176,8 @@ public class MatchedCandidate extends JPanel {
 		gbc_scrollPane.gridy = 2;
 		add(scrollPane, gbc_scrollPane);
 
-		JList<Skill> list = new JList<Skill>();
-		listModel = new DefaultListModel<Skill>();
+		list = new JList<>();
+
 		scrollPane.setViewportView(list);
 		
 		JLabel lblAdresseEmail = new JLabel("<html>Adresse<br>e-mail</html>");

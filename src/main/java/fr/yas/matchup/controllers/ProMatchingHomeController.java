@@ -9,12 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.text.html.HTML;
-
+import javax.swing.ListModel;
 import fr.yas.matchup.database.CandidateDAO;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
@@ -26,7 +23,6 @@ import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.MatchManager;
 import fr.yas.matchup.managers.Matching;
 import fr.yas.matchup.managers.ViewsManager;
-import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.ProMatchingHomeView;
 import fr.yas.matchup.views.panels.MatchedCandidate;
 import fr.yas.matchup.views.panels.PanelJobToMatch;
@@ -150,6 +146,7 @@ public class ProMatchingHomeController extends BaseController {
 						 */
 						MatchManager jobMatcher = new MatchManager(candidates, panelJobToMatch.getJob());
 						for (Matching match : jobMatcher.basic()) {
+							//Show the result
 							PanelMatchResume mResume = new PanelMatchResume(match.getCandidate());
 							mResume.getMatchResult().setText(String.valueOf(match.getPercentage()) + "%");
 							mResume.getLblName().setText("<html>" + match.getCandidate().getFirstname() + "<br />"
@@ -173,9 +170,13 @@ public class ProMatchingHomeController extends BaseController {
 									detail.getTextFieldNom().setText(matched.getLastname());
 									detail.getTextFieldPrenom().setText(matched.getFirstname());
 									detail.getTextFieldPhone().setText(matched.getPhone());
+									
+									ListModel<String> listModel = new DefaultListModel<>();
 									for (Skill skill : matched.getSkills()) {
-										detail.getListModel().addElement(skill);
+										((DefaultListModel<String>) listModel).addElement(skill.getName() + "(" + skill.getSkillType() + ")");
 									}
+									
+									detail.getList().setModel(listModel);
 
 									// set the button activity
 									view.getBtnListe().setEnabled(true);
