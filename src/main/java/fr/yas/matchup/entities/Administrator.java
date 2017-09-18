@@ -61,6 +61,7 @@ public class Administrator extends RegisteredUser {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		super.setName(firstname + " " + lastname);
+		super.setRole(Role.ADMIN);
 	}
 
 	/**

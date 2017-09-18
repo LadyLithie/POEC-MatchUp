@@ -64,6 +64,8 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setValid(Validity.valueOf(rs.getString(VALID)));
 			
 			candidate.setName(candidate.getFirstname() + " " + candidate.getLastname());
+			
+			candidate = getSkills(candidate);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			candidate = null;
@@ -118,6 +120,11 @@ public class CandidateDAO extends RegisteredUserDAO {
 		return result;
 	}
 	
+	/**
+	 * Retrieve skills from the relational table with candidate id
+	 * @param candidate
+	 * @return
+	 */
 	public Candidate getSkills(Candidate candidate) {
 		ResultSet rs = executeRequest("SELECT * FROM " + CANDIDATE_SKILL
 				+ " WHERE " + ID_CANDIDATE + " = " + candidate.getId());
@@ -139,6 +146,11 @@ public class CandidateDAO extends RegisteredUserDAO {
 		return candidate;
 	}
 
+	/**
+	 * Add skills to the relational table with candidate id
+	 * @param candidate
+	 * @return
+	 */
 	public int insertSkills(Candidate candidate) {
 		int result = 0;
 		deleteSkills(candidate);
@@ -150,6 +162,11 @@ public class CandidateDAO extends RegisteredUserDAO {
 		return result;
 	}
 
+	/**
+	 * Delete skills of the candidate from the relational table 
+	 * @param candidate
+	 * @return
+	 */
 	public int deleteSkills(Candidate candidate) {
 		return executeRequestUpdate("DELETE FROM " + CANDIDATE_SKILL + " WHERE "
 				+ ID_CANDIDATE + " = " + candidate.getId());

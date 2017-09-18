@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.entities.Validity;
@@ -27,11 +28,21 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 	public static final String PASSWORD="password_headhunter";
 	public static final String VALID = "valid";
 	
+	public static final String ENTERPRISE_HEADHUNTER ="headhunter_enterprise";
+	public static final String ID_ENTERPRISE ="enterprise_id";
+	public static final String ID_HEADHUNTER ="headhunter_id";
+
+	/**
+	 * Constructor
+	 */
 	public HeadhunterDAO() {
 		super(TABLE, ID);
-		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see fr.yas.matchup.database.RegisteredUserDAO#parseToObject(java.sql.ResultSet)
+	 */
 	@Override
 	public BaseEntity parseToObject(ResultSet rs) {
 		Headhunter headhunter = new Headhunter();
@@ -62,6 +73,10 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		return headhunter;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see fr.yas.matchup.database.RegisteredUserDAO#parseToString(fr.yas.matchup.entities.base.BaseEntity)
+	 */
 	@Override
 	public String parseToString(BaseEntity item) {
 		String result = "null,";
@@ -83,6 +98,10 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see fr.yas.matchup.database.RegisteredUserDAO#parseUpdateToString(fr.yas.matchup.entities.base.BaseEntity)
+	 */
 	@Override
 	public String parseUpdateToString(BaseEntity item) {
 		String res = "";
@@ -104,21 +123,73 @@ public class HeadhunterDAO extends RegisteredUserDAO {
 		return res;
 	}
 	
-	@Override
-	public List<BaseEntity> get() {
-		List<BaseEntity> associates = new ArrayList<BaseEntity>();
-		ResultSet rSet = executeRequest("SELECT * FROM HEADHUNTER_ENTERPRISE WHERE HEADHUNTER_ID " + " = " + ID);
-		
+//	@Override
+//	public List<BaseEntity> get() {
+//		List<BaseEntity> associates = new ArrayList<BaseEntity>();
+//		ResultSet rSet = executeRequest("SELECT * FROM HEADHUNTER_ENTERPRISE WHERE HEADHUNTER_ID " + " = " + ID);
+//		
+//		try {
+//			while (rSet.next()) {
+//				associates.add(parseToObject(rSet));
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return associates;
+//	}
+
+	/**
+	 * Retrieve the companies which whom the headhunter works and add them to the entity
+	 * @param headhunter
+	 * @return the modified headhunter entity
+	 */
+	public Headhunter getAssociates(Headhunter headhunter) {
+		ResultSet rs = executeRequest(
+				"SELECT * FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_HEADHUNTER + " = " + headhunter.getId());
+		List<Double> enterpriseId = new ArrayList<Double>();
 		try {
-			while (rSet.next()) {
-				associates.add(parseToObject(rSet));
+			while (rs.next()) {
+				enterpriseId.add(rs.getDouble(ID_ENTERPRISE));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return associates;
+		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
+
+		for (Double id : enterpriseId) {
+			headhunter.getAssociates().add((Enterprise) enterpriseDAO.get(id));
+		}
+
+		return headhunter;
+	}
+
+	/**
+	 * Add all the associates of headhunter to the DB
+	 * @param headhunter
+	 * @return int = 
+	 * 				number of inserted associates
+	 */
+	public int insertAssociates(Headhunter headhunter) {
+		int result = 0;
+		deleteAssociates(headhunter);
+		for (Enterprise enterprise : headhunter.getAssociates()) {
+			result += executeRequestUpdate("INSERT INTO " + ENTERPRISE_HEADHUNTER + " VALUES(" + enterprise.getId()
+					+ "," + headhunter.getId() + ")");
+		}
+		return result;
+	}
+
+	/**
+	 * Delete all the associates of headhunter from the DB
+	 * @param headhunter
+	 * @return
+	 */
+	public int deleteAssociates(Headhunter headhunter) {
+		return executeRequestUpdate(
+				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + headhunter.getId());
 	}
 
 }

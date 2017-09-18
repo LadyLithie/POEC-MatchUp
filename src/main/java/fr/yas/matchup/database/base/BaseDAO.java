@@ -35,6 +35,11 @@ public abstract class BaseDAO implements IDAOBase {
 		return id;
 	}
 
+	/**
+	 * Constructor
+	 * @param table
+	 * @param id
+	 */
 	public BaseDAO(String table, String id) {
 		this.table = table;
 		this.id = id;
@@ -70,7 +75,7 @@ public abstract class BaseDAO implements IDAOBase {
 	 * @return :
 	 * 			positive : valid request executed
 	 * 			 		0 : request without sql return
-	 * 	 			 	others : id of the entity impacted
+	 * 	 			 	others : id of the entity impacted 
 	 * 			negative : SQL error code
 	 */
 	@Override
@@ -80,7 +85,7 @@ public abstract class BaseDAO implements IDAOBase {
 		try {
 			Statement stmt = DBManager.getInstance().getCon().createStatement();
 			result = stmt.executeUpdate(request, Statement.RETURN_GENERATED_KEYS);
-
+			//for insert, useful when id in auto_increment
 			ResultSet rSet = stmt.getGeneratedKeys();
 			if (rSet.next()) {
 				result = rSet.getInt(1);
@@ -166,7 +171,7 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public void insert(BaseEntity item) {
 //		System.out.println("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
-		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
+		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES (" + parseToString(item) + ")");
 //		System.out.println(res);
 		if(res > 0) {
 			item.setId(res);

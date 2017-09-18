@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
-import fr.yas.matchup.views.professionalMatching.MatchedCandidate;
+import fr.yas.matchup.views.panels.MatchedCandidate;
 import fr.yas.matchup.views.usercontrols.MenuBar;
 
 public class ProfessionalMatchingView extends BaseView {
@@ -41,7 +41,7 @@ public class ProfessionalMatchingView extends BaseView {
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0,0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -114,13 +114,13 @@ public class ProfessionalMatchingView extends BaseView {
 		contentPane.add(textFieldLastname, gbc_textField_1);
 		textFieldLastname.setColumns(10);
 		
-		JLabel lblCompetencePossdes = new JLabel("<html>Competences<br>possÈdÈes</html> ");
-		GridBagConstraints gbc_lblCompetencePossdes = new GridBagConstraints();
-		gbc_lblCompetencePossdes.gridwidth = 2;
-		gbc_lblCompetencePossdes.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCompetencePossdes.gridx = 5;
-		gbc_lblCompetencePossdes.gridy = 3;
-		contentPane.add(lblCompetencePossdes, gbc_lblCompetencePossdes);
+		JLabel lblPossessedSkills = new JLabel("<html>Comp√©tences<br />poss√©d√©es</html> ");
+		GridBagConstraints gbc_lblPossessedSkills = new GridBagConstraints();
+		gbc_lblPossessedSkills.gridwidth = 2;
+		gbc_lblPossessedSkills.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPossessedSkills.gridx = 5;
+		gbc_lblPossessedSkills.gridy = 3;
+		contentPane.add(lblPossessedSkills, gbc_lblPossessedSkills);
 		
 		JLabel lblAge = new JLabel("Age");
 		GridBagConstraints gbc_lblAge = new GridBagConstraints();

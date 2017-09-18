@@ -55,12 +55,14 @@ public class AdminController extends BaseController {
 //	private List<RegisteredUser> users;
 
 	private MouseListener mouseChangeAvatar;
+	protected AdministratorView v;
 
 	public AdminController(JFrame frame) {
 		super();
 		super.frame = frame;
 		super.view = new AdministratorView(this.frame);
 //		users = new ArrayList<>();
+		v = (AdministratorView) super.view;
 	}
 
 	/*
@@ -70,7 +72,7 @@ public class AdminController extends BaseController {
 	 */
 	@Override
 	public void initView() {
-		AdministratorView v = (AdministratorView) super.view;
+//		AdministratorView v = (AdministratorView) super.view;
 		user = (Administrator) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 
 		/*
@@ -146,32 +148,32 @@ public class AdminController extends BaseController {
 	 */
 	@Override
 	public void initEvent() {
-		AdministratorView v = (AdministratorView) super.view;
-		this.mouseChangeAvatar = new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				v.getLblPhoto().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				v.getLblPhoto().setToolTipText("popup de confirmation avec textfield pour new link");
-				v.getLblPhoto().setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("popup de confirmation avec textfield pour new link");
-			}
-		};
+//		v = (AdministratorView) super.view;
+//		this.mouseChangeAvatar = new MouseListener() {
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				v.getLblPhoto().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+//			}
+//
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				v.getLblPhoto().setToolTipText("popup de confirmation avec textfield pour new link");
+//				v.getLblPhoto().setCursor(new Cursor(Cursor.HAND_CURSOR));
+//			}
+//
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				System.out.println("popup de confirmation avec textfield pour new link");
+//			}
+//		};
 
 		/*
 		 * Panel presentation
@@ -217,44 +219,19 @@ public class AdminController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == v.getBtnAdd()) {
-					popupAddForm(v);
+					PanelAdminSkill pSkill = popupAddForm(v);
+//					if(pSkill.getSkill() != null) {
+//						v.getListSkills().add(pSkill);
+//					}
+					if (pSkill.getSkill() != null) {
+						pSkill.getBtnModify().addActionListener(deleteSkills(pSkill));
+					}
 				}
 			}
 		});
 
 		for (PanelAdminSkill skillManager : v.getSkills()) {
-			skillManager.getBtnModify().addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					String name = skillManager.gettF_SkillName().getText();
-					String type = skillManager.gettF_SkillType().getText();
-					if (name.isEmpty() && type.isEmpty()) { // Delete
-						System.out.println(
-								"Cette comp�tence devrait �tre supprim�e\n mais cela aura des cons�quences sur ceux qui les utilise");
-						// popup de confirmation
-						if (e.getSource() == skillManager.getBtnModify()) {
-							popupConfirmationSupp(skillManager, v);
-						}
-					} else if (name.isEmpty() || type.isEmpty()) { // Error modification
-						if (name.isEmpty()) {
-							skillManager.gettF_SkillName().setBackground(Color.PINK);
-							skillManager.gettF_SkillType().setBackground(Color.WHITE);
-						} else {
-							skillManager.gettF_SkillName().setBackground(Color.WHITE);
-							skillManager.gettF_SkillType().setBackground(Color.PINK);
-						}
-					} else { // Modification valid
-						// use dao to correct in the database
-						System.out.println("use dao to correct in the database");
-						SkillDAO sDao = new SkillDAO();
-						Skill s = skillManager.getSkill();
-						s.setName(name);
-						s.setSkillType(type);
-						sDao.update(s);
-
-					}
-				}
-			});
+			skillManager.getBtnModify().addActionListener(deleteSkills(skillManager));
 		}
 
 		/*
@@ -353,6 +330,41 @@ public class AdminController extends BaseController {
 
 	
 
+	private ActionListener deleteSkills(PanelAdminSkill skillManager) {
+		ActionListener result = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String name = skillManager.gettF_SkillName().getText();
+				String type = skillManager.gettF_SkillType().getText();
+				if (name.isEmpty() && type.isEmpty()) { // Delete
+					System.out.println(
+							"Cette compétence devrait être supprimée\n mais cela aura des conséquences sur ceux qui les utilise");
+					// popup de confirmation
+					if (e.getSource() == skillManager.getBtnModify()) {
+						popupConfirmationSupp(skillManager, v);
+					}
+				} else if (name.isEmpty() || type.isEmpty()) { // Error modification
+					if (name.isEmpty()) {
+						skillManager.gettF_SkillName().setBackground(Color.PINK);
+						skillManager.gettF_SkillType().setBackground(Color.WHITE);
+					} else {
+						skillManager.gettF_SkillName().setBackground(Color.WHITE);
+						skillManager.gettF_SkillType().setBackground(Color.PINK);
+					}
+				} else { // Modification valid
+					// use dao to correct in the database
+					System.out.println("use dao to correct in the database");
+					SkillDAO sDao = new SkillDAO();
+					Skill s = skillManager.getSkill();
+					s.setName(name);
+					s.setSkillType(type);
+					sDao.update(s);
+				}
+			}
+		};
+		return result;
+	}
+
 	private void setMode(boolean b) {
 		AdministratorView v = (AdministratorView) super.view;
 
@@ -389,10 +401,10 @@ public class AdminController extends BaseController {
 		}
 	}
 
-	private void popupAddForm(AdministratorView v) {
+	private PanelAdminSkill popupAddForm(AdministratorView v) {
 		JFrame edition = new JFrame("Confirmation");
-		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous s�r de vouloir
-		// supprimer la comp�tence "+skillManager.getSkill().getName()+" ?");
+		// ConfirmMessage contentPanel = new ConfirmMessage("Etes-vous sûr de vouloir
+		// supprimer la compétence "+skillManager.getSkill().getName()+" ?");
 		JPanel contentPanel = new JPanel();
 		ViewsUtils.popUp(edition, contentPanel);
 
@@ -455,6 +467,9 @@ public class AdminController extends BaseController {
 		edition.setVisible(true);
 		edition.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+		
+		PanelAdminSkill pSkill = new PanelAdminSkill();
+
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -464,16 +479,25 @@ public class AdminController extends BaseController {
 					skill.setSkillType(tF_Type.getText());
 					SkillDAO sDao = new SkillDAO();
 					sDao.insert(skill);
-					PanelAdminSkill pSkill = new PanelAdminSkill();
 					pSkill.gettF_SkillName().setText(skill.getName());
 					pSkill.gettF_SkillType().setText(skill.getSkillType());
-					v.getListSkills().add(pSkill);
+					pSkill.setSkill(skill);
+					((AdministratorView) view).getListSkills().add(pSkill);
 					v.getSkills().add(pSkill);
-
 					edition.setVisible(false);
 				}
 			}
 		});
+		cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == cancelButton) {
+					pSkill.setSkill(null);
+					edition.setVisible(false);
+				}
+			}
+		});
+		return pSkill;
 	}
 
 	private void popupConfirmationSupp(PanelAdminSkill skillManager, AdministratorView v) {
@@ -484,7 +508,7 @@ public class AdminController extends BaseController {
 		ViewsUtils.popUp(edition, contentPanel);
 
 		JLabel lblMessage = new JLabel(
-				"Etes-vous s�r de vouloir supprimer \n" + "la comp�tence " + skillManager.getSkill().getName() + " ?");
+				"Etes-vous sûr de vouloir supprimer \n" + "la compétence " + skillManager.getSkill().getName() + " ?");
 		lblMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblMessage);
 

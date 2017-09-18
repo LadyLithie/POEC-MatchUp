@@ -16,6 +16,7 @@ public class NavigationBar extends BaseView {
 
 	private JButton btnGoToProfil;
 	private JButton btnGoToMatching;
+	//For each listener
 	private ActionListener backListener;
 	private ActionListener nextListener;
 
@@ -94,6 +95,9 @@ public class NavigationBar extends BaseView {
 		this.btnGoToMatching.addActionListener(nextListener);
 	}
 
+	/**
+	 * To avoid redondant actions on 1 event
+	 */
 	public void resetEvents() {
 		this.btnGoToProfil.removeActionListener(backListener);
 		this.btnGoToMatching.removeActionListener(nextListener);

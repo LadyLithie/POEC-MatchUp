@@ -102,7 +102,7 @@ public class EnterpriseDAOTest {
 		idTest = new Enterprise("userOne", "The Company", "00000000", "no email", null, null, null, null, "lolo",
 				"pwdlolo");
 		
-		String sqlString ="null,'The Company','00000000','lolo','null','null','no email','null','null','null','null','null','null','userOne','null'";
+		String sqlString ="null,'The Company','00000000','lolo','null','null','no email','null','null','null','null','null','COMPANY','userOne','null','FALSE'";
 		
 		assertEquals(sqlString,testDao.parseToString(idTest));
 	}
@@ -116,7 +116,7 @@ public class EnterpriseDAOTest {
 		idTest = new Enterprise("userOne", "The Company", "00000000", "no email", null, null, null, null, "lolo",
 				"pwdlolo");
 
-		String sqlString = "name_enterprise = 'The Company',phone_enterprise = '00000000',address_enterprise = 'lolo',city_enterprise = 'null',website_enterprise = 'null',mail_enterprise = 'no email',presentation_enterprise = 'null',logo_enterprise = 'null',twitter_enterprise = 'null',linkedin_enterprise = 'null',activityfield_enterprise = 'null',role_enterprise = 'null',login_enterprise = 'userOne',password_enterprise = 'null'";
+		String sqlString = "name_enterprise = 'The Company',phone_enterprise = '00000000',address_enterprise = 'lolo',city_enterprise = 'null',website_enterprise = 'null',mail_enterprise = 'no email',presentation_enterprise = 'null',logo_enterprise = 'null',twitter_enterprise = 'null',linkedin_enterprise = 'null',activityfield_enterprise = 'null',role_enterprise = 'COMPANY',login_enterprise = 'userOne',password_enterprise = 'null',valid = 'FALSE'";
 
 		assertEquals(sqlString, testDao.parseUpdateToString(idTest));
 	}

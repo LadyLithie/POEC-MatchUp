@@ -68,7 +68,7 @@ public class AdministratorDAO extends RegisteredUserDAO {
 		res += "'"+admin.getRole()+"',";
 		res += "'"+admin.getLogin()+"',";
 		res += "'"+admin.getPassword()+"',";
-		res += "'"+admin.getPassword()+"'";
+		res += "'"+admin.getValid()+"'";
 
 		return res;
 	}

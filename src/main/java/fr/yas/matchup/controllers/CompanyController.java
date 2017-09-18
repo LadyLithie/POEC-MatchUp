@@ -32,7 +32,7 @@ import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.utils.views.ActionModSocialLink;
 import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.CompanyView;
-import fr.yas.matchup.views.panels.Panel2FieldButton;
+import fr.yas.matchup.views.panels.PanelFieldsButton;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelPresentation;
@@ -45,7 +45,7 @@ import fr.yas.matchup.views.panels.PanelResumeJob;
 public class CompanyController extends BaseController {
 	private Enterprise user;
 	private ArrayList<Headhunter> headhunters = new ArrayList<>();
-	private ArrayList<Panel2FieldButton> pHeadhunters = new ArrayList<>();
+	private ArrayList<PanelFieldsButton> pHeadhunters = new ArrayList<>();
 	private ArrayList<PanelResumeJob> pJobs = new ArrayList<>();
 
 	/**
@@ -70,6 +70,7 @@ public class CompanyController extends BaseController {
 			// remove it graphically
 			view.getPanelContent().remove(headhunter);
 			view.getPanelContent().revalidate();
+			pHeadhunters.remove(headhunter);
 		};
 	}
 
@@ -80,7 +81,7 @@ public class CompanyController extends BaseController {
 	public CompanyController(JFrame frame) {
 		super();
 		super.frame = frame;
-		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
+//		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		super.view = new CompanyView(this.frame);
 	}
 
@@ -93,12 +94,18 @@ public class CompanyController extends BaseController {
 	public void initView() {
 		user = (Enterprise) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		CompanyView v = (CompanyView) getView();
-		// Panel presentation
-		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
+
+		// MenuBar
+		v.getMenuBar().getLblWelcome().setVisible(false);
+
+		
 		/*
 		 * Panel presentation Add user's informations
 		 */
+		PanelPresentation vP = ((PanelPresentation) v.getPanel_TopRight());
 		vP.getNamePanel().getInput().setText(user.getName());
+		vP.getPhonePanel().getInput().setText(user.getPhone());
+		vP.getAddressPanel().getInput().setText(user.getAddress());
 		vP.getEmailPanel().getInput().setText(user.getEmail());
 		vP.getWebsitePanel().getInput().setText(user.getWebsite());
 		vP.getSiretPanel().getInput().setText(user.getSiretNumber());
@@ -112,7 +119,7 @@ public class CompanyController extends BaseController {
 			pHeadhunters = new ArrayList<>();
 			for (Headhunter headhunter : user.getAssociates()) {
 				// posX = posX + 2;
-				Panel2FieldButton test = new Panel2FieldButton("Headhunter: ", "Supprimer");
+				PanelFieldsButton test = new PanelFieldsButton("Headhunter: ", "Supprimer");
 				test.getTextField1().setText(headhunter.getFirstname());
 				test.getTextField2().setText(headhunter.getLastname());
 				GridBagConstraints gbc_test = new GridBagConstraints();
@@ -155,9 +162,23 @@ public class CompanyController extends BaseController {
 	@Override
 	public void initEvent() {
 		CompanyView v = (CompanyView) super.view;
-
 		/*
-		 * Panel Presentation Define the action on the buttons
+		 * MenuBar
+		 */
+		v.getMenuBar().getNavigationBar().getBtnGoToMatching().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				ViewsManager.getInstance().next(new ProMatchingHomeController(frame));
+			}
+		});
+
+		
+		/*
+		 * Panel Presentation 
+		 * 					Define the action on the buttons
 		 */
 		PanelPresentation vPresentation = (PanelPresentation) v.getPanel_TopRight();
 		// mode view
@@ -174,8 +195,14 @@ public class CompanyController extends BaseController {
 					if (!user.setSiretNumber(vPresentation.getSiretPanel().getInput().getText())) {
 						vPresentation.getSiretPanel().getInput().setText(user.getSiretNumber());
 					}
+					user.setAddress(vPresentation.getAddressPanel().getInput().getText());
+					//Will need testing for numeric string
+					user.setPhone(vPresentation.getPhonePanel().getInput().getText());
 					user.setWebsite(vPresentation.getWebsitePanel().getInput().getText());
 					user.setPresentation(vPresentation.getTextAreaPresentation().getText());
+					
+					EnterpriseDAO eDao = new EnterpriseDAO();
+					eDao.update(user);
 				}
 			}
 		});
@@ -229,7 +256,7 @@ public class CompanyController extends BaseController {
 					} else {
 						vHeadhunters.getAssociates().addAll(pHeadhunters);
 					}
-					for (Panel2FieldButton headhunter : pHeadhunters) {
+					for (PanelFieldsButton headhunter : pHeadhunters) {
 						headhunter.setMode(false);
 					}
 					System.out.println(vHeadhunters.getAssociates().size());
@@ -252,11 +279,11 @@ public class CompanyController extends BaseController {
 			public void actionPerformed(ActionEvent e) {
 				vHeadhunters.setMode(false);
 				// need to add re-initialization of panel
-				for (Panel2FieldButton hh : pHeadhunters) {
+				for (PanelFieldsButton hh : pHeadhunters) {
 					vHeadhunters.getPanelContent().remove(hh);
 				}
 				pHeadhunters = vHeadhunters.getAssociates();
-				for (Panel2FieldButton headhunter : pHeadhunters) {
+				for (PanelFieldsButton headhunter : pHeadhunters) {
 					GridBagConstraints gbc_temp = new GridBagConstraints();
 					gbc_temp.fill = GridBagConstraints.HORIZONTAL;
 					gbc_temp.anchor = GridBagConstraints.CENTER;
@@ -292,16 +319,26 @@ public class CompanyController extends BaseController {
 					valid = false;
 				}
 
+				// email
+				// System.err.println(vHeadhunters.getNewHeadHunter().getTextFieldMail().getText().isEmpty());
+				if (!vHeadhunters.getNewHeadHunter().getTextFieldMail().getText().isEmpty()) {
+					vHeadhunters.getNewHeadHunter().getTextFieldMail().setBackground(Color.WHITE);
+				} else {
+					vHeadhunters.getNewHeadHunter().getTextFieldMail().setBackground(Color.PINK);
+					valid = false;
+				}
 				// If valid, we add the headhunter to the view list and reinitialize the new
 				// headhunter
 				if (valid) {
 					newHH.setFirstname(vHeadhunters.getNewHeadHunter().getTextField1().getText());
 					newHH.setLastname(vHeadhunters.getNewHeadHunter().getTextField2().getText());
+					newHH.setEmail(vHeadhunters.getNewHeadHunter().getTextFieldMail().getText());
 					headhunters.add(newHH);
 
-					Panel2FieldButton test = new Panel2FieldButton("Headhunter", "Supprimer");
+					PanelFieldsButton test = new PanelFieldsButton("Headhunter", "Supprimer");
 					test.getTextField1().setText(newHH.getFirstname());
 					test.getTextField2().setText(newHH.getLastname());
+					test.getTextFieldMail().setText(newHH.getEmail());
 					test.getButton().addActionListener(new deleteHHListener(vHeadhunters, test));
 					GridBagConstraints gbc_test = new GridBagConstraints();
 					gbc_test.fill = GridBagConstraints.HORIZONTAL;
@@ -314,12 +351,13 @@ public class CompanyController extends BaseController {
 
 					vHeadhunters.getNewHeadHunter().getTextField1().setText("");
 					vHeadhunters.getNewHeadHunter().getTextField2().setText("");
+					vHeadhunters.getNewHeadHunter().getTextFieldMail().setText("");
 					vHeadhunters.revalidate();
 				}
 			}
 		});
 		// Delete a listed one
-		for (Panel2FieldButton headhunter : pHeadhunters) {
+		for (PanelFieldsButton headhunter : pHeadhunters) {
 			headhunter.getButton().addActionListener(new deleteHHListener(vHeadhunters, headhunter));
 		}
 

@@ -170,7 +170,7 @@ public class LoginView extends BaseView {
 		gbc_panelAbout.fill = GridBagConstraints.BOTH;
 		panel.add(panelAbout, gbc_panelAbout);
 		
-		JLabel image = new JLabel(new ImageIcon("image/MatchUp 4f.png"));
+		JLabel image = new JLabel(new ImageIcon("image/MatchUp 1v3l.png"));
 		panelAbout.setLayout(new BorderLayout());
 		panelAbout.add(image, BorderLayout.CENTER);
 		

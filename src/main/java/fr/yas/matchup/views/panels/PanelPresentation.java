@@ -27,6 +27,8 @@ public class PanelPresentation extends JPanel implements IVisibility {
 	private PanelField siretPanel;
 	private PanelField emailPanel;
 	private PanelField websitePanel;
+	private PanelField addressPanel;
+	private PanelField phonePanel;
 
 	private JLabel lblLogo;
 	private JButton btnModifier;
@@ -41,6 +43,7 @@ public class PanelPresentation extends JPanel implements IVisibility {
 	private JTextArea textAreaPresentation;
 	private JPanel panelInfos;
 	private JPanel panelSocio;
+
 
 	/**
 	 * @return the btnEditer
@@ -127,6 +130,34 @@ public class PanelPresentation extends JPanel implements IVisibility {
 	}
 
 	/**
+	 * @return the addressPanel
+	 */
+	public PanelField getAddressPanel() {
+		return addressPanel;
+	}
+
+	/**
+	 * @return the phonePanel
+	 */
+	public PanelField getPhonePanel() {
+		return phonePanel;
+	}
+
+	/**
+	 * @return the btnEditer
+	 */
+	public JButton getBtnEditer() {
+		return btnEditer;
+	}
+
+	/**
+	 * @return the panelSocio
+	 */
+	public JPanel getPanelSocio() {
+		return panelSocio;
+	}
+
+	/**
 	 * Create the panel.
 	 */
 	public PanelPresentation() {
@@ -135,7 +166,7 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.rowHeights = new int[]{2, 0, 2, 0, 0, 2, 0};
 		gridBagLayout.columnWidths = new int[]{5, 0, 10, 0, 5};
-		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, 2.0, 0.0, 1.0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 1.0, 2.0, 0.0, 1.0 };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.1, 0.0, 1.0, 0.0, 0.0 };
 		setLayout(gridBagLayout);
 
@@ -165,7 +196,6 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		// A field Panel with label and its associate textField
 		siretPanel = new PanelField("SIRET");
 		GridBagConstraints gbc_siretPanel = new GridBagConstraints();
-		gbc_siretPanel.gridy = 1;
 		gbc_siretPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_siretPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_siretPanel.gridx = 0;
@@ -175,9 +205,28 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		siretPanel.getInput().setEditable(false);
 
 		// A field Panel with label and its associate textField
+		addressPanel = new PanelField("Adresse");
+		GridBagConstraints gbc_addressPanel = new GridBagConstraints();
+		gbc_addressPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_addressPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_addressPanel.gridx = 0;
+		panelInfos.add(addressPanel, gbc_addressPanel);
+		addressPanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		addressPanel.getInput().setEditable(false);
+
+		// A field Panel with label and its associate textField
+		phonePanel = new PanelField("Téléphone");
+		GridBagConstraints gbc_phonePanel = new GridBagConstraints();
+		gbc_phonePanel.insets = new Insets(0, 0, 5, 0);
+		gbc_phonePanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_phonePanel.gridx = 0;
+		panelInfos.add(phonePanel, gbc_phonePanel);
+		phonePanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
+		phonePanel.getInput().setEditable(false);
+
+		// A field Panel with label and its associate textField
 		emailPanel = new PanelField("Email");
 		GridBagConstraints gbc_emailPanel = new GridBagConstraints();
-		gbc_emailPanel.gridy = 2;
 		gbc_emailPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_emailPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_emailPanel.gridx = 0;
@@ -186,15 +235,16 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		emailPanel.getInput().setEditable(false);
 
 		// A field Panel with label and its associate textField
-		websitePanel = new PanelField("Website");
+		websitePanel = new PanelField("Site web");
 		GridBagConstraints gbc_websitePanel = new GridBagConstraints();
 		gbc_websitePanel.insets = new Insets(0, 0, 5, 0);
-		gbc_websitePanel.gridy = 3;
 		gbc_websitePanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_websitePanel.gridx = 0;
 		panelInfos.add(websitePanel, gbc_websitePanel);
 		websitePanel.getInput().setBorder(new EmptyBorder(0, 0, 0, 0));
 		websitePanel.getInput().setEditable(false);
+		
+		
 
 		panelSocio = new JPanel();
 		GridBagConstraints gbc_panelSocio = new GridBagConstraints();
@@ -204,8 +254,8 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		gbc_panelSocio.gridy = 1;
 		add(panelSocio, gbc_panelSocio);
 		GridBagLayout gbl_panelSocio = new GridBagLayout();
-		gbl_panelSocio.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-		gbl_panelSocio.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelSocio.columnWeights = new double[] { 0.0 };
+		gbl_panelSocio.rowWeights = new double[] { 0.0, 0.0 };
 		panelSocio.setLayout(gbl_panelSocio);
 
 		// Zone logo
@@ -232,7 +282,7 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		panelLogo.add(lblLogo, gbc_lblLogo);
 
 		btnModifier = new JButton("Modifier");
-		btnModifier.setVisible(false);
+		btnModifier.setEnabled(false);
 		GridBagConstraints gbc_btnModifier = new GridBagConstraints();
 		gbc_btnModifier.insets = new Insets(0, 0, 1, 1);
 		gbc_btnModifier.gridx = 2;
@@ -308,7 +358,6 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		GridBagConstraints gbc_panelDecision = new GridBagConstraints();
 		gbc_panelDecision.anchor = GridBagConstraints.EAST;
 		gbc_panelDecision.gridwidth = 6;
-		gbc_panelDecision.insets = new Insets(0, 0, 0, 5);
 		gbc_panelDecision.gridx = 0;
 		gbc_panelDecision.gridy = 6;
 		add(panelDecision, gbc_panelDecision);
@@ -348,7 +397,6 @@ public class PanelPresentation extends JPanel implements IVisibility {
 		this.getBtnAjout().setVisible(b);
 		this.getBtnAnnuler().setVisible(b);
 		this.getBtnModifier().setVisible(b);
-		// this.getBtnValider().setVisible(b);
 
 		this.getNamePanel().setMode(b);
 		this.getSiretPanel().setMode(b);

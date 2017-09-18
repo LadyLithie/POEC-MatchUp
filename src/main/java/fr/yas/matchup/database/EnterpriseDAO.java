@@ -100,8 +100,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		res += "'"+enterprise.getActivity()+"',";
 		res += "'"+enterprise.getRole()+"',";
 		res += "'"+enterprise.getLogin()+"',";
-		res += "'"+enterprise.getPassword()+"',";
-		res += "'"+enterprise.getValid()+"'";
+ 		res += "'"+enterprise.getPassword()+"',";
+		res += (enterprise.getValid() == null ? "'FALSE'" : "'" + enterprise.getValid() + "'" );
 		
 		return res;
 	}
@@ -125,34 +125,43 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		res += ROLE + " = '"+enterprise.getRole()+"',";
 		res += LOGIN + " = '"+enterprise.getLogin()+"',";
 		res += PASSWORD + " = '"+enterprise.getPassword()+"',";
-		res += VALID + " = '"+enterprise.getValid()+"'";
+		res += VALID + " = "+ (enterprise.getValid()!=null ? "'"+enterprise.getValid() + "'" : "'FALSE'");
 		
 		return res;
 	}
 
+	/**
+	 * Retrieve the headhunters working with the company and add them to the entity
+	 * @param enterprise
+	 * @return the modified enterprise entity
+	 */
 	public Enterprise getHeadhunters(Enterprise enterprise) {
+		//Search all rows where ID_ENTERPRISE = enterprise ID
 		ResultSet rs = executeRequest(
 				"SELECT * FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());
+		
 		List<Double> headhuntersId = new ArrayList<Double>();
+		//Create the list of ID_HEADHUNTER
 		try {
 			while (rs.next()) {
-				headhuntersId.add(rs.getDouble(ID_ENTERPRISE));
+				headhuntersId.add(rs.getDouble(ID_HEADHUNTER));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		EnterpriseDAO enterpriseDAO = new EnterpriseDAO();
+		//Retrieve for each id of the list the representation of the entity
+		HeadhunterDAO hDao = new HeadhunterDAO();
 
 		for (Double id : headhuntersId) {
-			enterprise.getAssociates().add((Headhunter) enterpriseDAO.get(id));
+			enterprise.getAssociates().add((Headhunter) hDao.get(id));
 		}
 
 		return enterprise;
 	}
 
 	/**
-	 * 
+	 * Add all the associates of enterprise to the DB
 	 * @param enterprise
 	 * @return int = 
 	 * 				number of inserted headhunters
@@ -167,6 +176,11 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		return result;
 	}
 
+	/**
+	 * Delete all the associates of enterprise
+	 * @param enterprise
+	 * @return
+	 */
 	public int deleteHeadhunter(Enterprise enterprise) {
 		return executeRequestUpdate(
 				"DELETE FROM " + ENTERPRISE_HEADHUNTER + " WHERE " + ID_ENTERPRISE + " = " + enterprise.getId());

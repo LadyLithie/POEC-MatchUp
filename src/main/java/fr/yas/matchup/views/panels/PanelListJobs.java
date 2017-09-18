@@ -70,7 +70,7 @@ public class PanelListJobs extends JPanel {
 		gbl_panelTitle.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panelTitle.setLayout(gbl_panelTitle);
 		
-		JLabel lbllTitle = new JLabel("Liste des postes proposés");
+		JLabel lbllTitle = new JLabel("Postes proposÃ©s");
 		GridBagConstraints gbc_lbllTitle = new GridBagConstraints();
 		gbc_lbllTitle.gridwidth = 2;
 		gbc_lbllTitle.insets = new Insets(5, 5, 5, 5);

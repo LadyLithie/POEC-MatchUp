@@ -124,7 +124,7 @@ public class CandidateController extends BaseController {
 								view.getBtnAnnulerButton().setEnabled(false);
 								view.getBtnSelectSkill().setVisible(true);
 								view.getTable().setEnabled(false);
-								view.getBtnSelectSkill().setText("Sélectionner Skill");
+								view.getBtnSelectSkill().setText("SÃ©lectionner Skill");
 								btnValidateSkill.setVisible(false);
 
 							}
@@ -141,7 +141,7 @@ public class CandidateController extends BaseController {
 								view.getBtnAnnulerButton().setEnabled(false);
 								view.getBtnSelectSkill().setVisible(true);
 								view.getTable().setEnabled(false);
-								view.getBtnSelectSkill().setText("Sélectionner Skill");
+								view.getBtnSelectSkill().setText("Sï¿½lectionner Skill");
 								btnValidateSkill.setVisible(false);
 							}
 
@@ -294,7 +294,7 @@ public class CandidateController extends BaseController {
 				// TODO Auto-generated method stub
 				if (e.getSource() == view.getBtnEditLink()) {
 
-					JFrame edition = new JFrame("Edition des réseaux sociaux");
+					JFrame edition = new JFrame("Edition des rï¿½seaux sociaux");
 					JPanel contentPanel = new JPanel();
 					ViewsUtils.popUp(edition, contentPanel);
 
