@@ -147,11 +147,11 @@ public class ProMatchingHomeController extends BaseController {
 								@Override
 								public void actionPerformed(ActionEvent e) {
 									Candidate matched = (Candidate) mResume.getMatched();
-									JInternalFrame frame = new JInternalFrame(matched.getName());
+									JFrame frame = new JFrame(matched.getName());
 									JPanel panel = new JPanel();
 									MatchedCandidate content = new MatchedCandidate();
-									frame.setContentPane(content);
-//									ViewsUtils.popUp(frame, panel);
+//									frame.setContentPane(content);
+									ViewsUtils.popUp(frame, panel);
 									
 //									panel.add(content,GridBagConstraints.CENTER);
 //									content.setVisible(true);

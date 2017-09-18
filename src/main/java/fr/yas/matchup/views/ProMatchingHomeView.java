@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Insets;
 import javax.swing.JScrollPane;
-import javax.swing.JMenuBar;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class ProMatchingHomeView extends BaseView {
 
@@ -22,6 +22,22 @@ public class ProMatchingHomeView extends BaseView {
 	private JLabel lblResult;
 	private MenuBar menuBar;
 	private JPanel panelResult;
+	private JButton btnListe;
+	private JButton btnMore;
+
+	/**
+	 * @return the btnListe
+	 */
+	public JButton getBtnListe() {
+		return btnListe;
+	}
+
+	/**
+	 * @return the btnMore
+	 */
+	public JButton getBtnMore() {
+		return btnMore;
+	}
 
 	/**
 	 * @return the menuBar
@@ -88,8 +104,19 @@ public class ProMatchingHomeView extends BaseView {
 		splitPane.setRightComponent(panelPreview);
 		panelPreview.setLayout(new BorderLayout(0, 0));
 		
+		JPanel panelTitle = new JPanel();
+		panelPreview.add(panelTitle, BorderLayout.NORTH);
+		panelTitle.setLayout(new BorderLayout(0, 0));
+		
+		btnListe = new JButton("Liste");
+		panelTitle.add(btnListe, BorderLayout.WEST);
+		
 		lblResult = new JLabel("result");
-		panelPreview.add(lblResult, BorderLayout.NORTH);
+		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
+		panelTitle.add(lblResult);
+		
+		btnMore = new JButton("Détail");
+		panelTitle.add(btnMore, BorderLayout.EAST);
 		
 		panelResult = new JPanel();
 		panelPreview.add(panelResult);
