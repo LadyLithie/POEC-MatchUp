@@ -170,7 +170,7 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public void insert(BaseEntity item) {
-		System.out.println("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
+//		System.out.println("INSERT INTO "+ table + " VALUES ("+parseToString(item)+")");
 		int res = executeRequestUpdate("INSERT INTO "+ table + " VALUES (" + parseToString(item) + ")");
 //		System.out.println(res);
 		if(res > 0) {

@@ -195,6 +195,7 @@ public abstract class RegisteredUser extends BaseEntity {
 		this.updated_at = updated_at;
 	}
 	
+	
 	public RegisteredUser(Role role){
 		this.role = role;
 	}

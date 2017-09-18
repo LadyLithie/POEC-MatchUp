@@ -100,8 +100,8 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		res += "'"+enterprise.getActivity()+"',";
 		res += "'"+enterprise.getRole()+"',";
 		res += "'"+enterprise.getLogin()+"',";
-		res += "'"+enterprise.getPassword()+"',";
-		res += (enterprise.getValid()!=null ? "'" + enterprise.getValid() + "'" : null);
+ 		res += "'"+enterprise.getPassword()+"',";
+		res += (enterprise.getValid() == null ? "'FALSE'" : "'" + enterprise.getValid() + "'" );
 		
 		return res;
 	}
@@ -125,7 +125,7 @@ public class EnterpriseDAO extends RegisteredUserDAO {
 		res += ROLE + " = '"+enterprise.getRole()+"',";
 		res += LOGIN + " = '"+enterprise.getLogin()+"',";
 		res += PASSWORD + " = '"+enterprise.getPassword()+"',";
-		res += VALID + " = "+ (enterprise.getValid()!=null ? "'"+enterprise.getValid() + "'" : null);
+		res += VALID + " = "+ (enterprise.getValid()!=null ? "'"+enterprise.getValid() + "'" : "'FALSE'");
 		
 		return res;
 	}
