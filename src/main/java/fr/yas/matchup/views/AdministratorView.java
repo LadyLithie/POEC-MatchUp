@@ -1,6 +1,5 @@
 package fr.yas.matchup.views;
 
-import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -142,7 +141,9 @@ public class AdministratorView extends BaseView {
 		super.panel = panel;
 
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWeights = new double[] { 1.0, 0.5};
+//		gbl_contentPane.columnWidths = new int[]{261, 506};
+		gbl_contentPane.columnWidths = new int[]{0, 0};
+		gbl_contentPane.columnWeights = new double[] { 2, 1};
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0 };
 		panel.setLayout(gbl_contentPane);
 
@@ -221,20 +222,18 @@ public class AdministratorView extends BaseView {
 		gbc_panelAdminPresentation.gridy = 0;
 		panel.add(panelAdminPresentation, gbc_panelAdminPresentation);
 		GridBagLayout gbl_panelAdminPresentation = new GridBagLayout();
-		gbl_panelAdminPresentation.columnWidths = new int[] { 45, 45, 100, 100 };
-		gbl_panelAdminPresentation.rowHeights = new int[] { 30, 30, 30, 30, 30 };
-		gbl_panelAdminPresentation.columnWeights = new double[] { 0.0, 0.0, 1.0, 1.0 };
-		gbl_panelAdminPresentation.rowWeights = new double[] { 1.0, 1.0, 0.0, 0.0 };
+//		gbl_panelAdminPresentation.columnWidths = new int[] { 45, 45, 100, 77, 100 };
+//		gbl_panelAdminPresentation.rowHeights = new int[] { 30, 30, 30, 30, 30 };
+		gbl_panelAdminPresentation.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 1.0 };
+		gbl_panelAdminPresentation.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0 };
 		panelAdminPresentation.setLayout(gbl_panelAdminPresentation);
 
 		lblPhoto = new JLabel("");
-		lblPhoto.setIcon(
-				new ImageIcon(AdministratorView.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
+		lblPhoto.setIcon(new ImageIcon("image/GenericAvatar.png"));
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
-		gbc_lblPhoto.gridwidth = 2;
 		gbc_lblPhoto.gridheight = 3;
 		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPhoto.gridx = 0;
+		gbc_lblPhoto.gridx = 1;
 		gbc_lblPhoto.gridy = 0;
 		panelAdminPresentation.add(lblPhoto, gbc_lblPhoto);
 
@@ -247,20 +246,21 @@ public class AdministratorView extends BaseView {
 
 		JPanel panel_name = new JPanel();
 		GridBagConstraints gbc_panel_name = new GridBagConstraints();
+		gbc_panel_name.gridwidth = 2;
 		gbc_panel_name.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_name.fill = GridBagConstraints.BOTH;
 		gbc_panel_name.gridx = 3;
 		gbc_panel_name.gridy = 0;
 		panelAdminPresentation.add(panel_name, gbc_panel_name);
-		panel_name.setLayout(new BorderLayout(0, 0));
+		panel_name.setLayout(new GridLayout(0, 2, 0, 0));
 
 		textField_adminFirstName = new JTextField();
-		panel_name.add(textField_adminFirstName, BorderLayout.WEST);
+		panel_name.add(textField_adminFirstName);
 		textField_adminFirstName.setEditable(false);
 		textField_adminFirstName.setColumns(10);
 
 		textField_AdminLastName = new JTextField();
-		panel_name.add(textField_AdminLastName, BorderLayout.EAST);
+		panel_name.add(textField_AdminLastName);
 		textField_AdminLastName.setEditable(false);
 		textField_AdminLastName.setColumns(10);
 
@@ -274,8 +274,9 @@ public class AdministratorView extends BaseView {
 		textField_AdminEmail = new JTextField();
 		textField_AdminEmail.setEditable(false);
 		GridBagConstraints gbc_textField_AdminEmail = new GridBagConstraints();
-		gbc_textField_AdminEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_AdminEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_AdminEmail.gridwidth = 2;
+		gbc_textField_AdminEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_AdminEmail.gridx = 3;
 		gbc_textField_AdminEmail.gridy = 1;
 		panelAdminPresentation.add(textField_AdminEmail, gbc_textField_AdminEmail);
@@ -291,6 +292,7 @@ public class AdministratorView extends BaseView {
 		textField_AdminPhone = new JTextField();
 		textField_AdminPhone.setEditable(false);
 		GridBagConstraints gbc_textField_AdminPhone = new GridBagConstraints();
+		gbc_textField_AdminPhone.gridwidth = 2;
 		gbc_textField_AdminPhone.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_AdminPhone.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_AdminPhone.gridx = 3;

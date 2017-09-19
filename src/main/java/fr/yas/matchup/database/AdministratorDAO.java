@@ -3,6 +3,8 @@ package fr.yas.matchup.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import fr.yas.matchup.entities.Administrator;
+import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class AdministratorDAO extends RegisteredUserDAO {
@@ -13,10 +15,11 @@ public class AdministratorDAO extends RegisteredUserDAO {
 	public static final String FIRSTNAME = "firstname_admin";
 	public static final String MAIL = "mail_admin";
 	public static final String PHONE = "phone_admin";
+	public static final String AVATAR = "logo_admin";
 	public static final String ROLE = "role_admin";
 	public static final String LOGIN = "login_admin";
 	public static final String PASSWORD = "password_admin";
-
+	public static final String VALID = "valid";
 	
 	
 	public AdministratorDAO() {
@@ -34,10 +37,16 @@ public class AdministratorDAO extends RegisteredUserDAO {
 			admin.setFirstname(resultSet.getString(FIRSTNAME));
 			admin.setEmail(resultSet.getString(MAIL));
 			admin.setPhone(resultSet.getString(PHONE));
-			admin.setRole(resultSet.getString(ROLE));
+			admin.setAvatar(resultSet.getBlob(AVATAR));
+			if (resultSet.getString(ROLE).equals("admin")) {
+				admin.setRole(Role.ADMIN);
+			} else {
+				admin.setRole(Role.valueOf(resultSet.getString(ROLE)));
+			}
 			admin.setLogin(resultSet.getString(LOGIN));
 			admin.setPassword(resultSet.getString(PASSWORD));
 			admin.setName(admin.getFirstname() + " " + admin.getLastname());
+			admin.setValid(Validity.valueOf(resultSet.getString(VALID)));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,7 +67,8 @@ public class AdministratorDAO extends RegisteredUserDAO {
 		res += "'"+admin.getPhone()+"',";
 		res += "'"+admin.getRole()+"',";
 		res += "'"+admin.getLogin()+"',";
-		res += "'"+admin.getPassword()+"'";
+		res += "'"+admin.getPassword()+"',";
+		res += "'"+admin.getValid()+"'";
 
 		return res;
 	}
@@ -74,7 +84,8 @@ public class AdministratorDAO extends RegisteredUserDAO {
 		res += PHONE + " = '"+admin.getPhone()+"',";
 		res += ROLE + " = '"+admin.getRole()+"',";
 		res += LOGIN + " = '"+admin.getLogin()+"',";
-		res += PASSWORD + " = '"+admin.getPassword()+"'";
+		res += PASSWORD + " = '"+admin.getPassword()+"',";
+		res += VALID + " = '"+admin.getValid()+"'";
 
 		return res;
 	}

@@ -34,6 +34,7 @@ public abstract class BaseView implements IBaseView {
 	public void loadView(JFrame frame) {
 		frame.setTitle(getPageName());
 		ViewsUtils.configureJFrame(frame, getContentPane());
+		ViewsUtils.setColorLightSilver(getContentPane());
 	}
 	
 	

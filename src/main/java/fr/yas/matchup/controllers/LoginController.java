@@ -17,6 +17,7 @@ import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.LoginView;
 import fr.yas.matchup.controllers.ViewsDatasTerms;
+import fr.yas.matchup.database.ProposalDAO;
 import fr.yas.matchup.database.RegisteredUserDAO;
 
 /**
@@ -32,6 +33,7 @@ public class LoginController extends BaseController {
 	 * @param frame
 	 */
 	public LoginController(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new LoginView(this.frame);
 	}
@@ -43,6 +45,7 @@ public class LoginController extends BaseController {
 	 * @param newUser
 	 */
 	public LoginController(JFrame frame, RegisteredUser newUser) {
+		super();
 		this.user = newUser;
 		super.frame = frame;
 		super.view = new LoginView(this.frame);
@@ -76,6 +79,7 @@ public class LoginController extends BaseController {
 	@Override
 	public void initEvent() {
 		LoginView view = (LoginView) super.view;
+		super.frame.getRootPane().setDefaultButton(view.getBtnLogin());
 
 		// Connect and go to Profile
 		view.getBtnLogin().addActionListener(new ActionListener() {
@@ -102,8 +106,10 @@ public class LoginController extends BaseController {
 					if (user != null) {
 						setupDatas();
 						if (user instanceof Enterprise) {
-							ViewsManager.getInstance().next(new ProfileEController(frame));
+							((Enterprise) user).setJobs(new ProposalDAO().getByCompany(user.getId()));
+							ViewsManager.getInstance().next(new CompanyController(frame));
 						}else if (user instanceof Headhunter) {
+							((Headhunter) user).setJobs(new ProposalDAO().getByHeadhunter(user.getId()));
 							ViewsManager.getInstance().next(new HeadhunterController(frame));
 						}else if (user instanceof Candidate) {
 							ViewsManager.getInstance().next(new CandidateController(frame));

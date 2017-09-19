@@ -8,7 +8,7 @@ package fr.yas.matchup.entities;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 public class Skill extends BaseEntity {
-	public static final String SOCIAL = "Savoir-être";
+	public static final String SOCIAL = "Savoir-Ãªtre";
 	public static final String TECHNIQUE = "Savoir-faire";
 	private String name;
 	private String skillType;
@@ -42,9 +42,8 @@ public class Skill extends BaseEntity {
 	}
 	
 	
-	public Skill (double id, String name, String skillType) {
+	public Skill (String name, String skillType) {
 		super();
-		super.setId(id);
 		this.name = name;
 		this.skillType = skillType;
 	}
@@ -54,12 +53,17 @@ public class Skill extends BaseEntity {
 		super();
 	}
 
+	public String toStringFull() {
+		return "Skill "+super.toString()+"[name=" + name + ", skillType=" + skillType + "]";
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Skill "+super.toString()+"[name=" + name + ", skillType=" + skillType + "]";
+		return (name != null ?  name : "")
+				+ (skillType != null ? "(" + skillType + ")" : "()");
 	}
 
 }

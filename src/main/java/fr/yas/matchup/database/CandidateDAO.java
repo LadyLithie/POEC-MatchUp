@@ -7,7 +7,9 @@ import java.util.List;
 
 import fr.yas.matchup.database.base.BaseDAO;
 import fr.yas.matchup.entities.Candidate;
+import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.entities.Skill;
+import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 
 
@@ -26,6 +28,7 @@ public class CandidateDAO extends RegisteredUserDAO {
 	public static final String LOGIN = "login_candidate";
 	public static final String PASSWORD = "password_candidate";
 	public static final String ROLE = "role_candidate";
+	public static final String VALID = "valid";
 
 	public static final String CANDIDATE_SKILL = "candidate_skill";
 	public static final String ID_CANDIDATE = "candidate_id";
@@ -48,12 +51,21 @@ public class CandidateDAO extends RegisteredUserDAO {
 			candidate.setBirstdate(rs.getString(BIRTHDAY));
 			candidate.setAddress(rs.getString(ADDRESS));
 			candidate.setEmail(rs.getString(MAIL));
-			candidate.setAvatar(rs.getString(PICTURE));
+//			candidate.setAvatar((Blob) rs.getBinaryStream(PICTURE));
+			candidate.setAvatar(rs.getBlob(PICTURE));
 			candidate.setPresentation(rs.getString(PRESENTATION));
 			candidate.setLogin(rs.getString(LOGIN));
 			candidate.setPassword(rs.getString(PASSWORD));
-			candidate.setRole(rs.getString(ROLE));
+			if (rs.getString(ROLE).equals("candidate")) {
+				candidate.setRole(Role.CANDIDATE);
+			} else {
+				candidate.setRole(Role.valueOf(rs.getString(ROLE)));
+			}
+			candidate.setValid(Validity.valueOf(rs.getString(VALID)));
+			
 			candidate.setName(candidate.getFirstname() + " " + candidate.getLastname());
+			
+			candidate = getSkills(candidate);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			candidate = null;
@@ -70,14 +82,19 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += "'" + candidate.getLastname() + "',";
 		result += "'" + candidate.getFirstname() + "',";
 		result += "'" + candidate.getPhone() + "',";
-		result += "'" + candidate.getBirstdate() + "',";
+		if (candidate.getBirstdate() != null) {
+			result += "'" + candidate.getBirstdate() + "',";
+		} else {
+			result += null + ",";
+		}
 		result += "'" + candidate.getAddress() + "',";
 		result += "'" + candidate.getEmail() + "',";
 		result += "'" + candidate.getAvatar() + "',";
 		result += "'" + candidate.getPresentation() +"',";
 		result += "'" + candidate.getLogin() + "',";
 		result += "'" + candidate.getPassword() + "',";
-		result += "'" + candidate.getRole() + "'";
+		result += "'" + candidate.getRole() + "',";
+		result += "'" + candidate.getValid() + "'";
 
 		return result;
 	}
@@ -98,10 +115,16 @@ public class CandidateDAO extends RegisteredUserDAO {
 		result += LOGIN + " = '" + candidate.getLogin() + "',";
 		result += PASSWORD + " = '" + candidate.getPassword() + "',";
 		result += ROLE + " = '" + candidate.getRole() + "'";
+		result += VALID + " = '" + candidate.getValid() + "'";
 
 		return result;
 	}
 	
+	/**
+	 * Retrieve skills from the relational table with candidate id
+	 * @param candidate
+	 * @return
+	 */
 	public Candidate getSkills(Candidate candidate) {
 		ResultSet rs = executeRequest("SELECT * FROM " + CANDIDATE_SKILL
 				+ " WHERE " + ID_CANDIDATE + " = " + candidate.getId());
@@ -123,6 +146,11 @@ public class CandidateDAO extends RegisteredUserDAO {
 		return candidate;
 	}
 
+	/**
+	 * Add skills to the relational table with candidate id
+	 * @param candidate
+	 * @return
+	 */
 	public int insertSkills(Candidate candidate) {
 		int result = 0;
 		deleteSkills(candidate);
@@ -134,6 +162,11 @@ public class CandidateDAO extends RegisteredUserDAO {
 		return result;
 	}
 
+	/**
+	 * Delete skills of the candidate from the relational table 
+	 * @param candidate
+	 * @return
+	 */
 	public int deleteSkills(Candidate candidate) {
 		return executeRequestUpdate("DELETE FROM " + CANDIDATE_SKILL + " WHERE "
 				+ ID_CANDIDATE + " = " + candidate.getId());

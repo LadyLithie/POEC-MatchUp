@@ -28,8 +28,9 @@ public class DBManager {
 		if (canConnect()) {
 			connect();
 		}else {
-			createDB("config","dbsql.sql");
-			createDB(CONFIG, "ScriptInsertValBase.sql");
+			createDB(CONFIG,"matchup.sql");
+//			createDB(CONFIG,"structDB.sql");
+//			createDB(CONFIG, "ScriptData.sql");
 		}
 	}
 
@@ -79,6 +80,10 @@ public class DBManager {
 
 	/**
 	 * Try the connection to our DB
+	 * to allow the application to function
+	 * @return 	
+	 * 			true if present
+	 * 			false, if not -> so we need to create it 
 	 */
 	private boolean canConnect() {
 		try {
@@ -106,7 +111,7 @@ public class DBManager {
 		
 		try {
 			stmt = creaCon.createStatement();
-			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+";");
+			stmt.execute("CREATE DATABASE IF NOT EXISTS "+dbName+" CHARACTER SET utf8 COLLATE utf8_general_ci;");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -123,15 +128,14 @@ public class DBManager {
 		try {
 			stmt = con.createStatement();
 			for(String it : creationRequest.split(";")) {
-				if(!it.equals("") && !it.equals("\n")) {
-					//System.out.println(it);
+				if(!it.equals("\n") && !it.equals("")) {
 					stmt.execute(it);					
 				}
 			}
 			stmt.execute(creationRequest);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 	}
@@ -190,17 +194,6 @@ public class DBManager {
 			// Localize our database and how to access it
 			con = DriverManager.getConnection("jdbc:mysql://" + serverAddress + ":" + port + "/" + dbName, login,
 					password);
-			// here sonoo is database name, root is username and password
-
-			// //Statement = define query
-			// Statement stmt = con.createStatement();
-			// //ResultSet = sql result
-			// ResultSet rs = stmt.executeQuery("select * from emp");
-			// //Treat the data
-			// while (rs.next())
-			// System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " +
-			// rs.getString(3));
-
 			// Close connection
 			// con.close();
 		} catch (Exception e) {

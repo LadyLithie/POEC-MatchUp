@@ -10,6 +10,7 @@
 package fr.yas.matchup.entities;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.yas.matchup.entities.base.BaseEntity;
@@ -17,10 +18,8 @@ import fr.yas.matchup.entities.base.BaseEntity;
 public class Proposal extends BaseEntity {
 	private String name;
 	private String presentation;
-	//private String handicap;
 	private String createdAt;
 	private String updatedAt;
-	// SQL Datetime = JAVA String ? or Date converted with SimpleDateFormat?
 	private ContractType contractType;  
 	private Location localization;
 	private Enterprise company;
@@ -100,23 +99,30 @@ public class Proposal extends BaseEntity {
 	public void setLocalization(Location localization) {
 		this.localization = localization;
 	}
-	public String getStringLocalization() {
-		return localization.getPays() + ":" + localization.getAddress() + "," + localization.getDepartement() + "," + localization.getCity();
-	}
+	
+	/**
+	 * 
+	 * @return the localization in a String for sql
+	 */
+//	public String getStringLocalization() {
+//		String result;
+//		if (localization != null) {
+//			result = localization.toString();
+//		} else {
+//			result = "";
+//		}
+//		return result;
+//	}
 	/**
 	 * WARNING : need test on pattern
 	 * @param string (format:PAYS:address,CodePostal,VILLE)
 	 */
 	public void setLocalization(String string) {
-		Location location = new Location();
-		String[] ad = string.split(":");
-		location.setPays(ad[0]);
-		ad = ad[1].split(",");		
-		location.setAddress(ad[0]);
-		location.setDepartement(new Integer(ad[1]));
-		location.setCity(ad[2]);
-		
-		this.localization = location;	
+		if (string == null || string.trim().isEmpty()) {
+			localization = new Location();
+		}else {
+			localization = new Location(string);
+		}
 	}
 	/**
 	 * @return the company
@@ -164,10 +170,12 @@ public class Proposal extends BaseEntity {
 		super();
 		this.name = name;
 		this.contractType = contractType;
+		skills = new ArrayList<>();
 	}
 	
 	public Proposal() {
 		super();
+		skills = new ArrayList<>();
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

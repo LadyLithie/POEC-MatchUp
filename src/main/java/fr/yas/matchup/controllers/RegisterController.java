@@ -12,10 +12,14 @@ import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 
+import fr.yas.matchup.database.CandidateDAO;
+import fr.yas.matchup.database.EnterpriseDAO;
+import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.RegisteredUser;
+import fr.yas.matchup.entities.Role;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.views.RegisterView;
 
@@ -51,7 +55,24 @@ public class RegisterController extends BaseController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (getValidRegister(view)) {
-					System.out.println("Utilisateur enregistré");
+					System.out.println("Utilisateur enregistrÃ© : ");
+					switch (user.getRole()) {
+					case HEADHUNTER:
+						HeadhunterDAO hDao = new HeadhunterDAO();
+						hDao.insert(user);
+						break;
+					case COMPANY:
+						EnterpriseDAO eDao = new EnterpriseDAO();
+						eDao.insert(user);
+						break;
+					case CANDIDATE:
+						CandidateDAO cDao = new CandidateDAO();
+						cDao.insert(user);
+						break;
+					default: 
+						//It could be the admin but it's not allow for creation this way
+						break;
+					}
 					ViewsManager.getInstance().next(new LoginController(frame,user));
 				}
 			}
@@ -65,22 +86,6 @@ public class RegisterController extends BaseController {
 			}
 		});
 	}
-		
-
-	/* (non-Javadoc)
-	 * @see fr.yas.matchup.controllers.BaseController#initView()
-	 */
-	@Override
-	public void initView() {
-		RegisterView v = ((RegisterView) getView());
-//		v.getRdbtnEntreprise().setSelected(true);
-//		v.getLogin().getInput().setText("Trololo");
-//		v.getPwdField().setText("pwd");
-//		v.getPwdVerifField().setText("pwd");
-//		v.getEmail().getInput().setText("trololo@lolo.fr");
-		
-		}
-
 
 	/**
 	 * Test that each field as the requested value
@@ -91,7 +96,7 @@ public class RegisterController extends BaseController {
 		// test validity of the password
 		boolean valid = true;
 		String pwd = new String(view.getPwdField().getPassword());
-		if (pwd.equals(new String(view.getPwdVerifField().getPassword()))) {
+		if (pwd.equals(new String(view.getPwdVerifField().getPassword())) && !pwd.isEmpty()) {
 
 			// Same password, we create the user depending on the type selected
 			if (view.getRdbtnCandidat().isSelected()) {
@@ -100,18 +105,21 @@ public class RegisterController extends BaseController {
 				user.setLogin(view.getLogin().getInput().getText());
 				user.setEmail(view.getEmail().getInput().getText());
 				user.setPassword(pwd);
-			} else if (view.getRdbtnEntreprise().isSelected()) {
+				user.setRole(Role.CANDIDATE);
+				} else if (view.getRdbtnEntreprise().isSelected()) {
 //				System.out.println("Entreprise");
 				user = new Enterprise();
 				user.setLogin(view.getLogin().getInput().getText());
 				user.setEmail(view.getEmail().getInput().getText());
 				user.setPassword(pwd);
-			} else if (view.getRdbtnRecruteur().isSelected()) {
+				user.setRole(Role.COMPANY);
+				} else if (view.getRdbtnRecruteur().isSelected()) {
 //				System.out.println("Recruteur");
 				user = new Headhunter();
 				user.setLogin(view.getLogin().getInput().getText());
 				user.setEmail(view.getEmail().getInput().getText());
 				user.setPassword(pwd);
+				user.setRole(Role.HEADHUNTER);
 			} else {
 				System.err.println("choisissez un type d'utilisateur");
 			}

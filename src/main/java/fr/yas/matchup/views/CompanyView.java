@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import fr.yas.matchup.views.panels.PanelHeadhunters;
 import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelPresentation;
+import fr.yas.matchup.views.usercontrols.MenuBar;
 
 
 
@@ -22,10 +23,11 @@ import fr.yas.matchup.views.panels.PanelPresentation;
  * @author Audrey
  *
  */
-public class ProfileEView extends BaseView {
+public class CompanyView extends BaseView {
 	private JPanel panel_left;
 	private JPanel panel_TopRight;
 	private JPanel panel_bottomRight;
+	private MenuBar menuBar;
 
 	/**
 	 * Panel listing all the jobs proposed by the Enterprise
@@ -59,9 +61,16 @@ public class ProfileEView extends BaseView {
 	}
 
 	/**
+	 * @return the menuBar
+	 */
+	public MenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	/**
 	 * Create the frame.
 	 */
-	public ProfileEView(JFrame frame) {
+	public CompanyView(JFrame frame) {
 		super();
 		super.pageName = "Profile";
 		JPanel panel = new JPanel();
@@ -70,10 +79,18 @@ public class ProfileEView extends BaseView {
 		//Define the general layout for the whole frame
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{5, 0, 5, 0, 5, 0};
-		gbl_panel.rowHeights = new int[]{5, 0, 5, 0, 5, 0};
+		gbl_panel.rowHeights = new int[]{0, 5, 0, 5, 0, 5, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
+
+		menuBar = new MenuBar();
+		GridBagConstraints gbc_menuBar = new GridBagConstraints();
+		gbc_menuBar.anchor = GridBagConstraints.FIRST_LINE_START;
+		gbc_menuBar.gridx = 0;
+		gbc_menuBar.gridy = 0;
+		gbc_menuBar.gridwidth = GridBagConstraints.REMAINDER;
+		panel.add(menuBar.getContentPane(), gbc_menuBar);
 		
 		//Add a big unique panel on the left side 
 		panel_left = new PanelListJobs();
@@ -82,7 +99,7 @@ public class ProfileEView extends BaseView {
 		gbc_panel_left.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_left.fill = GridBagConstraints.BOTH;
 		gbc_panel_left.gridx = 1;
-		gbc_panel_left.gridy = 1;
+		gbc_panel_left.gridy = 2;
 		panel_left.setMinimumSize(new Dimension(250, 200));
 		panel.add(panel_left, gbc_panel_left);
 		
@@ -92,8 +109,8 @@ public class ProfileEView extends BaseView {
 		gbc_panel_TopRight.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_TopRight.fill = GridBagConstraints.BOTH;
 		gbc_panel_TopRight.gridx = 3;
-		gbc_panel_TopRight.gridy = 1;
-		panel_TopRight.setMinimumSize(new Dimension(300, 100));
+		gbc_panel_TopRight.gridy = 2;
+		panel_TopRight.setMinimumSize(new Dimension(300, 150));
 		panel.add(panel_TopRight, gbc_panel_TopRight);
 		
 		//Add a panel on the bottom right
@@ -102,7 +119,7 @@ public class ProfileEView extends BaseView {
 		gbc_panel_bottomRight.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_bottomRight.fill = GridBagConstraints.BOTH;
 		gbc_panel_bottomRight.gridx = 3;
-		gbc_panel_bottomRight.gridy = 3;
+		gbc_panel_bottomRight.gridy = 4;
 		panel_bottomRight.setMinimumSize(new Dimension(300, 50));
 		panel.add(panel_bottomRight, gbc_panel_bottomRight);
 

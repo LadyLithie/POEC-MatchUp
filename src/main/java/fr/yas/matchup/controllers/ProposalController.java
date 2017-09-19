@@ -17,18 +17,23 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import fr.yas.matchup.database.CityDAO;
 import fr.yas.matchup.database.ContractDAO;
+import fr.yas.matchup.database.LocationDAO;
+import fr.yas.matchup.database.ProposalDAO;
 import fr.yas.matchup.database.SkillDAO;
+import fr.yas.matchup.entities.City;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
+import fr.yas.matchup.entities.Location;
 import fr.yas.matchup.entities.Proposal;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.ViewsManager;
 import fr.yas.matchup.utils.views.ComboBoxRenderer;
-import fr.yas.matchup.views.ProposalFrame;
+import fr.yas.matchup.views.ProposalView;
 
 /**
  * @author Audrey
@@ -50,7 +55,7 @@ public class ProposalController extends BaseController {
 		SkillDAO sDao = new SkillDAO();
 		skills = sDao.get();
 		super.frame = frame;
-		super.view = new ProposalFrame(this.frame, skills);
+		super.view = new ProposalView(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		// DAO : skills = all registered skills
 
@@ -67,9 +72,8 @@ public class ProposalController extends BaseController {
 		super.frame = frame;
 		SkillDAO sDao = new SkillDAO();
 		skills = sDao.get();
-		super.view = new ProposalFrame(this.frame, skills);
+		super.view = new ProposalView(this.frame, skills);
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		// DAO : skills = all registered skills
 		this.job = job;
 
 	}
@@ -82,7 +86,10 @@ public class ProposalController extends BaseController {
 	@Override
 	public void initView() {
 		user = (RegisteredUser) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
-		ProposalFrame vFrame = ((ProposalFrame) getView());
+		ProposalView vFrame = ((ProposalView) getView());
+		vFrame.getComboBox_contract().setRenderer(new ComboBoxRenderer());
+		vFrame.getComboBox_linkedUser().setRenderer(new ComboBoxRenderer());
+		vFrame.getComboBox_location().setRenderer(new ComboBoxRenderer());
 		if (job == null) { // mode creation
 			vFrame.setMode(true);
 			// Contracts
@@ -90,6 +97,12 @@ public class ProposalController extends BaseController {
 			List<BaseEntity> contracts = contractDAO.get();
 			for (BaseEntity type : contracts) {
 				vFrame.getComboBox_contract().addItem((ContractType) type);
+			}
+			//City
+			LocationDAO locationDAO = new LocationDAO();
+			List<BaseEntity> cities = locationDAO.get();
+			for (BaseEntity town : cities) {
+				vFrame.getComboBox_location().addItem((Location) town);
 			}
 			// Link
 			if (user instanceof Enterprise) {
@@ -107,14 +120,14 @@ public class ProposalController extends BaseController {
 			vFrame.getComboBox_contract().addItem(job.getContractType());
 			vFrame.getComboBox_contract().setSelectedIndex(0);
 			vFrame.getComboBox_location().addItem(job.getLocalization());
-			vFrame.getComboBox_contract().setSelectedIndex(0);
+			vFrame.getComboBox_location().setSelectedIndex(0);
 			vFrame.getTextArea().setText(job.getPresentation());
 			vFrame.getTextField_JobTitle().setText(job.getName());
 			ArrayList<JCheckBox> ls = vFrame.getListSkills();
 			System.out.println(ls.size());
 			for (Skill skill : job.getSkills()) {
 				int i = 0;
-				while ((ls.get(i).getText() != skill.getName()) && i<ls.size()) {
+				while (!ls.get(i).getText().equals(skill.getName()) && i<ls.size()) {
 					i++;
 				}
 				if(i<ls.size()) {
@@ -149,6 +162,7 @@ public class ProposalController extends BaseController {
 				JComboBox<RegisteredUser> comboBox_company = new JComboBox<RegisteredUser>();
 				comboBox_company.addItem(job.getCompany());
 				comboBox_company.setSelectedItem(job.getCompany());
+				comboBox_company.setEnabled(false);
 				GridBagConstraints gbc_comboBox_company = new GridBagConstraints();
 				gbc_comboBox_company.fill = GridBagConstraints.HORIZONTAL;
 				gbc_comboBox_company.gridx = 2;
@@ -158,15 +172,11 @@ public class ProposalController extends BaseController {
 				vFrame.setMode(false);
 			}
 		}
-		vFrame.getComboBox_contract().setRenderer(new ComboBoxRenderer());
-		vFrame.getComboBox_linkedUser().setRenderer(new ComboBoxRenderer());
-		vFrame.getComboBox_location().setRenderer(new ComboBoxRenderer());
-
 	}
 
 	@Override
 	public void initEvent() {
-		ProposalFrame v = (ProposalFrame) super.view;
+		ProposalView v = (ProposalView) super.view;
 		// must test if job and user are linked
 		if (user instanceof Enterprise || user instanceof Headhunter) {
 			/*
@@ -178,34 +188,45 @@ public class ProposalController extends BaseController {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Go previous page
 					if (user instanceof Enterprise) {
-						ViewsManager.getInstance().next(new ProfileEController(frame));
+						ViewsManager.getInstance().next(new CompanyController(frame));
 					} else {
 						ViewsManager.getInstance().next(new HeadhunterController(frame));
 					}
 				}
 			});
-			// Register a new job
+			// Register a new job or update an existing one
 			v.getBtnProposalCreation().addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					//Absolutely need a title
 					if (v.getTextField_JobTitle().getText().isEmpty()) {
 						v.getTextField_JobTitle().setBackground(Color.PINK);
 					} else {
+						boolean exist = false;
+						//It's a creation
 						if (job == null) {
+							//Constructor with title and type of contract (by default CDD)
 							job = new Proposal(v.getTextField_JobTitle().getText(),
 									(ContractType) v.getComboBox_contract().getSelectedItem());
+							//Add the skills list
 							job.setSkills(new ArrayList<Skill>());
 							for (JCheckBox skill : v.getListSkills()) {
 								if (skill.isSelected()) {
 									int i = 0;
-									while (((Skill) skills.get(i)).getName() != skill.getText()) {
+									while (!((Skill) skills.get(i)).getName().equals(skill.getText())) {
 										i++;
 									}
 									job.getSkills().add((Skill) skills.get(i));
 								}
 							}
+							//Set the presentation
 							job.setPresentation(v.getTextArea().getText());
-						} else {
+						} else { //It's a modification
+							exist = true;
+							//Update title and presentation
+							job.setName(v.getTextField_JobTitle().getText());
+							job.setPresentation(v.getTextArea().getText());
+							//Review the skills list for update
 							for (JCheckBox skill : v.getListSkills()) {
 								if (skill.isSelected()) {
 									int i = 0;
@@ -218,17 +239,47 @@ public class ProposalController extends BaseController {
 									}
 								}
 							}
+							//Update the contract and the location
+							job.setContractType((ContractType) v.getComboBox_contract().getSelectedItem());
 						}
-						System.out.println(job.toString());
-						// DAO Job
-						if (user instanceof Enterprise) {
-							((Enterprise) user).getJobs().add(job);
-							ViewsManager.getInstance().next(new ProfileEController(frame));
+						job.setLocalization((Location) v.getComboBox_location().getSelectedItem());
+						ProposalDAO pDao = new ProposalDAO();
+						//Add the job to the user list, 
+						//the user to the job for foreign key
+						//the linked user to the job for foreign key
+						//Return to user profile
+						if (user instanceof Enterprise) { //the current user is a company
+							//Add the job to the user list
+							job.setCompany((Enterprise) user);
+							job.setHeadhunter((Headhunter) v.getComboBox_linkedUser().getSelectedItem());
+							
+							if (exist) {
+								pDao.update(job);
+								pDao.insertSkills(job);
+							} else {
+								pDao.insert(job);
+								pDao.insertSkills(job);
+								((Enterprise) user).getJobs().add(job);
+							}
 
-						} else {
-							((Headhunter) user).getJobs().add(job);
+							System.out.println(job.toString());
+							ViewsManager.getInstance().next(new CompanyController(frame));
+
+						} else {//the current user is a headhunter
+							job.setHeadhunter((Headhunter) user);
+							job.setCompany((Enterprise) v.getComboBox_linkedUser().getSelectedItem());
+							
+							if (exist) {
+								pDao.update(job);
+								pDao.insertSkills(job);
+							} else {
+								pDao.insert(job);
+								pDao.insertSkills(job);
+								((Headhunter) user).getJobs().add(job);
+							}
+
+							System.out.println(job.toString());
 							ViewsManager.getInstance().next(new HeadhunterController(frame));
-							// System.out.println("return profile headhunter");
 						}
 					}
 				}

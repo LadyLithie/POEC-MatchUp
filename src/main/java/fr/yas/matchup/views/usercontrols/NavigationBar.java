@@ -3,6 +3,7 @@ package fr.yas.matchup.views.usercontrols;
 import javax.swing.JPanel;
 
 import fr.yas.matchup.managers.ViewsManager;
+import fr.yas.matchup.utils.views.ViewsUtils;
 import fr.yas.matchup.views.BaseView;
 import fr.yas.matchup.views.ViewsTerms;
 
@@ -16,6 +17,7 @@ public class NavigationBar extends BaseView {
 
 	private JButton btnGoToProfil;
 	private JButton btnGoToMatching;
+	//For each listener
 	private ActionListener backListener;
 	private ActionListener nextListener;
 
@@ -94,6 +96,9 @@ public class NavigationBar extends BaseView {
 		this.btnGoToMatching.addActionListener(nextListener);
 	}
 
+	/**
+	 * To avoid redondant actions on 1 event
+	 */
 	public void resetEvents() {
 		this.btnGoToProfil.removeActionListener(backListener);
 		this.btnGoToMatching.removeActionListener(nextListener);

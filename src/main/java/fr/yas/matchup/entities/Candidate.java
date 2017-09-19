@@ -3,6 +3,7 @@
  */
 package fr.yas.matchup.entities;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,13 +13,12 @@ import java.util.List;
  *
  */
 public class Candidate extends RegisteredUser {
-	
+
 	private String firstname;
 	private String lastname;
 	private String birstdate;
 	private String address;
-	private String role;
-	
+
 	private ArrayList<Diploma> qualifications;
 	private ArrayList<String> mobility;
 
@@ -32,7 +32,8 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param firstname the firstname to set
+	 * @param firstname
+	 *            the firstname to set
 	 */
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
@@ -46,7 +47,8 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param lastname the lastname to set
+	 * @param lastname
+	 *            the lastname to set
 	 */
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
@@ -60,7 +62,8 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param string the birstdate to set
+	 * @param string
+	 *            the birstdate to set
 	 */
 	public void setBirstdate(String string) {
 		this.birstdate = string;
@@ -74,7 +77,8 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param qualifications the qualifications to set
+	 * @param qualifications
+	 *            the qualifications to set
 	 */
 	public void setQualifications(ArrayList<Diploma> qualifications) {
 		this.qualifications = qualifications;
@@ -88,12 +92,13 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param mobility the mobility to set
+	 * @param mobility
+	 *            the mobility to set
 	 */
 	public void setMobility(ArrayList<String> mobility) {
 		this.mobility = mobility;
 	}
-	
+
 	/**
 	 * @return the skills
 	 */
@@ -102,12 +107,13 @@ public class Candidate extends RegisteredUser {
 	}
 
 	/**
-	 * @param skills the skills to set
+	 * @param skills
+	 *            the skills to set
 	 */
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -116,14 +122,6 @@ public class Candidate extends RegisteredUser {
 		this.address = address;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
 	/**
 	 * 
 	 */
@@ -133,7 +131,6 @@ public class Candidate extends RegisteredUser {
 
 	/**
 	 * @param login
-	 * @param isConnected
 	 * @param name
 	 * @param phone
 	 * @param email
@@ -144,21 +141,40 @@ public class Candidate extends RegisteredUser {
 	 * @param firstname
 	 * @param lastname
 	 * @param birstdate
+	 * @param address
 	 * @param qualifications
 	 * @param mobility
+	 * @param skills
 	 */
-	public Candidate(String login, String name, String phone, String email, String presentation,
-			String avatar, String created_at, String updated_at, String firstname, String lastname, String birstdate,
-			ArrayList<Diploma> qualifications, ArrayList<String> mobility, String address,String role) {
+	public Candidate(String login, String name, String phone, String email, String presentation, Blob avatar,
+			String created_at, String updated_at, String firstname, String lastname, String birstdate, String address,
+			ArrayList<Diploma> qualifications, ArrayList<String> mobility, List<Skill> skills) {
 		super(login, name, phone, email, presentation, avatar, created_at, updated_at);
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.address = address;
 		this.birstdate = birstdate;
+		this.address = address;
 		this.qualifications = qualifications;
 		this.mobility = mobility;
-
+		this.skills = skills;
+		
+		super.setRole(Role.CANDIDATE);
 		super.setName(firstname + " " + lastname);
-		this.role = role;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Candidate [" + (firstname != null ? "firstname=" + firstname + ", " : "")
+				+ (lastname != null ? "lastname=" + lastname + ", " : "")
+				+ (birstdate != null ? "birstdate=" + birstdate + ", " : "")
+				+ (address != null ? "address=" + address + ", " : "")
+				+ (qualifications != null ? "qualifications=" + qualifications + ", " : "")
+				+ (mobility != null ? "mobility=" + mobility + ", " : "")
+				+ (skills != null ? "skills=" + skills + ", " : "")
+				+ (super.toString() != null ? "toString()=" + super.toString() : "") + "]";
+	}
+
 }

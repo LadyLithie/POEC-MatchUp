@@ -1,37 +1,29 @@
 package fr.yas.matchup.controllers;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-
-import com.sun.jmx.snmp.UserAcl;
-
 import fr.yas.matchup.database.HeadhunterDAO;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Headhunter;
 import fr.yas.matchup.entities.Proposal;
-import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.managers.ViewsManager;
-import fr.yas.matchup.views.LoginView;
-import fr.yas.matchup.views.RegisterView;
 import fr.yas.matchup.views.headhunter.HeadhunterView;
+import fr.yas.matchup.views.panels.PanelEnterpriseAssociated;
 import fr.yas.matchup.views.panels.PanelHeadhunterJob;
+
+import fr.yas.matchup.views.panels.PanelHeadhunterPresentation;
+import fr.yas.matchup.views.panels.PanelLinkedEnterprises;
+import fr.yas.matchup.views.panels.PanelListJobs;
 import fr.yas.matchup.views.panels.PanelResumeJob;
+
 
 
 
@@ -39,12 +31,12 @@ public class HeadhunterController extends BaseController {
 
 	private Headhunter user;
 //	private Proposal job;
-	private JPanel panel_JobList;
-	private ArrayList<Proposal> jobs = new ArrayList<>();
-	private ArrayList<PanelHeadhunterJob> panelJobs = new ArrayList<>();
-	private ArrayList<Enterprise> enterprises = new ArrayList<>();
-	private ArrayList<String> phones = new ArrayList<>();
-	private ArrayList<String> emails = new ArrayList<>();
+	private PanelListJobs panel_JobList;
+	private PanelHeadhunterPresentation panel_HeadhunterPresentation;
+	private PanelLinkedEnterprises panel_LinkedEnterprises;
+	private ArrayList<Proposal> jobs;
+	private ArrayList<PanelResumeJob> pJobs = new ArrayList<>();
+	
 	
 	
 	public HeadhunterController (JFrame frame) {
@@ -64,37 +56,59 @@ public class HeadhunterController extends BaseController {
 		user = (Headhunter) getViewDatas().get(ViewsDatasTerms.CURRENT_USER);
 		HeadhunterView view = ((HeadhunterView) getView());
 		
-		view.getTextField_Firstname().setText(user.getFirstname());
-		view.getTextField_Lastname().setText(user.getLastname());
-		view.getTextField_Email().setText(user.getEmail());
-		view.getTextField_Phone().setText(user.getPhone());
-		view.getTextField_Linkedin().setText(user.getLinkedin());
-		view.getTextField_Twitter().setText(user.getTwitter());
-		view.getTextArea_Presentation().setText(user.getPresentation());
+		panel_HeadhunterPresentation = (PanelHeadhunterPresentation) view.getPanel_HeadhunterPresentation();
 		
-//		panel_JobList = (JPanel) view.getPanel_JobList();
-//		if (user.getJobs() != null) {
+		view.getPanel_HeadhunterPresentation().getTextField_Firstname().setText(user.getFirstname());
+		view.getPanel_HeadhunterPresentation().getTextField_Lastname().setText(user.getLastname());
+		view.getPanel_HeadhunterPresentation().getTextField_Email().setText(user.getEmail());
+		view.getPanel_HeadhunterPresentation().getTextField_Phone().setText(user.getPhone());
+		view.getPanel_HeadhunterPresentation().getTextField_Linkedin().setText(user.getLinkedin());
+		view.getPanel_HeadhunterPresentation().getTextField_Twitter().setText(user.getTwitter());
+		view.getPanel_HeadhunterPresentation().getTextArea_Presentation().setText(user.getPresentation());
+		
+		
+		panel_JobList = (PanelListJobs) view.getPanel_JobList();
+		
+		if (user.getJobs() != null) {
+			
+			pJobs = new ArrayList<>();
+			
+			for (Proposal job : user.getJobs()) {
+				
+				PanelResumeJob unJob = new PanelResumeJob(job);
+				
+				unJob.setPreferredSize(new Dimension(150, 150));
+				unJob.getLblLink().setText("Entreprise");
+				unJob.getTextField().setText(job.getName());
+				GridBagConstraints gbc_UnJob = new GridBagConstraints();
+				gbc_UnJob.anchor = GridBagConstraints.NORTHWEST;
+				panel_JobList.getPanelJobs().add(unJob, gbc_UnJob);
+				panel_JobList.getPanelJobs().getResumeJobs().add(unJob);
+				pJobs.add(unJob);
+				
+			}
+			
+		}
+		
+//		panel_LinkedEnterprises = (JPanel) view.getPanel_LinkedEnterprises();
+//		
+//		List<BaseEntity> associates = new List<BaseEntity> get();
+//		if (user.getAssociates() != null) {
 //			
-//			panelJobs = new ArrayList<>();
-//			
-//			for (Proposal Ujob : user.getJobs()) {
+//			for (Enterprise enterprise : associates) {
 //				
-//				PanelHeadhunterJob panelJob = new PanelHeadhunterJob(Ujob);
-//				
-//				
-//				job.setPreferredSize(new Dimension(130, 170));
-//				job.getLblLink().setText("Contact");
-//				GridBagConstraints gbc_job = new GridBagConstraints();
-//				gbc_job.anchor = GridBagConstraints.NORTHEAST;
-//				panelJob.getPanelJobs().add(job, gbc_job);
-//				panelJob.getPanelJobs().getResumeJobs().add(job);
-//				panelJobs.add(job);
+//				PanelEnterpriseAssociated uneEntreprise = new PanelEnterpriseAssociated(enterprise);
+//				uneEntreprise.getLblEnterpriseName().setText(enterprise.getName());
 //			}
 //			
 //		}
 		
-		//view.getTextArea_JobTitle().setText(user.getJobs().get(1).getName());
-		//view.getTextArea_Presentation().setText(user.getJobs().get(1).getPresentation());
+		
+
+		
+		
+		//view.getPanel_LinkedEnterprises().getPanelContentListEnterprise().;
+		
 	
 	
 	/* (non-Javadoc)
@@ -108,101 +122,112 @@ public class HeadhunterController extends BaseController {
 		HeadhunterView view = (HeadhunterView) super.view;
 		
 		
-		view.getBtnEditPresentation().addActionListener(new ActionListener() {
+		view.getPanel_HeadhunterPresentation().getBtnEditPresentation().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				view.getBtnAnnuler().setVisible(true);
-				view.getBtnValider().setVisible(true);
-				view.getBtnEditPresentation().setVisible(false);
-				view.getTextField_Firstname().setEditable(true);
-				view.getTextField_Lastname().setEditable(true);
-				view.getTextField_Email().setEditable(true);
-				view.getTextField_Phone().setEditable(true);
-				view.getTextField_Linkedin().setEditable(true);
-				view.getTextField_Twitter().setEditable(true);
-				view.getTextArea_Presentation().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getBtnAnnuler().setVisible(true);
+				view.getPanel_HeadhunterPresentation().getBtnValider().setVisible(true);
+				view.getPanel_HeadhunterPresentation().getBtnEditPresentation().setVisible(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Firstname().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Lastname().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Email().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Phone().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Linkedin().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Twitter().setEditable(true);
+				view.getPanel_HeadhunterPresentation().getTextArea_Presentation().setEditable(true);
 			}
 		});
 		
-		view.getBtnAnnuler().addActionListener(new ActionListener() {
+		view.getPanel_HeadhunterPresentation().getBtnAnnuler().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				initView();
 				
-				view.getBtnAnnuler().setVisible(false);
-				view.getBtnValider().setVisible(false);
-				view.getBtnEditPresentation().setVisible(true);
-				view.getTextField_Firstname().setEditable(false);
-				view.getTextField_Lastname().setEditable(false);
-				view.getTextField_Email().setEditable(false);
-				view.getTextField_Phone().setEditable(false);
-				view.getTextField_Linkedin().setEditable(false);
-				view.getTextField_Twitter().setEditable(false);
-				view.getTextArea_Presentation().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getBtnAnnuler().setVisible(false);
+				view.getPanel_HeadhunterPresentation().getBtnValider().setVisible(false);
+				view.getPanel_HeadhunterPresentation().getBtnEditPresentation().setVisible(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Firstname().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Lastname().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Email().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Phone().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Linkedin().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Twitter().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextArea_Presentation().setEditable(false);
 				
 			}
 		});
 		
-		view.getBtnValider().addActionListener(new ActionListener() {
+		view.getPanel_HeadhunterPresentation().getBtnValider().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				user.setFirstname(view.getTextField_Firstname().getText());
-				user.setLastname(view.getTextField_Lastname().getText());
-				user.setEmail(view.getTextField_Email().getText());
-				user.setPhone(view.getTextField_Phone().getText());
-				user.setLinkedin(view.getTextField_Linkedin().getText());
-				user.setTwitter(view.getTextField_Twitter().getText());
-				user.setPresentation(view.getTextArea_Presentation().getText());
+				user.setFirstname(view.getPanel_HeadhunterPresentation().getTextField_Firstname().getText());
+				user.setLastname(view.getPanel_HeadhunterPresentation().getTextField_Lastname().getText());
+				user.setEmail(view.getPanel_HeadhunterPresentation().getTextField_Email().getText());
+				user.setPhone(view.getPanel_HeadhunterPresentation().getTextField_Phone().getText());
+				user.setLinkedin(view.getPanel_HeadhunterPresentation().getTextField_Linkedin().getText());
+				user.setTwitter(view.getPanel_HeadhunterPresentation().getTextField_Twitter().getText());
+				user.setPresentation(view.getPanel_HeadhunterPresentation().getTextArea_Presentation().getText());
 				
 				HeadhunterDAO dao = new HeadhunterDAO();
 				List<BaseEntity> hunters = dao.get();
 				
 				for (BaseEntity baseEntity : hunters) {
 					Headhunter user = ((Headhunter) baseEntity);
-					user.setFirstname(view.getTextField_Firstname().getText());
-					user.setLastname(view.getTextField_Lastname().getText());
-					user.setEmail(view.getTextField_Email().getText());
-					user.setPhone(view.getTextField_Phone().getText());
-					user.setLinkedin(view.getTextField_Linkedin().getText());
-					user.setTwitter(view.getTextField_Twitter().getText());
-					user.setPresentation(view.getTextArea_Presentation().getText());
+					user.setFirstname(view.getPanel_HeadhunterPresentation().getTextField_Firstname().getText());
+					user.setLastname(view.getPanel_HeadhunterPresentation().getTextField_Lastname().getText());
+					user.setEmail(view.getPanel_HeadhunterPresentation().getTextField_Email().getText());
+					user.setPhone(view.getPanel_HeadhunterPresentation().getTextField_Phone().getText());
+					user.setLinkedin(view.getPanel_HeadhunterPresentation().getTextField_Linkedin().getText());
+					user.setTwitter(view.getPanel_HeadhunterPresentation().getTextField_Twitter().getText());
+					user.setPresentation(view.getPanel_HeadhunterPresentation().getTextArea_Presentation().getText());
 					dao.update(user);
 				}
 				
-				view.getBtnAnnuler().setVisible(false);
-				view.getBtnValider().setVisible(false);
-				view.getBtnEditPresentation().setVisible(true);
-				view.getTextField_Firstname().setEditable(false);
-				view.getTextField_Lastname().setEditable(false);
-				view.getTextField_Email().setEditable(false);
-				view.getTextField_Phone().setEditable(false);
-				view.getTextField_Linkedin().setEditable(false);
-				view.getTextField_Twitter().setEditable(false);
-				view.getTextArea_Presentation().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getBtnAnnuler().setVisible(false);
+				view.getPanel_HeadhunterPresentation().getBtnValider().setVisible(false);
+				view.getPanel_HeadhunterPresentation().getBtnEditPresentation().setVisible(true);
+				view.getPanel_HeadhunterPresentation().getTextField_Firstname().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Lastname().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Email().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Phone().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Linkedin().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextField_Twitter().setEditable(false);
+				view.getPanel_HeadhunterPresentation().getTextArea_Presentation().setEditable(false);
 				
 				initView();
 				
 			}
 		});
 		
-//		view.getBtnEditJob().addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				ViewsManager.getInstance().next(new ProposalController(frame));
-//
-//				
-//			}
-//		});
+		view.getPanel_LinkedEnterprises().getBtnEditer().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				view.getPanel_LinkedEnterprises().getBtnAnnuler().setVisible(true);
+				
+			}
+		});
 		
-		view.getBtnAddJob().addActionListener(new ActionListener() {
+		view.getPanel_LinkedEnterprises().getBtnAnnuler().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				view.getPanel_LinkedEnterprises().getBtnAnnuler().setVisible(false);
+				initView();
+				
+			}
+		});
+		
+		
+		view.getPanel_JobList().getBtnAdd().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

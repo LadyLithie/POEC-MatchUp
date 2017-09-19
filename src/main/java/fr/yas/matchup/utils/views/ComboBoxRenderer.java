@@ -23,7 +23,7 @@ public class ComboBoxRenderer extends DefaultListCellRenderer {
 			// setIcon(ingredient.getIcon());
 		}else if (value instanceof Location) {
 			Location item = (Location) value;
-			setText(item.getPays() + ":" + item.getDepartement() + " " + item.getCity());
+			setText(item.getZipcode() + " " + item.getCity());
 		}else if (value instanceof RegisteredUser) {
 			RegisteredUser item = (RegisteredUser) value;
 			setText(item.getName());

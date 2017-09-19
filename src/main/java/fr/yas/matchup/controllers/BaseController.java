@@ -10,6 +10,9 @@ import fr.yas.matchup.views.BaseView;
 public abstract class BaseController implements IBaseController {
 	protected JFrame frame;
 	protected BaseView view;
+	/**
+	 * Container of datas
+	 */
 	protected Map<String,Object> viewDatas = new HashMap<String, Object>();
 
 	/**
