@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 
 import fr.yas.matchup.database.CityDAO;
 import fr.yas.matchup.database.ContractDAO;
+import fr.yas.matchup.database.LocationDAO;
 import fr.yas.matchup.database.ProposalDAO;
 import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.City;
@@ -98,10 +99,10 @@ public class ProposalController extends BaseController {
 				vFrame.getComboBox_contract().addItem((ContractType) type);
 			}
 			//City
-			CityDAO cityDAO = new CityDAO();
-			List<BaseEntity> cities = cityDAO.get();
+			LocationDAO locationDAO = new LocationDAO();
+			List<BaseEntity> cities = locationDAO.get();
 			for (BaseEntity town : cities) {
-				vFrame.getComboBox_location().addItem((City) town);
+				vFrame.getComboBox_location().addItem((Location) town);
 			}
 			// Link
 			if (user instanceof Enterprise) {
@@ -118,8 +119,8 @@ public class ProposalController extends BaseController {
 			// init view with the job infos
 			vFrame.getComboBox_contract().addItem(job.getContractType());
 			vFrame.getComboBox_contract().setSelectedIndex(0);
-			//vFrame.getComboBox_location().addItem(job.getLocalization());
-			vFrame.getComboBox_contract().setSelectedIndex(0);
+			vFrame.getComboBox_location().addItem(job.getLocalization());
+			vFrame.getComboBox_location().setSelectedIndex(0);
 			vFrame.getTextArea().setText(job.getPresentation());
 			vFrame.getTextField_JobTitle().setText(job.getName());
 			ArrayList<JCheckBox> ls = vFrame.getListSkills();

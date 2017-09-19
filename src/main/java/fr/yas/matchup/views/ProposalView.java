@@ -15,17 +15,15 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.plaf.metal.MetalBorders.TextFieldBorder;
 
 import fr.yas.matchup.entities.Location;
-import fr.yas.matchup.entities.City;
 import fr.yas.matchup.entities.ContractType;
 import fr.yas.matchup.entities.RegisteredUser;
 import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.base.BaseEntity;
+import fr.yas.matchup.utils.views.ViewsUtils;
 
-import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
@@ -39,8 +37,8 @@ public class ProposalView extends BaseView implements IVisibility {
 	// Zone options
 	private JComboBox<RegisteredUser> comboBox_linkedUser;
 	private JComboBox<ContractType> comboBox_contract;
-	//private JComboBox<Location> comboBox_location;
-	private JComboBox<City> comboBox_location;
+	private JComboBox<Location> comboBox_location;
+//	private JComboBox<City> comboBox_location;
 	//Zone skills
 	private ArrayList<JCheckBox> listSkills;
 	// Zone description
@@ -49,12 +47,12 @@ public class ProposalView extends BaseView implements IVisibility {
 	private JPanel panelCheckBox;
 	private JLabel lblLink;
 
-	/**
-	 * @return the comboBox_location
-	 */
-	public JComboBox<City> getComboBox_location() {
-		return comboBox_location;
-	}
+//	/**
+//	 * @return the comboBox_location
+//	 */
+//	public JComboBox<City> getComboBox_location() {
+//		return comboBox_location;
+//	}
 
 	/**
 	 * @return the btnCancel
@@ -85,12 +83,12 @@ public class ProposalView extends BaseView implements IVisibility {
 		return comboBox_contract;
 	}
 
-//	/**
-//	 * @return the comboBox_location
-//	 */
-//	public JComboBox<Location> getComboBox_location() {
-//		return comboBox_location;
-//	}
+	/**
+	 * @return the comboBox_location
+	 */
+	public JComboBox<Location> getComboBox_location() {
+		return comboBox_location;
+	}
 	
 	//Zone options end
 
@@ -161,7 +159,6 @@ public class ProposalView extends BaseView implements IVisibility {
 
 		panelCheckBox = new JPanel();
 		scrollPane.setViewportView(panelCheckBox);
-		panelCheckBox.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		GridBagLayout gbl_panelCheckBox = new GridBagLayout();
 		gbl_panelCheckBox.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -186,24 +183,9 @@ public class ProposalView extends BaseView implements IVisibility {
 		}
 
 		/*
-		 * JLabel lblDevelopementSkills = new JLabel("Competences developpement");
-		 * GridBagConstraints gbc_lblDevelopementSkills = new GridBagConstraints();
-		 * gbc_lblDevelopementSkills.insets = new Insets(0, 0, 5, 5);
-		 * gbc_lblDevelopementSkills.gridx = 0; gbc_lblDevelopementSkills.gridy = 0;
-		 * panelCheckBox.add(lblDevelopementSkills, gbc_lblDevelopementSkills);
-		 * 
-		 * JLabel lblSocialSkills = new JLabel("Competences sociales");
-		 * GridBagConstraints gbc_lblSocialSkills = new GridBagConstraints();
-		 * gbc_lblSocialSkills.insets = new Insets(0, 0, 5, 5);
-		 * gbc_lblSocialSkills.gridx = 2; gbc_lblSocialSkills.gridy = 0;
-		 * panelCheckBox.add(lblSocialSkills, gbc_lblSocialSkills);
-		 * 
-		 */
-		/*
 		 * Zone description
 		 */
 		JPanel panelText = new JPanel();
-		panelText.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelText = new GridBagConstraints();
 		gbc_panelText.gridheight = 2;
 		gbc_panelText.insets = new Insets(0, 0, 5, 0);
@@ -257,7 +239,6 @@ public class ProposalView extends BaseView implements IVisibility {
 		 * Zone options
 		 */
 		JPanel panelComboBox = new JPanel();
-		panelComboBox.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagConstraints gbc_panelComboBox = new GridBagConstraints();
 		gbc_panelComboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_panelComboBox.fill = GridBagConstraints.BOTH;
@@ -278,8 +259,8 @@ public class ProposalView extends BaseView implements IVisibility {
 		gbc_lblGeographicLocation.gridy = 0;
 		panelComboBox.add(lblGeographicLocation, gbc_lblGeographicLocation);
 		
-		//comboBox_location = new JComboBox<Location>();
-		comboBox_location = new JComboBox<City>();
+		comboBox_location = new JComboBox<Location>();
+//		comboBox_location = new JComboBox<City>();
 		GridBagConstraints gbc_comboBox_location = new GridBagConstraints();
 		gbc_comboBox_location.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_location.fill = GridBagConstraints.HORIZONTAL;

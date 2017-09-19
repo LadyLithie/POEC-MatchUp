@@ -3,18 +3,20 @@
  */
 package fr.yas.matchup.entities;
 
+import fr.yas.matchup.entities.base.BaseEntity;
+
 /**
  * @author Audrey
  *
  */
-public class Location {
+public class Location extends BaseEntity{
 	public static final String INTERNATIONAL = "Internationnal";
 	public static final String FRANCE = "France";
 	public static final String EUROPE = "Union Européenne";
 
 	private String address;
 	private String city;
-	private int postal_code;
+	private String zipcode;
 	private String pays;
 
 	/**
@@ -48,18 +50,18 @@ public class Location {
 	}
 
 	/**
-	 * @return the postal_code
+	 * @return the zipcode
 	 */
-	public int getPostal_code() {
-		return postal_code;
+	public String getZipcode() {
+		return zipcode;
 	}
 
 	/**
-	 * @param postal_code
-	 *            the postal_code to set
+	 * @param zipcode
+	 *            the zipcode to set
 	 */
-	public void setPostal_code(int departement) {
-		this.postal_code = departement;
+	public void setZipcode(String string) {
+		this.zipcode = string;
 	}
 
 	/**
@@ -90,14 +92,14 @@ public class Location {
 	/**
 	 * @param address
 	 * @param city
-	 * @param postal_code
+	 * @param zipcode
 	 * @param pays
 	 */
-	public Location(String address, String city, int departement, String pays) {
+	public Location(String address, String city, String zipcode, String pays) {
 		super();
 		this.address = address;
 		this.city = city;
-		this.postal_code = departement;
+		this.zipcode = zipcode;
 		if (pays.isEmpty() || pays == null) {
 			pays = Location.FRANCE;
 		} else {
@@ -116,12 +118,12 @@ public class Location {
 		if (ad[1].length() != 3) {
 			ad = ad[1].split(",");
 			this.setAddress(ad[0]);
-			this.setPostal_code(Integer.valueOf(ad[1]));
+			this.setZipcode(ad[1]);
 			this.setCity(ad[2]);
 		} else {
 			ad = ad[1].split(",");
 			this.setAddress(ad[0]);
-			this.setPostal_code(Integer.valueOf(ad[1]));
+			this.setZipcode(ad[1]);
 			this.setCity("");
 		}
 
@@ -134,7 +136,7 @@ public class Location {
 	 */
 	@Override
 	public String toString() {
-		return pays + ":" + address + "," + postal_code + "," + city;
+		return pays + ":" + address + "," + zipcode + "," + city;
 	}
 
 }

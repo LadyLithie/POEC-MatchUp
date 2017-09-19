@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,9 +20,11 @@ import org.junit.Test;
 import fr.yas.matchup.database.CandidateDAO;
 import fr.yas.matchup.database.DBManager;
 import fr.yas.matchup.database.EnterpriseDAO;
+import fr.yas.matchup.database.SkillDAO;
 import fr.yas.matchup.entities.Candidate;
 import fr.yas.matchup.entities.Enterprise;
 import fr.yas.matchup.entities.Role;
+import fr.yas.matchup.entities.Skill;
 import fr.yas.matchup.entities.Validity;
 import fr.yas.matchup.entities.base.BaseEntity;
 import fr.yas.matchup.utils.processexecution.ProcessManager;
@@ -41,8 +44,11 @@ public class CandidateDAOTest {
 		process.close();
 	}
 
+	private BaseDAO candidateDAO;
+
 	@Before
 	public void setUp() throws Exception {
+		candidateDAO = new CandidateDAO();
 	}
 
 	@After
@@ -52,7 +58,7 @@ public class CandidateDAOTest {
 	@Test
 	public void testParseToObject() throws SQLException {				
 		Candidate idTest = new Candidate("userOne", "The Company", "00000000", "no email", null, null, null, null, "lololo",
-				"pwdlolo", null, null, null, null);
+				"pwdlolo", null, null, null, null, null);
 		CandidateDAO testDao = new CandidateDAO(); 
 		testDao.insert(idTest);
 
@@ -78,7 +84,7 @@ public class CandidateDAOTest {
 
 	@Test
 	public void testParseToString() {		
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+		Candidate candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
 				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
 		candidateDAO.insert(candidate);		
 		assertNotNull(candidate);
@@ -110,7 +116,7 @@ public class CandidateDAOTest {
 
 	@Test
 	public void testParseUpdateToString() {
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+		Candidate candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
 				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
 		Candidate candidatebis = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
 				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
@@ -149,7 +155,7 @@ public class CandidateDAOTest {
 		skilldao.insert(skill);
 		skilldao.get();
 		
-		candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
+		Candidate candidate = new Candidate("log", "user", "0102030405", "log@orange.com", "Bonjour", null, " ", " ", "toto", "tata", "1999-12-12", "address", 
 				new ArrayList<Diploma>(), new ArrayList<String>(), new ArrayList<>());
 		candidateDAO.insert(candidate);
 		
